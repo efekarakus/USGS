@@ -2,14 +2,20 @@
 import os,sys
 import wx
 
+"""
+"""
+class ManagerialWindow(wx.Frame):
 
-if __name__ == "__main__":
-	app = wx.App(False)
-	frame = wx.Frame(None, wx.ID_ANY, "Hello World")
-	panel = wx.Panel(frame, -1)
-	vbox = wx.BoxSizer(wx.VERTICAL)
-	slider = wx.Slider(frame, -1, 0, 0, 20, wx.DefaultPosition, (250, -1), wx.SL_AUTOTICKS | wx.SL_HORIZONTAL | wx.SL_LABELS)
-	vbox.Add(slider, 1, wx.ALIGN_CENTRE)
-	panel.SetSizer(vbox)
-	frame.Show(True)
-	app.MainLoop()
+	def __init__(self, parent, id, title):
+		wx.Frame.__init__(self, parent, id, title, wx.DefaultPosition, (300, 150))
+		self.MainPanel = wx.Panel(self, -1)
+
+		self.vbox = wx.BoxSizer(wx.VERTICAL)
+		self.tssSlider = \ 
+		wx.Slider(frame, -1, 0, 0, 20, wx.DefaultPosition, (250, -1), wx.SL_AUTOTICKS | wx.SL_HORIZONTAL | wx.SL_LABELS)
+
+		self.vbox.Add(self.tssSlider, 1, wx.ALIGN_CENTRE)
+		self.MainPanel.SetSizer(vbox)
+
+	def getTSSValue(self):
+		return self.tssSlider.GetValue()

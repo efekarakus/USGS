@@ -11,7 +11,7 @@ class ManagerialAction:
 
 	"""
 	"""
-	def OnTSS(self):
-		tssSlider = self.managerUI.getTSSSlider()
-		value = tssSlider.GetValue()
-		print value
+	def OnGo(self):
+		managerUI = self.managerUI
+		tssValue = managerUI.GetValue()
+		print tssValue
