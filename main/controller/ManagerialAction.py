@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+import os, sys
+#sys.path.append("../model")
 import wx
+from SetupModule import *
 
 """
 ActionListener for the Managerial Window.
@@ -20,4 +24,4 @@ class ManagerialAction:
 	def OnGo(self, event):
 		managerUI = self.managerUI
 		tssValue = managerUI.getTSSValue()
-		print tssValue
+		print computeTSS(tssValue)
