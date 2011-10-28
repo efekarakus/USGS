@@ -3,7 +3,8 @@
 
 /** 
  * To compile the code:
- * gcc -m32 -shared -I/usr/include/python2.7/ -lpython2.7 -o myModule.so setup.c
+ * gcc -m32 -shared -I/usr/include/python2.7/ -lpython2.7 -o SetupModule.so setup.c
+ * Don't forget to cp SetupModule.so ../controller
  */
 
 #include <Python.h>
