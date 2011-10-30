@@ -1,38 +1,80 @@
 #ifndef _LIST
 #define _LIST
 
-/**
- * Node struct that forms the linked list
- */
-typedef struct _Node {
-	double data;            ///< the data held at the current node
-	struct _Node* next;     ///< pointer for the next node
-} Node;
 
 /**
- * Singly linked list that holds nodes that contain a double and a next pointer
+ * Singly linked list struct that has a data field and a pointer to a next node
+ * (Contains dummy head node)
  */
 typedef struct _List {
-	struct Node* head; 	///< head of the linked list
+   struct _List* next;
+   double data;
 } List;
+
+
+/**
+ * Initializes the linked list before use
+ * @param list the linked list that will be initialized
+ */
+void LL_init(List* list);
+
 
 /**
  * Add a new node into the linked list with the value "value"
- * @param list the linked list that we want to insert the new node in
- * @param data the value that we want to insert in the linked list
+ * @param list the linked list that we want to insert the new node into
+ * @param data the double value that we want to insert into the linked list
  */
-void insert_node(List* list, double data);
+void LL_insert(List* list, double data);
+
+
+/**
+ * Add a new node into end of the linked list
+ * @param list the linked list that we want to insert the new node into
+ * @param data the double value that we want to insert into the end of the linked list
+ */
+void LL_insertEnd(List* list, double data);
+
 
 /**
  * Deletes the first occurence of value from the linked list
  * @param list the linked list that we want to remove the data from
  * @param data the value that we want to remove from the linked list
  */
-void delete_node(List* list, double data);
+void LL_remove(List* list, double data);
+
 
 /**
- * Deletes the whole linked list and sets list = NULL
- * @param list the linkedlist that we want to free form the memory
+ * Deletes the element from the front of the list
+ * @param list the linked list that we want to remove the front element from
  */
-void delete_list(List* list);
+void LL_removeFront(List* list);
+
+
+/**
+ * Prints out every value in the list
+ * @param list the linked list that we want to print
+ */
+void LL_print(List* list);
+
+/**
+ * Determines whether or not the list is empty
+ * @param list the linked list that we want to check for emptiness
+ * @return 0 if the list is not empty and 1 if it is
+ */
+int LL_isEmpty(List* list);
+
+
+/**
+ * Determines the number of elements in the list
+ * @param list the linked list that we want to query
+ * @return the number of elements in the list
+ */
+long LL_count(List* list);
+
+
+/**
+ * Deletes the whole linked list and frees all allocated memory
+ * @param list the linked list that we want to free from memory
+ */
+void LL_destroy(List* list);
 #endif
