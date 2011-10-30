@@ -20,7 +20,7 @@ void LL_init(List* list);
 
 
 /**
- * Add a new node into the linked list with the value "value"
+ * Add a new node into the linked list with the data value
  * @param list the linked list that we want to insert the new node into
  * @param data the double value that we want to insert into the linked list
  */

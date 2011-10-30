@@ -8,12 +8,23 @@
 #include <stdlib.h>
 
 
+
+/**
+ * Initializes the linked list before use
+ * @param list the linked list that will be initialized
+ */
 void LL_init(List* list)
 {
    list->next = NULL;   // Initialize all list members
 	list->data = 0;
 }
 
+
+/**
+ * Add a new node into the linked list with the data value
+ * @param list the linked list that we want to insert the new node into
+ * @param data the double value that we want to insert into the linked list
+ */
 void LL_insert(List* list, double data)
 {
 	List* first = list->next;
@@ -39,6 +50,11 @@ void LL_insert(List* list, double data)
 }
 
 
+/**
+ * Add a new node into end of the linked list
+ * @param list the linked list that we want to insert the new node into
+ * @param data the double value that we want to insert into the end of the linked list
+ */
 void LL_insertEnd(List* list, double data)
 {
 	List* prev = list;
@@ -57,6 +73,12 @@ void LL_insertEnd(List* list, double data)
 	curr->next = NULL;
 }
 
+
+/**
+ * Deletes the first occurence of value from the linked list
+ * @param list the linked list that we want to remove the data from
+ * @param data the value that we want to remove from the linked list
+ */
 void LL_remove(List* list, double data)
 {
 	if (LL_isEmpty(list) == 1)
@@ -80,6 +102,28 @@ void LL_remove(List* list, double data)
 	curr = NULL;
 }
 
+
+/**
+ * Deletes the element from the front of the list
+ * @param list the linked list that we want to remove the front element from
+ */
+void LL_removeFront(List* list)
+{
+	List* prev = list;
+	List* curr = list->next;
+	List* link = curr->next;
+
+	prev->next = link;
+
+	free(curr);
+	curr = NULL;
+}
+
+
+/**
+ * Prints out every value in the list
+ * @param list the linked list that we want to print
+ */
 void LL_print(List* list)
 {
 	list = list->next;
@@ -91,6 +135,12 @@ void LL_print(List* list)
 	}
 }
 
+
+/**
+ * Determines whether or not the list is empty
+ * @param list the linked list that we want to check for emptiness
+ * @return 0 if the list is not empty and 1 if it is
+ */
 int LL_isEmpty(List* list)
 {
 	if (list->next == NULL)
@@ -100,6 +150,12 @@ int LL_isEmpty(List* list)
 		return 0;
 }
 
+
+/**
+ * Determines the number of elements in the list
+ * @param list the linked list that we want to query
+ * @return the number of elements in the list
+ */
 long LL_count(List* list)
 {
 	long count = 0;
@@ -114,6 +170,11 @@ long LL_count(List* list)
 	return count;
 }
 
+
+/**
+ * Deletes the whole linked list and frees all allocated memory
+ * @param list the linked list that we want to free from memory
+ */
 void LL_destroy(List* list)
 {
 	List* curr = list->next;
@@ -138,16 +199,4 @@ void LL_destroy(List* list)
 	{
 		LL_removeFront(list);
 	}
-}
-
-void LL_removeFront(List* list)
-{
-	List* prev = list;
-	List* curr = list->next;
-	List* link = curr->next;
-
-	prev->next = link;
-
-	free(curr);
-	curr = NULL;
 }
