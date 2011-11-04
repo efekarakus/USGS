@@ -1,12 +1,8 @@
 /*
  * list.c
- * Created by: Tom Loboda
  */
 
 #include "list.h"
-#include <stdio.h>
-#include <stdlib.h>
-
 
 
 /**
@@ -15,8 +11,9 @@
  */
 void LL_init(List* list)
 {
-   list->next = NULL;   // Initialize all list members
-	list->data = 0;
+   list = malloc(sizeof(List));
+   list->next = NULL;           // Initialize all list members
+   list->data = 0;
 }
 
 
