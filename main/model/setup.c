@@ -2,7 +2,7 @@
 
 /* Bind Python function names to our C functions */
 static PyMethodDef SetupModule_methods[] = {
-    {"computeTSS", py_computeTSS, METH_VARARGS},
+    {"goCommand", py_goCommand, METH_VARARGS},
     {NULL, NULL}
 };
 
@@ -12,7 +12,7 @@ static PyMethodDef SetupModule_methods[] = {
  * @param args: the TSS slider value
  * @return 2*TSS
  */
-static PyObject* py_computeTSS(PyObject* self, PyObject* args) {
+static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 	int tss;
 	PyArg_ParseTuple(args, "i", &tss);
 	tss = 2*tss;

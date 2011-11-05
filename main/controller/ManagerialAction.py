@@ -24,4 +24,4 @@ class ManagerialAction:
 	def OnGo(self, event):
 		managerUI = self.managerUI
 		tssValue = managerUI.getTSSValue()
-		print computeTSS(tssValue)
+		print goCommand(tssValue)

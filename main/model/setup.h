@@ -14,6 +14,6 @@
 void initSetupModule();
 
 /* Hello World function to be called from Python */
-static PyObject* py_computeTSS(PyObject* self, PyObject* args);
+static PyObject* py_goCommand(PyObject* self, PyObject* args);
 
 #endif
