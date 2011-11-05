@@ -1,24 +1,14 @@
 #ifndef _LIST
 #define _LIST
 
-#include <stdio.h>
-#include <stdlib.h>
-
 
 /**
- * Node structure that contains data for linked list
- */
-typedef struct _Node {
-	struct _Node* next;
-	double data;
-} Node;
-
-
-/**
- * Singly linked list struct that has a pointer to the head node
+ * Singly linked list struct that has a data field and a pointer to a next node
+ * (Contains dummy head node)
  */
 typedef struct _List {
-   struct _Node* head;
+    struct _List* next;
+    double data;
 } List;
 
 

@@ -3,23 +3,8 @@
  */
 
 #include "list.h"
-
-
-int main()
-{
-	List list;	
-	LL_init(&list);
-//	LL_insert(&list, 10);
-//	LL_insert(&list, 20);
-//	LL_remove(&list, 20);
-//	LL_remove(&list, 10);
-//	LL_destroy(&list);	
-
-	LL_print(&list);	
-	printf("\nEverything ok!\n");
-
-	return 0;
-}
+#include <stdio.h>
+#include <stdlib.h>
 
 
 /**
@@ -28,11 +13,8 @@ int main()
  */
 void LL_init(List* list)
 {
-   list = malloc(sizeof(List));
-	list->head = NULL;
-
-	if (list->head == NULL)
-		printf("\nPass test 1");
+   list->next = NULL;   // Initialize all list members
+	list->data = 0;
 }
 
 
@@ -43,27 +25,12 @@ void LL_init(List* list)
  */
 void LL_insert(List* list, double data)
 {
-	if (list->head == NULL)   // If list is empty
-	{
-		list->head = (Node*)malloc(sizeof(Node));
-		list->head->data = data;
-		list->head->next = NULL;
-	}
+	List* first = list->next;
 
-	else
+	if (first == NULL)   // if list is empty
 	{
-		Node* link = list->head;
-		list->head = (Node*)malloc(sizeof(Node));
-		list->head->data = data;
-		list->head->next = link;
-	}
+		first = (List*)malloc(sizeof(List));
 
-/*
-	List* curr = list;
-
-	if (curr == NULL)   // if list is empty
-	{
-		first = (List*)malloc(sizeof(List));		
 		first->data = data;
 		first->next = NULL;
 		list->next = first;
@@ -73,11 +40,11 @@ void LL_insert(List* list, double data)
 	{
 		List* newNode = (List*)malloc(sizeof(List));
 		list->next = newNode;
-		
+
 		newNode->data = data;
 		newNode->next = first;
 	}
-*/
+
 }
 
 
@@ -88,7 +55,6 @@ void LL_insert(List* list, double data)
  */
 void LL_insertEnd(List* list, double data)
 {
-/*
 	List* prev = list;
 	List* curr = list->next;
 
@@ -103,7 +69,6 @@ void LL_insertEnd(List* list, double data)
 
 	curr->data = data;
 	curr->next = NULL;
-*/
 }
 
 
@@ -114,7 +79,6 @@ void LL_insertEnd(List* list, double data)
  */
 void LL_remove(List* list, double data)
 {
-/*
 	if (LL_isEmpty(list) == 1)
 		return;
 
@@ -130,11 +94,10 @@ void LL_remove(List* list, double data)
 	}
 
 	List* link = curr->next;
-	rrev->next = link;
+	prev->next = link;
 
 	free(curr);
 	curr = NULL;
-*/
 }
 
 
@@ -144,7 +107,6 @@ void LL_remove(List* list, double data)
  */
 void LL_removeFront(List* list)
 {
-/*
 	List* prev = list;
 	List* curr = list->next;
 	List* link = curr->next;
@@ -153,7 +115,6 @@ void LL_removeFront(List* list)
 
 	free(curr);
 	curr = NULL;
-*/
 }
 
 
@@ -163,24 +124,13 @@ void LL_removeFront(List* list)
  */
 void LL_print(List* list)
 {
-	Node* curr = list->head;
+	list = list->next;
 
-	if (curr == NULL)
-		printf("\nshould be null...");
-	else {
-		printf("%f data", curr->data);
-	}
-/*
-	while (curr != NULL)
+	while (list != NULL)
 	{	
-		printf("\n%f", curr->data);
-			
-		if (curr->next == NULL)
-			printf("\nNO!!!");
-
-		curr = curr->next;
+		printf("\n%f", list->data);
+		list = list->next;
 	}
-*/
 }
 
 
@@ -191,13 +141,11 @@ void LL_print(List* list)
  */
 int LL_isEmpty(List* list)
 {
-/*
 	if (list->next == NULL)
 		return 1;
 
 	else
 		return 0;
-*/
 }
 
 
@@ -208,7 +156,6 @@ int LL_isEmpty(List* list)
  */
 long LL_count(List* list)
 {
-/*
 	long count = 0;
 	list = list->next;
 
@@ -219,7 +166,6 @@ long LL_count(List* list)
 	}
 
 	return count;
-*/
 }
 
 
@@ -229,17 +175,10 @@ long LL_count(List* list)
  */
 void LL_destroy(List* list)
 {
-/*
 	List* curr = list->next;
 
 	if (curr == NULL)   // No elements in list
-	{
-		free(list);
-		list = NULL;
 		return;
-	}
-
-	printf("1\n");	
 
 	List* nxt = curr->next;
 
@@ -248,12 +187,8 @@ void LL_destroy(List* list)
 		curr->next = NULL;
 		free(curr);
 		curr = NULL;
-		free(list);
-		list = NULL;
 		return;
 	}
-
-	printf("2\n");
 
 	int i=0;
 	int num = LL_count(list);
@@ -262,10 +197,4 @@ void LL_destroy(List* list)
 	{
 		LL_removeFront(list);
 	}
-
-	printf("3\n");
-
-	free(list);
-	list = NULL;
-*/
 }
