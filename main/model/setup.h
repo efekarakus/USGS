@@ -1,6 +1,9 @@
 #ifndef _SETUP
 #define _SETUP
 
+#include "globals.h"
+#include "patch.h"
+
 /* All the variables that are needed for setup */
 
 /**
