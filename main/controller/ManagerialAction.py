@@ -2,7 +2,7 @@
 import os, sys
 #sys.path.append("../model")
 import wx
-from SetupModule import *
+from MainModule import *
 
 """
 ActionListener for the Managerial Window.

@@ -4,13 +4,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 /**
- * Singly linked list struct that has a data field and a pointer to a next node
- * (Contains dummy head node)
+ * Node structure that contains data for linked list
+ */
+typedef struct _Node {
+	struct _Node* next;
+	double data;
+} Node;
+
+
+/**
+ * Singly linked list struct that has a pointer to the head node
  */
 typedef struct _List {
-   struct _List* next;
-   double data;
+   struct _Node* head;
 } List;
 
 
