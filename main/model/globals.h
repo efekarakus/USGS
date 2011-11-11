@@ -93,7 +93,6 @@ double Gj_consum = 6.5;
 double k_herbivore = 0.2;
 double k_POC = 0.2;
 
-double theta = 1.072
-
+double theta = 1.072;
 
 #endif

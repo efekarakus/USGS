@@ -3,9 +3,6 @@
  */
 
 #include "list.h"
-#include <stdio.h>
-#include <stdlib.h>
-
 
 /**
  * Initializes the linked list before use

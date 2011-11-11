@@ -1,6 +1,8 @@
 #ifndef _LIST
 #define _LIST
 
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * Singly linked list struct that has a data field and a pointer to a next node
