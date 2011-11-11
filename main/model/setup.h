@@ -4,8 +4,6 @@
 #include "globals.h"
 #include "patch.h"
 
-/* All the variables that are needed for setup */
-
 /**
  * Calls the helper functions import_hydro and setup_environmentals
  */
