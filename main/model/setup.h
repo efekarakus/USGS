@@ -9,6 +9,10 @@
 
 char* file_names[] = {"10k-", "20k-", "30k-", "40k-", "50k-", "60k-", "70k-", "80k-", "90k-", "100k-"};
 
+char* discharge_file = "discharge.txt";
+char* photo_radiation_file = "par.txt";
+char* temperature_file = "water-temp.txt";
+
 /**
  * Calls the helper functions import_hydro and setup_environmentals
  */
@@ -31,4 +35,9 @@ void init_patches();
 void import_hydro();
 
 void setup_environmentals();
+
+void set_discharge();
+void set_photo_radiation();
+void set_temperature();
+
 #endif

@@ -125,9 +125,7 @@ void import_hydro() {
             printf("tempy %d\n",tempy);
             fscanf(pFile, "%f", &value);
             //temp_depth = atoi(str);
-            printf("About to print.\n");
             printf("temp_depth %f\n",value);
-            printf("Finished printing.\n");
             fscanf(pFile, "%f", &value);
             //temp_px_velocity = atoi(str);
             printf("temp_px_vel %f\n",value);
@@ -142,12 +140,155 @@ void import_hydro() {
     }
 }
 
+
 /**
  * TODO: Tom and Efe
+ *
+ * NOTE: STILL NEED TO IMPLEMENT UPDATE-HYDRO-MAP!!!!!!!!!!!!!!!
+ * NOTE: NEED TO FREE:
+ *			- photo_radiation
+ *			- temperature
+ *			- discharge (if fixed_environmentals == true)
  */
 void setup_environmentals() 
 {
+    if (fixed_environmentals == 1)
+    {
+		hydro_group = gui_hydro_group;
+		// update-hydro-map()
+		photo_radiation = (int*)malloc(sizeof(int));
+		*photo_radiation = gui_photo_radiation;
+		temperature = (double*)malloc(sizeof(double));
+		*temperature = gui_temperature;
+    }
 
+	else
+	{
+		set_discharge();
+		set_photo_radiation();
+		set_temperature();
+
+		hydro_group = 0;
+		// choose-hydro-map
+		// update-hydro-map
+	}
+}		
+
+
+void set_discharge()
+{
+	char* pathname = "./model/data/Environmentals/";
+
+	char* currFile = discharge_file;
+	int length = strlen(pathname) + strlen(currFile) + 1;
+	char filename[length];
+	filename[0] = '\0';
+	strcat(filename, pathname);
+	strcat(filename, currFile);
+
+	FILE* file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		perror ("Error opening discharge file");
+	}
+
+	char line[256];
+	int count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
+	{
+		count++;
+	}
+	
+	discharge = (int*)malloc(count * sizeof(int));
+
+	rewind(file);
+	count = 0;
+	while (fgets(line, 256, file) != NULL)	// Populate discharge array
+	{
+		int value = atoi(line);
+		discharge[count] = value;
+		count++;
+	}
+}
+
+
+void set_photo_radiation()
+{
+	char* pathname = "./model/data/Environmentals/";
+
+	char* currFile = photo_radiation_file;
+	int length = strlen(pathname) + strlen(currFile) + 1;
+	char filename[length];
+	filename[0] = '\0';
+	strcat(filename, pathname);
+	strcat(filename, currFile);
+
+	FILE* file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		perror ("Error opening photo_radiation file");
+	}
+
+	char line[256];
+	int count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
+	{
+		count++;
+	}
+
+	photo_radiation = (int*)malloc(count * sizeof(int));
+
+	rewind(file);
+	count = 0;
+	
+	while (fgets(line, 256, file) != NULL)	// Populate discharge array
+	{
+		int value = atoi(line);
+		photo_radiation[count] = value;
+		count++;
+	}
+}
+
+
+void set_temperature()
+{
+	char* pathname = "./model/data/Environmentals/";
+
+	char* currFile = temperature_file;
+	int length = strlen(pathname) + strlen(currFile) + 1;
+	char filename[length];
+	filename[0] = '\0';
+	strcat(filename, pathname);
+	strcat(filename, currFile);
+
+	FILE* file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		perror ("Error opening water-temperature file");
+	}
+
+	char line[256];
+	int count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
+	{
+		count++;
+	}
+
+	temperature = (double*)malloc(count * sizeof(double));
+
+	rewind(file);
+
+	count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Populate temperature array
+	{
+		double value = atof(line);
+		temperature[count] = value;
+		count++;
+	}
 }
 
 int main() {

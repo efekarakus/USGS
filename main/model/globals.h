@@ -9,17 +9,18 @@ int MAP_HEIGHT; ///< the map's height
 
 // All GUI variables
 char* file_extension = "new";
-int fixed_environmentals = 1;	///< fixedEnvironmentals
+int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
 int gui_photo_radiation = 2000;    ///< fixedPAR
 int gui_hydro_group = 5;	///< fixedHydro
 
 
 // Environmental globals
-int temperature;	///< temp
-int photo_radiation;	///< par
+double* temperature;	///< temp
+int* photo_radiation;	///< par
 int hydro_group;	///< hydro-group
 
+int* discharge;    ///< discharge
 
 
 // convert ft to m from the SMS to .png scaling conversion
