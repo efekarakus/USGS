@@ -6,8 +6,6 @@
 patch** patches; ///< 2D array of patches (pixel) objects that forms a map
 int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
-// 2D array of patches
-
 
 // All GUI variables
 
