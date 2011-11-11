@@ -8,6 +8,9 @@ int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
 
 // All GUI variables
+char* fileExtention = "new";
+
+
 
 // convert ft to m from the SMS to .png scaling conversion
 int patch_length = 30;
