@@ -1,6 +1,10 @@
 #ifndef _GLOBALS
 #define _GLOBALS
 
+// 2D array of Patches
+
+// All GUI variables
+
 // convert ft to m from the SMS to .png scaling conversion
 int patch_length = 30;
 int max_area = 30*30;
