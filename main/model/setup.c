@@ -6,8 +6,16 @@
  * TODO: detailed comments
  */
 void setup() {
+    init_patches();
     import_hydro();
     setup_environmentals();
+}
+
+/**
+ * Reads one of the 
+ */
+void init_patches() {
+
 }
 
 /**

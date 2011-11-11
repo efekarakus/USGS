@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-#I like cookies
 import os,sys
 sys.path.append("view")
 sys.path.append("controller")
