@@ -8,7 +8,17 @@ int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
 
 // All GUI variables
-char* file_extention = "new";
+char* file_extension = "new";
+int fixed_environmentals = 1;	///< fixedEnvironmentals
+int gui_temperature = 20;    ///< fixedTemp
+int gui_photo_radiation = 2000;    ///< fixedPAR
+int gui_hydro_group = 5;	///< fixedHydro
+
+
+// Environmental globals
+int temperature;	///< temp
+int photo_radiation;	///< par
+int hydro_group;	///< hydro-group
 
 
 
