@@ -3,8 +3,9 @@
 
 #include "globals.h"
 #include "patch.h"
+#include <stdio.h>
 
-char** fileName = {"10k-", "20k-", "30k-", "40k-", "50k-", "60k-", "70k-", "80k-", "90k-", "100k-"};
+char** file_names = {"10k-", "20k-", "30k-", "40k-", "50k-", "60k-", "70k-", "80k-", "90k-", "100k-"};
 
 /**
  * Calls the helper functions import_hydro and setup_environmentals
