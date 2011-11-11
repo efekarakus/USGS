@@ -1,5 +1,6 @@
 #include "main.h"
-
+#include <stdio.h>
+#include "setup.c"
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
@@ -16,6 +17,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 	int tss;
 	PyArg_ParseTuple(args, "i", &tss);
 	tss = 2*tss;
+    setup();
 	return Py_BuildValue("i", tss);
 }
 
