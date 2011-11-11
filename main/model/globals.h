@@ -3,7 +3,7 @@
 
 // convert ft to m from the SMS to .png scaling conversion
 int patch_length = 30;
-int max_area = patch_length*patch_length;
+int max_area = 30*30;
 
 // max gwr/unit biomass; e- excretion->DOC; r- respiration; s- senecence(natural mortality); -egestion ->POC
 double max_waterdecomp = 6.26/24;
@@ -45,7 +45,7 @@ int Ai_sedconsumer_seddecomp = 3;
 int Ai_sedconsumer_peri = 2;
 double Ai_sedconsumer_detritus = 3.5;
 double Ai_consum_herbivore = 3.5;
-int Ai_consum_sedconsumer 4;
+int Ai_consum_sedconsumer = 4;
 double Gi_waterdecomp_DOC = 0.05;
 double Gi_waterdecomp_POC = 0.05;
 double Gi_Peri_DOC = 0.05;
