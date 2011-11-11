@@ -87,7 +87,55 @@ void init_patches() {
  * TODO: Nathan and Chris
  */
 void import_hydro() {
-
+    // Read the files
+    int i, j, tempx, tempy;
+    char file[256];
+    FILE* pFile;
+    char* str;
+    float value;
+    double temp_depth, temp_px_velocity, temp_py_vector, temp_velocity;
+    char* path = "./model/data/HydroSets/";
+    // Append the extension to each file
+    for(i = 0;i < 1; i++)
+    {
+        strcpy(file, path);
+        strcat(file, file_names[i]);
+        strcat(file, file_extension);
+        printf("%s\n", file);
+        pFile = fopen(file, "r");
+        if(pFile == NULL)
+        {
+            printf("Failed to open the file");
+            exit(1);
+        }
+        // Skip the file layout
+        for(j = 0; j < 6; j++){
+            fscanf(pFile, "%s", str);
+            printf("%s ", str);
+        }
+        printf("\n");
+        while(fscanf(pFile, "%s", str) != EOF)
+        {
+            tempx = atoi(str);
+            printf("tempx %d\n",tempx);
+            fscanf(pFile, "%s", str);
+            tempy = atoi(str);
+            printf("tempy %d\n",tempy);
+            fscanf(pFile, "%f", &value);
+            //temp_depth = atoi(str);
+            printf("temp_depth %f\n",value);
+            fscanf(pFile, "%f", &value);
+            //temp_px_velocity = atoi(str);
+            printf("temp_px_vel %f\n",value);
+            fscanf(pFile, "%f", &value);
+            //temp_py_vector = atoi(str);
+            printf("temp_py_vec %f\n",value);
+            fscanf(pFile, "%f", &value);
+            //temp_velocity = atoi(str);
+            printf("temp_velocity %f\n",value);
+        }
+        fclose(pFile);
+    }
 }
 
 /**
