@@ -1,0 +1,2 @@
+pxcor pycor depth px-vector py-vector velocity
+33 22 10 2 2 2

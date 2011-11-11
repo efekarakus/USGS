@@ -18,7 +18,7 @@ void setup() {
 void find_map_sizes() {
     // open the first hydro map
     char* hydro_map = file_names[0];
-    char* path = "./data/HydroSets/";
+    char* path = "./model/data/HydroSets/";
     int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
     char hydro_path[length];
     strcpy(hydro_path, path);
@@ -91,7 +91,7 @@ void import_hydro() {
     int i, j, tempx, tempy;
     char file[256];
     FILE* pFile;
-    char* str;
+    char str[256];
     float value;
     double temp_depth, temp_px_velocity, temp_py_vector, temp_velocity;
     char* path = "./model/data/HydroSets/";
@@ -101,6 +101,7 @@ void import_hydro() {
         strcpy(file, path);
         strcat(file, file_names[i]);
         strcat(file, file_extension);
+        strcat(file, ".txt");
         printf("%s\n", file);
         pFile = fopen(file, "r");
         if(pFile == NULL)
@@ -108,6 +109,7 @@ void import_hydro() {
             printf("Failed to open the file");
             exit(1);
         }
+        printf("I die after the open.\n");
         // Skip the file layout
         for(j = 0; j < 6; j++){
             fscanf(pFile, "%s", str);
@@ -123,7 +125,9 @@ void import_hydro() {
             printf("tempy %d\n",tempy);
             fscanf(pFile, "%f", &value);
             //temp_depth = atoi(str);
+            printf("About to print.\n");
             printf("temp_depth %f\n",value);
+            printf("Finished printing.\n");
             fscanf(pFile, "%f", &value);
             //temp_px_velocity = atoi(str);
             printf("temp_px_vel %f\n",value);
