@@ -88,7 +88,7 @@ void init_patches() {
  */
 void import_hydro() {
     // Read the files
-    int i, j, tempx, tempy;
+    int i, j, temp_x, temp_y;
     char file[256];
     FILE* pFile;
     char str[256];
@@ -96,45 +96,38 @@ void import_hydro() {
     double temp_depth, temp_px_velocity, temp_py_vector, temp_velocity;
     char* path = "./model/data/HydroSets/";
     // Append the extension to each file
-    for(i = 0;i < 1; i++)
+    for(i = 0;i < num_hydro_files; i++)
     {
         strcpy(file, path);
         strcat(file, file_names[i]);
         strcat(file, file_extension);
         strcat(file, ".txt");
-        printf("%s\n", file);
         pFile = fopen(file, "r");
+
         if(pFile == NULL)
         {
             printf("Failed to open the file");
             exit(1);
         }
-        printf("I die after the open.\n");
+
         // Skip the file layout
-        for(j = 0; j < 6; j++){
+        for(j = 0; j < 6; j++)
+		{
             fscanf(pFile, "%s", str);
-            printf("%s ", str);
         }
-        printf("\n");
         while(fscanf(pFile, "%s", str) != EOF)
         {
-            tempx = atoi(str);
-            printf("tempx %d\n",tempx);
+            temp_x = atoi(str);
             fscanf(pFile, "%s", str);
-            tempy = atoi(str);
-            printf("tempy %d\n",tempy);
+            temp_y = atoi(str);
             fscanf(pFile, "%f", &value);
-            //temp_depth = atoi(str);
-            printf("temp_depth %f\n",value);
+            temp_depth = value;
             fscanf(pFile, "%f", &value);
-            //temp_px_velocity = atoi(str);
-            printf("temp_px_vel %f\n",value);
+            temp_px_velocity = value;
             fscanf(pFile, "%f", &value);
-            //temp_py_vector = atoi(str);
-            printf("temp_py_vec %f\n",value);
+            temp_py_vector = value;
             fscanf(pFile, "%f", &value);
-            //temp_velocity = atoi(str);
-            printf("temp_velocity %f\n",value);
+            temp_velocity = value;
         }
         fclose(pFile);
     }
