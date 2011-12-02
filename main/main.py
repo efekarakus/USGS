@@ -3,11 +3,10 @@ import os,sys
 sys.path.append("view")
 sys.path.append("controller")
 import wx
-from ManagerialWindow import ManagerialWindow
-from ManagerialAction import ManagerialAction
+from RiverModel import RiverModel
 
 app = wx.App(False)
-frame = ManagerialWindow(None, wx.ID_ANY, "Manager Window")
+frame = RiverModel(None, wx.ID_ANY, "River Model")
 frame.Show(True)
 frame.Centre()
 app.MainLoop()

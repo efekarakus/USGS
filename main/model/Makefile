@@ -3,3 +3,4 @@ all: main.c
 	mv MainModule.so ../controller
 clean:
 	rm -f *.so
+	rm -f ../controller/MainModule.so
