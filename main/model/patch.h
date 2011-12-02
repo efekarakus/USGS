@@ -3,6 +3,44 @@
 
 #include "list.h"
 
+void update_patches();
+
+void go_macro();
+
+void go_phyto();
+
+void go_herbivore();
+
+void go_waterdecomp();
+
+void go_seddecomp();
+
+void go_consum();
+
+void go_DOC();
+
+void go_POC();
+
+void go_detritus();
+
+void pred_phyto();
+
+void pred_herbivore();
+
+void pred_seddecomp();
+
+void pred_waterdecomp();
+
+void pred_sedconsumer();
+
+void pred_detritus();
+
+void pred_DOC();
+
+void pred_POC();
+
+void pred_consum();
+
 typedef struct _patch {
 
 	/* Build_in patch variables by netlogo */

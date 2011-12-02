@@ -117,4 +117,15 @@ double k_POC = 0.2;
 
 double theta = 1.072;
 
+//temperatue dependent coefficient for aquatic plants
+double Q10;
+//Slider variables
+double macro_base_temp = 19.7;
+double TSS = 10;
+double gross_macro_coef = 0.08;
+double resp_macro_coef = 0.04;
+double sen_macro_coef = 0.08;
+int macro_mas_max = 1000;
+double macro_vel_max = 1.0;
+
 #endif
