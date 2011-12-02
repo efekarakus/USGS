@@ -151,13 +151,10 @@ void import_hydro() {
     while(fscanf(pFile, "%s", str) != EOF)
     {
         temp_x = atoi(str);
-        printf("pxcor %d\n",temp_x);
         fscanf(pFile, "%s", str);
         temp_y = atoi(str);
-        printf("pxcor %d\n",temp_y );
         fscanf(pFile, "%s", str);
         strcpy(temp_cell_type,  str);
-        printf("cell-type %s\n", temp_cell_type);
     }
     fclose(pFile);
 }
@@ -194,8 +191,35 @@ void setup_environmentals()
 		// choose-hydro-map
 		// update-hydro-map
 	}
-}		
+}
 
+/**
+ * Sets up the 10 stocks, currently has default values
+ * Will get these values as input later
+ */
+void setup_stocks()
+{
+    int x, y;
+    for(x = 0; x < MAP_WIDTH; x++)
+    {
+        for(y = 0; y < MAP_HEIGHT; y++)
+        {
+            if(patches[x][y].depth > 0)
+            {
+                patches[x][y].macro = 1;
+                patches[x][y].phyto = 10;
+                patches[x][y].waterdecomp = 10;
+                patches[x][y].seddecomp = 1;
+                patches[x][y].herbivore = 1;
+                patches[x][y].sedconsumer = 1;
+                patches[x][y].DOC = 10;
+                patches[x][y].POC = 10;
+                patches[x][y].detritus = 1;
+                patches[x][y].consum = .1;
+            }
+        }
+    }
+}
 
 /**
  * Reads the discharge.txt file and initializes the discharge array variable
@@ -321,7 +345,6 @@ void set_temperature()
 		count++;
 	}
 }
-
 
 int main() {
     setup();

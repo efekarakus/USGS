@@ -42,6 +42,12 @@ void import_hydro();
 
 void setup_environmentals();
 
+/**
+ * Sets up the 10 stocks, currently has default values
+ * Will get these values as input later
+ */
+void setup_stocks();
+
 void set_discharge();
 void set_photo_radiation();
 void set_temperature();
