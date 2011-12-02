@@ -135,9 +135,9 @@ void import_hydro() {
 
 
 /**
- * TODO: Tom and Efe
+ * Reads from files the initial discharge (daily) and initial radiation (hourly) values and then imports the maps based on the discharge value
  *
- * NOTE: STILL NEED TO IMPLEMENT UPDATE-HYDRO-MAP!!!!!!!!!!!!!!!
+ * NOTE: STILL NEED TO IMPLEMENT "UPDATE-HYDRO-MAP" AND "CHOOSE-HYDRO-MAP"
  * NOTE: NEED TO FREE:
  *			- photo_radiation
  *			- temperature
@@ -168,6 +168,9 @@ void setup_environmentals()
 }		
 
 
+/**
+ * Reads the discharge.txt file and initializes the discharge array variable
+ */
 void set_discharge()
 {
 	char* pathname = "./model/data/Environmentals/";
@@ -206,6 +209,9 @@ void set_discharge()
 }
 
 
+/*
+ * Reads the "par.txt" file and initializes the photo_radiation array variable 
+ */
 void set_photo_radiation()
 {
 	char* pathname = "./model/data/Environmentals/";
@@ -245,6 +251,9 @@ void set_photo_radiation()
 }
 
 
+/**
+ * Reads the "water-temp.txt" file and initializes the temperature array variable
+ */
 void set_temperature()
 {
 	char* pathname = "./model/data/Environmentals/";
@@ -283,6 +292,7 @@ void set_temperature()
 		count++;
 	}
 }
+
 
 int main() {
     setup();
