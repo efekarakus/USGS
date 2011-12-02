@@ -84,20 +84,22 @@ void init_patches() {
 }
 
 /**
- * TODO: Nathan and Chris
+ * Reads the Hydo map files and sets up the proper (x,y) patches
+ * Input in the form of "pxcor pycor depth px-vector py-vector velocity"
+ * and this must be the first line in the file.
  */
 void import_hydro() {
-    // Read the files
     int i, j, temp_x, temp_y;
     char file[256];
     FILE* pFile;
     char str[256];
     float value;
-    double temp_depth, temp_px_velocity, temp_py_vector, temp_velocity;
+    double temp_depth, temp_px_vector, temp_py_vector, temp_velocity;
     char* path = "./model/data/HydroSets/";
-    // Append the extension to each file
+
     for(i = 0;i < num_hydro_files; i++)
     {
+        // Append the extension to get the correct hydro map
         strcpy(file, path);
         strcat(file, file_names[i]);
         strcat(file, file_extension);
@@ -106,15 +108,17 @@ void import_hydro() {
 
         if(pFile == NULL)
         {
-            printf("Failed to open the file");
+            printf("Failed to open the hydromap");
             exit(1);
         }
 
         // Skip the file layout
         for(j = 0; j < 6; j++)
-		{
+        {
             fscanf(pFile, "%s", str);
         }
+
+        // Scan through the files and retrieve the values
         while(fscanf(pFile, "%s", str) != EOF)
         {
             temp_x = atoi(str);
@@ -123,7 +127,7 @@ void import_hydro() {
             fscanf(pFile, "%f", &value);
             temp_depth = value;
             fscanf(pFile, "%f", &value);
-            temp_px_velocity = value;
+            temp_px_vector = value;
             fscanf(pFile, "%f", &value);
             temp_py_vector = value;
             fscanf(pFile, "%f", &value);
@@ -131,6 +135,31 @@ void import_hydro() {
         }
         fclose(pFile);
     }
+
+    //Read in the cell-type file and set the patches
+    strcpy(file, "./model/data/Environmentals/cell-type.txt");
+    pFile = fopen(file, "r");
+
+    if(pFile == NULL)
+    {
+        printf("Failed to open cell-type.txt");
+        exit(1);
+    }
+
+    // Go through the cell-type.txt file and set the appropriate patches
+    char temp_cell_type[256];
+    while(fscanf(pFile, "%s", str) != EOF)
+    {
+        temp_x = atoi(str);
+        printf("pxcor %d\n",temp_x);
+        fscanf(pFile, "%s", str);
+        temp_y = atoi(str);
+        printf("pxcor %d\n",temp_y );
+        fscanf(pFile, "%s", str);
+        strcpy(temp_cell_type,  str);
+        printf("cell-type %s\n", temp_cell_type);
+    }
+    fclose(pFile);
 }
 
 

@@ -33,6 +33,11 @@ void find_map_width_height(FILE* hydro_file);
 
 void init_patches();
 
+/**
+ * Reads the Hydo map files and sets up the proper (x,y) patches
+ * Input in the form of "pxcor pycor depth px-vector py-vector velocity"
+ * and this must be the first line in the file.
+ */
 void import_hydro();
 
 void setup_environmentals();
