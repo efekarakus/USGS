@@ -3,43 +3,25 @@
 
 #include "list.h"
 
-void update_patches();
+void update_patches(int x, int y);
 
-void go_macro();
+void go_macro(int x, int y);
 
-void go_phyto();
+void go_phyto(int x, int y);
 
-void go_herbivore();
+void go_herbivore(int x, int y);
 
-void go_waterdecomp();
+void go_waterdecomp(int x, int y);
 
-void go_seddecomp();
+void go_seddecomp(int x, int y);
 
-void go_consum();
+void go_consum(int x, int y);
 
-void go_DOC();
+void go_DOC(int x, int y);
 
-void go_POC();
+void go_POC(int x, int y);
 
-void go_detritus();
-
-void pred_phyto();
-
-void pred_herbivore();
-
-void pred_seddecomp();
-
-void pred_waterdecomp();
-
-void pred_sedconsumer();
-
-void pred_detritus();
-
-void pred_DOC();
-
-void pred_POC();
-
-void pred_consum();
+void go_detritus(int x, int y);
 
 typedef struct _patch {
 

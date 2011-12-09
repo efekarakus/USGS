@@ -6,8 +6,7 @@
  */
 void go()
 {
-
-
+	update_environmentals();
 }
 
 
