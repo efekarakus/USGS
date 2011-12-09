@@ -32,6 +32,7 @@ int photo_radiation;	///< photo_radiation
 int discharge;	///< discharge
 
 int hydro_group;	///< hydro-group
+int hydro_changed = 0;  //boolean stating if the hydro map was changed
 double temp_dif = 0;	///< The percent difference from 17 degrees Celsius. (Used in update_temp)
 double par_dif = 0;	///< The percent difference in par. (Used in update_par)
 

@@ -33,7 +33,7 @@ void update_environmentals()
 		update_temp();	// Updates to a new water temperature
 	}
 
-	update_par()	// Updates hourly to a new photosynthetic radiation value
+	update_par();	// Updates hourly to a new photosynthetic radiation value
 }
 
 
@@ -54,7 +54,7 @@ void update_par()
 {
 	photo_radiation_index++;
 	photo_radiation = photo_radiation_data[photo_radiation_index];
-	photo_radiation = photo_radiation - (photo_radiation * par_diff);
+	photo_radiation = photo_radiation - (photo_radiation * par_dif);
 }
 
 /**
