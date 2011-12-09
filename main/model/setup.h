@@ -40,16 +40,29 @@ void init_patches();
  */
 void import_hydro();
 
+/**
+ * Reads from files the initial discharge (daily) and initial radiation (hourly) values and then imports the maps based on the discharge value
+ */
 void setup_environmentals();
+
+/**
+ * Reads the "discharge.txt" file and initializes the discharge variables
+ */
+void set_discharge();
+
+/**
+ * Reads the "par.txt" file and initializes the photo_radiation array variables
+ */
+void set_photo_radiation();
+
+/**
+ * Reads the "water-temp.txt" file and initializes the temperature array variable
+ */
+void set_temperature();
 
 /**
  * Sets up the 10 stocks, currently has default values
  * Will get these values as input later
  */
 void setup_stocks();
-
-void set_discharge();
-void set_photo_radiation();
-void set_temperature();
-
 #endif

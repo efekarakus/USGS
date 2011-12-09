@@ -1,4 +1,5 @@
 #include "go.h"
+#include "globals.h"
 
 /**
  * This function runs the model
@@ -17,9 +18,9 @@ void go()
  */
 void update_environmentals()
 {
-	if (hours % 24 == 0)	// Updates daily
+	if ((hours % 24) == 0)	// Updates daily
 	{
-		update_discharge();	// Pulls a new discharge from a text file
+		update_discharge();	// Pulls next discharge from a data array
 		//choose_hydro_map();	// Chooses a new hydro map based on the discharge
 		if (hydro_changed == 1)
 		{
@@ -27,7 +28,7 @@ void update_environmentals()
 		}
 	}
 
-	if (hours % 168 == 0)	// Updates weekly
+	if ((hours % 168) == 0)	// Updates weekly
 	{
 		update_temp();	// Updates to a new water temperature
 	}
@@ -41,7 +42,9 @@ void update_environmentals()
  */
 void update_temp()
 {
-	// Doesn't make sense
+	temperature_index++;
+	temperature = temperature_data[temperature_index];
+	temperature = temperature - ((temperature - 17) * temp_dif);
 }
 
 /**
@@ -49,7 +52,9 @@ void update_temp()
  */
 void update_par()
 {
-	// Doesn't make sense
+	photo_radiation_index++;
+	photo_radiation = photo_radiation_data[photo_radiation_index];
+	photo_radiation = photo_radiation - (photo_radiation * par_diff);
 }
 
 /**
@@ -57,7 +62,6 @@ void update_par()
  */
 void update_discharge()
 {
-
-
-}
- */
+	discharge_index++;
+	discharge = discharge_data[discharge_index];
+} 

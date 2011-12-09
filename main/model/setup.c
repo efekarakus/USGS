@@ -1,4 +1,6 @@
+#include "globals.h"
 #include "setup.h"
+
 
 /**
  * Calls the helper functions import_hydro and setup_environmentals
@@ -18,7 +20,7 @@ void setup() {
 void find_map_sizes() {
     // open the first hydro map
     char* hydro_map = file_names[0];
-    char* path = "./model/data/HydroSets/";
+    char* path = "./data/HydroSets/";
     int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
     char hydro_path[length];
     strcpy(hydro_path, path);
@@ -28,7 +30,7 @@ void find_map_sizes() {
      
     FILE* file = fopen(hydro_path, "r");
     if (file == NULL) {
-        fputs("error openning the hydro map", stderr);
+        fputs("error opening the hydro map", stderr);
         exit(-1);
     }
 
@@ -95,7 +97,7 @@ void import_hydro() {
     char str[256];
     float value;
     double temp_depth, temp_px_vector, temp_py_vector, temp_velocity;
-    char* path = "./model/data/HydroSets/";
+    char* path = "./data/HydroSets/";
 
     for(i = 0;i < num_hydro_files; i++)
     {
@@ -137,7 +139,7 @@ void import_hydro() {
     }
 
     //Read in the cell-type file and set the patches
-    strcpy(file, "./model/data/Environmentals/cell-type.txt");
+    strcpy(file, "./data/Environmentals/cell-type.txt");
     pFile = fopen(file, "r");
 
     if(pFile == NULL)
@@ -164,24 +166,26 @@ void import_hydro() {
  * Reads from files the initial discharge (daily) and initial radiation (hourly) values and then imports the maps based on the discharge value
  *
  * NOTE: STILL NEED TO IMPLEMENT "UPDATE-HYDRO-MAP" AND "CHOOSE-HYDRO-MAP"
- * NOTE: NEED TO FREE:
+ *		 
+ *		 STILL NEED TO FREE:
  *			- photo_radiation
  *			- temperature
  *			- discharge (if fixed_environmentals == true)
  */
 void setup_environmentals() 
 {
-    if (fixed_environmentals == 1)
+	temp_dif = 0;
+	par_dif = 0;
+
+    if (fixed_environmentals == 1)	// Read environmental data from the GUI
     {
 		hydro_group = gui_hydro_group;
 		// update-hydro-map()
-		photo_radiation = (int*)malloc(sizeof(int));
-		*photo_radiation = gui_photo_radiation;
-		temperature = (double*)malloc(sizeof(double));
-		*temperature = gui_temperature;
+		photo_radiation = gui_photo_radiation;
+		temperature = gui_temperature;
     }
 
-	else
+	else	// Read environmental data from the txt files
 	{
 		set_discharge();
 		set_photo_radiation();
@@ -192,6 +196,148 @@ void setup_environmentals()
 		// update-hydro-map
 	}
 }
+
+
+/**
+ * Reads the discharge.txt file and initializes the discharge variables
+ */
+void set_discharge()
+{
+	char* pathname = "./data/Environmentals/";
+
+	char* currFile = discharge_file;
+	int length = strlen(pathname) + strlen(currFile) + 1;
+	char filename[length];
+	filename[0] = '\0';
+	strcat(filename, pathname);
+	strcat(filename, currFile);
+
+	FILE* file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		perror ("Error opening discharge file");
+	}
+
+	char line[256];
+	int count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
+	{
+		count++;
+	}
+	
+	discharge_data = (int*)malloc(count * sizeof(int));
+
+	rewind(file);
+	count = 0;
+	while (fgets(line, 256, file) != NULL)	// Populate discharge_data array
+	{
+		int value = atoi(line);
+		discharge_data[count] = value;
+		count++;
+	}
+
+	discharge_index = 0;	// Initialize discharge index to represent current index
+	discharge = discharge_data[discharge_index];	// Assign first value of discharge
+
+	fclose(file);
+}
+
+
+/*
+ * Reads the "par.txt" file and initializes the photo_radiation array variables
+ */
+void set_photo_radiation()
+{
+	char* pathname = "./data/Environmentals/";
+
+	char* currFile = photo_radiation_file;
+	int length = strlen(pathname) + strlen(currFile) + 1;
+	char filename[length];
+	filename[0] = '\0';
+	strcat(filename, pathname);
+	strcat(filename, currFile);
+
+	FILE* file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		perror ("Error opening photo_radiation file");
+	}
+
+	char line[256];
+	int count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
+	{
+		count++;
+	}
+
+	photo_radiation_data = (int*)malloc(count * sizeof(int));
+
+	rewind(file);
+	count = 0;
+	
+	while (fgets(line, 256, file) != NULL)	// Populate discharge array
+	{
+		int value = atoi(line);
+		photo_radiation_data[count] = value;
+		count++;
+	}
+	
+	photo_radiation_index = 0;	// Initialize photo_radiation index to represent current index
+	photo_radiation = photo_radiation_data[photo_radiation_index];	// Assign first value of photo_radiation
+
+	fclose(file);
+}
+
+
+/**
+ * Reads the "water-temp.txt" file and initializes the temperature array variable
+ */
+void set_temperature()
+{
+	char* pathname = "./data/Environmentals/";
+
+	char* currFile = temperature_file;
+	int length = strlen(pathname) + strlen(currFile) + 1;
+	char filename[length];
+	filename[0] = '\0';
+	strcat(filename, pathname);
+	strcat(filename, currFile);
+
+	FILE* file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		perror ("Error opening water-temperature file");
+	}
+
+	char line[256];
+	int count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
+	{
+		count++;
+	}
+
+	temperature_data = (double*)malloc(count * sizeof(double));
+
+	rewind(file);
+
+	count = 0;
+
+	while (fgets(line, 256, file) != NULL)	// Populate temperature array
+	{
+		double value = atof(line);
+		temperature_data[count] = value;
+		count++;
+	}
+
+	temperature_index = 0;	// Initialize temperature index to represent current index
+	temperature = temperature_data[temperature_index];	// Assign first value of temperature
+
+	fclose(file);
+}
+
 
 /**
  * Sets up the 10 stocks, currently has default values
@@ -221,130 +367,6 @@ void setup_stocks()
     }
 }
 
-/**
- * Reads the discharge.txt file and initializes the discharge array variable
- */
-void set_discharge()
-{
-	char* pathname = "./model/data/Environmentals/";
-
-	char* currFile = discharge_file;
-	int length = strlen(pathname) + strlen(currFile) + 1;
-	char filename[length];
-	filename[0] = '\0';
-	strcat(filename, pathname);
-	strcat(filename, currFile);
-
-	FILE* file = fopen(filename, "r");
-	if (file == NULL)
-	{
-		perror ("Error opening discharge file");
-	}
-
-	char line[256];
-	int count = 0;
-
-	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
-	{
-		count++;
-	}
-	
-	discharge = (int*)malloc(count * sizeof(int));
-
-	rewind(file);
-	count = 0;
-	while (fgets(line, 256, file) != NULL)	// Populate discharge array
-	{
-		int value = atoi(line);
-		discharge[count] = value;
-		count++;
-	}
-}
-
-
-/*
- * Reads the "par.txt" file and initializes the photo_radiation array variable 
- */
-void set_photo_radiation()
-{
-	char* pathname = "./model/data/Environmentals/";
-
-	char* currFile = photo_radiation_file;
-	int length = strlen(pathname) + strlen(currFile) + 1;
-	char filename[length];
-	filename[0] = '\0';
-	strcat(filename, pathname);
-	strcat(filename, currFile);
-
-	FILE* file = fopen(filename, "r");
-	if (file == NULL)
-	{
-		perror ("Error opening photo_radiation file");
-	}
-
-	char line[256];
-	int count = 0;
-
-	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
-	{
-		count++;
-	}
-
-	photo_radiation = (int*)malloc(count * sizeof(int));
-
-	rewind(file);
-	count = 0;
-	
-	while (fgets(line, 256, file) != NULL)	// Populate discharge array
-	{
-		int value = atoi(line);
-		photo_radiation[count] = value;
-		count++;
-	}
-}
-
-
-/**
- * Reads the "water-temp.txt" file and initializes the temperature array variable
- */
-void set_temperature()
-{
-	char* pathname = "./model/data/Environmentals/";
-
-	char* currFile = temperature_file;
-	int length = strlen(pathname) + strlen(currFile) + 1;
-	char filename[length];
-	filename[0] = '\0';
-	strcat(filename, pathname);
-	strcat(filename, currFile);
-
-	FILE* file = fopen(filename, "r");
-	if (file == NULL)
-	{
-		perror ("Error opening water-temperature file");
-	}
-
-	char line[256];
-	int count = 0;
-
-	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
-	{
-		count++;
-	}
-
-	temperature = (double*)malloc(count * sizeof(double));
-
-	rewind(file);
-
-	count = 0;
-
-	while (fgets(line, 256, file) != NULL)	// Populate temperature array
-	{
-		double value = atof(line);
-		temperature[count] = value;
-		count++;
-	}
-}
 
 int main() {
     setup();

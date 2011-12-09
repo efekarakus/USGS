@@ -2,11 +2,7 @@
 #define GO_H
 
 #include "main.h"
-
-// Variables
-long hours = 0;	//> This represents 1 tick (Should always be [0, sizeof(long)])
-
-double temp_dif = 0;	//> The percent difference from 17 degrees Celsius. (Used in update_temp
+#include "globals.h"
 
 
 

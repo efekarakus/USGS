@@ -3,11 +3,14 @@
 
 #include "patch.h"
 
+// Model variables
 patch** patches; ///< 2D array of patches (pixel) objects that forms a map
 int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
+long hours = 0;	///< Represents 1 tick (should always be [0, sizeof(long)]
 
-// All GUI variables
+
+// GUI variables
 char* file_extension = "new";
 int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
@@ -16,11 +19,21 @@ int gui_hydro_group = 5;	///< fixedHydro
 
 
 // Environmental globals
-double* temperature;	///< temp
-int* photo_radiation;	///< par
-int hydro_group;	///< hydro-group
+double* temperature_data;	///< temp array which holds data that temp indexes
+int* photo_radiation_data;	///< par array which holds data that photo_radiation indexes
+int* discharge_data;	///< discharge array which holds data that discharge indexes
 
-int* discharge;    ///< discharge
+int temperature_index;	///< The index of the current temperature value
+int photo_radiation_index;	///< The index of the current photo_radiation value
+int discharge_index;	///< The index of the current discharge value
+
+double temperature;	///< temp
+int photo_radiation;	///< photo_radiation
+int discharge;	///< discharge
+
+int hydro_group;	///< hydro-group
+double temp_dif = 0;	///< The percent difference from 17 degrees Celsius. (Used in update_temp)
+double par_dif = 0;	///< The percent difference in par. (Used in update_par)
 
 
 // convert ft to m from the SMS to .png scaling conversion
