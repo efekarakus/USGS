@@ -20,7 +20,7 @@ void setup() {
 void find_map_sizes() {
     // open the first hydro map
     char* hydro_map = file_names[0];
-    char* path = "./data/HydroSets/";
+    char* path = "./model/data/HydroSets/";
     int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
     char hydro_path[length];
     strcpy(hydro_path, path);
@@ -97,7 +97,7 @@ void import_hydro() {
     char str[256];
     float value;
     double temp_depth, temp_px_vector, temp_py_vector, temp_velocity;
-    char* path = "./data/HydroSets/";
+    char* path = "./model/data/HydroSets/";
 
     for(i = 0;i < num_hydro_files; i++)
     {
@@ -139,7 +139,7 @@ void import_hydro() {
     }
 
     //Read in the cell-type file and set the patches
-    strcpy(file, "./data/Environmentals/cell-type.txt");
+    strcpy(file, "./model/data/Environmentals/cell-type.txt");
     pFile = fopen(file, "r");
 
     if(pFile == NULL)
@@ -203,7 +203,7 @@ void setup_environmentals()
  */
 void set_discharge()
 {
-	char* pathname = "./data/Environmentals/";
+	char* pathname = "./model/data/Environmentals/";
 
 	char* currFile = discharge_file;
 	int length = strlen(pathname) + strlen(currFile) + 1;
@@ -249,7 +249,7 @@ void set_discharge()
  */
 void set_photo_radiation()
 {
-	char* pathname = "./data/Environmentals/";
+	char* pathname = "./model/data/Environmentals/";
 
 	char* currFile = photo_radiation_file;
 	int length = strlen(pathname) + strlen(currFile) + 1;
@@ -296,7 +296,7 @@ void set_photo_radiation()
  */
 void set_temperature()
 {
-	char* pathname = "./data/Environmentals/";
+	char* pathname = "./model/data/Environmentals/";
 
 	char* currFile = temperature_file;
 	int length = strlen(pathname) + strlen(currFile) + 1;
