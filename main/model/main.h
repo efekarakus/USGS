@@ -8,6 +8,7 @@
  *     */
 #include <Python.h>
 #include "setup.h"
+#include "patch.h"
 
 /* Python calls this to let us initialize our module */
 void initMainModule();

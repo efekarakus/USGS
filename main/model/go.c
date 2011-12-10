@@ -27,6 +27,7 @@ void go()
 
 
 	// Ask patches HERE
+	update_patches(0, 0);
 }
 
 

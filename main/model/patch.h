@@ -2,6 +2,8 @@
 #define _PATCH
 
 #include "list.h"
+#include "math.h"
+#include "globals.h"
 
 void update_patches(int x, int y);
 
@@ -181,5 +183,7 @@ typedef struct _patch {
 	double waterdecomp_senescence;          ///< NOT AVAILABLE
 	double turbidity;                       ///< metric of suspended solids in water column
 } patch;
+
+patch** patches; ///< 2D array of patches (pixel) objects that forms a map
 
 #endif 

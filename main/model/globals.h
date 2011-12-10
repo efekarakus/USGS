@@ -4,7 +4,6 @@
 #include "patch.h"
 
 // Model variables
-patch** patches; ///< 2D array of patches (pixel) objects that forms a map
 int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
 long hours = 0;	///< Represents 1 tick (should always be [0, sizeof(long)]
@@ -16,6 +15,8 @@ int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
 int gui_photo_radiation = 2000;    ///< fixedPAR
 int gui_hydro_group = 5;	///< fixedHydro
+double gui_k_phyto = 0.4;  ///< k-phyto
+double gui_k_macro = 0.4; ///< k-macro
 
 
 // Environmental globals
@@ -117,12 +118,14 @@ double Aj_seddecomp = 0.2;
 double Aj_herbivore = 2.4;
 int Aj_sedconsumer = 2;
 double Aj_consum = 0.65;
+double Aj_peri;
 int Gj_phyto = 100;
 int Gj_waterdecomp = 20;
 int Gj_seddecomp = 120;
 int Gj_herbivore = 108;
 int Gj_sedconsumer = 20;
 double Gj_consum = 6.5;
+double Gj_peri;
 
 // set k-macro .4 -> taken from interface
 // set k-phyto .4 -> taken from interface

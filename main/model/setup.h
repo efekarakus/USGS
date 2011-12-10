@@ -2,7 +2,6 @@
 #define _SETUP
 
 #include "globals.h"
-#include "patch.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

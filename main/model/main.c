@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "setup.c"
 #include "go.c"
+#include "patch.c"
+
+
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
