@@ -1,16 +1,16 @@
 #include "globals.h"
 #include "setup.h"
 
-
 /**
  * Calls the helper functions import_hydro and setup_environmentals
- * TODO: detailed comments
  */
 void setup() {
     find_map_sizes();
     init_patches();
     import_hydro();
+    printf("3-PASS\n");
     setup_environmentals();
+    printf("4-PASS\n");
 }
 
 /**
@@ -86,7 +86,7 @@ void init_patches() {
 }
 
 /**
- * Reads the Hydo map files and sets up the proper (x,y) patches
+ * Reads the Hydro map files and sets up the proper (x,y) patches
  * Input in the form of "pxcor pycor depth px-vector py-vector velocity"
  * and this must be the first line in the file.
  */
@@ -134,12 +134,25 @@ void import_hydro() {
             temp_py_vector = value;
             fscanf(pFile, "%f", &value);
             temp_velocity = value;
+
+
+            // assign the values to patches:
+            printf("temp_x: %d, temp_y: %d and MAX_WIDTH: %d, MAX_HEIGHT: %d\n", temp_x, temp_y, MAP_WIDTH, MAP_HEIGHT);
+            temp_x--; // need to offset the x,y coordinates as their map coordinates starts at (1,1) and not (0,0)
+            temp_y--;
+            patches[temp_x][temp_y].pxcor = temp_x;
+            patches[temp_x][temp_y].pycor = temp_y;
+            patches[temp_x][temp_y].depth = temp_depth;
+            patches[temp_x][temp_y].px_vector = temp_px_vector;
+            patches[temp_x][temp_y].py_vector = temp_py_vector;
+            patches[temp_x][temp_y].velocity = temp_velocity;
+
         }
         fclose(pFile);
     }
 
     //Read in the cell-type file and set the patches
-    strcpy(file, "./model/data/Environmentals/cell-type.txt");
+    strcpy(file, "./model/data/Environmentals/cell-type.txt");  //TODO: make this file path more generic by moving it to the header file
     pFile = fopen(file, "r");
 
     if(pFile == NULL)
@@ -150,6 +163,12 @@ void import_hydro() {
 
     // Go through the cell-type.txt file and set the appropriate patches
     char temp_cell_type[256];
+   
+    // skip the file layout
+    for(j = 0; j < 3; j++) {
+        fscanf(pFile, "%s", str);
+    }
+    
     while(fscanf(pFile, "%s", str) != EOF)
     {
         temp_x = atoi(str);
@@ -157,6 +176,18 @@ void import_hydro() {
         temp_y = atoi(str);
         fscanf(pFile, "%s", str);
         strcpy(temp_cell_type,  str);
+
+
+        temp_x--;
+        temp_y--;
+        printf("temp_x: %d, temp_y: %d\n", temp_x, temp_y);
+        // assign the cell_type to the patches
+        if(strcmp(temp_cell_type,"output") == 0) {
+            patches[temp_x][temp_y].cell_type = 0;
+        } else { 
+            patches[temp_x][temp_y].cell_type = 1;
+        }
+
     }
     fclose(pFile);
 }
@@ -184,7 +215,6 @@ void setup_environmentals()
 		photo_radiation = gui_photo_radiation;
 		temperature = gui_temperature;
     }
-
 	else	// Read environmental data from the txt files
 	{
 		set_discharge();
@@ -365,10 +395,5 @@ void setup_stocks()
             }
         }
     }
-}
-
-
-int main() {
-    setup();
 }
 

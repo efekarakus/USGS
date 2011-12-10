@@ -148,9 +148,3 @@ void pred_consum(int x, int y)
 	}
 }
 
-
-int main()
-{
-	printf("0\n");
-	return 0;
-}

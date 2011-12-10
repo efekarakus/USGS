@@ -22,6 +22,20 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     PyArg_ParseTuple(args, "i", &tss);
     tss = 2*tss;
     setup();
+    int x,y;
+    for(x = 0; x < MAP_WIDTH; x++) {
+      for(y = 0; y < MAP_HEIGHT; y++) {
+        patch p = patches[x][y];
+        int pxcor = p.pxcor;
+        int pycor = p.pycor;
+        double depth = p.depth;
+        double px_vector = p.px_vector;
+        double py_vector = p.py_vector;
+        short cell_type = p.cell_type;
+        printf("patch[%d][%d] has: (pxcor: %d, pycor: %d, depth: %f, px_vector: %f, py_vector: %f, cell_type: %d, )\n", x, y, pxcor, pycor, depth, px_vector, py_vector, cell_type);
+      }
+    }
+
 	go();
     return Py_BuildValue("i", tss);
 }
