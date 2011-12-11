@@ -1,11 +1,9 @@
 #include "color.h"
 
-void scale_color(Color colorVal, int value, int maxVal, int minVal, int x,
-    int y){
+void scale_color(Color colorVal, int value, int maxVal, int minVal, int x, int y){
     int returnValue = 0;
     if(maxVal == minVal){
-        printf("Error in use of scale_color. Max and min value are
-            equal.\n");
+        printf("Error in use of scale_color. Max and min value are equal.\n");
         exit(1);
     }
 
