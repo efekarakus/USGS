@@ -301,7 +301,7 @@ void go_sedconsumer(int x, int y) {
     patches[x][y].sedconsumer_senescence = s_sedconsumer * patches[x][y].sedconsumer;
 }
 
-void go_consum(x,y) {
+void go_consum(int x,int y) {
 
     // update consum_sedconsumer_prey_limitation
     patches[x][y].consum_sedconsumer_prey_limitation = patches[x][y].sedconsumer / (Ai_consum_sedconsumer - Gi_consum_sedconsumer);
@@ -350,14 +350,83 @@ void go_consum(x,y) {
     patches[x][y].consum_senescence = s_consum * patches[x][y].consum;
 }
 
-void go_DOC(int x, int y) {
+void go_DOC(int x, int y)
+{
+    // 4% of photosynthetic gets released into the water column. Wetzel lit.
+    patches[x][y].macro_exudation = .04 * patches[x][y].macro;
 
+    // Dead objects < 1um are considered DOC in Wetzel book..
+    patches[x][y].micro_death = patches[x][y].senescence_macro * .01 + patches[x][y].senescence_phyto * .01;
+
+    // *need reference
+    patches[x][y].excretion = patches[x][y].herbivore_excretion + patches[x][y].waterdecomp_excretion + 
+                              patches[x][y].seddecomp_excretion + patches[x][y].sedconsumer_excretion + 
+                              patches[x][y].consum_excretion + patches[x][y].excretion_phyto + patches[x][y].peri_excretion;
+
+    // *need reference
+    patches[x][y].flocculation = .01 * patches[x][y].DOC;
+
+    patches[x][y].DOC_growth = patches[x][y].macro_exudation + patches[x][y].micro_death + patches[x][y].excretion;
 }
 
-void go_POC(int x, int y) {
+void go_POC(int x, int y)
+{
+    if(patches[x][y].velocity > 0)
+    {
+        // exchange between POC and detritus determined by an approximation of Stoke's Law
+        patches[x][y].detritus_POC_transfer = patches[x][y].detritus * (.25 * log(((patches[x][y].velocity / 40 ) + .0001) + 1) * 10);
+    }
 
+    if(patches[x][y].detritus_POC_transfer > 1)
+    {
+        // cap at 100%. *need reference
+        patches[x][y].detritus_POC_transfer = 1;
+    }
+
+    // approximations of the percention of dead objects < 10um that will be in water column; Wetzel Limnology textbook.
+    patches[x][y].small_death = patches[x][y].senescence_macro * .09 + patches[x][y].senescence_phyto * .09 + 
+                                patches[x][y].scouring_macro * .1 + patches[x][y].waterdecomp_senescence * 
+                                .7 + .3 * patches[x][y].peri_senescence;
+
+    // flocculation, leaching approximation
+    patches[x][y].POC_growth = patches[x][y].flocculation + patches[x][y].detritus_POC_transfer;
 }
 
-void go_detritus(int x, int y) {
+void go_detritus(int x, int y)
+{
+    if(patches[x][y].velocity > 0)
+    {
+        // *need reference
+        patches[x][y].POC_detritus_transfer = patches[x][y].POC * (1 - (.25 * log((( patches[x][y].velocity / 40) + .0001) + 1) * 10 ));
+    }
 
+    if(patches[x][y].POC_detritus_transfer < 0)
+    {
+        // *need reference
+        patches[x][y].POC_detritus_transfer = 0;
+    }
+
+    if(patches[x][y].velocity = 0)
+    {
+        // *need reference. almost all material falls to the bottom in stagnant water
+        patches[x][y].POC_detritus_transfer = patches[x][y].POC * .9; 
+    }
+
+    if(patches[x][y].gross_photo_macro < 0)
+    {
+        // to incorporate scoured macrophytes into detritus
+        patches[x][y].macro_death = 0 - patches[x][y].gross_photo_macro;
+    }
+
+    // Dead objects > 10um will sink Wetzel book..
+    patches[x][y].large_death = patches[x][y].senescence_macro * .9 + patches[x][y].scouring_macro * .9 + 
+                                patches[x][y].senescence_phyto * .9 + patches[x][y].seddecomp_senescence + 
+                                patches[x][y].waterdecomp_senescence * .3 + patches[x][y].herbivore_senescence + 
+                                patches[x][y].sedconsumer_senescence + patches[x][y].consum_senescence + .07 * patches[x][y].peri_senescence;
+
+    patches[x][y].egestion = herbivore_egestion + patches[x][y].sedconsumer_egestion + consum_egestion;
+
+    // *need reference
+    patches[x][y].detritus_growth = patches[x][y].large_death + patches[x][y].POC_detritus_transfer + 
+                                    patches[x][y].egestion + patches[x][y].macro_death;
 }
