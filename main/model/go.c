@@ -29,7 +29,6 @@ void go()
 /**
  * Updates the environmental variables (Primary macrophyte routine)
  *
- * TODO NEED TO IMPLEMENT "UPDATE-HYDRO-MAP"
  */
 void update_environmentals()
 {
