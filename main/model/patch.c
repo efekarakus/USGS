@@ -349,3 +349,15 @@ void go_consum(x,y) {
     // update consum_senescence
     patches[x][y].consum_senescence = s_consum * patches[x][y].consum;
 }
+
+void go_DOC(int x, int y) {
+
+}
+
+void go_POC(int x, int y) {
+
+}
+
+void go_detritus(int x, int y) {
+
+}

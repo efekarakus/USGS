@@ -1,5 +1,4 @@
 #include "pred.h"
-#include "setup.h"
 
 
 /**
@@ -25,7 +24,10 @@ void pred_phyto(int x, int y)
  */
 void pred_herbivore(int x, int y)
 {
-	patches[x][y].herbivore = patches[x][y].herbivore_ingest_phyto + patches[x][y].herbivore_ingest_peri + patches[x][y].herbivore_ingest_waterdecomp - (patches[x][y].herbivore_respiration + patches[x][y].herbivore_excretion + patches[x][y].herbivore_senescence) - patches[x][y].consum_pred_herbivore;
+	patches[x][y].herbivore = patches[x][y].herbivore_ingest_phyto + patches[x][y].herbivore_ingest_peri + 
+                              patches[x][y].herbivore_ingest_waterdecomp - 
+                              (patches[x][y].herbivore_respiration + patches[x][y].herbivore_excretion + patches[x][y].herbivore_senescence)
+                              - patches[x][y].consum_pred_herbivore;
 
 	if (patches[x][y].herbivore < 0.001)
 	{
@@ -41,7 +43,9 @@ void pred_herbivore(int x, int y)
  */
 void pred_seddecomp(int x, int y)
 {
-	patches[x][y].seddecomp = patches[x][y].seddecomp + patches[x][y].seddecomp_ingest_detritus - (patches[x][y].seddecomp_respiration + patches[x][y].seddecomp_excretion + patches[x][y].seddecomp_senescence) - patches[x][y].sedconsumer_pred_seddecomp;
+	patches[x][y].seddecomp = patches[x][y].seddecomp + patches[x][y].seddecomp_ingest_detritus 
+                              - (patches[x][y].seddecomp_respiration + patches[x][y].seddecomp_excretion + patches[x][y].seddecomp_senescence)
+                              - patches[x][y].sedconsumer_pred_seddecomp;
 
 	if (patches[x][y].seddecomp < 0.001)
 	{
@@ -57,7 +61,10 @@ void pred_seddecomp(int x, int y)
  */
 void pred_waterdecomp(int x, int y)
 {
-	patches[x][y].waterdecomp = patches[x][y].waterdecomp + patches[x][y].waterdecomp_ingest_doc + patches[x][y].waterdecomp_ingest_poc - (patches[x][y].waterdecomp_respiration + patches[x][y].waterdecomp_excretion + patches[x][y].waterdecomp_senescence) - patches[x][y].herbivore_pred_waterdecomp;
+	patches[x][y].waterdecomp = patches[x][y].waterdecomp + patches[x][y].waterdecomp_ingest_doc + 
+                                patches[x][y].waterdecomp_ingest_poc 
+                                - (patches[x][y].waterdecomp_respiration + patches[x][y].waterdecomp_excretion + patches[x][y].waterdecomp_senescence) 
+                                - patches[x][y].herbivore_pred_waterdecomp;
 
 	if (patches[x][y].waterdecomp < 0.001)
 	{
@@ -73,7 +80,10 @@ void pred_waterdecomp(int x, int y)
  */
 void pred_sedconsumer(int x, int y)
 {
-	patches[x][y].sedconsumer = patches[x][y].sedconsumer + patches[x][y].sedconsumer_ingest_peri + patches[x][y].sedconsumer_ingest_seddecomp - (patches[x][y].sedconsumer_respiration + patches[x][y].sedconsumer_excretion + patches[x][y].sedconsumer_senescence) - patches[x][y].consum_pred_sedconsumer;
+	patches[x][y].sedconsumer = patches[x][y].sedconsumer + patches[x][y].sedconsumer_ingest_peri + 
+                                patches[x][y].sedconsumer_ingest_seddecomp 
+                                - (patches[x][y].sedconsumer_respiration + patches[x][y].sedconsumer_excretion + patches[x][y].sedconsumer_senescence) 
+                                - patches[x][y].consum_pred_sedconsumer;
 
 	if (patches[x][y].sedconsumer < 0.001)
 	{
@@ -145,7 +155,9 @@ void pred_POC(int x, int y)
  */
 void pred_consum(int x, int y)
 {
-	patches[x][y].consum = patches[x][y].consum + patches[x][y].consum_ingest_herbivore + patches[x][y].consum_ingest_sedconsumer - (patches[x][y].consum_respiration + patches[x][y].consum_excretion + patches[x][y].consum_senescence);
+	patches[x][y].consum = patches[x][y].consum + patches[x][y].consum_ingest_herbivore + 
+                           patches[x][y].consum_ingest_sedconsumer 
+                           - (patches[x][y].consum_respiration + patches[x][y].consum_excretion + patches[x][y].consum_senescence);
 
 	if (patches[x][y].consum < 0.001)
 	{

@@ -1,6 +1,7 @@
 #include "go.h"
 #include "globals.h"
 #include "math.h"
+#include "pred.c"
 
 /**
  * This function runs the model
@@ -31,10 +32,24 @@ void go()
             go_seddecomp(x,y);
             go_sedconsumer(x,y);
             go_consum(x,y);
+            go_DOC(x,y);
+            go_POC(x,y);
+            go_detritus(x,y);
+
+            pred_phyto(x,y);
+            pred_herbivore(x,y);
+            pred_seddecomp(x,y);
+            pred_detritus(x,y);
+            pred_DOC(x,y);
+            pred_POC(x,y);
+            pred_consum(x,y);
         }
     }
 
+    avg_output();
     hours++;
+    printf("out_macro: %f\n", out_macro);
+    printf("out_phyto: %f\n", out_phyto);
 }
 
 
@@ -201,4 +216,55 @@ void update_discharge()
 {
 	discharge_index++;
 	discharge = discharge_data[discharge_index];
-} 
+}
+
+
+/**
+ * Go through all the patches with cell-type = 'output' and take the 
+ * mean of the Stock variables
+ */
+void avg_output() {
+    
+    int x,y;
+    int count = 0;
+    double sum_macro = 0;
+    double sum_phyto = 0;
+    double sum_herbivore = 0;
+    double sum_waterdecomp = 0;
+    double sum_seddecomp = 0;
+    double sum_sedconsumer = 0;
+    double sum_consum = 0;
+    double sum_DOC = 0;
+    double sum_POC = 0;
+    double sum_detritus = 0;
+
+    for (x = 0; x < MAP_WIDTH; x++) {
+        for (y = 0; y < MAP_HEIGHT; y++) {
+            // output cells
+            if(!patches[x][y].cell_type)
+            {
+                sum_macro += patches[x][y].macro;
+                sum_phyto += patches[x][y].phyto;
+                sum_herbivore += patches[x][y].herbivore;
+                sum_waterdecomp += patches[x][y].waterdecomp;
+                sum_seddecomp += patches[x][y].seddecomp;
+                sum_sedconsumer += patches[x][y].consum;
+                sum_DOC += patches[x][y].DOC;
+                sum_POC += patches[x][y].POC;
+                sum_detritus += patches[x][y].detritus;
+                count++;
+            }
+        }
+    }
+
+    out_macro = sum_macro/count;
+    out_phyto = sum_phyto/count;
+    out_herbivore = sum_herbivore/count;
+    out_waterdecomp = sum_waterdecomp/count;
+    out_seddecomp = sum_seddecomp/count;
+    out_sedconsumer = sum_sedconsumer/count;
+    out_consum = sum_consum/count;
+    out_DOC = sum_DOC/count;
+    out_POC = sum_POC/count;
+    out_detritus = sum_detritus/count;
+}

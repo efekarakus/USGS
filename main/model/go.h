@@ -4,8 +4,6 @@
 #include "main.h"
 #include "globals.h"
 
-
-
 /* Runs the model */
 void go();
 
@@ -45,5 +43,10 @@ void update_par();
  */
 void update_discharge();
 
+/**
+ * Go through all the patches with cell-type = 'output' and take the 
+ * mean of the Stock variables
+ */
+void avg_output();
 
 #endif

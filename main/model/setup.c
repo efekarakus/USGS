@@ -214,11 +214,10 @@ void import_hydro() {
         fscanf(pFile, "%s", str);
         strcpy(temp_cell_type,  str);
 
+        printf("x: %d, y: %d, type: %s\n", temp_x, temp_y, temp_cell_type);
 
-        temp_x--;
-        temp_y--;
         // assign the cell_type to the patches
-        if(strcmp(temp_cell_type,"output") == 0) {
+        if(strcmp(temp_cell_type,"\"output\"") == 0) {
             patches[temp_x][temp_y].cell_type = 0;
         } else { 
             patches[temp_x][temp_y].cell_type = 1;

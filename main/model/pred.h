@@ -1,6 +1,9 @@
 #ifndef _PRED
 #define _PRED
 
+#include "globals.h"
+#include "setup.h"
+#include "patch.h"
 
 /**
  * Predicts the new phyto value in the patch

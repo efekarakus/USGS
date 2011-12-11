@@ -3,7 +3,7 @@
 #include "setup.c"
 #include "go.c"
 #include "patch.c"
-
+#include "cleanup.c"
 
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
@@ -38,6 +38,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     }
 */
 	go();
+    cleanup();
     return Py_BuildValue("i", tss);
 }
 
