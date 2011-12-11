@@ -24,6 +24,7 @@ double gui_k_macro = 0.4; ///< k-macro
 double gui_macro_mass_max = 1000; ///< macro-mass-max
 double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
+char* which_stock = "phyto" ///< which-stock?
 
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
