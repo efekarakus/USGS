@@ -17,6 +17,7 @@ void cleanup();
 
 /**
  * Frees up the 2D array of patches
+ * and the 2D array of color values
  */
 void clean_patches();
 

@@ -27,8 +27,10 @@ void clean_patches() {
             free( patches[x][y].v_list );
         }
         free( patches[x] );
+        free( colorValues[x] );
     }
     free( patches );
+    free( colorValues );
 }
 
 /**

@@ -1,6 +1,6 @@
 #include "globals.h"
 #include "setup.h"
-
+#include "color.h"
 /**
  * Calls the helper functions import_hydro and setup_environmentals
  */
@@ -119,6 +119,19 @@ void init_patches() {
             patches[col][row].depth_list = malloc(num_hydro_files*sizeof(double));
             patches[col][row].v_list = malloc(num_hydro_files*sizeof(double));
         }
+    }
+
+    //initialize colors corresponding to each patch
+    colorValues = malloc(MAP_WIDTH*sizeof(color*));
+    for( col = 0; col < MAP_WIDTH; col++) {
+        colorValues[col] = malloc(MAP_HEIGHT*sizeof(color));       
+    }   
+    for( col = 0; col < MAP_WIDTH; col++) {
+        for(row = 0; row < MAP_HEIGHT; row++){
+            colorValues[col][row].colors[0] = 0;
+            colorValues[col][row].colors[1] = 0;
+            colorValues[col][row].colors[2] = 0;
+        }   
     }
 
 }
