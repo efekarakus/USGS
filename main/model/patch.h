@@ -74,18 +74,18 @@ typedef struct _patch {
 	double sedconsumer_space_limitation;    ///< NOT AVAILABLE
 	double consum_space_limitation;         ///< NOT AVAILABLE
 
-	int assimilation;                       ///< NOT AVAILABLE
-	int detritus;                           ///< NOT AVAILABLE
-	int DOC;                                ///< NOT AVAILABLE
-	int POC;                                ///< NOT AVAILABLE
-	int waterdecomp;                        ///< NOT AVAILABLE
-	int seddecomp;                          ///< NOT AVAILABLE
-	int macro;                              ///< NOT AVAILABLE
-	int phyto;                              ///< NOT AVAILABLE
-	int herbivore;                          ///< NOT AVAILABLE
-	int sedconsumer;                        ///< NOT AVAILABLE
-	int peri;                               ///< NOT AVAILABLE
-	int consum;                             ///< NOT AVAILABLE
+	double assimilation;                       ///< NOT AVAILABLE
+	double detritus;                           ///< NOT AVAILABLE
+	double DOC;                                ///< NOT AVAILABLE
+	double POC;                                ///< NOT AVAILABLE
+	double waterdecomp;                        ///< NOT AVAILABLE
+	double seddecomp;                          ///< NOT AVAILABLE
+	double macro;                              ///< NOT AVAILABLE
+	double phyto;                              ///< NOT AVAILABLE
+	double herbivore;                          ///< NOT AVAILABLE
+	double sedconsumer;                        ///< NOT AVAILABLE
+	double peri;                               ///< NOT AVAILABLE
+	double consum;                             ///< NOT AVAILABLE
 	double bottom_light;                    ///< par that reaches the bottom of the river
 	int consumer;                           ///< consumers in the water column, such as fish
 	double consum_consumption;              ///< NOT AVAILABLE

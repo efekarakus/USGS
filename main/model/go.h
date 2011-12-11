@@ -49,4 +49,24 @@ void update_discharge();
  */
 void avg_output();
 
+/**
+ * @return the max_timestep based on the greatest x-y vector
+ */
+int get_timestep();
+
+/**
+ *
+ */
+void flow_carbon(int x, int y);
+
+/**
+ * Checks if the x, y values for the patch is within boundaries of the map
+ * @return 1 if valid, 0 otherwise
+ */
+int is_valid_patch(int x, int y);
+
+/**
+ * @return the number of days that have passed since the start of the code
+ */
+int get_day();
 #endif

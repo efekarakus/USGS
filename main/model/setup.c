@@ -15,6 +15,7 @@ void setup() {
     printf("PASSED -- setup_environmentals()\n");
     setup_stocks();
     printf("PASSED -- setup_stocks()\n");
+    printf("SUCCESS -- setup\n");
 }
 
 /**
@@ -226,8 +227,6 @@ void import_hydro() {
         temp_y = atoi(str);
         fscanf(pFile, "%s", str);
         strcpy(temp_cell_type,  str);
-
-        printf("x: %d, y: %d, type: %s\n", temp_x, temp_y, temp_cell_type);
 
         // assign the cell_type to the patches
         if(strcmp(temp_cell_type,"\"output\"") == 0) {

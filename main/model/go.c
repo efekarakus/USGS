@@ -47,9 +47,27 @@ void go()
     }
 
     avg_output();
+
+    // flow carbon
+    int max_timestep = get_timestep();
+    int time, max_time = 3600/max_timestep;
+    for (time = 0; time < max_time; time++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
+            for (y = 0; y < MAP_HEIGHT; y++) {
+                if(patches[x][y].depth > 0 && patches[x][y].velocity>0)
+                {
+                    flow_carbon(x,y);
+                }
+            }
+        }
+    }
+    
+    // increment tick
     hours++;
-    printf("out_macro: %f\n", out_macro);
-    printf("out_phyto: %f\n", out_phyto);
+    int day = get_day();
+    if(day >= gui_days_to_run) {
+        //TODO: break out of the while loop!
+    }
 }
 
 
@@ -267,4 +285,83 @@ void avg_output() {
     out_DOC = sum_DOC/count;
     out_POC = sum_POC/count;
     out_detritus = sum_detritus/count;
+}
+
+/**
+ * @return the max_timestep based on the greatest x-y vector
+ */
+int get_timestep() {
+    return patch_length/COMPARE_MAX;
+}
+
+/**
+ *
+ */
+void flow_carbon(int x, int y) {
+
+    int corner_patch = abs( patches[x][y].py_vector - patches[x][y].px_vector )/max_area;
+    int tb_patch = abs( patches[x][y].py_vector*( patch_length - abs(patches[x][y].px_vector) ) )/max_area;
+    int rl_patch = abs( patches[x][y].px_vector*( patch_length - abs(patches[x][y].py_vector) ) )/max_area;
+
+    //TODO: loop-output
+
+    // if a neighbor patch is dry, the carbon does not move in that direction
+    int tb_moved = 0, corner_moved = 0, rl_moved = 0;
+    int px = 0, py = 0;
+    if ( patches[x][y].px_vector >= 0 ) px = 1; else px = -1;
+    if ( patches[x][y].py_vector >= 0 ) py = 1; else py = -1;
+
+    // flow carbon to the top/bottom patches
+    if ( is_valid_patch(x, y+py) )
+    {
+        patches[x][y+py].DOC += patches[x][y].DOC*tb_patch;
+        patches[x][y+py].POC += patches[x][y].POC*tb_patch;
+        patches[x][y+py].phyto += patches[x][y].phyto*tb_patch;
+        patches[x][y+py].waterdecomp += patches[x][y].waterdecomp*tb_patch;
+        tb_moved = 1;
+    }
+
+    // flow carbon to the corner patch
+    if ( is_valid_patch(x+px, y+py) )
+    {
+        patches[x+px][y+py].DOC += patches[x][y].DOC*corner_patch;
+        patches[x+px][y+py].POC += patches[x][y].POC*corner_patch;
+        patches[x+px][y+py].phyto += patches[x][y].phyto*corner_patch;
+        patches[x+px][y+py].waterdecomp += patches[x][y].waterdecomp*corner_patch;
+        corner_moved = 1;
+    }
+
+    // flow carbon to the left/right patches
+    if ( is_valid_patch(x+px, y) ) 
+    {
+        patches[x+px][y].DOC += patches[x][y].DOC*rl_patch;
+        patches[x+px][y].POC += patches[x][y].POC*rl_patch;
+        patches[x+px][y].phyto += patches[x][y].phyto*rl_patch;
+        patches[x+px][y].waterdecomp += patches[x][y].waterdecomp*rl_patch;
+        rl_moved = 1;
+    }
+
+    // how much components did we loose
+    double patch_loss = tb_patch*tb_moved + corner_patch*corner_moved + rl_patch*rl_moved;
+    patches[x][y].DOC = patches[x][y].DOC - patches[x][y].DOC*patch_loss;
+    patches[x][y].POC = patches[x][y].POC - patches[x][y].POC*patch_loss;
+    patches[x][y].phyto = patches[x][y].phyto - patches[x][y].phyto*patch_loss;
+    patches[x][y].waterdecomp = patches[x][y].waterdecomp - patches[x][y].waterdecomp*patch_loss;
+}
+
+/**
+ * Checks if the x, y values for the patch is within boundaries of the map
+ * @return 1 if valid, 0 otherwise
+ */
+int is_valid_patch(int x, int y) {
+    if (x <0 || y < 0) return 0;
+    if (x >= MAP_WIDTH || y>= MAP_HEIGHT) return 0;
+    return 1;
+}
+
+/**
+ * @return the number of days that have passed since the start of the code
+ */
+int get_day() {
+    return hours/24;
 }
