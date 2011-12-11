@@ -162,7 +162,7 @@ void go_waterdecomp(int x, int y){
         assertRange(patches[x][y].waterdecomp_doc_prey_limitation, 0, 1);
 
     patches[x][y].waterdecomp_poc_prey_limitation = patches[x][y].POC \
-        (Ai_waterdcomp_POC - Gi_waterdecomp_POC);
+        / (Ai_waterdecomp_POC - Gi_waterdecomp_POC);
     patches[x][y].waterdecomp_poc_prey_limitation = \
         assertRange(patches[x][y].waterdecomp_poc_prey_limitation, 0, 1);
 
@@ -183,7 +183,7 @@ void go_waterdecomp(int x, int y){
     patches[x][y].waterdecomp_pred_doc = pref_waterdecomp_POC \
         * max_waterdecomp * patches[x][y].waterdecomp \
         * patches[x][y].waterdecomp_space_limitation \
-        *  waterdecomp_poc_prey_limitation;
+        *  patches[x][y].waterdecomp_poc_prey_limitation;
 
     patches[x][y].waterdecomp_ingest_poc = \
         patches[x][y].waterdecomp_pred_poc;
@@ -194,6 +194,6 @@ void go_waterdecomp(int x, int y){
     patches[x][y].waterdecomp_excretion = e_waterdecomp * \
         patches[x][y].waterdecomp;
 
-    patches[x][y].waterdecomp_senescence s_waterdecomp * \
+    patches[x][y].waterdecomp_senescence = s_waterdecomp * \
         patches[x][y].waterdecomp;
 }
