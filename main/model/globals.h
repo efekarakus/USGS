@@ -150,4 +150,16 @@ double sen_macro_coef = 0.08;
 int macro_mas_max = 1000;
 double macro_vel_max = 1.0;
 
+double out_macro;
+double out_phyto;
+double out_herbivore;
+double out_waterdecomp;
+double out_seddecomp;
+double out_sedconsumer;
+double out_consum;
+double out_DOC;
+double out_POC;
+double out_detritus;
+
+
 #endif
