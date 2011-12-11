@@ -20,15 +20,26 @@ void go()
 	}
 
 
-	// Ask patches HERE
-	update_patches(0, 0);
+	// Ask patches
+    int x, y;
+    for(x = 0; x < MAP_WIDTH; x++) {
+        for(y = 0; y < MAP_HEIGHT; y++) {
+            update_patches(x,y);
+            go_macro(x,y);
+            go_phyto(x,y);
+            go_waterdecomp(x,y);
+            go_seddecomp(x,y);
+            go_sedconsumer(x,y);
+            go_consum(x,y);
+        }
+    }
+
     hours++;
 }
 
 
 /**
  * Updates the environmental variables (Primary macrophyte routine)
- *
  */
 void update_environmentals()
 {

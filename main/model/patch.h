@@ -21,6 +21,8 @@ void go_waterdecomp(int x, int y);
 
 void go_seddecomp(int x, int y);
 
+void go_sedconsumer(int x, int y);
+
 void go_consum(int x, int y);
 
 void go_DOC(int x, int y);

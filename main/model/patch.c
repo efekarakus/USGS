@@ -197,3 +197,155 @@ void go_waterdecomp(int x, int y){
     patches[x][y].waterdecomp_senescence = s_waterdecomp * \
         patches[x][y].waterdecomp;
 }
+
+
+void go_seddecomp(int x, int y) {
+    
+    // update seddecomp_detritus_prey_limitation
+    patches[x][y].seddecomp_detritus_prey_limitation = patches[x][y].detritus / (Ai_seddecomp_detritus - Gi_seddecomp_detritus);
+    if(patches[x][y].seddecomp_detritus_prey_limitation > 1)
+        patches[x][y].seddecomp_detritus_prey_limitation = 1;
+    else if(patches[x][y].seddecomp_detritus_prey_limitation < 0)
+        patches[x][y].seddecomp_detritus_prey_limitation = 0;
+
+    // update seddecomp_space_limitation
+    if( (Gj_seddecomp - Aj_seddecomp) != 0 ) {
+        patches[x][y].seddecomp_space_limitation = 1 - ((patches[x][y].seddecomp - Aj_seddecomp)/(Gj_seddecomp - Aj_seddecomp));
+    } else {
+        patches[x][y].seddecomp_space_limitation = 0;
+    }
+    if(patches[x][y].seddecomp_space_limitation > 1)
+        patches[x][y].seddecomp_space_limitation = 1;
+    else if(patches[x][y].seddecomp_space_limitation < 0)
+        patches[x][y].seddecomp_space_limitation = 0;
+
+    // update seddecomp_pred_detritus
+    patches[x][y].seddecomp_pred_detritus = pref_seddecomp_detritus*max_seddecomp*patches[x][y].seddecomp*
+                                            patches[x][y].seddecomp_detritus_prey_limitation *
+                                            patches[x][y].seddecomp_space_limitation;
+
+    // update seddecomp_ingest_detritus
+    patches[x][y].seddecomp_ingest_detritus = patches[x][y].seddecomp_pred_detritus;
+
+    // update seddecomp_respiration
+    patches[x][y].seddecomp_respiration = r_seddecomp * patches[x][y].seddecomp;
+
+    // update seddecomp_excretion
+    patches[x][y].seddecomp_excretion = e_seddecomp * patches[x][y].seddecomp;
+
+    // update seddecomp_senescence
+    patches[x][y].seddecomp_senescence = s_seddecomp * patches[x][y].seddecomp;
+}
+
+void go_sedconsumer(int x, int y) {
+    
+    // update sedconsumer_seddecomp_prey_limitation
+    patches[x][y].sedconsumer_seddecomp_prey_limitation = patches[x][y].seddecomp / (Ai_sedconsumer_seddecomp - Gi_sedconsumer_seddecomp);
+    if( patches[x][y].sedconsumer_seddecomp_prey_limitation > 1 )
+        patches[x][y].sedconsumer_seddecomp_prey_limitation = 1;
+    else if ( patches[x][y].sedconsumer_seddecomp_prey_limitation < 0 )
+        patches[x][y].sedconsumer_seddecomp_prey_limitation = 0;
+
+    // update sedconsumer_peri_prey_limitation
+    patches[x][y].sedconsumer_peri_prey_limitation = patches[x][y].peri / (Ai_sedconsumer_peri - Gi_sedconsumer_peri);
+    if( patches[x][y].sedconsumer_peri_prey_limitation > 1 )
+        patches[x][y].sedconsumer_peri_prey_limitation = 1;
+    else if (patches[x][y].sedconsumer_peri_prey_limitation < 0)
+        patches[x][y].sedconsumer_peri_prey_limitation = 0;
+
+    // update sedconsumer_detritus_prey_limitation
+    patches[x][y].sedconsumer_detritus_prey_limitation = patches[x][y].detritus / (Ai_sedconsumer_detritus - Gi_sedconsumer_detritus);
+    if( patches[x][y].sedconsumer_detritus_prey_limitation > 1 )
+        patches[x][y].sedconsumer_detritus_prey_limitation = 1;
+    else if ( patches[x][y].sedconsumer_detritus_prey_limitation < 0 )
+        patches[x][y].sedconsumer_detritus_prey_limitation = 0;
+
+    // update sedconsumer_space_limitation
+    patches[x][y].sedconsumer_space_limitation = 1 - ((patches[x][y].sedconsumer - Aj_sedconsumer)/(Gj_sedconsumer - Aj_sedconsumer));
+    if( patches[x][y].sedconsumer_space_limitation > 1 )
+        patches[x][y].sedconsumer_space_limitation = 1;
+    else if ( patches[x][y].sedconsumer_space_limitation < 0 )
+        patches[x][y].sedconsumer_space_limitation = 0;
+
+    // update sedconsumer_pred_peri
+    patches[x][y].sedconsumer_pred_peri = pref_sedconsumer_peri * max_sedconsumer * patches[x][y].sedconsumer *
+                                          patches[x][y].sedconsumer_space_limitation * 
+                                          patches[x][y].sedconsumer_peri_prey_limitation;
+
+    // update sedconsumer_ingest_peri
+    patches[x][y].sedconsumer_ingest_peri = patches[x][y].sedconsumer_pred_peri * (1 - sedconsumer_egestion_seddecomp);
+
+    // update sedconsumer_pred_seddecomp
+    patches[x][y].sedconsumer_pred_seddecomp = pref_sedconsumer_seddecomp * max_sedconsumer * patches[x][y].sedconsumer *
+                                               patches[x][y].sedconsumer_space_limitation *
+                                               patches[x][y].sedconsumer_seddecomp_prey_limitation;
+
+    // update sedconsumer_ingest_seddecomp
+    patches[x][y].sedconsumer_ingest_seddecomp = patches[x][y].sedconsumer_pred_seddecomp * (1 - sedconsumer_egestion_seddecomp);
+
+    // update sedconsumer_pred_detritus
+    patches[x][y].sedconsumer_pred_detritus = pref_sedconsumer_detritus * max_sedconsumer * patches[x][y].sedconsumer *
+                                              patches[x][y].sedconsumer_space_limitation * 
+                                              patches[x][y].sedconsumer_detritus_prey_limitation;
+
+    // update sedconsumer_ingest_detritus
+    patches[x][y].sedconsumer_ingest_detritus = patches[x][y].sedconsumer_pred_detritus * (1 - sedconsumer_egestion_detritus);
+
+    // update sedconsumer_respiration
+    patches[x][y].sedconsumer_respiration = r_sedconsumer * patches[x][y].sedconsumer;
+
+    // update sedconsumer_excretion
+    patches[x][y].sedconsumer_excretion = e_sedconsumer * patches[x][y].sedconsumer;
+
+    // update sedconsumer_senescence
+    patches[x][y].sedconsumer_senescence = s_sedconsumer * patches[x][y].sedconsumer;
+}
+
+void go_consum(x,y) {
+
+    // update consum_sedconsumer_prey_limitation
+    patches[x][y].consum_sedconsumer_prey_limitation = patches[x][y].sedconsumer / (Ai_consum_sedconsumer - Gi_consum_sedconsumer);
+    if( patches[x][y].consum_sedconsumer_prey_limitation > 1 )
+        patches[x][y].consum_sedconsumer_prey_limitation = 1;
+    else if ( patches[x][y].consum_sedconsumer_prey_limitation < 0 )
+        patches[x][y].consum_sedconsumer_prey_limitation = 0;
+
+    // update consum_herbivore_prey_limitation
+    patches[x][y].consum_herbivore_prey_limitation = patches[x][y].herbivore / (Ai_consum_herbivore - Gi_consum_herbivore);
+    if( patches[x][y].consum_herbivore_prey_limitation > 1 )
+        patches[x][y].consum_herbivore_prey_limitation = 1;
+    else if ( patches[x][y].consum_herbivore_prey_limitation < 0 )
+        patches[x][y].consum_herbivore_prey_limitation = 0;
+
+    // update consum_space_limitation
+    patches[x][y].consum_space_limitation = 1 - ((patches[x][y].consum - Aj_consum)/(Gj_consum - Aj_consum));
+    if( patches[x][y].consum_space_limitation > 1 )
+        patches[x][y].consum_space_limitation = 1;
+    else if ( patches[x][y].consum_space_limitation < 0 )
+        patches[x][y].consum_space_limitation = 0;
+
+    // update consum_pred_herbivore
+    patches[x][y].consum_pred_herbivore = pref_consum_herbivore * max_consum * patches[x][y].consum *
+                                          patches[x][y].consum_space_limitation * 
+                                          patches[x][y].consum_herbivore_prey_limitation;
+
+    // update consum_ingest_herbivore
+    patches[x][y].consum_ingest_herbivore = patches[x][y].consum_pred_herbivore * (1- consum_egestion);
+
+    // update consum_pred_sedconsumer
+    patches[x][y].consum_pred_sedconsumer = pref_consum_sedconsumer * max_consum * patches[x][y].consum *
+                                            patches[x][y].consum_space_limitation *
+                                            patches[x][y].consum_sedconsumer_prey_limitation;
+
+    // update consum_ingest_sedconsumer
+    patches[x][y].consum_ingest_sedconsumer = patches[x][y].consum_pred_sedconsumer * (1 - consum_egestion);
+
+    // update consum_respiration
+    patches[x][y].consum_respiration = r_consum * patches[x][y].consum;
+
+    // update consum_excretion
+    patches[x][y].consum_excretion = e_consum * patches[x][y].consum;
+
+    // update consum_senescence
+    patches[x][y].consum_senescence = s_consum * patches[x][y].consum;
+}
