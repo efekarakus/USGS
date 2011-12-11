@@ -90,9 +90,14 @@ void pred_sedconsumer(int x, int y)
  */
 void pred_detritus(int x, int y)
 {
-	patches[x][y].detritus_POC_transfer = patches[x][y].detritus * ((0.25 * log((patches[x][y].velocity / 40) + 0.01) * 10) + 0.5);
+	patches[x][y].detritus_POC_transfer = \
+        patches[x][y].detritus * \
+        ((0.25 * log10(patches[x][y].velocity / 40) + 0.01) + 0.5);
 	
-	patches[x][y].detritus = patches[x][y].detritus + patches[x][y].detritus_growth - patches[x][y].seddecomp_pred_detritus - patches[x][y].detritus_POC_transfer;
+	patches[x][y].detritus = patches[x][y].detritus \
+	    + patches[x][y].detritus_growth - \
+	    patches[x][y].seddecomp_pred_detritus - \
+	    patches[x][y].detritus_POC_transfer;
 
 	if (patches[x][y].detritus < 0.001)
 	{
