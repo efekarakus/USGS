@@ -5,6 +5,11 @@
 #include "math.h"
 #include "globals.h"
 
+/*
+ * Asserts that the value is between low and high
+ */
+double assertRange(double value, double low, double high);
+
 void update_patches(int x, int y);
 
 void go_macro(int x, int y);
@@ -107,7 +112,7 @@ typedef struct _patch {
 	double gross_photo_phyto;               ///< photosythesis of phytoplankton
 	double growth_herbivore;                ///< NOT AVAILABLE
 	double growth_detritus;                 ///< NOT AVAILABLE
-	double growth_macro;                    ///< NOT AVAILABLE
+	double growth_macro;                    ///< amount of biomass macro gains
 	double growth_sedconsumer;              ///< NOT AVAILABLE
 	double growth_phyto;                    ///< NOT AVAILABLE
 	double growth_waterdecomp;              ///< NOT AVAILABLE
@@ -115,7 +120,7 @@ typedef struct _patch {
 	double herbivore_ingest_peri;           ///< NOT AVAILABLE
 	double herbivore_pred_peri;             ///< NOT AVAILABLE
 	double herbivore_ingest_phyto;          ///< NOT AVAILABLE
-	double herbivore_pred_phyto;            ///< NOT AVAILABLE
+	double herbivore_pred_phyto;            ///< amount of biomass herbivore "consume" from phyto
 	double herbivore_ingest_waterdecomp;    ///< NOT AVAILABLE
 	double herbivore_pred_waterdecomp;      ///< NOT AVAILABLE
 	double herbivore_excretion;             ///< NOT AVAILABLE
@@ -147,12 +152,12 @@ typedef struct _patch {
 	double scouring;                        ///< NOT AVAILABLE
 	double small_death;                     ///< amount of dead plant material that becomes POC
 	double respiration;                     ///< NOT AVAILABLE
-	double respiration_macro;               ///< NOT AVAILABLE
+	double respiration_macro;               ///< hourly macrophyte respiration
 	double respiration_phyto;               ///< NOT AVAILABLE
 	double scouring_macro;                  ///< NOT AVAILABLE
 	double sedconsumer_ingest_peri;         ///< NOT AVAILABLE
 	double sedconsumer_pred_peri;           ///< NOT AVAILABLE
-	double senescence_macro;                ///< NOT AVAILABLE
+	double senescence_macro;                ///< hourly macrophyte death
 	double senescence_phyto;                ///< NOT AVAILABLE
 	double sedconsumer_consumption;         ///< NOT AVAILABLE
 	double sedconsumer_ingest_detritus;     ///< NOT AVAILABLE

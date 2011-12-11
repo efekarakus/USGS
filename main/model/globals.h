@@ -3,6 +3,9 @@
 
 #include "patch.h"
 
+// Helper constants
+double e = 2.718281828459045; // e^x;
+
 // Model variables
 int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
@@ -17,7 +20,9 @@ int gui_photo_radiation = 2000;    ///< fixedPAR
 int gui_hydro_group = 5;	///< fixedHydro
 double gui_k_phyto = 0.4;  ///< k-phyto
 double gui_k_macro = 0.4; ///< k-macro
-
+double gui_macro_mass_max = 1000; ///< macro-mass-max
+double gui_macro_vel_max = 1.0; ///< macro-vel-max
+double gui_gross_macro_coef = 0.08; // gross-macro-coef
 
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
