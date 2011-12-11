@@ -2,6 +2,8 @@
 #define _SETUP
 
 #include "globals.h"
+#include "list.h"
+#include "go.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

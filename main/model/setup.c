@@ -6,11 +6,15 @@
  */
 void setup() {
     find_map_sizes();
+    printf("PASSED -- find_map_sizes\n");
     init_patches();
+    printf("PASSED -- init_patches\n");
     import_hydro();
-    printf("3-PASS\n");
+    printf("PASSED -- import_hydro()\n");
     setup_environmentals();
-    printf("4-PASS\n");
+    printf("PASSED -- setup_environmentals()\n");
+    setup_stocks();
+    printf("PASSED -- setup_stocks()\n");
 }
 
 /**
@@ -18,24 +22,39 @@ void setup() {
  * the maximum pycor, we assign these values to MAP_WIDTH and MAP_HEIGHT
  */
 void find_map_sizes() {
-    // open the first hydro map
-    char* hydro_map = file_names[0];
-    char* path = "./model/data/HydroSets/";
-    int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
-    char hydro_path[length];
-    strcpy(hydro_path, path);
-    strcat(hydro_path, hydro_map);
-    strcat(hydro_path, file_extension);
-    strcat(hydro_path, ".txt");
+    
+    int max_map_width = 0;
+    int max_map_height = 0;
+
+    int index;
+    for(index = 0; index < num_hydro_files; index++) {
+      char* hydro_map = file_names[index];
+      char* path = "./model/data/HydroSets/";
+      int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
+      char hydro_path[length];
+      strcpy(hydro_path, path);
+      strcat(hydro_path, hydro_map);
+      strcat(hydro_path, file_extension);
+      strcat(hydro_path, ".txt");
      
-    FILE* file = fopen(hydro_path, "r");
-    if (file == NULL) {
-        fputs("error opening the hydro map", stderr);
-        exit(-1);
+      FILE* file = fopen(hydro_path, "r");
+      if (file == NULL) {
+          fputs("error opening the hydro map", stderr);
+          exit(-1);
+      }
+
+      find_map_width_height(file); // find the width and height of the maps
+      if(MAP_WIDTH > max_map_width) {
+          max_map_width = MAP_WIDTH;
+      }
+      if(MAP_HEIGHT > max_map_height) {
+          max_map_height = MAP_HEIGHT;
+      }
+      fclose(file);
     }
 
-    find_map_width_height(file); // find the width and height of the maps
-    fclose(file);
+    MAP_WIDTH = max_map_width;
+    MAP_HEIGHT = max_map_height;
 }
 
 
@@ -69,8 +88,8 @@ void find_map_width_height(FILE* hydro_file) {
         }
         counter++;
     }
-    MAP_WIDTH = max_x;
-    MAP_HEIGHT = max_y;
+    MAP_WIDTH = max_x+1;
+    MAP_HEIGHT = max_y+1;
 }
 
 /**
@@ -79,10 +98,29 @@ void find_map_width_height(FILE* hydro_file) {
 void init_patches() {
     // initialize the patches
     int row = 0;
+    int col = 0;
+
     patches = malloc(MAP_WIDTH*sizeof(patch*));
-    for(row = 0; row < MAP_WIDTH; row++) {
-        patches[row] = malloc(MAP_HEIGHT*sizeof(patch));
+    for(col = 0; col < MAP_WIDTH; col++) {
+        patches[col] = malloc(MAP_HEIGHT*sizeof(patch));
     }
+
+    // initialize the arrays for each patch
+    for(col = 0; col < MAP_WIDTH; col++){
+        for(row = 0; row < MAP_HEIGHT; row++) {
+            patches[col][row].pxcor = col; 
+            patches[col][row].pycor = row;
+            patches[col][row].pcolor = 0;
+            patches[col][row].current_depth = 0;
+            patches[col][row].available = 0;  // we have not seen this patch yet
+
+            patches[col][row].pxv_list = malloc(num_hydro_files*sizeof(double));
+            patches[col][row].pyv_list = malloc(num_hydro_files*sizeof(double));
+            patches[col][row].depth_list = malloc(num_hydro_files*sizeof(double));
+            patches[col][row].v_list = malloc(num_hydro_files*sizeof(double));
+        }
+    }
+
 }
 
 /**
@@ -137,15 +175,14 @@ void import_hydro() {
 
 
             // assign the values to patches:
-            printf("temp_x: %d, temp_y: %d and MAX_WIDTH: %d, MAX_HEIGHT: %d\n", temp_x, temp_y, MAP_WIDTH, MAP_HEIGHT);
-            temp_x--; // need to offset the x,y coordinates as their map coordinates starts at (1,1) and not (0,0)
-            temp_y--;
+            patches[temp_x][temp_y].available = 1;
             patches[temp_x][temp_y].pxcor = temp_x;
             patches[temp_x][temp_y].pycor = temp_y;
-            patches[temp_x][temp_y].depth = temp_depth;
-            patches[temp_x][temp_y].px_vector = temp_px_vector;
-            patches[temp_x][temp_y].py_vector = temp_py_vector;
-            patches[temp_x][temp_y].velocity = temp_velocity;
+            patches[temp_x][temp_y].depth_list[i] = temp_depth;
+            patches[temp_x][temp_y].pxv_list[i] = temp_px_vector;
+            patches[temp_x][temp_y].pyv_list[i] = temp_py_vector;
+            patches[temp_x][temp_y].v_list[i] = temp_velocity;
+            patches[temp_x][temp_y].aqa_point = -999;
 
         }
         fclose(pFile);
@@ -180,7 +217,6 @@ void import_hydro() {
 
         temp_x--;
         temp_y--;
-        printf("temp_x: %d, temp_y: %d\n", temp_x, temp_y);
         // assign the cell_type to the patches
         if(strcmp(temp_cell_type,"output") == 0) {
             patches[temp_x][temp_y].cell_type = 0;
@@ -196,7 +232,7 @@ void import_hydro() {
 /**
  * Reads from files the initial discharge (daily) and initial radiation (hourly) values and then imports the maps based on the discharge value
  *
- * NOTE: STILL NEED TO IMPLEMENT "UPDATE-HYDRO-MAP" AND "CHOOSE-HYDRO-MAP"
+ * TODO: STILL NEED TO IMPLEMENT "UPDATE-HYDRO-MAP"
  *		 
  *		 STILL NEED TO FREE:
  *			- photo_radiation
@@ -211,7 +247,7 @@ void setup_environmentals()
     if (fixed_environmentals == 1)	// Read environmental data from the GUI
     {
 		hydro_group = gui_hydro_group;
-		// update-hydro-map()
+		update_hydro_map();
 		photo_radiation = gui_photo_radiation;
 		temperature = gui_temperature;
     }
@@ -222,10 +258,12 @@ void setup_environmentals()
 		set_temperature();
 
 		hydro_group = 0;
-		// choose-hydro-map
-		// update-hydro-map
+		choose_hydro_map();
+		update_hydro_map();
 	}
 }
+
+
 
 
 /**

@@ -1,7 +1,6 @@
 #ifndef _PATCH
 #define _PATCH
 
-#include "list.h"
 #include "math.h"
 #include "globals.h"
 
@@ -38,16 +37,17 @@ typedef struct _patch {
 	int pcolor; ///< the rgb_value for the patch
 	
 	/* Extra patch variables that were added by Scientists */
+    short available;      ///< 0 if this patch did not contain information in the hydro_maps, 1 otherwise
 	double px_vector;     ///< flow vector in the x_direction for hydraulics
-	List pxv_list;        ///< list of x_flow vectors
+	double* pxv_list;     ///< list of x_flow vectors
 	double py_vector;     ///< flow vector in the y_direction for hydraulics
-	List pyv_list;        ///< list of y_flow vectors
+	double* pyv_list;     ///< list of y_flow vectors
 	double max_vector;    ///< largest flow vector
 	double depth;         ///< depth of an individual cell
-	List depth_list;      ///< all the depths in the different hydraulic datasets
+	double* depth_list;   ///< all the depths in the different hydraulic datasets
 	double current_depth; ///< depth in the previous time_step
 	double velocity;      ///< the rate of flow for hydraulics
-	List v_list;          ///< list of velocities
+	double* v_list;       ///< list of velocities
 	int aqa_point;        ///< biomass estimates of macro from USGS
 	short cell_type;      ///< 0 for "output", 1 for "input"
 

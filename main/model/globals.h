@@ -10,7 +10,7 @@ double e = 2.718281828459045; // e^x;
 int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
 long hours = 0;	///< Represents 1 tick (should always be [0, sizeof(long)]
-
+double COMPARE_MAX; ///< represents the maximum of the x or y vector among all patches, this is used to calculate max step
 
 // GUI variables
 char* file_extension = "new";
