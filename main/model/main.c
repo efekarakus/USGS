@@ -27,33 +27,30 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 
     int day;
     setup();
-//    while( (day = (hours / 24)) < gui_days_to_run)
-//    {
+    while( (day = (hours / 24)) < gui_days_to_run)
+    {
 	    go();
-//    }
+    }
     PyObject* data = (PyObject*)build_data();                                                  
     cleanup();
-    return Py_BuildValue("i", tss);
+    return data;
 }
 
 PyObject* build_data(){
-    int dimensions[2];
-    int** buffer;
-    PyArrayObject *result;
-    int x, y;
+    int size = MAP_WIDTH*MAP_HEIGHT + 1;
+    int index;
+    PyObject* list = PyList_New(size);
+    if(!list)
+        return NULL;
 
-    dimensions[0] = MAP_WIDTH;
-    dimensions[1] = MAP_HEIGHT;
-    result = (PyArrayObject *) PyArray_FromDims(2, dimensions, PyArray_INT);
-    
-    buffer = result->data;
-    for( y=0; y < MAP_HEIGHT; y++){
-        for( x= 0; x < MAP_WIDTH; x++){
-            buffer[x][y] = colorValues[x][y];
-        }
+    PyObject* num =  Py_BuildValue("i", MAP_WIDTH);
+    PyList_SET_ITEM(list, 0, num);
+    for(index = 1; index < size; index++)
+    {
+        num = Py_BuildValue("i", colorValues[(index-1)%MAP_WIDTH][(index-1)/MAP_WIDTH]);
+        PyList_SET_ITEM(list, index, num);
     }
-
-    return PyArray_Return(result);
+    return list;
 }
 
 /* Python calls this function to let us initialize our module */

@@ -3,6 +3,7 @@
 #include "math.h"
 #include "pred.c"
 #include "list.c"
+#include "color.c"
 
 /**
  * This function runs the model
@@ -68,6 +69,10 @@ void go()
 
     // increment tick
     hours++;
+
+    int day = hours%24;
+    if (day == 0)
+        update_color();
 }
 
 

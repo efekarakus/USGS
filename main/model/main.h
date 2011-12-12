@@ -10,7 +10,6 @@
 #include "setup.h"
 #include "patch.h"
 #include <sys/types.h>
-#include <Numeric/arrayobject.h>
 #include <stdlib.h>
 
 /* Python calls this to let us initialize our module */

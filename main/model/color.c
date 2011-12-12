@@ -1,6 +1,6 @@
 #include "color.h"
 
-void scale_color(enum Color colorVal, int value, int maxVal, int minVal, int x, int y){
+void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int x, int y){
     int returnValue = 0;
     if(maxVal == minVal){
         printf("Error in use of scale_color. Max and min value are equal.\n");
@@ -21,7 +21,7 @@ void scale_color(enum Color colorVal, int value, int maxVal, int minVal, int x, 
     if( maxVal < minVal){
         returnValue = 255 - returnValue;
     }
-    //colorValues[x][y].colors[(int)colorVal] = returnValue;
+      printf("pixel: x: %d, y: %d, value: %f\n", x, y, value);
     colorValues[x][y] = returnValue << (int)colorVal*8;
 }
 
@@ -50,7 +50,7 @@ void update_color(){
     else if( strcmp(which_stock, "waterdecomp") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                scale_color(green, patches[x][y].macro, 30, 0, x, y);
+                scale_color(green, patches[x][y].waterdecomp, 30, 0, x, y);
             }
         }
     }

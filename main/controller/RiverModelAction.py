@@ -8,21 +8,19 @@ ActionListener for the RiverModel GUI.
 """
 class RiverModelAction:
 
-	"""
-	Constructor:
-	Takes the Managerial Window as a parameter
-	@param managerUI the managerial window
-	"""
-	def __init__(self, UI):
-	    self.UI = UI	
+    """
+    Constructor:
+    Takes the Managerial Window as a parameter
+    @param managerUI the managerial window
+    """
+    def __init__(self, UI):
+        self.UI = UI	
 
 	"""
 	Function that is triggered if the user clicks on the 'GO' button.
 	Reads the TSS slider's value and prints it.
 	"""
-	def OnGo(self, event):
-		UI = self.UI
-		tssValue = UI.getTSSValue()
-		test = goCommand(tssValue)
-		print "I tried?"
-		print test
+    def OnGo(self, event):
+        UI = self.UI
+        tssValue = UI.getTSSValue()
+        test = goCommand(tssValue)

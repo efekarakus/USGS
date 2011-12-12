@@ -23,19 +23,19 @@ class RiverModel(wx.Frame):
         # panel
         self.MainPanel = wx.Panel(self, -1)
         self.MainPanel.SetBackgroundColour("white")
-	self.parametersPanel = ParametersPanel(self.MainPanel)
+        self.parametersPanel = ParametersPanel(self.MainPanel)
     	vbox = wx.BoxSizer(wx.VERTICAL)
 
         # buttons box
         self.goButton = wx.Button(self.MainPanel, self.GO_BUTTON_ID, 'GO')
         
         # add the boxes to the MainPanel
-	vbox.Add(self.parametersPanel, wx.ID_ANY, wx.ALIGN_LEFT)
+        vbox.Add(self.parametersPanel, wx.ID_ANY, wx.ALIGN_LEFT)
         vbox.Add(self.goButton, wx.ID_ANY, wx.ALIGN_CENTER)  
         self.MainPanel.SetSizer(vbox)
 
         # add actions
-	action = RiverModelAction(self)
+        action = RiverModelAction(self)
         wx.EVT_BUTTON(self, self.GO_BUTTON_ID, action.OnGo)
 
     """
