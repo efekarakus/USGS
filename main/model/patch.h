@@ -87,7 +87,7 @@ typedef struct _patch {
 	double peri;                               ///< NOT AVAILABLE
 	double consum;                             ///< NOT AVAILABLE
 	double bottom_light;                    ///< par that reaches the bottom of the river
-	int consumer;                           ///< consumers in the water column, such as fish
+	double consumer;                           ///< consumers in the water column, such as fish
 	double consum_consumption;              ///< NOT AVAILABLE
 	double consum_ingest_herbivore;         ///< NOT AVAILABLE
 	double consum_pred_herbivore;           ///< NOT AVAILABLE

@@ -6,10 +6,10 @@
 
 /**
  * This function runs the model
- * TODO implement anything after update_patches
  */
 void go()
 {
+    
 	if (fixed_environmentals == 0) {
 		update_environmentals();	// This is flagged to run every 24 hours in the function
 	} else {
@@ -21,7 +21,6 @@ void go()
 		}
 	}
 
-    printf("hydro group %d for hour: %ld\n", hydro_group, hours);
 	// Ask patches
     int x, y;
     for(x = 0; x < MAP_WIDTH; x++) {
@@ -69,15 +68,6 @@ void go()
 
     // increment tick
     hours++;
-    int day = get_day();
-    if(day >= gui_days_to_run) {
-        //TODO: break out of the while loop!
-    }
-    //If a new day has passed
-    if( (double)hours / (double)24 == (double)day){
-        printf("This is day:%d and this is hours:%ld\n", day, hours);
-    }
-    printf("DONE -- go() hours: %ld\n", hours);
 }
 
 
@@ -305,7 +295,9 @@ int get_timestep() {
 }
 
 /**
- *
+ * Flows carbon from the current patch at (x,y) to your neighbor patches
+ * @param x: the x-coordinate of the patch
+ * @param y: the y-coordinate of the patch
  */
 void flow_carbon(int x, int y) {
 
@@ -313,7 +305,9 @@ void flow_carbon(int x, int y) {
     double tb_patch = fabs( patches[x][y].py_vector*( patch_length - fabs(patches[x][y].px_vector) ) )/max_area;
     double rl_patch = fabs( patches[x][y].px_vector*( patch_length - fabs(patches[x][y].py_vector) ) )/max_area;
 
-    //TODO: loop-output
+    if ( gui_loop_output ) {
+        if ( patches[x][y].cell_type ) loop_output(x,y);
+    }
 
     // if a neighbor patch is dry, the carbon does not move in that direction
     int tb_moved = 0, corner_moved = 0, rl_moved = 0;
@@ -360,7 +354,28 @@ void flow_carbon(int x, int y) {
 }
 
 /**
+ * If the gui_loop_output is set to 1, for every cell of type 'input', we
+ * change its stock values to the global variable values
+ * @param x: the x-coordinate of the patch
+ * @param y: the y-coordinate of the patch
+ */
+void loop_output(int x, int y) {
+    patches[x][y].macro = out_macro;
+    patches[x][y].phyto = out_phyto;
+    patches[x][y].herbivore = out_herbivore;
+    patches[x][y].waterdecomp = out_waterdecomp;
+    patches[x][y].seddecomp = out_seddecomp;
+    patches[x][y].sedconsumer = out_sedconsumer;
+    patches[x][y].consum = out_consum;
+    patches[x][y].DOC = out_DOC;
+    patches[x][y].POC = out_POC;
+    patches[x][y].detritus = out_detritus;
+}
+
+/**
  * Checks if the x, y values for the patch is within boundaries of the map
+ * @param x: the x-coordinate of the patch
+ * @param y: the y-coordinate of the patch
  * @return 1 if valid, 0 otherwise
  */
 int is_valid_patch(int x, int y) {

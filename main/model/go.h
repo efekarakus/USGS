@@ -56,12 +56,24 @@ void avg_output();
 int get_timestep();
 
 /**
- *
+ * Flows carbon from the current patch at (x,y) to your neighbor patches
+ * @param x: the x-coordinate of the patch
+ * @param y: the y-coordinate of the patch
  */
 void flow_carbon(int x, int y);
 
 /**
+ * If the gui_loop_output is set to 1, for every cell of type 'input', we
+ * change its stock values to the global variable values
+ * @param x: the x-coordinate of the patch
+ * @param y: the y-coordinate of the patch
+ */
+void loop_output(int x, int y);
+
+/**
  * Checks if the x, y values for the patch is within boundaries of the map
+ * @param x: the x-coordinate of the patch
+ * @param y: the y-coordinate of the patch
  * @return 1 if valid, 0 otherwise
  */
 int is_valid_patch(int x, int y);
