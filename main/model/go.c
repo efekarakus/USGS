@@ -20,7 +20,7 @@ void go()
 		}
 	}
 
-    printf("PASSED -- update_environmentals() in GO\n");
+    printf("hydro group %d for hour: %ld\n", hydro_group, hours);
 	// Ask patches
     int x, y;
     for(x = 0; x < MAP_WIDTH; x++) {
@@ -45,28 +45,28 @@ void go()
             pred_consum(x,y);
         }
     }
-    printf("PASSED -- update_patches() in GO\n");
   
     avg_output();
 
-    printf("PASSED -- avg_output() in GO\n");
-
-    int seen = 0;
     // flow carbon
     int max_timestep = get_timestep();
     int time, max_time = 3600/max_timestep;
+
+    int seen = 0;
+    //TODO: change to a list that contains depths>0 and velocity >0
 //    for (time = 0; time < max_time; time++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
-            for (y = 0; y < MAP_HEIGHT; y++) {
+        for (y = 0; y < MAP_HEIGHT; y++) {
+            for (x = 0; x < MAP_WIDTH; x++) {
                 if( (patches[x][y].depth > 0) && (patches[x][y].velocity > 0) )
                 {
+                    if (seen == 0) {
+                        printf("x: %d, y: %d, px_vector: %f, py_vector: %f\n", x, y, patches[x][y].px_vector, patches[x][y].py_vector);
+                    }
                     flow_carbon(x,y);
                 }
             }
         }
 //    }
-
-    printf("PASSED -- flow_carbon() in GO\n");
 
     // increment tick
     hours++;
@@ -75,7 +75,7 @@ void go()
         //TODO: break out of the while loop!
     }
 
-    printf("DONE -- go()\n");
+    printf("DONE -- go() hours: %ld\n", hours);
 }
 
 
@@ -165,10 +165,10 @@ void update_hydro_map() {
             // the hydro maps contained information about this patch
             // set the values of px_vector, py_vector, depth and velocity
             if(patches[x][y].available) {
-                patches[x][y].px_vector = patches[x][y].pxv_list[hydro_group];
-                patches[x][y].py_vector = patches[x][y].pyv_list[hydro_group];
-                patches[x][y].depth = patches[x][y].depth_list[hydro_group];
-                patches[x][y].velocity = patches[x][y].v_list[hydro_group];
+                patches[x][y].px_vector = patches[x][y].pxv_list[hydro_group-1];
+                patches[x][y].py_vector = patches[x][y].pyv_list[hydro_group-1];
+                patches[x][y].depth = patches[x][y].depth_list[hydro_group-1];
+                patches[x][y].velocity = patches[x][y].v_list[hydro_group-1];
 
                 if( abs(patches[x][y].px_vector) > abs(patches[x][y].py_vector) ) {
                     patches[x][y].max_vector = patches[x][y].px_vector;

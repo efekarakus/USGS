@@ -37,7 +37,11 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
       }
     }
 */
-	go();
+    int days = 0;
+    while(days < 3*24) {
+	  go();
+      days++;
+    }
     cleanup();
     return Py_BuildValue("i", tss);
 }
