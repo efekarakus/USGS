@@ -2,6 +2,7 @@
 import os, sys
 import wx
 from MainModule import *
+from RiverImage import *
 
 """
 ActionListener for the RiverModel GUI.
@@ -23,4 +24,5 @@ class RiverModelAction:
     def OnGo(self, event):
         UI = self.UI
         tssValue = UI.getTSSValue()
-        test = goCommand(tssValue)
+        colorsList = goCommand(tssValue)
+        outputImage(colorsList)
