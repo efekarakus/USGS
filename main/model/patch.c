@@ -77,9 +77,9 @@ void go_phyto(int x,int y){
 	//this is the attenuation coefficient of phytoplank m^2/g of phyto plankton
 	double light_k = 0.4;
 	patches[x][y].respiration_phyto = 0.1 / 24 * patches[x][y].phyto * Q10;
-	double pre_ln = (0.01 + photo_radiation * e * exp(-1*patches[x][y].phyto * \
+	double pre_ln = (0.01 + photo_radiation  * exp(-1*patches[x][y].phyto * \
 		gui_k_phyto * patches[x][y].depth));
-	double be = (km + (photo_radiation * e * exp(-1 * patches[x][y].phyto * \
+	double be = (km + (photo_radiation * exp(-1 * patches[x][y].phyto * \
 		gui_k_phyto * patches[x][y].depth)));
 	//photosynthesis from phytoplankton derived from Huisman Weissing 1994
 	patches[x][y].gross_photo_phyto = fabs(pre_ln / be) * \

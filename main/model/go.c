@@ -26,24 +26,26 @@ void go()
     int x, y;
     for(x = 0; x < MAP_WIDTH; x++) {
         for(y = 0; y < MAP_HEIGHT; y++) {
-            update_patches(x,y);
-            go_macro(x,y);
-            go_phyto(x,y);
-            go_waterdecomp(x,y);
-            go_seddecomp(x,y);
-            go_sedconsumer(x,y);
-            go_consum(x,y);
-            go_DOC(x,y);
-            go_POC(x,y);
-            go_detritus(x,y);
+            if(patches[x][y].depth > 0){
+                update_patches(x,y);
+                go_macro(x,y);
+                go_phyto(x,y);
+                go_waterdecomp(x,y);
+                go_seddecomp(x,y);
+                go_sedconsumer(x,y);
+                go_consum(x,y);
+                go_DOC(x,y);
+                go_POC(x,y);
+                go_detritus(x,y);
 
-            pred_phyto(x,y);
-            pred_herbivore(x,y);
-            pred_seddecomp(x,y);
-            pred_detritus(x,y);
-            pred_DOC(x,y);
-            pred_POC(x,y);
-            pred_consum(x,y);
+                pred_phyto(x,y);
+                pred_herbivore(x,y);
+                pred_seddecomp(x,y);
+                pred_detritus(x,y);
+                pred_DOC(x,y);
+                pred_POC(x,y);
+                pred_consum(x,y);
+            }
         }
     }
   

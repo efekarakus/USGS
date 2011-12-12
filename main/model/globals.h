@@ -3,8 +3,6 @@
 
 #include "patch.h"
 
-// Helper constants
-double e = 2.718281828459045; // e^x;
 
 // Model variables
 int MAP_WIDTH;  ///< the map's width
