@@ -31,8 +31,29 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 //    {
 	    go();
 //    }
+    PyObject* data = (PyObject*)build_data();                                                  
     cleanup();
     return Py_BuildValue("i", tss);
+}
+
+PyObject* build_data(){
+    int dimensions[2];
+    int** buffer;
+    PyArrayObject *result;
+    int x, y;
+
+    dimensions[0] = MAP_WIDTH;
+    dimensions[1] = MAP_HEIGHT;
+    result = (PyArrayObject *) PyArray_FromDims(2, dimensions, PyArray_INT);
+    
+    buffer = result->data;
+    for( y=0; y < MAP_HEIGHT; y++){
+        for( x= 0; x < MAP_WIDTH; x++){
+            buffer[x][y] = colorValues[x][y];
+        }
+    }
+
+    return PyArray_Return(result);
 }
 
 /* Python calls this function to let us initialize our module */

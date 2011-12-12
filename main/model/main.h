@@ -9,11 +9,16 @@
 #include <Python.h>
 #include "setup.h"
 #include "patch.h"
+#include <sys/types.h>
+#include <Numeric/arrayobject.h>
+#include <stdlib.h>
 
 /* Python calls this to let us initialize our module */
 void initMainModule();
 
 /* Hello World function to be called from Python */
 static PyObject* py_goCommand(PyObject* self, PyObject* args);
+
+PyObject* build_data();
 
 #endif

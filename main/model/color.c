@@ -21,7 +21,8 @@ void scale_color(enum Color colorVal, int value, int maxVal, int minVal, int x, 
     if( maxVal < minVal){
         returnValue = 255 - returnValue;
     }
-    colorValues[x][y].colors[(int)colorVal] = returnValue;
+    //colorValues[x][y].colors[(int)colorVal] = returnValue;
+    colorValues[x][y] = returnValue << (int)colorVal*8;
 }
 
 void update_color(){

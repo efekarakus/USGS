@@ -4,9 +4,9 @@
 #include "string.h"
     enum Color
     {
-        red = 0,
+        red = 2,
         green = 1,
-        blue = 2
+        blue = 0
     };
 
     /**
@@ -28,9 +28,9 @@
 
     void update_color();
     
-    typedef struct _colorStruct{
-        int colors[3]; //red, green, blue
-    }color;
+    //typedef struct _colorStruct{
+    //    int colors[3]; //red, green, blue
+    //}color;
 
-    color** colorValues;
+    int** colorValues;
 #endif

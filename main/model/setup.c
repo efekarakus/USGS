@@ -123,15 +123,13 @@ void init_patches() {
     }
 
     //initialize colors corresponding to each patch
-    colorValues = malloc(MAP_WIDTH*sizeof(color*));
+    colorValues = malloc(MAP_WIDTH*sizeof(int*));
     for( col = 0; col < MAP_WIDTH; col++) {
-        colorValues[col] = malloc(MAP_HEIGHT*sizeof(color));       
+        colorValues[col] = malloc(MAP_HEIGHT*sizeof(int));       
     }   
     for( col = 0; col < MAP_WIDTH; col++) {
         for(row = 0; row < MAP_HEIGHT; row++){
-            colorValues[col][row].colors[0] = 0;
-            colorValues[col][row].colors[1] = 0;
-            colorValues[col][row].colors[2] = 0;
+            colorValues[col][row] = 0;
         }   
     }
 
