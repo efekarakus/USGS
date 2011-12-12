@@ -56,8 +56,6 @@ void go()
     get_flow_patches(&flow_patches);
     List* head = flow_patches.next;
     List* current = head;
-    printf("x: %d, y: %d, doc: %f\n", 245, 0, patches[245][0].DOC);
-    //TODO: change to a list that contains depths>0 and velocity >0
     //TODO: see if you can get rid of the time for-loop, by multiplying it with max_time
     for (time = 0; time < max_time; time++) {
         while( current != NULL ) {
@@ -67,7 +65,6 @@ void go()
         }
         current = head;
     }
-    printf("x: %d, y: %d, doc: %f\n", 245, 0, patches[245][0].DOC);
     LL_destroy(&flow_patches);    
 
     // increment tick
