@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "patch.h"
 
 /**
  * Singly linked list struct that has a data field and a pointer to a next node
@@ -10,7 +11,7 @@
  */
 typedef struct _List {
     struct _List* next;
-    double data;
+    patch* data;
 } List;
 
 
@@ -24,17 +25,17 @@ void LL_init(List* list);
 /**
  * Add a new node into the linked list with the data value
  * @param list the linked list that we want to insert the new node into
- * @param data the double value that we want to insert into the linked list
+ * @param data the patch* value that we want to insert into the linked list
  */
-void LL_insert(List* list, double data);
+void LL_insert(List* list, patch* data);
 
 
 /**
  * Add a new node into end of the linked list
  * @param list the linked list that we want to insert the new node into
- * @param data the double value that we want to insert into the end of the linked list
+ * @param data the patch* value that we want to insert into the end of the linked list
  */
-void LL_insertEnd(List* list, double data);
+void LL_insertEnd(List* list, patch* data);
 
 
 /**
@@ -42,7 +43,7 @@ void LL_insertEnd(List* list, double data);
  * @param list the linked list that we want to remove the data from
  * @param data the value that we want to remove from the linked list
  */
-void LL_remove(List* list, double data);
+void LL_remove(List* list, patch* data);
 
 
 /**

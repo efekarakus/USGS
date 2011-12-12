@@ -3,6 +3,7 @@
 
 #include "main.h"
 #include "globals.h"
+#include "list.h"
 
 /* Runs the model */
 void go();
@@ -69,4 +70,9 @@ int is_valid_patch(int x, int y);
  * @return the number of days that have passed since the start of the code
  */
 int get_day();
+
+/**
+ * Populates the flow_patches linked list with patches that have a velocity > 0 and depth > 0
+ */
+void get_flow_patches(List* flow_patches);
 #endif

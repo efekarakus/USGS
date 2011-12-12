@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "math.h"
 #include "pred.c"
+#include "list.c"
 
 /**
  * This function runs the model
@@ -51,23 +52,23 @@ void go()
     // flow carbon
     int max_timestep = get_timestep();
     int time, max_time = 3600/max_timestep;
-
-    printf("before DOC: %f\n", patches[210][1162].DOC);
-
+    List flow_patches;
+    get_flow_patches(&flow_patches);
+    List* head = flow_patches.next;
+    List* current = head;
+    printf("x: %d, y: %d, doc: %f\n", 245, 0, patches[245][0].DOC);
     //TODO: change to a list that contains depths>0 and velocity >0
     //TODO: see if you can get rid of the time for-loop, by multiplying it with max_time
     for (time = 0; time < max_time; time++) {
-        for (y = 0; y < MAP_HEIGHT; y++) {
-            for (x = 0; x < MAP_WIDTH; x++) {
-                if( (patches[x][y].depth > 0) && (patches[x][y].velocity > 0) )
-                {
-                    flow_carbon(x,y);
-                }
-            }
+        while( current != NULL ) {
+            patch* p = current->data;
+            flow_carbon((*p).pxcor, (*p).pycor);
+            current = current->next;
         }
+        current = head;
     }
-
-    printf("after DOC: %f\n", patches[210][1162].DOC);
+    printf("x: %d, y: %d, doc: %f\n", 245, 0, patches[245][0].DOC);
+    LL_destroy(&flow_patches);    
 
     // increment tick
     hours++;
@@ -374,3 +375,22 @@ int is_valid_patch(int x, int y) {
 int get_day() {
     return hours/24;
 }
+
+/**
+ * Populates the flow_patches linked list with patches that have a velocity > 0 and depth > 0
+ */
+void get_flow_patches(List* flow_patches) {
+    LL_init(flow_patches);
+  
+    int x, y;
+    for(y = 0; y < MAP_HEIGHT; y++) {
+        for(x = 0; x < MAP_WIDTH; x++) {
+            if (patches[x][y].depth > 0 && patches[x][y].velocity > 0)
+            {
+                LL_insert(flow_patches, &patches[x][y]);
+            }
+        }
+    }
+
+}
+
