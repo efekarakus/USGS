@@ -23,4 +23,6 @@ class RiverModelAction:
 	def OnGo(self, event):
 		UI = self.UI
 		tssValue = UI.getTSSValue()
-		print goCommand(tssValue)
+		test = goCommand(tssValue)
+		print "I tried?"
+		print test

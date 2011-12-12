@@ -73,7 +73,10 @@ void go()
     if(day >= gui_days_to_run) {
         //TODO: break out of the while loop!
     }
-
+    //If a new day has passed
+    if( (double)hours / (double)24 == (double)day){
+        printf("This is day:%d and this is hours:%ld\n", day, hours);
+    }
     printf("DONE -- go() hours: %ld\n", hours);
 }
 
