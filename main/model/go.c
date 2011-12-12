@@ -20,7 +20,7 @@ void go()
 		}
 	}
 
-
+    printf("PASSED -- update_environmentals() in GO\n");
 	// Ask patches
     int x, y;
     for(x = 0; x < MAP_WIDTH; x++) {
@@ -45,29 +45,37 @@ void go()
             pred_consum(x,y);
         }
     }
-
+    printf("PASSED -- update_patches() in GO\n");
+  
     avg_output();
 
+    printf("PASSED -- avg_output() in GO\n");
+
+    int seen = 0;
     // flow carbon
     int max_timestep = get_timestep();
     int time, max_time = 3600/max_timestep;
-    for (time = 0; time < max_time; time++) {
+//    for (time = 0; time < max_time; time++) {
         for (x = 0; x < MAP_WIDTH; x++) {
             for (y = 0; y < MAP_HEIGHT; y++) {
-                if(patches[x][y].depth > 0 && patches[x][y].velocity>0)
+                if( (patches[x][y].depth > 0) && (patches[x][y].velocity > 0) )
                 {
                     flow_carbon(x,y);
                 }
             }
         }
-    }
-    
+//    }
+
+    printf("PASSED -- flow_carbon() in GO\n");
+
     // increment tick
     hours++;
     int day = get_day();
     if(day >= gui_days_to_run) {
         //TODO: break out of the while loop!
     }
+
+    printf("DONE -- go()\n");
 }
 
 
@@ -299,9 +307,13 @@ int get_timestep() {
  */
 void flow_carbon(int x, int y) {
 
-    int corner_patch = abs( patches[x][y].py_vector - patches[x][y].px_vector )/max_area;
-    int tb_patch = abs( patches[x][y].py_vector*( patch_length - abs(patches[x][y].px_vector) ) )/max_area;
-    int rl_patch = abs( patches[x][y].px_vector*( patch_length - abs(patches[x][y].py_vector) ) )/max_area;
+    double corner_patch = abs( patches[x][y].py_vector - patches[x][y].px_vector )/max_area;
+    double tb_patch = abs( patches[x][y].py_vector*( patch_length - abs(patches[x][y].px_vector) ) )/max_area;
+    double rl_patch = abs( patches[x][y].px_vector*( patch_length - abs(patches[x][y].py_vector) ) )/max_area;
+
+    if( corner_patch != 0.0 || tb_patch != 0.0 || rl_patch != 0.0 ) {
+        printf("INSIDE FLOW_CARBON at %d,%d: corner_patch: %f, tb_patch: %f, rl_patch: %f\n", x, y, corner_patch, tb_patch, rl_patch);
+    }
 
     //TODO: loop-output
 

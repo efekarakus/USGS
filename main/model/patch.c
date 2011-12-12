@@ -406,7 +406,7 @@ void go_detritus(int x, int y)
         patches[x][y].POC_detritus_transfer = 0;
     }
 
-    if(patches[x][y].velocity = 0)
+    if(patches[x][y].velocity == 0)
     {
         // *need reference. almost all material falls to the bottom in stagnant water
         patches[x][y].POC_detritus_transfer = patches[x][y].POC * .9; 
