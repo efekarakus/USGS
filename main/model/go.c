@@ -52,21 +52,22 @@ void go()
     int max_timestep = get_timestep();
     int time, max_time = 3600/max_timestep;
 
-    int seen = 0;
+    printf("before DOC: %f\n", patches[210][1162].DOC);
+
     //TODO: change to a list that contains depths>0 and velocity >0
-//    for (time = 0; time < max_time; time++) {
+    //TODO: see if you can get rid of the time for-loop, by multiplying it with max_time
+    for (time = 0; time < max_time; time++) {
         for (y = 0; y < MAP_HEIGHT; y++) {
             for (x = 0; x < MAP_WIDTH; x++) {
                 if( (patches[x][y].depth > 0) && (patches[x][y].velocity > 0) )
                 {
-                    if (seen == 0) {
-                        printf("x: %d, y: %d, px_vector: %f, py_vector: %f\n", x, y, patches[x][y].px_vector, patches[x][y].py_vector);
-                    }
                     flow_carbon(x,y);
                 }
             }
         }
-//    }
+    }
+
+    printf("after DOC: %f\n", patches[210][1162].DOC);
 
     // increment tick
     hours++;
@@ -170,7 +171,7 @@ void update_hydro_map() {
                 patches[x][y].depth = patches[x][y].depth_list[hydro_group-1];
                 patches[x][y].velocity = patches[x][y].v_list[hydro_group-1];
 
-                if( abs(patches[x][y].px_vector) > abs(patches[x][y].py_vector) ) {
+                if( fabs(patches[x][y].px_vector) > fabs(patches[x][y].py_vector) ) {
                     patches[x][y].max_vector = patches[x][y].px_vector;
                 } else {
                     patches[x][y].max_vector = patches[x][y].py_vector;
@@ -307,13 +308,9 @@ int get_timestep() {
  */
 void flow_carbon(int x, int y) {
 
-    double corner_patch = abs( patches[x][y].py_vector - patches[x][y].px_vector )/max_area;
-    double tb_patch = abs( patches[x][y].py_vector*( patch_length - abs(patches[x][y].px_vector) ) )/max_area;
-    double rl_patch = abs( patches[x][y].px_vector*( patch_length - abs(patches[x][y].py_vector) ) )/max_area;
-
-    if( corner_patch != 0.0 || tb_patch != 0.0 || rl_patch != 0.0 ) {
-        printf("INSIDE FLOW_CARBON at %d,%d: corner_patch: %f, tb_patch: %f, rl_patch: %f\n", x, y, corner_patch, tb_patch, rl_patch);
-    }
+    double corner_patch = fabs( patches[x][y].py_vector - patches[x][y].px_vector )/max_area;
+    double tb_patch = fabs( patches[x][y].py_vector*( patch_length - fabs(patches[x][y].px_vector) ) )/max_area;
+    double rl_patch = fabs( patches[x][y].px_vector*( patch_length - fabs(patches[x][y].py_vector) ) )/max_area;
 
     //TODO: loop-output
 

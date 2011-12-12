@@ -4,7 +4,6 @@
 #include "go.c"
 #include "patch.c"
 #include "cleanup.c"
-#include "color.c"
 
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
@@ -38,11 +37,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
       }
     }
 */
-    int days = 0;
-    while(days < 3*24) {
-	  go();
-      days++;
-    }
+	go();
     cleanup();
     return Py_BuildValue("i", tss);
 }
