@@ -4,6 +4,7 @@
 #include "go.c"
 #include "patch.c"
 #include "cleanup.c"
+#include "color.c"
 
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
