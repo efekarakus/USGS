@@ -1,6 +1,7 @@
 #ifndef COLOR_H
 #define COLOR_H
 #include "math.h"
+#include "string.h"
     enum Color
     {
         red = 0,
@@ -23,9 +24,10 @@
      * If number is greater than range2, then the lightest shade of color
      * is chosen.
      */
-    void scale_color(enum Color colorVal, int value, int maxVal, 
-        int minVal, int x, int y);
+    void scale_color(enum Color colorVal, int value, int maxVal, int minVal, int x, int y);
 
+    void update_color();
+    
     typedef struct _colorStruct{
         int colors[3]; //red, green, blue
     }color;
