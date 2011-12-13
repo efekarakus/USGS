@@ -22,8 +22,8 @@ def outputImage(colorsList):
     y = (index - 1)/width
 
     r = colorsList[index] >> 16
-    g = (colorsList[index] << 16) >> 24
-    b = (colorsList[index] << 24) >> 24
+    g = (colorsList[index] >> 8) & 0xff
+    b = colorsList[index] & 0xff
     image.putpixel( (x, y), (r, g, b))
   #endfor
   image.save(imageTitle, imageType)

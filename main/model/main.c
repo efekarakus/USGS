@@ -4,6 +4,7 @@
 #include "go.c"
 #include "patch.c"
 #include "cleanup.c"
+#include "globals.h"
 
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
@@ -29,8 +30,10 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     setup();
     while( (day = (hours / 24)) < gui_days_to_run)
     {
+        printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
 	    go();
     }
+    printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
     PyObject* data = (PyObject*)build_data();                                                  
     cleanup();
     return data;

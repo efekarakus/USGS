@@ -21,7 +21,6 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
     if( maxVal < minVal){
         returnValue = 255 - returnValue;
     }
-      printf("pixel: x: %d, y: %d, value: %f\n", x, y, value);
     colorValues[x][y] = returnValue << (int)colorVal*8;
 }
 
@@ -32,7 +31,7 @@ void update_color(){
     if( strcmp(which_stock, "macro") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                scale_color(green, patches[x][y].macro, 600000, 0, x, y);
+                scale_color(green, patches[x][y].macro, MAX_MACRO, 0, x, y);
             }
         }
     }
@@ -41,7 +40,7 @@ void update_color(){
     else if( strcmp(which_stock, "phyto") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                scale_color(green, patches[x][y].phyto, 75000, 0, x, y);
+                scale_color(green, patches[x][y].phyto, 75000, 0, x, y); //TODO: replace it with MAX_PHYTO
             }
         }
     }
@@ -50,7 +49,7 @@ void update_color(){
     else if( strcmp(which_stock, "waterdecomp") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                scale_color(green, patches[x][y].waterdecomp, 30, 0, x, y);
+                scale_color(green, patches[x][y].waterdecomp, MAX_WATERDECOMP, 0, x, y);
             }
         }
     }
@@ -59,7 +58,7 @@ void update_color(){
     else if( strcmp(which_stock, "POC") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                scale_color(blue, patches[x][y].POC, 10, 0, x, y);
+                scale_color(blue, patches[x][y].POC, MAX_POC, 0, x, y);
             }
         }
     }
@@ -69,7 +68,7 @@ void update_color(){
     else if( strcmp(which_stock, "detritus") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                scale_color(green, patches[x][y].detritus, 400, 0, x, y);
+                scale_color(green, patches[x][y].detritus, MAX_DETRITUS, 0, x, y);
             }
         }
     }
@@ -78,7 +77,7 @@ void update_color(){
     else if( strcmp(which_stock, "sedconsumer") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                scale_color(green, patches[x][y].sedconsumer, 15, 0, x, y);
+                scale_color(green, patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0, x, y);
             }
         }
     }

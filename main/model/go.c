@@ -45,6 +45,8 @@ void go()
                 pred_DOC(x,y);
                 pred_POC(x,y);
                 pred_consum(x,y);
+
+                update_max(x,y);
             }
         }
     }
@@ -416,3 +418,41 @@ void get_flow_patches(List* flow_patches) {
 
 }
 
+/**
+ * Updates the global variables for the stocks
+ * @param x: the x-coordinate of the patch
+ * @param y: the y-coordinate of the patch
+ */
+void update_max(int x, int y) {
+
+    if ( patches[x][y].phyto > MAX_MACRO ) {
+        MAX_MACRO = patches[x][y].macro;
+    }
+    if ( patches[x][y].phyto > MAX_PHYTO ) {
+        MAX_PHYTO = patches[x][y].phyto;
+    }
+    if ( patches[x][y].herbivore > MAX_HERBIVORE ) {
+        MAX_HERBIVORE = patches[x][y].herbivore;
+    }
+    if ( patches[x][y].waterdecomp > MAX_WATERDECOMP ) {
+        MAX_WATERDECOMP = patches[x][y].waterdecomp;
+    }
+    if ( patches[x][y].seddecomp > MAX_SEDDECOMP ) {
+        MAX_SEDDECOMP = patches[x][y].seddecomp;
+    }
+    if ( patches[x][y].sedconsumer > MAX_SEDCONSUMER ) {
+        MAX_SEDCONSUMER = patches[x][y].sedconsumer;
+    }
+    if ( patches[x][y].consum > MAX_CONSUM ) {
+        MAX_CONSUM = patches[x][y].consum;
+    }
+    if ( patches[x][y].DOC > MAX_DOC ) {
+        MAX_DOC = patches[x][y].DOC;
+    }
+    if ( patches[x][y].POC > MAX_POC ) {
+        MAX_POC = patches[x][y].POC;
+    }
+    if ( patches[x][y].detritus > MAX_DETRITUS ) {
+        MAX_DETRITUS = patches[x][y].detritus;
+    }
+}

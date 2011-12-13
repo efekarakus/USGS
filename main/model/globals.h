@@ -16,7 +16,7 @@ int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
 int gui_photo_radiation = 2000;    ///< fixedPAR
 int gui_hydro_group = 5;	///< fixedHydro
-int gui_days_to_run = 1;  ///< number of days to run the code
+int gui_days_to_run = 365;  ///< number of days to run the code
 int gui_loop_output = 0;  ///< represents the Loop-Output? variable in the gui, if set to 1 the 'input' cells gets the stock values changed
 double gui_k_phyto = 0.4;  ///< k-phyto
 double gui_k_macro = 0.4; ///< k-macro
@@ -49,6 +49,18 @@ int patch_length = 30;
 int max_area = 30*30;
 
 // max gwr/unit biomass; e- excretion->DOC; r- respiration; s- senecence(natural mortality); -egestion ->POC
+double MAX_MACRO = 0.0;
+double MAX_PHYTO = 0.0;
+double MAX_HERBIVORE = 0.0;
+double MAX_WATERDECOMP = 0.0;
+double MAX_SEDDECOMP = 0.0;
+double MAX_SEDCONSUMER = 0.0;
+double MAX_CONSUM = 0.0;
+double MAX_DOC = 0.0;
+double MAX_POC = 0.0;
+double MAX_DETRITUS = 0.0;
+
+
 double max_waterdecomp = 6.26/24;
 double max_seddecomp = 6.26/24;
 double max_herbivore = 1/24;
