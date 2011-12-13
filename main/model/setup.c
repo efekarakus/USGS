@@ -6,15 +6,11 @@
  */
 void setup() {
     find_map_sizes();
-    printf("PASSED -- find_map_sizes\n");
     init_patches();
-    printf("PASSED -- init_patches\n");
+    init_color_values();
     import_hydro();
-    printf("PASSED -- import_hydro()\n");
     setup_environmentals();
-    printf("PASSED -- setup_environmentals()\n");
     setup_stocks();
-    printf("PASSED -- setup_stocks()\n");
     printf("SUCCESS -- setup\n");
 }
 
@@ -122,6 +118,14 @@ void init_patches() {
         }
     }
 
+}
+
+/**
+ * Creates the 2D array of colors
+ */
+void init_color_values() {
+    int row = 0;
+    int col = 0;
     //initialize colors corresponding to each patch
     colorValues = malloc(MAP_WIDTH*sizeof(int*));
     for( col = 0; col < MAP_WIDTH; col++) {
@@ -129,7 +133,7 @@ void init_patches() {
     }   
     for( col = 0; col < MAP_WIDTH; col++) {
         for(row = 0; row < MAP_HEIGHT; row++){
-            colorValues[col][row] = 0;
+            colorValues[col][row] = (255 << 16 ) | (255 << 8) | 255;  // white background
         }   
     }
 

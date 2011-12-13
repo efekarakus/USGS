@@ -32,7 +32,15 @@ void find_map_sizes();
  */
 void find_map_width_height(FILE* hydro_file);
 
+/**
+ * Creates the 2D array of patches
+ */
 void init_patches();
+
+/**
+ * Creates the 2D array of colors
+ */
+void init_color_values();
 
 /**
  * Reads the Hydo map files and sets up the proper (x,y) patches
