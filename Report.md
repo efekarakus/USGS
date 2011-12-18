@@ -428,6 +428,101 @@ prey refuge at which capture efficiency is equal to 0.
 </tr>
 </table>
 
+Table 2:
+
+Stock-specific values for heterotroph formulas, where τ is the maximum rate of consumption by 
+predator, where τ is the maximum rate of consumption by the predator stock, P is the innate prey 
+preference i of predator j, ηj is carbon lost to excretion, μ is the specific physiological mortality rate, ε 
+is the egestion rate, Ajj  is the minimum predator density at which prey capture efficiency is decreased, 
+and Gjj is the maximum predator density at which prey capture efficiency is set to 0.
+
+<table>
+<tr>
+  <td>Stock</td>
+  <td>τ</td>
+  <td>Ρij</td>
+  <td>η</td>
+  <td>μ</td>
+  <td>ε</td>
+  <td>Ajj</td>
+  <td>Gjj</td>
+</tr>
+<tr>
+  <td> Herbivore </td>
+  <td> 0.04166667 </td>
+  <td> 0.003333 </td> 
+  <td> 0.016666667 </td>
+  <td> 0.000416667 </td>
+  <td> 0.2 </td> 
+  <td> 2.4 </td>
+  <td >108 </td>
+</tr>
+<tr>
+  <td> Water Decomposer </td>
+  <td> 0.26083333</td>
+  <td>0.025</td>
+  <td>0.007208333</td>
+  <td>0.002083333</td>
+  <td>0</td> 
+  <td>1.2</td> 
+  <td>20</td>
+</tr>
+<tr>
+  <td>Sediment Decomposer</td>
+  <td> 0.26083333 </td> 
+  <td>0.025</td>
+  <td>0.007208333</td>
+  <td>0.002083333</td>
+  <td>0</td>
+  <td>0.2</td>
+  <td>120 </td>
+</tr>
+<tr>
+  <td>Sediment consumer </td>
+  <td> 0.02291667 </td> 
+  <td>0.003333</td>
+  <td>0.000416667</td>
+  <td>0.000416667 </td>
+  <td>0.35</td>
+  <td>2</td>
+  <td>20</td>
+</tr>
+<tr>
+  <td> Consumer </td>
+  <td>0.005125 </td>
+  <td>0.000521</td>
+  <td>8.33333E-05</td> 
+  <td>8.33333E-05</td>
+  <td>0.2</td>
+  <td>0.65</td> 
+  <td>6.5</td>
+</tr>
+</table>
+
+<a name="submodels_stocks"/>
+### Detritus, Particulate Organic Carbon (POC), and Dissolved Organic Carbon (DOC)
+
+Both the detritus and particulate organic carbon (POC) carbon stocks acquire carbon from dead 
+organic matter which is > 1μm in size.  However, POC refers to matter in the water column and detritus 
+refers to matter in the sediments.  For this model, senesced material was deemed detritus if particle size 
+was > 10μm (Wetzel 2001). The percent of senesced material transferred to the detritus stock varied 
+according to its source (Table 3). All egested carbon contributes to detritus (Table 3).  Carbon lost to POC 
+from the detritus category is described as: 
+
+9. Transj=  Xj \* (2.5 log ((v / 40.0) + .0001) + 0.5)
+
+where v is equal to the water velocity, and higher velocities result in a greater proportion of organic 
+matter in the water column.  Similarly, the transfer of carbon from the POC stock to the detritus stock is 
+described as the product of POC biomass and (1 – Transj).  When velocity is equal to zero, 90% of the 
+carbon in the POC stock settles out and becomes detritus.
+
+All senesced carbon in the model that is not assigned to the detritus stock is assigned to the POC 
+stock, with the exception of a small percentage, which is assigned to the dissolved organic carbon (DOC) 
+stock (Table 3). Carbon is also transferred to POC from DOC at a rate of 1% due to flocculation.
+
+The DOC carbon stock acquires carbon from dead or excreted objects that measure < 1 µm in 
+size (Wetzel 2001).  In this model, in addition to some senesced carbon, all carbon excreted or released 
+as exudates contributes to DOC (Wetzel 1975)(Table 3).
 
 <a name="submodels_hydro"/>
 ### Incorporation of Hydraulic
