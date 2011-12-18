@@ -22,6 +22,7 @@ Requirements
 ------------
 
 You will need the following components to run/modify RiverModel:
+
 1. Python2.7: http://www.python.org/getit/releases/2.7/ 
 1. gcc: http://gcc.gnu.org/
 1. Python Imaging Library: http://www.pythonware.com/products/pil/
