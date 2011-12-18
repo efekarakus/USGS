@@ -276,11 +276,82 @@ Physiological losses of an autotrophic stock were modeled as:
 
 3. Physj = (µj + ŋj + σj) \* Xj
 
+where µj is the specific physiological mortality rate, ŋj is carbon lost to excretion, and σj is carbon lost to 
+respiration (Garbey et al. 2006).  Carbon lost via physiological mortality is transferred to the detritus, 
+POC and DOC stocks, and carbon lost via excretion enters the DOC stock.  Carbon lost to respiration by a 
+stock is removed from the system.  In this version of the model, the phytoplankton stock, and not the 
+macrophyte stock, loses carbon to herbivores.  These losses are described in the equations for 
+heterotrophic stocks.
+
 <a name="submodels_heto"/>
 ### Hetotrophic Stocks
 
-<a name="submodels_stocks"/>
-### Detritus, Particulate Organic Carbon (POC), and Dissolved Organic Carbon (DOC)
+Heterotrophic stocks included herbivores, consumers, and decomposers.  We modeled all of 
+these stocks using the general equations developed by Wiegert (1975, 1979).  Biomass of a stock at time 
+t + 1 is determined by the formula:
+
+4. dXj/dt = Cj \* (1 – εj) – Physj - Predj
+
+where the biomass of stock j equals the difference between consumption corrected for egestion (εj) and 
+physiological and predatory losses.  Egested material enters the detrital food web as POC, much of 
+which may be converted to detritus depending on the hydrological conditions of the cell.  Consumption 
+by stock j is determined by the summation of consumption of each available prey type (m) of predator j, 
+and is given by the following formula:
+
+5. Cj = ∑ (πij \* τj \* Xj \* fij \* fjj (sum from i = 1 to j)
+
+where πij is the preference of stock j for prey stock i, τj is the maximum rate of consumption by predator 
+stock j, and Xj is the biomass of predator stock j.  The functional response of predator stocks is 
+determined by fij and fjj, represent prey and space limitation functions. Population growth rates 
+can be limited by both prey availability and intra-specific interference at high population densities. Both 
+fij and fjj produces values between 0 and 1. At high prey densities, predators will not be resource-limited 
+and thus feed at the maximum rate (τj); however, below a prey density threshold (Aij), consumption will 
+be reduced and will eventually fall to zero when prey densities are below a refuge level (Gij).  For 
+simplicity the United States Geological Survey assumesfij decreases linearly between Aij and Gij.  Space 
+limitation is determined similarly except values of Ajj and Gjj relate to predator density.
+
+If a predator stock feeds only on one prey type, then πij is set to one.  However when a predator 
+stock feeds on multiple stocks πij is a function of innate prey preference (Pij) for specific stocks and the 
+biomass of those stocks in the cell.
+
+6. πij = (Pij \* fij)/∑ (Pij \* fij)  (∑ is sum from i =1 to m)
+
+Stock-specific values for Aij, Ajj, Gij, Gjj, and Pij were adapted from Pace et al. (1984) and are 
+listed in Tables 1 & 2, however these values are likely to be system-specific and thus should be 
+calibrated with independent data from the system to be modeled.
+
+Physiological losses of a heterotrophic stock were modeled as above for autotrophic stocks:
+
+7. Physj = (µj + ηj + σj) \* Xj
+
+Carbon lost to predation is determined by the summation of losses to each predator stock (k).
+
+8. Predj = ∑ (πjk * τk * Xk * fjk * fkk)  (∑ is sum from k=1 to n)
+
+Table1:
+
+Stock-specific values for heterotroph formulas, where πij is the preference of stock j for prey stock i, 
+Aij is the maximum prey density threshold below which capture efficiency is decreased, and Gij is the 
+prey refuge at which capture efficiency is equal to 0.
+
+<table>
+<tr>
+  <td> Predator stock </td> 
+  <td> Prey stock </td>
+  <td> πij </td>
+  <td> Aij </td>
+  <td> Gij </td>
+</tr>
+<tr>
+  <td> Herbivore </td>
+  <td> Phytoplankton </td>
+  <td> 0.7 </td>
+  <td> 20 </td>
+  <td> 0.01 </td>
+</tr>
+</table>
+
+
 
 <a name="submodels_hydro"/>
 ### Incorporation of Hydraulic
