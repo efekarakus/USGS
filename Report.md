@@ -349,8 +349,84 @@ prey refuge at which capture efficiency is equal to 0.
   <td> 20 </td>
   <td> 0.01 </td>
 </tr>
+<tr>
+  <td> Herbivore </td>
+  <td> Water decomposers </td>
+  <td> 0.15 </td>
+  <td> 3 </td>
+  <td> 0.01 </td>
+</tr>
+<tr>
+  <td> Water decomposer </td>
+  <td> POC </td>
+  <td> 0.5 </td>
+  <td> 30 </td>
+  <td> 0.05 </td>
+</tr>
+<tr>
+  <td> Water decomposer </td> 
+  <td> DOC  </td> 
+  <td> 0.05  </td> 
+  <td> 30 </td>
+  <td> 0.05 </td>
+</tr>
+<tr>
+  <td>Sediment decomposer </td> 
+  <td> Detritus  </td>
+  <td> 1 </td>
+  <td> 0.6 </td>
+  <td> 0.005</td>
+</tr>
+<tr>
+  <td> Periphyton </td>
+  <td> DOC  </td> 
+  <td> 0.5 </td>
+  <td> 30 </td>
+  <td> 0.05 </td>
+</tr>
+<tr>
+  <td> Periphyton </td> 
+  <td> POC </td> 
+  <td> 0.5  </td> 
+  <td> 30 </td> 
+  <td> 0.05 </td>
+</tr>
+<tr>
+  <td> Sediment consumer </td>
+  <td> Sediment decomposer </td> 
+  <td> 0.5 </td>
+  <td>3</td>
+  <td>0.02</td>
+</tr>
+<tr>
+  <td>Sediment consumer </td>
+  <td>Detritus</td>
+  <td>0.1</td>
+  <td>3.5</td>
+  <td>0.02</td>
+</tr>
+<tr>
+  <td>Sediment consumer </td> 
+  <td> Periphyton </td> 
+  <td>0.4</td>
+  <td>2</td>
+  <td>0.02</td>
+</tr>
+<tr>
+  <td> Consumer </td> 
+  <td> Herbivore </td> 
+  <td> 0.7</td>
+  <td>3.5</td>
+  <td> 0.025 </td>
+</tr>
+<tr>
+  <td> Consumer </td>
+  <td> Sediment consumer </td>
+  <td>0.3 </td>
+  <td>4</td>
+  <td>0.04 </td>
+</tr>
 </table>
-
 
 
 <a name="submodels_hydro"/>
