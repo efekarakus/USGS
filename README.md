@@ -32,7 +32,8 @@ Running the Model
 -----------------
 
 You can run the model as follows:
-```bash
+
+```
 pwd
 > /Users/efekarakus/USGS
 cd main/model/
@@ -44,6 +45,7 @@ python main.py
 <a name="implementation"/>
 Implementation
 --------------
+
 
 <a name="testing"/>
 Testing
