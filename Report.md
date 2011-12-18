@@ -265,7 +265,7 @@ predatory losses.
 Primary production for macrophytes is described using the maximum gross photosynthesis 
 equation (Kaj Sand-Jensen, Chambers et al. 1991):
 
-1. Prodj = 0.08\*Xj\*(L / (L + 10))\*Q10\*(K – Xj) / K
+2. Prodj = 0.08\*Xj\*(L / (L + 10))\*Q10\*(K – Xj) / K
 
 where Xj is equal to the macrophyte biomass, Q10 is the temperature-dependent coefficient, 
 K is the halfsaturation constant, and L is the amount of light that reaches the macrophytes depending on the 
@@ -274,7 +274,7 @@ modeled using a similar formula (Huisman and Weissing 1994).
 
 Physiological losses of an autotrophic stock were modeled as:
 
-
+3. Physj = (µj + ŋj + σj) \* Xj
 
 <a name="submodels_heto"/>
 ### Hetotrophic Stocks
