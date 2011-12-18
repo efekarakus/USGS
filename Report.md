@@ -19,6 +19,29 @@ Table of Contents
   * [Hetotrophic Stocks](#submodels_heto)
   * [Detritus, Particulate Organic Carbon (POC), and Dissolved Organic Carbon (DOC)](#submodels_stocks)
   * [Incorporation of Hydraulic](#submodels_hydro)
+* [Reflection of Original Model](#reflection_original)
+* [Conclusion of Original Model](#conclusion_original)
+* [Other Stakeholders](#other_stakeholders)
+* [Solution - NetLogo to C Translations](#translation)
+  * [Memory Concerns](#translation_memory)
+  * [Transition to Python](#translation_python)
+  * [Valgrind](#translation_valgrind)
+* [Meetings with USGS](#meetings)
+  * [Meeting One](#meetings_one)
+  * [Meeting Two](#meetings_two)
+  * [Meeting Three](#meetings_three)
+  * [Meetings Four](#meetings_four)
+  * [Meetings Five](#meetings_five)
+  * [Meetings Six](#meetings_six)
+  * [Meetings Seven](#meetings_seven)
+* [Functional Requirements](#functional_req)
+* [Non-Functional Requirements](#nonfunctional_req)
+* [Assumptions](#assumptions)
+* [Plan](#plan)
+* [Team Experience](#experience)
+* [Lessons Learned](#lessons)
+* [End of Semester Status](#status)
+* [Plans for Completion](#completion)
 
 <a name="clientprofile"/>
 Client Profile
@@ -72,3 +95,85 @@ Submodels
 
 <a name="submodels_hydro"/>
 ### Incorporation of Hydraulic
+
+<a name="reflection_original"/>
+Reflection of Original Model
+----------------------------
+
+<a name="conclusion_original"/>
+Conclusion of Original Model
+----------------------------
+
+<a name="other_stakeholders"/>
+Other Stakeholders
+------------------
+
+<a name="translation"/>
+Solution - NetLogo to C Translations
+------------------------------------
+
+<a name="translation_memory"/>
+### Memory Concerns
+
+<a name="translation_python"/>
+### Transition to Python
+
+<a name="translation_valgrind"/>
+### Valgrind
+
+<a name="meetings"/>
+Meetings with USGS
+------------------
+
+<a name="meetings_one"/>
+### Meeting One
+
+<a name="meetings_two"/>
+### Meeting Two
+
+<a name="meetings_three"/>
+### Meeting Three
+
+<a name="meeting_four"/>
+### Meeting Four
+
+<a name="meeting_five"/>
+### Meeting Five
+
+<a name="meeting_six"/>
+### Meeting Six
+
+<a name="meeting_seven"/>
+### Meeting Seven
+
+<a name="functional_req"/>
+Functional Requirements
+-----------------------
+
+<a name="nonfunctional_req"/>
+Non-Functional Requirements
+---------------------------
+
+<a name="assumptions"/>
+Assumptions
+-----------
+
+<a name="plan"/>
+Plan
+----
+
+<a name="experience"/>
+Team Experience
+---------------
+
+<a name="lessons"/>
+Lessons Learned
+---------------
+
+<a name="status"/>
+End of Semester Status
+----------------------
+
+<a name="completion"/>
+Plans for Completion
+--------------------
