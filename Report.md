@@ -191,6 +191,8 @@ basic carbon cycle is modeled using simple food web interactions while hydrologi
 Army Corps of Engineers is used to incorporate physical characteristics of Pool 5 which describe the 
 longitudinal movement of carbon.
 
+![Figure 1: Map of pool 5 on the Mississippi River](./images/Figure1.png "Figure 1: Map of pool 5 on the Mississippi River")
+
 <a name="originalmodel_state"/>
 ### State Variables and Scales
 
@@ -610,6 +612,8 @@ Mobile carbon from each cell was modeled to flow at the same velocity as water, 
 amount of carbon transferred between cells was calculated using functions based on the speed and 
 direction of water flow in each cell (Fig. 2).  Since most fish actively move to find food, consumers in the 
 water column in this model were not affected by hydraulics.
+
+![Figure 2: Hydrological component of model](./images/Figure2.png "Figure 2: Hydrological component of model")
 
 <a name="reflection_original"/>
 Reflection of Original Model
