@@ -374,7 +374,7 @@ void go_POC(int x, int y)
     if(patches[x][y].velocity > 0)
     {
         // exchange between POC and detritus determined by an approximation of Stoke's Law
-        patches[x][y].detritus_POC_transfer = patches[x][y].detritus * (.25 * log(((patches[x][y].velocity / 40 ) + .0001) + 1) * 10);
+        patches[x][y].detritus_POC_transfer = patches[x][y].detritus * (.25 * log10(((patches[x][y].velocity / 40 ) + .0001) + 1));
     }
 
     if(patches[x][y].detritus_POC_transfer > 1)
@@ -397,7 +397,7 @@ void go_detritus(int x, int y)
     if(patches[x][y].velocity > 0)
     {
         // *need reference
-        patches[x][y].POC_detritus_transfer = patches[x][y].POC * (1 - (.25 * log((( patches[x][y].velocity / 40) + .0001) + 1) * 10 ));
+        patches[x][y].POC_detritus_transfer = patches[x][y].POC * (1 - (.25 * log10((( patches[x][y].velocity / 40) + .0001) + 1)));
     }
 
     if(patches[x][y].POC_detritus_transfer < 0)
