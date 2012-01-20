@@ -244,12 +244,6 @@ void import_hydro() {
 
 /**
  * Reads from files the initial discharge (daily) and initial radiation (hourly) values and then imports the maps based on the discharge value
- *
- *		 
- * TODO	   STILL NEED TO FREE:
- *			- photo_radiation
- *			- temperature
- *			- discharge (if fixed_environmentals == true)
  */
 void setup_environmentals() 
 {
