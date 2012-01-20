@@ -31,7 +31,7 @@ double assertRange(double value, double low, double high){
 }
 
 void go_macro(int x, int y){
-	Q10 = theta*exp(temperature - macro_base_temp);
+	Q10 = pow(theta, (temperature - macro_base_temp));
 
 	if(patches[x][y].velocity < macro_vel_max){
 		patches[x][y].K = max_area * (gui_macro_mass_max - \
