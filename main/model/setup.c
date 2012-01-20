@@ -1,11 +1,14 @@
 #include "globals.h"
 #include "setup.h"
 #include "color.h"
+
+
 /**
  * Calls the helper functions import_hydro and setup_environmentals
  */
-void setup() {
-    find_map_sizes();
+void setup() 
+{
+	find_map_sizes();
     init_patches();
     init_color_values();
     import_hydro();
@@ -18,36 +21,41 @@ void setup() {
  * Opens the first hydro-map i.e 10k-map and finds the maximum pxcor and
  * the maximum pycor, we assign these values to MAP_WIDTH and MAP_HEIGHT
  */
-void find_map_sizes() {
-    
+void find_map_sizes() 
+{    
     int max_map_width = 0;
     int max_map_height = 0;
 
     int index;
-    for(index = 0; index < num_hydro_files; index++) {
-      char* hydro_map = file_names[index];
-      char* path = "./model/data/HydroSets/";
-      int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
-      char hydro_path[length];
-      strcpy(hydro_path, path);
-      strcat(hydro_path, hydro_map);
-      strcat(hydro_path, file_extension);
-      strcat(hydro_path, ".txt");
+    for(index = 0; index < num_hydro_files; index++) 
+	{
+		char* hydro_map = file_names[index];
+		char* path = hydrosets_path;
+		int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
+		char hydro_path[length];
+		strcpy(hydro_path, path);
+		strcat(hydro_path, hydro_map);
+		strcat(hydro_path, file_extension);
+		strcat(hydro_path, ".txt");
      
-      FILE* file = fopen(hydro_path, "r");
-      if (file == NULL) {
-          fputs("error opening the hydro map", stderr);
-          exit(-1);
-      }
+		FILE* file = fopen(hydro_path, "r");
+		if (file == NULL) 
+		{
+			fputs("error opening the hydro map", stderr);
+			exit(-1);
+		}
 
-      find_map_width_height(file); // find the width and height of the maps
-      if(MAP_WIDTH > max_map_width) {
-          max_map_width = MAP_WIDTH;
-      }
-      if(MAP_HEIGHT > max_map_height) {
-          max_map_height = MAP_HEIGHT;
-      }
-      fclose(file);
+		find_map_width_height(file); // find the width and height of the maps
+		if(MAP_WIDTH > max_map_width) 
+		{
+			max_map_width = MAP_WIDTH;
+		}
+		if(MAP_HEIGHT > max_map_height) 
+		{
+			max_map_height = MAP_HEIGHT;
+		}
+		
+		fclose(file);
     }
 
     MAP_WIDTH = max_map_width;
@@ -57,9 +65,10 @@ void find_map_sizes() {
 
 /**
  * Reads a hydro_file finds the biggest pycor and pxcor and assigns them to MAP_WIDTH and MAP_HEIGHT
- * @param hydro_file
- */
-void find_map_width_height(FILE* hydro_file) {
+ * @param hydro_file the hydrolic file with data regarding patches
+*/
+void find_map_width_height(FILE* hydro_file) 
+{
     int patch_info_size = 6;    // first line in the file, pxcor/pycor/depth/px-vector/py-vector/velocity
     int word_size = 100;
 
@@ -69,22 +78,25 @@ void find_map_width_height(FILE* hydro_file) {
     int max_x = 0;
     int max_y = 0;
     int counter = 0;
-    while(fscanf(hydro_file, "%s", word) != EOF) {
+    while(fscanf(hydro_file, "%s", word) != EOF) 
+	{
         // pxcor
-        if(counter%patch_info_size == 0) {
+        if(counter%patch_info_size == 0) 
+		{
             int value = atoi(word);
             if(value > max_x)
-                    max_x = value;
-                    
+                    max_x = value;            
         }        
         // pycor
-        else if(counter%patch_info_size == 1) {
+        else if(counter%patch_info_size == 1) 
+		{
             int value = atoi(word);
             if(value > max_y)
                 max_y = value;
         }
         counter++;
     }
+
     MAP_WIDTH = max_x+1;
     MAP_HEIGHT = max_y+1;
 }
@@ -92,19 +104,23 @@ void find_map_width_height(FILE* hydro_file) {
 /**
  * Creates the 2D array of patches
  */
-void init_patches() {
+void init_patches() 
+{
     // initialize the patches
     int row = 0;
     int col = 0;
 
     patches = malloc(MAP_WIDTH*sizeof(patch*));
-    for(col = 0; col < MAP_WIDTH; col++) {
+    for(col = 0; col < MAP_WIDTH; col++) 
+	{
         patches[col] = malloc(MAP_HEIGHT*sizeof(patch));
     }
 
     // initialize the arrays for each patch
-    for(col = 0; col < MAP_WIDTH; col++){
-        for(row = 0; row < MAP_HEIGHT; row++) {
+    for(col = 0; col < MAP_WIDTH; col++)
+	{
+        for(row = 0; row < MAP_HEIGHT; row++) 
+		{
             patches[col][row].pxcor = col; 
             patches[col][row].pycor = row;
             patches[col][row].pcolor = 0;
@@ -117,41 +133,46 @@ void init_patches() {
             patches[col][row].v_list = malloc(num_hydro_files*sizeof(double));
         }
     }
-
 }
 
 /**
  * Creates the 2D array of colors
  */
-void init_color_values() {
+void init_color_values() 
+{
     int row = 0;
     int col = 0;
-    //initialize colors corresponding to each patch
+
+	//initialize colors corresponding to each patch
     colorValues = malloc(MAP_WIDTH*sizeof(int*));
-    for( col = 0; col < MAP_WIDTH; col++) {
+    for( col = 0; col < MAP_WIDTH; col++) 
+	{
         colorValues[col] = malloc(MAP_HEIGHT*sizeof(int));       
     }   
-    for( col = 0; col < MAP_WIDTH; col++) {
-        for(row = 0; row < MAP_HEIGHT; row++){
+
+    for( col = 0; col < MAP_WIDTH; col++) 
+	{
+        for(row = 0; row < MAP_HEIGHT; row++)
+		{
             colorValues[col][row] = (255 << 16 ) | (255 << 8) | 255;  // white background
         }   
     }
-
 }
 
 /**
  * Reads the Hydro map files and sets up the proper (x,y) patches
- * Input in the form of "pxcor pycor depth px-vector py-vector velocity"
+ * Input is in the form of "pxcor pycor depth px-vector py-vector velocity"
  * and this word formation must be the first line in the file.
- */
-void import_hydro() {
+*/
+void import_hydro() 
+{
     int i, j, temp_x, temp_y;
     char file[256];
     FILE* pFile;
     char str[256];
     float value;
     double temp_depth, temp_px_vector, temp_py_vector, temp_velocity;
-    char* path = "./model/data/HydroSets/";
+    char* path = hydrosets_path;
 
     for(i = 0;i < num_hydro_files; i++)
     {
@@ -193,11 +214,12 @@ void import_hydro() {
             patches[temp_x][temp_y].aqa_point = -999;
 
         }
+
         fclose(pFile);
     }
 
     //Read in the cell-type file and set the patches
-    strcpy(file, "./model/data/Environmentals/cell-type.txt");  //TODO: make this file path more generic by moving it to the header file
+    strcpy(file, cell_type_path);
     pFile = fopen(file, "r");
 
     if(pFile == NULL)
@@ -210,7 +232,8 @@ void import_hydro() {
     char temp_cell_type[256];
 
     // skip the file layout
-    for(j = 0; j < 3; j++) {
+    for(j = 0; j < 3; j++) 
+	{
         fscanf(pFile, "%s", str);
     }
 
@@ -231,8 +254,8 @@ void import_hydro() {
         {
             patches[temp_x][temp_y].cell_type = 1;
         }
-
     }
+
     fclose(pFile);
 }
 
@@ -265,14 +288,12 @@ void setup_environmentals()
 }
 
 
-
-
 /**
  * Reads the discharge.txt file and initializes the discharge variables
  */
 void set_discharge()
 {
-	char* pathname = "./model/data/Environmentals/";
+	char* pathname = environmentals_path;
 
 	char* currFile = discharge_file;
 	int length = strlen(pathname) + strlen(currFile) + 1;
@@ -318,7 +339,7 @@ void set_discharge()
  */
 void set_photo_radiation()
 {
-	char* pathname = "./model/data/Environmentals/";
+	char* pathname = environmentals_path;
 
 	char* currFile = photo_radiation_file;
 	int length = strlen(pathname) + strlen(currFile) + 1;
@@ -365,7 +386,7 @@ void set_photo_radiation()
  */
 void set_temperature()
 {
-	char* pathname = "./model/data/Environmentals/";
+	char* pathname = environmentals_path;
 
 	char* currFile = temperature_file;
 	int length = strlen(pathname) + strlen(currFile) + 1;
@@ -435,4 +456,3 @@ void setup_stocks()
         }
     }
 }
-

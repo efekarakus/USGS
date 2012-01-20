@@ -15,6 +15,10 @@ char* discharge_file = "discharge.txt";
 char* photo_radiation_file = "par.txt";
 char* temperature_file = "water-temp.txt";
 
+char* cell_type_path = "./model/data/Environmentals/cell-type.txt";
+char* environmentals_path = "./model/data/Environmentals/";
+char* hydrosets_path = "./model/data/HydroSets/";
+
 /**
  * Calls the helper functions import_hydro and setup_environmentals
  */
