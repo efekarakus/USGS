@@ -17,7 +17,7 @@ void update_patches(int x, int y){
 			exp( (-1*patches[x][y].depth)*patches[x][y].turbidity )); 
 	Aj_peri = patches[x][y].macro / 10 ;
 	Gj_peri = patches[x][y].macro / 2;
-	Aj_seddecomp = patches[x][y].detritus / 5 ;
+	Aj_seddecomp = patches[x][y].detritus / 20;
 	Gj_seddecomp = patches[x][y].detritus / 5;
 }
 
