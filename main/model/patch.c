@@ -180,7 +180,7 @@ void go_waterdecomp(int x, int y){
     patches[x][y].waterdecomp_ingest_doc = \
         patches[x][y].waterdecomp_pred_doc;
 
-    patches[x][y].waterdecomp_pred_doc = pref_waterdecomp_POC \
+    patches[x][y].waterdecomp_pred_poc = pref_waterdecomp_POC \
         * max_waterdecomp * patches[x][y].waterdecomp \
         * patches[x][y].waterdecomp_space_limitation \
         *  patches[x][y].waterdecomp_poc_prey_limitation;
