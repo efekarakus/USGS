@@ -142,7 +142,7 @@ void init_color_values() {
 /**
  * Reads the Hydro map files and sets up the proper (x,y) patches
  * Input in the form of "pxcor pycor depth px-vector py-vector velocity"
- * and this must be the first line in the file.
+ * and this word formation must be the first line in the file.
  */
 void import_hydro() {
     int i, j, temp_x, temp_y;
@@ -174,30 +174,22 @@ void import_hydro() {
             fscanf(pFile, "%s", str);
         }
 
-        // Scan through the files and retrieve the values
+        // Scan through the files and assign the values
         while(fscanf(pFile, "%s", str) != EOF)
         {
-            temp_x = atoi(str);
+            patches[temp_x][temp_y].pxcor = atoi(str);
             fscanf(pFile, "%s", str);
-            temp_y = atoi(str);
+            patches[temp_x][temp_y].pycor = atoi(str);
             fscanf(pFile, "%f", &value);
-            temp_depth = value;
+            patches[temp_x][temp_y].depth_list[i] = value;
             fscanf(pFile, "%f", &value);
-            temp_px_vector = value;
+            patches[temp_x][temp_y].pxv_list[i] = value;
             fscanf(pFile, "%f", &value);
-            temp_py_vector = value;
+            patches[temp_x][temp_y].pyv_list[i] = value;
             fscanf(pFile, "%f", &value);
-            temp_velocity = value;
+            patches[temp_x][temp_y].v_list[i] = value;
 
-
-            // assign the values to patches:
             patches[temp_x][temp_y].available = 1;
-            patches[temp_x][temp_y].pxcor = temp_x;
-            patches[temp_x][temp_y].pycor = temp_y;
-            patches[temp_x][temp_y].depth_list[i] = temp_depth;
-            patches[temp_x][temp_y].pxv_list[i] = temp_px_vector;
-            patches[temp_x][temp_y].pyv_list[i] = temp_py_vector;
-            patches[temp_x][temp_y].v_list[i] = temp_velocity;
             patches[temp_x][temp_y].aqa_point = -999;
 
         }
@@ -216,12 +208,12 @@ void import_hydro() {
 
     // Go through the cell-type.txt file and set the appropriate patches
     char temp_cell_type[256];
-   
+
     // skip the file layout
     for(j = 0; j < 3; j++) {
         fscanf(pFile, "%s", str);
     }
-    
+
     while(fscanf(pFile, "%s", str) != EOF)
     {
         temp_x = atoi(str);
@@ -231,9 +223,12 @@ void import_hydro() {
         strcpy(temp_cell_type,  str);
 
         // assign the cell_type to the patches
-        if(strcmp(temp_cell_type,"\"output\"") == 0) {
+        if(strcmp(temp_cell_type,"\"output\"") == 0)
+        {
             patches[temp_x][temp_y].cell_type = 0;
-        } else { 
+        }
+        else
+        {
             patches[temp_x][temp_y].cell_type = 1;
         }
 
@@ -244,12 +239,6 @@ void import_hydro() {
 
 /**
  * Reads from files the initial discharge (daily) and initial radiation (hourly) values and then imports the maps based on the discharge value
- *
- *		 
- * TODO	   STILL NEED TO FREE:
- *			- photo_radiation
- *			- temperature
- *			- discharge (if fixed_environmentals == true)
  */
 void setup_environmentals() 
 {
