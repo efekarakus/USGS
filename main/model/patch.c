@@ -72,7 +72,7 @@ void go_phyto(int x,int y){
 		patches[x][y].phyto = 0.001;
 	}
 	double base_temperature = 8.0; //base temperature for nominal growth
-	Q10 = theta * exp( temperature - base_temperature);
+	Q10 = pow(theta, (temperature - base_temperature));
 	double km = 10; //half saturation constant
 	//this is the attenuation coefficient of phytoplank m^2/g of phyto plankton
 	double light_k = 0.4;
