@@ -102,13 +102,13 @@ void go_herbivore(int x, int y){
 	    assertRange(patches[x][y].herbivore_phyto_prey_limitation, 0, 1);
 
     patches[x][y].herbivore_peri_prey_limitation = patches[x][y].peri \
-        / (Ai_herbivore_phyto - Gi_herbivore_phyto);
+        / (Ai_herbivore_peri - Gi_herbivore_peri);
     patches[x][y].herbivore_peri_prey_limitation = \
         assertRange( patches[x][y].herbivore_peri_prey_limitation, 0, 1);
 
     patches[x][y].herbivore_waterdecomp_prey_limitation = \
         patches[x][y].waterdecomp / \
-        (Ai_herbivore_phyto - Gi_herbivore_phyto);
+        (Ai_herbivore_waterdecomp - Gi_herbivore_waterdecomp);
     patches[x][y].herbivore_waterdecomp_prey_limitation = \
         assertRange(patches[x][y].herbivore_waterdecomp_prey_limitation, 0, 1);
 
