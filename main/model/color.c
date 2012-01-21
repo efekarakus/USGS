@@ -33,7 +33,7 @@ void update_color(){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
               if(patches[x][y].macro != 0.0)
-                scale_color(green, patches[x][y].macro, MAX_MACRO, 0, x, y);
+                scale_color(green, patches[x][y].macro, 60000, 0, x, y); //TODO: replace it with MAX_MACRO
             }
         }
     }
@@ -43,7 +43,7 @@ void update_color(){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
               if( patches[x][y].phyto != 0.0)
-                scale_color(green, patches[x][y].phyto, MAX_PHYTO, 0, x, y); //TODO: replace it with MAX_PHYTO
+                scale_color(green, patches[x][y].phyto, 75000, 0, x, y); //TODO: replace it with MAX_PHYTO
             }
         }
     }

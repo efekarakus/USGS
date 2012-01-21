@@ -198,21 +198,26 @@ void import_hydro()
         // Scan through the files and assign the values
         while(fscanf(pFile, "%s", str) != EOF)
         {
-            patches[temp_x][temp_y].pxcor = atoi(str);
+            temp_x = atoi(str);
             fscanf(pFile, "%s", str);
-            patches[temp_x][temp_y].pycor = atoi(str);
+            temp_y = atoi(str);
             fscanf(pFile, "%f", &value);
-            patches[temp_x][temp_y].depth_list[i] = value;
+            temp_depth = value;
             fscanf(pFile, "%f", &value);
-            patches[temp_x][temp_y].pxv_list[i] = value;
+            temp_px_vector = value;
             fscanf(pFile, "%f", &value);
-            patches[temp_x][temp_y].pyv_list[i] = value;
+            temp_py_vector = value;
             fscanf(pFile, "%f", &value);
-            patches[temp_x][temp_y].v_list[i] = value;
+            temp_velocity = value;
 
             patches[temp_x][temp_y].available = 1;
+            patches[temp_x][temp_y].pxcor = temp_x;
+            patches[temp_x][temp_y].pycor = temp_y;
+            patches[temp_x][temp_y].depth_list[i] = temp_depth;
+            patches[temp_x][temp_y].pxv_list[i] = temp_px_vector;
+            patches[temp_x][temp_y].pyv_list[i] = temp_py_vector;
+            patches[temp_x][temp_y].v_list[i] = temp_velocity;
             patches[temp_x][temp_y].aqa_point = -999;
-
         }
 
         fclose(pFile);

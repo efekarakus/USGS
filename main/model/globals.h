@@ -16,14 +16,14 @@ int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
 int gui_photo_radiation = 2000;    ///< fixedPAR
 int gui_hydro_group = 5;	///< fixedHydro
-int gui_days_to_run = 10;  ///< number of days to run the code
+int gui_days_to_run = 365;  ///< number of days to run the code
 int gui_loop_output = 0;  ///< represents the Loop-Output? variable in the gui, if set to 1 the 'input' cells gets the stock values changed
 double gui_k_phyto = 0.4;  ///< k-phyto
 double gui_k_macro = 0.4; ///< k-macro
 double gui_macro_mass_max = 1000; ///< macro-mass-max
 double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
-char* which_stock = "phyto"; ///< which-stock?
+char* which_stock = "macro"; ///< which-stock?
 
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
