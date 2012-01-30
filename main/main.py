@@ -2,11 +2,14 @@
 import os,sys
 sys.path.append("view")
 sys.path.append("controller")
-import wx
+from Tkinter import *
 from RiverModel import RiverModel
 
-app = wx.App(False)
-frame = RiverModel(None, wx.ID_ANY, "River Model")
-frame.Show(True)
-frame.Centre()
-app.MainLoop()
+VERSION = 'v1.0'
+
+
+if __name__=="__main__":
+  root = Tk()
+  rivermodel_app = RiverModel(root)
+  root.title('RiverModel '+VERSION)
+  root.mainloop()

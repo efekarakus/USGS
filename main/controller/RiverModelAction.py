@@ -23,6 +23,6 @@ class RiverModelAction:
 	"""
     def OnGo(self, event):
         UI = self.UI
-        tssValue = UI.getTSSValue()
-        colorsList = goCommand(tssValue)
+        tss_value = UI.get_tss_value()
+        colorsList = goCommand(tss_value)
         outputImage(colorsList)

@@ -1,3 +1,5 @@
+import os, sys
+sys.path.append("/Library/Python/2.7/site-packages/")
 from PIL import Image
 
 imageTitle = "river.png"
