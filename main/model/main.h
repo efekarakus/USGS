@@ -18,9 +18,17 @@ void initMainModule();
 /* Hello World function to be called from Python */
 static PyObject* py_goCommand(PyObject* self, PyObject* args);
 
-/*Extracts the TSS value from the GUI and assigns it in globals.h */
+/* Extracts the TSS value from the GUI and assigns it in globals.h */
 static PyObject* py_extract_TSS(PyObject* self, PyObject* args);
 
+/* Extracts the macro_base_temp from the GUI and assigns it in globals.h */
+static PyObject* py_extract_macro_base_temp(PyObject* self, PyObject* args);
+
+/* Extracts the gross_macro_coef from the GUI and assigns it in globals.h */
+static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args);
+
+/* Extracts the resp_macro_coef from the GUI and assigns it in globals.h */
+static PyObject* py_extract_resp_macro_coef(PyObject* self, PyObject* args);
 
 
 PyObject* build_data();
