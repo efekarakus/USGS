@@ -18,6 +18,9 @@ void initMainModule();
 /* Hello World function to be called from Python */
 static PyObject* py_goCommand(PyObject* self, PyObject* args);
 
+static PyObject* py_extract_TSS(PyObject* self, PyObject* args);
+
+
 PyObject* build_data();
 
 #endif
