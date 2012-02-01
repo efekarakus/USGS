@@ -1,30 +1,22 @@
 from Tkinter import *
 from ConfigurationPanel import ConfigurationPanel
-from RiverModelAction import RiverModelAction
+from InterfacePanel import InterfacePanel
 
+#TODO: handle days_to_run error cases
+#TODO: menu bar to change between interfaces
+#TODO: fix fractional representation for macro_base_temp
 class RiverModel:
     def __init__(self, parent):
         self.container = Frame(parent)
         self.container.pack()
-        
-        action = RiverModelAction(self)
 
         # widgets
+        self.interface_panel = InterfacePanel(self.container)
         self.configuration_panel = ConfigurationPanel(self.container)
-        self._init_go_button()
-
-        # actions
-        self.go_button.bind("<Button-1>", action.OnGo)
-
 
     #######################################
     #       Components Declaration        #
     #######################################
-    def _init_go_button(self):
-        self.go_button = Button(self.container)
-        self.go_button.configure(text="GO")
-        self.go_button.pack(side=BOTTOM)
-        self.go_button.focus_force()
 
     #######################################
     #       Getters                       #
