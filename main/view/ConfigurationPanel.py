@@ -84,10 +84,16 @@ class ConfigurationPanel:
         self.k_macro.grid(row=row,column=column)
 
     def _init_fixed_temp(self):
-        return
+        row,column = (0,3)
+        label = Label(self.container,text="Temperature: ").grid(row=row,column=column)
+        self.fixed_temp = Scale(self.container,from_=0,to=30,orient=HORIZONTAL,resolution=1,tickinterval=15)
+        self.fixed_temp.grid(row=row,column=column+1)
 
     def _init_fixed_par(self):
-        return
+        row,column=(1,3)
+        label = Label(self.container,text="PAR: ").grid(row=row,column=column)
+        self.fixed_par = Scale(self.container,from_=0,to=2000,orient=HORIZONTAL,resolution=100,tickinterval=1000)
+        self.fixed_par.grid(row=row,column=column+1)
     
     #######################################
     #       Getters                       #
@@ -121,3 +127,9 @@ class ConfigurationPanel:
 
     def get_k_macro(self):
         return self.k_macro.get()
+
+    def get_fixed_temp(self):
+        return self.fixed_temp.get()
+
+    def get_fixed_par(self):
+        return self.fixed_par.get()

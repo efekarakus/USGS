@@ -38,8 +38,8 @@ class RiverModel:
     def get_macro_base_temp(self):
         return self.configuration_panel.get_macro_base_temp()
 
-    def get_gross_base_temp(self):
-        return self.configuration_panel.get_gross_base_temp()
+    def get_gross_macro_coef(self):
+        return self.configuration_panel.get_gross_macro_coef()
 
     def get_resp_macro_coef(self):
         return self.configuration_panel.get_resp_macro_coef()
@@ -58,3 +58,9 @@ class RiverModel:
 
     def get_k_macro(self):
         return self.configuration_panel.get_k_macro()
+
+    def get_fixed_temp(self):
+        return self.configuration_panel.get_fixed_temp()
+
+    def get_fixed_par(self):
+        return self.configuration_panel.get_fixed_par()
