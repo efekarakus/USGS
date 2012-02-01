@@ -9,6 +9,7 @@
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
+	{"extract_days_to_run_Command", py_extract_days_to_run, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
 	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
 	{"extract_gross_macro_coef_Command", py_extract_gross_macro_coef, METH_VARARGS},
@@ -49,6 +50,18 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     PyObject* data = (PyObject*)build_data();                                                  
     cleanup();
     return data;
+}
+
+
+/**
+ * Extracts the days to run value from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The days to run input value
+*/
+static PyObject* py_extract_days_to_run(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "i", &gui_days_to_run);
+	printf("\n\nDAYS TO RUN: %d\n", gui_days_to_run);
 }
 
 

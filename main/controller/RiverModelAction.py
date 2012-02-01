@@ -22,10 +22,13 @@ class RiverModelAction:
 	"""
     def OnGo(self, event):
 		UI = self.UI
+
+#TODO: days_to_run needs to be implemented in the GUI
+
+#		days_to_run_value = UI.get_days_to_run()
 		tss_value = UI.get_tss_value()
 		macro_base_temp_value = UI.get_macro_base_temp()
 		gross_macro_coef_value = UI.get_gross_macro_coef()
-		print gross_macro_coef_value
 		resp_macro_coef_value = UI.get_resp_macro_coef()
 		sen_macro_coef_value = UI.get_sen_macro_coef()
 		macro_mass_max_value = UI.get_macro_mass_max()
@@ -34,6 +37,8 @@ class RiverModelAction:
 		k_macro_value = UI.get_k_macro()
 		fixed_temperature_value = UI.get_fixed_temp()
 		fixed_photo_radiation_value = UI.get_fixed_par()
+
+#		extract_days_to_run_Command(days_to_run_value)
 		extract_TSS_Command(tss_value)
 		extract_macro_base_temp_Command(macro_base_temp_value)
 		extract_gross_macro_coef_Command(gross_macro_coef_value)
@@ -45,5 +50,6 @@ class RiverModelAction:
 		extract_k_macro_Command(k_macro_value)
 		extract_fixed_temperature_Command(fixed_temperature_value)
 		extract_fixed_photo_radiation_Command(fixed_photo_radiation_value)
+
 		colorsList = goCommand(tss_value)
 		outputImage(colorsList)
