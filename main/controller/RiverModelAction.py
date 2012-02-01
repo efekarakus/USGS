@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os, sys
-import wx
 from MainModule import *
 from RiverImage import *
 
