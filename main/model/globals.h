@@ -18,6 +18,7 @@ int gui_photo_radiation = 2000;    ///< fixedPAR
 int gui_hydro_group = 5;	///< fixedHydro
 int gui_days_to_run = 1;  ///< number of days to run the code
 int gui_loop_output = 0;  ///< represents the Loop-Output? variable in the gui, if set to 1 the 'input' cells gets the stock values changed
+int gui_tss = 0;
 double gui_k_phyto = 0.4;  ///< k-phyto
 double gui_k_macro = 0.4; ///< k-macro
 double gui_macro_mass_max = 1000; ///< macro-mass-max

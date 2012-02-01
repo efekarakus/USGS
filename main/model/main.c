@@ -43,16 +43,19 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 
 
 /**
- * Extracts the TSS value from the GUI and assigns it globals.h
+ * Extracts the TSS value from the GUI and assigns it in globals.h
  * @param self The python object calling this C function
  * @param arggs The TSS slider value
 */
 static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 {
-	int tss;
-	PyArg_ParseTuple(args, "i", &tss);
-	printf("\n\nTHIS IS THE VALUE OF TSS (Tom is awesome): %d\n", tss);
+	PyArg_ParseTuple(args, "i", &gui_tss);
+
+	printf("\n\nTHIS IS THE VALUE OF TSS (Tom is awesome): %d\n", gui_tss);
 }
+
+
+
 
 
 
