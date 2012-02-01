@@ -13,7 +13,14 @@ static PyMethodDef MainModule_methods[] = {
 	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
 	{"extract_gross_macro_coef_Command", py_extract_gross_macro_coef, METH_VARARGS},
 	{"extract_resp_macro_coef_Command", py_extract_resp_macro_coef, METH_VARARGS},
-    {NULL, NULL}
+	{"extract_sen_macro_coef_Command", py_extract_sen_macro_coef, METH_VARARGS},
+	{"extract_macro_mass_max_Command", py_extract_macro_mass_max, METH_VARARGS},
+	{"extract_macro_vel_max_Command", py_extract_macro_vel_max, METH_VARARGS},
+	{"extract_k_phyto_Command", py_extract_k_phyto, METH_VARARGS},
+	{"extract_k_macro_Command", py_extract_k_macro, METH_VARARGS},
+	{"extract_fixed_temperature_Command", py_extract_fixed_temperature, METH_VARARGS},
+	{"extract_fixed_photo_radiation_Command", py_extract_fixed_photo_radiation, METH_VARARGS},
+	{NULL, NULL}
 };
 
 
@@ -65,9 +72,9 @@ static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 */
 static PyObject* py_extract_macro_base_temp(PyObject* self, PyObject* args)
 {
-	PyArg_ParseTuple(args, "f", &gui_macro_base_temp);
+	PyArg_ParseTuple(args, "d", &gui_macro_base_temp);
 
-	printf("\n\nTHIS IS THE VALUE OF MACRO_BASE_TEMP: %f\n", gui_macro_base_temp);
+	printf("\n\nMACRO_BASE_TEMP: %f\n", gui_macro_base_temp);
 
 }
 
@@ -79,7 +86,7 @@ static PyObject* py_extract_macro_base_temp(PyObject* self, PyObject* args)
 */
 static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args)
 {
-	PyArg_ParseTuple(args, "f", &gui_gross_macro_coef);
+	PyArg_ParseTuple(args, "d", &gui_gross_macro_coef);
 
 	printf("\n\nGROSS_MACRO_COEF: %f\n", gui_gross_macro_coef);
 }
@@ -92,8 +99,93 @@ static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args)
 */
 static PyObject* py_extract_resp_macro_coef(PyObject* self, PyObject* args)
 {
-	PyArg_ParseTuple(args, "f", &gui_resp_macro_coef);
+	PyArg_ParseTuple(args, "d", &gui_resp_macro_coef);
 	printf("\n\nRESP_MACRO_COEF: %f\n", gui_resp_macro_coef);
+}
+
+
+/**
+ * Extracts the sen_macro_coef from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The sen_macro_coef slider value
+*/
+static PyObject* py_extract_sen_macro_coef(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "d", &gui_sen_macro_coef);
+	printf("\n\nSEN_MACRO_COEF: %f\n", gui_sen_macro_coef);
+}
+
+
+/**
+ * Extracts the macro_mass_max from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The macro_mass_max slider value
+*/
+static PyObject* py_extract_macro_mass_max(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "i", &gui_macro_mass_max);
+	printf("\n\nMACRO_MASS_MAX: %d\n", gui_macro_mass_max);
+
+}
+
+
+/**
+ * Extracts the macro_vel_max from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The macro_vel_max slider value
+*/
+static PyObject* py_extract_macro_vel_max(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "d", &gui_macro_vel_max);
+	printf("\n\nMACRO_VEL_MAX: %f\n", gui_macro_vel_max);
+}
+
+
+/**
+ * Extracts the k_phyto from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The k_phyto slider value
+*/
+static PyObject* py_extract_k_phyto(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "d", &gui_k_phyto);
+	printf("\n\nK_PHYTO: %f\n", gui_k_phyto);
+}
+
+
+/**
+ * Extracts the k_macro from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The k_macro slider value
+*/
+static PyObject* py_extract_k_macro(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "d", &gui_k_macro);
+	printf("\n\nK_MACRO: %f\n", gui_k_macro);
+}
+
+
+/**
+ * Extracts the fixed_temp from the Gui and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The fixed_temp slider value
+*/
+static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "i", &gui_temperature);
+	printf("\n\nTEMPERATURE: %d\n", gui_temperature);
+}
+
+
+/**
+ * Extracts the fixed_photo_radiation from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @args The fixed_photo_radiation slider value
+*/
+static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "i", &gui_photo_radiation);
+	printf("\n\nPHOTO RADIATION: %d\n", gui_photo_radiation);
 }
 
 

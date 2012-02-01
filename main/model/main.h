@@ -30,6 +30,26 @@ static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args);
 /* Extracts the resp_macro_coef from the GUI and assigns it in globals.h */
 static PyObject* py_extract_resp_macro_coef(PyObject* self, PyObject* args);
 
+/* Extracts the sen_macro_coef from the GUI and assigns it in globals.h*/
+static PyObject* py_extract_sen_macro_coef(PyObject* self, PyObject* args);
+
+/* Extracts the macro_mass_max from the GUI and assigns it in globals.h */
+static PyObject* py_extract_macro_mass_max(PyObject* self, PyObject* args);
+
+/* Extracts the macro_vel_max from the GUI and assigns it in globals.h */
+static PyObject* py_extract_macro_vel_max(PyObject* self, PyObject* args);
+
+/* Extracts the k_phyto from the GUI and assigns it in globals.h */
+static PyObject* py_extract_k_phyto(PyObject* self, PyObject* args);
+
+/* Extracts the k_macro from the GUI and assigns it in globals.h */
+static PyObject* py_extract_k_macro(PyObject* self, PyObject* args);
+
+/* Extracts the temperature from the GUI and assigns it in globals.h */
+static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args);
+
+/* Extracts the photo radiation from the GUI and assigns it in globals.h */
+static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args);
 
 PyObject* build_data();
 
