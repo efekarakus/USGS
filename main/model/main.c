@@ -9,8 +9,10 @@
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
+	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
     {NULL, NULL}
 };
+
 
 /** 
  * TODO: update the comments of this function
@@ -38,6 +40,22 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     cleanup();
     return data;
 }
+
+
+/**
+ * Extracts the TSS value from the GUI and assigns it globals.h
+ * @param self The python object calling this C function
+ * @param arggs The TSS slider value
+*/
+static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
+{
+	int tss;
+	PyArg_ParseTuple(args, "i", &tss);
+	printf("\n\nTHIS IS THE VALUE OF TSS (Tom is awesome): %d\n", tss);
+}
+
+
+
 
 PyObject* build_data(){
     int size = MAP_WIDTH*MAP_HEIGHT + 1;
