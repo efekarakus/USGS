@@ -21,7 +21,14 @@ class RiverModelAction:
 	Reads the TSS slider's value and prints it.
 	"""
     def OnGo(self, event):
-        UI = self.UI
-        tss_value = UI.get_tss_value()
-        colorsList = goCommand(tss_value)
-        outputImage(colorsList)
+		UI = self.UI
+		tss_value = UI.get_tss_value()
+		macro_base_temp_value = UI.get_macro_base_temp()
+		gross_base_temp_value = UI.get_gross_base_temp()
+		resp_macro_coef_value = UI.get_resp_macro_coef()
+		extract_TSS_Command(tss_value)
+		extract_macro_base_temp_Command(macro_base_temp_value)
+		extract_gross_base_temp_Command(gross_base_temp_value)
+		extract_resp_macro_coef_Command(resp_macro_coef_value)
+		colorsList = goCommand(tss_value)
+		outputImage(colorsList)

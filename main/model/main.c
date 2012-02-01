@@ -10,9 +10,9 @@
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
-	{"extract_macro_base_temp", py_extract_macro_base_temp, METH_VARARGS},
-	{"extract_gross_macro_coef", py_extract_gross_macro_coef, METH_VARARGS},
-	{"extract_resp_macro_coef", py_extract_resp_macro_coef, METH_VARARGS},
+	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
+	{"extract_gross_macro_coef_Command", py_extract_gross_macro_coef, METH_VARARGS},
+	{"extract_resp_macro_coef_Command", py_extract_resp_macro_coef, METH_VARARGS},
     {NULL, NULL}
 };
 
