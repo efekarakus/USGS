@@ -107,8 +107,8 @@ class ConfigurationPanel:
     def get_macro_base_temp(self):
         return self.macro_base_temp.get()
 
-    def get_gross_base_temp(self):
-        return self.gross_base_temp.get()
+    def get_gross_macro_coef(self):
+        return self.gross_macro_coef.get()
 
     def get_resp_macro_coef(self):
         return self.resp_macro_coef.get()
