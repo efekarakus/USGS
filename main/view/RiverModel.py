@@ -1,4 +1,5 @@
 from Tkinter import *
+from ConfigurationPanel import ConfigurationPanel
 from RiverModelAction import RiverModelAction
 
 class RiverModel:
@@ -9,7 +10,7 @@ class RiverModel:
         action = RiverModelAction(self)
 
         # widgets
-        self._init_tss_slider()
+        self.configuration_panel = ConfigurationPanel(self.container)
         self._init_go_button()
 
         # actions
@@ -26,5 +27,5 @@ class RiverModel:
         self.tss_slider.pack(side=TOP)
 
     def get_tss_value(self):
-        return self.tss_slider.get()
+        return self.configuration_panel.get_tss_value()
 
