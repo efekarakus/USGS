@@ -10,6 +10,9 @@
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
+	{"extract_macro_base_temp", py_extract_macro_base_temp, METH_VARARGS},
+	{"extract_gross_macro_coef", py_extract_gross_macro_coef, METH_VARARGS},
+	{"extract_resp_macro_coef", py_extract_resp_macro_coef, METH_VARARGS},
     {NULL, NULL}
 };
 
@@ -45,7 +48,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 /**
  * Extracts the TSS value from the GUI and assigns it in globals.h
  * @param self The python object calling this C function
- * @param arggs The TSS slider value
+ * @param args The TSS slider value
 */
 static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 {
@@ -55,9 +58,43 @@ static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 }
 
 
+/**
+ * Extracts the macro_base_temp value from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The macro_base_temp slider value
+*/
+static PyObject* py_extract_macro_base_temp(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "f", &gui_macro_base_temp);
+
+	printf("\n\nTHIS IS THE VALUE OF MACRO_BASE_TEMP: %f\n", gui_macro_base_temp);
+
+}
 
 
+/**
+ * Extracts the gross_macro_coef from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The gross_macro_coef slider value
+*/
+static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "f", &gui_gross_macro_coef);
 
+	printf("\n\nGROSS_MACRO_COEF: %f\n", gui_gross_macro_coef);
+}
+
+
+/**
+ * Extracts the resp_macro_coef from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The resp_macro_coef slider value
+*/
+static PyObject* py_extract_resp_macro_coef(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "f", &gui_resp_macro_coef);
+	printf("\n\nRESP_MACRO_COEF: %f\n", gui_resp_macro_coef);
+}
 
 
 PyObject* build_data(){
