@@ -7,12 +7,8 @@ class InterfacePanel:
         self.container = Frame(parent)
         self.container.pack()
         
-        # widges
+        # widgets
         self._init_go_button()
-
-        # actions
-        action = RiverModelAction(self)
-        self.go_button.bind("<Button-1>", action.OnGo)
 
     def forget(self):
         """Hides the frame in parent."""

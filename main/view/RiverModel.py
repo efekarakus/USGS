@@ -1,6 +1,7 @@
 from Tkinter import *
 from ConfigurationPanel import ConfigurationPanel
 from InterfacePanel import InterfacePanel
+from RiverModelAction import RiverModelAction
 
 #TODO: handle days_to_run error cases
 #TODO: menu bar to change between interfaces
@@ -11,12 +12,39 @@ class RiverModel:
         self.container.pack()
 
         # widgets
+        self._init_menubar()
         self.interface_panel = InterfacePanel(self.container)
         self.configuration_panel = ConfigurationPanel(self.container)
+
+        # visualization
+        self.interface_panel.display()
+        self.configuration_panel.forget()
+
+        # actions
+        action = RiverModelAction(self)
+        # actions for current panel
+        self.mb_interface.bind("<Button-1>",action.OnMBInterface)
+        self.mb_configuration.bind("<Button-1>",action.OnMBConfig)
+
+        # actions for interface panel
+        self.interface_panel.go_button.bind("<Button-1>", action.OnGo)
+
+        # actions for configuration panel
+
 
     #######################################
     #       Components Declaration        #
     #######################################
+    def _init_menubar(self):
+        self.menubar = Frame(self.container,relief=RAISED,borderwidth=1)
+        self.menubar.pack()
+
+        self.mb_interface = Button(self.menubar,text='Interface')
+        self.mb_interface.pack(side=LEFT)
+
+        self.mb_configuration = Button(self.menubar,text='Configuration')
+        self.mb_configuration.pack(side=LEFT)
+
 
     #######################################
     #       Getters                       #
