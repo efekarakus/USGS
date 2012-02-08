@@ -18,6 +18,20 @@ void initMainModule();
 /* Hello World function to be called from Python */
 static PyObject* py_goCommand(PyObject* self, PyObject* args);
 
+/* Extracts all GUI values and assigns them in globals.h */
+static PyObject* py_extract_GUI_values(PyObject* self, PyObject* tssArg,
+									   PyObject* macro_base_tempArg,
+									   PyObject* gross_macro_coefArg,
+									   PyObject* resp_macro_coefArg,
+									   PyObject* macro_mass_maxArg,
+									   PyObject* macro_vel_maxArg,
+									   PyObject* k_phytoArg,
+									   PyObject* k_macroArg,
+									   PyObject* temperatureArg,
+									   PyObject* photo_radiationArg);
+
+
+
 /* Extracts the days to run value from the GUI and assigns it in globals.h */
 static PyObject* py_extract_days_to_run(PyObject* self, PyObject* args);
 
