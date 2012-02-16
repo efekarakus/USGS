@@ -68,32 +68,14 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
  * @param temperatureArg The temperature slider value
  * @param photo_radiationArg The photo_radiation slider value
  */
-static PyObject* py_extract_GUI_values(PyObject* self, PyObject* tssArg, 
-									   PyObject* macro_base_tempArg, 
-									   PyObject* gross_macro_coefArg, 
-									   PyObject* resp_macro_coefArg, 
-									   PyObject* sen_macro_coefArg,
-									   PyObject* macro_mass_maxArg, 
-									   PyObject* macro_vel_maxArg, 
-									   PyObject* k_phytoArg, 
-									   PyObject* k_macroArg, 
-									   PyObject* temperatureArg, 
-									   PyObject* photo_radiationArg)
+static PyObject* py_extract_GUI_values(PyObject* self, PyObject* args)
 {
-	PyArg_ParseTuple(tssArg, "i", &gui_tss);	
-	PyArg_ParseTuple(macro_base_tempArg, "d", &gui_macro_base_temp);
-	PyArg_ParseTuple(gross_macro_coefArg, "d", &gui_gross_macro_coef);
-	PyArg_ParseTuple(resp_macro_coefArg, "d", &gui_resp_macro_coef);
-	PyArg_ParseTuple(sen_macro_coefArg, "d", &gui_sen_macro_coef);
-	PyArg_ParseTuple(macro_mass_maxArg, "i", &gui_macro_mass_max);
-	PyArg_ParseTuple(macro_vel_maxArg, "d", &gui_macro_vel_max);
-	PyArg_ParseTuple(k_phytoArg, "d", &gui_k_phyto);
-	PyArg_ParseTuple(k_macroArg, "d", &gui_k_macro);
-	PyArg_ParseTuple(temperatureArg, "i", &gui_temperature);
-	PyArg_ParseTuple(photo_radiationArg, "i", &gui_photo_radiation);
-
-	printf("I still need to check for correctness.  But at least the damn thing runs!\n");
-
+	PyArg_ParseTuple(args, "iddddidddii", &gui_tss, &gui_macro_base_temp, &gui_gross_macro_coef,
+		&gui_resp_macro_coef, &gui_sen_macro_coef, &gui_macro_mass_max, &gui_macro_vel_max,
+		&gui_k_phyto, &gui_k_macro, &gui_temperature, &gui_photo_radiation);
+	//Needed to return none
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -107,6 +89,8 @@ static PyObject* py_extract_days_to_run(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &gui_days_to_run);
 	printf("\n\nDAYS TO RUN: %d\n", gui_days_to_run);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -118,8 +102,8 @@ static PyObject* py_extract_days_to_run(PyObject* self, PyObject* args)
 static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &gui_tss);
-
-	printf("\n\nTHIS IS THE VALUE OF TSS (Tom is awesome): %d\n", gui_tss);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -133,7 +117,8 @@ static PyObject* py_extract_macro_base_temp(PyObject* self, PyObject* args)
 	PyArg_ParseTuple(args, "d", &gui_macro_base_temp);
 
 	printf("\n\nMACRO_BASE_TEMP: %f\n", gui_macro_base_temp);
-
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -147,6 +132,8 @@ static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args)
 	PyArg_ParseTuple(args, "d", &gui_gross_macro_coef);
 
 	printf("\n\nGROSS_MACRO_COEF: %f\n", gui_gross_macro_coef);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -159,6 +146,8 @@ static PyObject* py_extract_resp_macro_coef(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_resp_macro_coef);
 	printf("\n\nRESP_MACRO_COEF: %f\n", gui_resp_macro_coef);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -171,6 +160,8 @@ static PyObject* py_extract_sen_macro_coef(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_sen_macro_coef);
 	printf("\n\nSEN_MACRO_COEF: %f\n", gui_sen_macro_coef);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -183,7 +174,8 @@ static PyObject* py_extract_macro_mass_max(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &gui_macro_mass_max);
 	printf("\n\nMACRO_MASS_MAX: %d\n", gui_macro_mass_max);
-
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -196,6 +188,8 @@ static PyObject* py_extract_macro_vel_max(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_macro_vel_max);
 	printf("\n\nMACRO_VEL_MAX: %f\n", gui_macro_vel_max);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -208,6 +202,8 @@ static PyObject* py_extract_k_phyto(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_k_phyto);
 	printf("\n\nK_PHYTO: %f\n", gui_k_phyto);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -220,6 +216,8 @@ static PyObject* py_extract_k_macro(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_k_macro);
 	printf("\n\nK_MACRO: %f\n", gui_k_macro);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -232,6 +230,8 @@ static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &gui_temperature);
 	printf("\n\nTEMPERATURE: %d\n", gui_temperature);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
@@ -244,6 +244,8 @@ static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args
 {
 	PyArg_ParseTuple(args, "i", &gui_photo_radiation);
 	printf("\n\nPHOTO RADIATION: %d\n", gui_photo_radiation);
+	Py_INCREF(Py_None);
+	return Py_None;
 }
 
 
