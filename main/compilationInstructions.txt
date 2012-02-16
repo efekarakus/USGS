@@ -1,0 +1,4 @@
+How to compile the python code
+python buildPython.py py2exe -p encodings –pPIL
+How to compile the c code:
+python setup.py build -cmingw32
