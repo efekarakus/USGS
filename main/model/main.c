@@ -102,6 +102,7 @@ static PyObject* py_extract_days_to_run(PyObject* self, PyObject* args)
 static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &gui_tss);
+	printf("\n\nTSS: %d\n", gui_tss);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
