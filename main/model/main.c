@@ -3,11 +3,13 @@
 #include "setup.c"
 #include "go.c"
 #include "patch.c"
+#include "dump.c"
 #include "cleanup.c"
 #include "globals.h"
 
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
+    {"goCommand", py_goCommand, METH_VARARGS},
 	{"extract_days_to_run_Command", py_extract_days_to_run, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
 	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
@@ -23,7 +25,35 @@ static PyMethodDef MainModule_methods[] = {
 	{NULL, NULL}
 };
 
+/** 
+* TODO: update the comments of this function
+* Computes the tss value and returns twice as much 
+* @param self: the python object calling this C function
+* @param args: the TSS slider value
+* @return 2*TSS
+*/
+static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 
+    //TODO: remove this section
+    int tss;
+    PyArg_ParseTuple(args, "i", &tss);
+    tss = 2*tss;
+
+    int day;
+    setup();
+    while( (day = (hours / 24)) < gui_days_to_run)
+    {   
+        printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
+        go();
+    }   
+    printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
+    PyObject* data = (PyObject*)build_data();    
+    if (!dump_data) {
+        printf("Could not create folder './results' and write the data from the patches\n");
+    }   
+    cleanup();
+    return data;
+}
 
 /**
  * Extracts the days to run value from the GUI and assigns it in globals.h
