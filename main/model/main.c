@@ -9,7 +9,6 @@
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
-	{"extract_GUI_values_Command", py_extract_GUI_values, METH_VARARGS},
 	{"extract_days_to_run_Command", py_extract_days_to_run, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
 	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
@@ -52,32 +51,6 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     cleanup();
     return data;
 }
-
-
-/**
- * Extracts all GUI values and assigns them in globals.h
- * @param self The python object calling this function
- * @param tssArg The TSS slider value
- * @param macro_base_tempArg The macro_base_tesmp slider value
- * @param gross_macro_coefArg The gross_macro_coef slider value
- * @param resp_macro_coefArg The resp_macro_coef slider value
- * @param macro_mass_maxArg The macro_mass_max slider value
- * @param macro_vel_maxArg The macro_cel_max slider value
- * @param k_phytoArg The k_phyto slider value
- * @param k_macroArg The k_macro slider value
- * @param temperatureArg The temperature slider value
- * @param photo_radiationArg The photo_radiation slider value
- */
-static PyObject* py_extract_GUI_values(PyObject* self, PyObject* args)
-{
-	PyArg_ParseTuple(args, "iddddidddii", &gui_tss, &gui_macro_base_temp, &gui_gross_macro_coef,
-		&gui_resp_macro_coef, &gui_sen_macro_coef, &gui_macro_mass_max, &gui_macro_vel_max,
-		&gui_k_phyto, &gui_k_macro, &gui_temperature, &gui_photo_radiation);
-	//Needed to return none
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
 
 
 /**
