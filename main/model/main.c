@@ -62,17 +62,15 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 */
 static PyObject* py_extract_days_to_run(PyObject* self, PyObject* args)
 {
-	char read_String[101];
-	read_String[0] = '\0';
+	char* read_String;
 
 	PyArg_ParseTuple(args, "s", &read_String);
-
-	read_String[100] = '\0';
 	
 	int read_Int = atoi(read_String);
 	gui_days_to_run = read_Int;
 
 	printf("\n\nDAYS TO RUN: %d\n", gui_days_to_run);
+	
 	Py_INCREF(Py_None);
 	return Py_None;
 }
