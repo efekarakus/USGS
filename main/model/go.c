@@ -300,7 +300,7 @@ void avg_output() {
  * @return the max_timestep based on the greatest x-y vector
  */
 int get_timestep() {
-    return patch_length/COMPARE_MAX;
+    return gui_timestep_factor*(patch_length/COMPARE_MAX);
 }
 
 /**
@@ -319,10 +319,10 @@ void flow_carbon(int x, int y) {
     }
 
     // if a neighbor patch is dry, the carbon does not move in that direction
+    int max_timestep = get_timestep();
     int tb_moved = 0, corner_moved = 0, rl_moved = 0;
-    int px = 0, py = 0;
-    if ( patches[x][y].px_vector >= 0 ) px = 1; else px = -1;
-    if ( patches[x][y].py_vector >= 0 ) py = 1; else py = -1;
+    int px = (int)(((double)max_timestep)*patches[x][y].px_vector);
+    int py = (int)(((double)max_timestep)*patches[x][y].py_vector);
 
     // flow carbon to the top/bottom patches
     if ( is_valid_patch(x, y+py) )

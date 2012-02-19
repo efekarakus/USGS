@@ -12,6 +12,7 @@ double COMPARE_MAX; ///< represents the maximum of the x or y vector among all p
 
 // GUI variables
 char* file_extension = "new";
+int gui_timestep_factor = 1;    ///< By how much are we speeding up the code? Increasing the factor will reduce the number of iterations required
 int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
 int gui_photo_radiation = 2000;    ///< fixedPAR
