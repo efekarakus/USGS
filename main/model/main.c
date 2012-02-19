@@ -48,7 +48,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     }   
     printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
     PyObject* data = (PyObject*)build_data();    
-    if (!dump_data) {
+    if (!dump_data()) {
         printf("Could not create folder './results' and write the data from the patches\n");
     }   
     cleanup();
