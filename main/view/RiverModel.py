@@ -84,3 +84,6 @@ class RiverModel:
 
     def get_fixed_par(self):
         return self.configuration_panel.get_fixed_par()
+
+    def get_hydro_map(self):
+        return self.configuration_panel.get_hydro_map()
