@@ -30,6 +30,11 @@ double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
 char* which_stock = "macro"; ///< which-stock?
 
+// Arrays used to hold map groups and days to run each map
+char** gui_map_array;
+int* gui_days_array;
+int gui_map_days_index;
+
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
 int* photo_radiation_data;	///< par array which holds data that photo_radiation indexes
@@ -48,6 +53,7 @@ int hydro_changed = 0;  //boolean stating if the hydro map was changed
 double temp_dif = 0;	///< The percent difference from 17 degrees Celsius. (Used in update_temp)
 double par_dif = 0;	///< The percent difference in par. (Used in update_par)
 
+int nan_trigger = 0;  ///< 1 if there is a NaN value in the DOC values 0 otherwise
 
 // convert ft to m from the SMS to .png scaling conversion
 int patch_length = 30;

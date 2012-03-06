@@ -21,9 +21,44 @@ static PyMethodDef MainModule_methods[] = {
 	{"extract_k_phyto_Command", py_extract_k_phyto, METH_VARARGS},
 	{"extract_k_macro_Command", py_extract_k_macro, METH_VARARGS},
 	{"extract_fixed_temperature_Command", py_extract_fixed_temperature, METH_VARARGS},
-	{"extract_fixed_photo_radiation_Command", py_extract_fixed_photo_radiation, METH_VARARGS},
-	{NULL, NULL}
+    {"extract_fixed_photo_radiation_Command", py_extract_fixed_photo_radiation, METH_VARARGS},
+    {"extract_filenames_size_Command", py_extract_filenames_size, METH_VARARGS},
+    {"extract_filenames_Command", py_extract_filenames, METH_VARARGS},
+    {NULL, NULL}
 };
+
+
+static PyObject* py_extract_filenames_size(PyObject* self, PyObject* args) {
+    PyArg_ParseTuple(args, "i", &gui_map_days_index);
+    printf("Array Size: %d\n", gui_map_days_index);
+    gui_days_array = (int*)malloc(gui_map_days_index * sizeof(int));
+    gui_map_array = (char**)malloc(gui_map_days_index * sizeof(char*));
+    return Py_None;
+}
+
+static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
+    PyObject* filenames;
+//    PyArrayObject* pArray;
+    if(!PyArg_ParseTuple(args, "O", &filenames))
+      printf("ParseTuple Fail for Filenames\n");
+    printf("Array Size in filenames: %d\n", gui_map_days_index);    
+    
+//    if((pArray = (PyArrayObject*)PyArray_ContiguousFromObject(pObject,PyArray_OBJECT, 1, 1))== NULL)
+//      printf("ANOTHER FAIL\n");
+      
+    int i;
+    for(i = 0; i < gui_map_days_index; i++)
+    {
+      char* temp = PyTuple_GetItem(filenames, i);
+      printf("I GET HERE\n");
+      gui_map_array[i] = (char*)malloc(strlen(temp) * sizeof(char) + 1);
+      printf("BUT NOT HERE\n");
+      strncpy(gui_map_array[i], temp, strlen(temp));
+      gui_map_array[i][strlen(temp)] = '\0';
+      printf("Map: %s\n", gui_map_array[i]);
+    }
+    return Py_None;
+}
 
 /** 
 * TODO: update the comments of this function
@@ -35,9 +70,33 @@ static PyMethodDef MainModule_methods[] = {
 static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 
     //TODO: remove this section
-    int tss;
-    PyArg_ParseTuple(args, "i", &tss);
-    tss = 2*tss;
+    //int tss;
+    //PyArg_ParseTuple(args, "i", &tss);
+    //tss = 2*tss;
+    PyObject* filenames;
+    PyObject* days;
+    int size;
+
+    //PyArg_ParseTuple(args, "O", &filenames);
+    //PyArg_ParseTuple(args, "O", &days);
+    PyArg_ParseTuple(args, "i", &size);
+    printf("CALLED PARSETUPLE!\n");
+   
+    //gui_days_array = (int*)malloc(size * sizeof(int));
+    //gui_map_array = (char**)malloc(size * sizeof(char*));
+    printf("Size: %d\n", size);
+    int i;
+    /*for(i = 0; i < size; i++)
+    {
+      gui_days_array[i] = PyTuple_GetItem(days, i);
+      char* temp = PyTuple_GetItem(filenames, i);
+      gui_map_array[i] = (char*)malloc(strlen(temp) * sizeof(char) + 1);
+      strncpy(gui_map_array[i], temp, strlen(temp));
+      gui_map_array[i][strlen(temp)] = '\0';
+      printf("Days: %d Map: %s\n", gui_days_array[i], gui_map_array[i]);
+    }*/
+
+    //clean_map_days_array(size);
 
     int day;
     setup();
@@ -230,6 +289,19 @@ static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args
 	Py_INCREF(Py_None);
 	return Py_None;
 }
+
+/**
+ * Extracts the selected hydro map and days to run pair from the GUI
+ * @param self The python object calling this C function
+ * @args The hydro_map slider value
+ */
+ static PyObject* py_extract_hydro_map(PyObject* self, PyObject* args)
+ {
+    PyArg_ParseTuple(args, "i", &gui_hydro_group);
+    printf("\n\nHYDRO MAP: %d\n", gui_hydro_group);
+    Py_INCREF(Py_None);
+    return Py_None;
+ }
 
 
 PyObject* build_data(){

@@ -60,7 +60,8 @@ void go()
     get_flow_patches(&flow_patches);
     List* head = flow_patches.next;
     List* current = head;
-    //TODO: see if you can get rid of the time for-loop, by multiplying it with max_time
+
+    nan_trigger = 0;      // set nan to false
     for (time = 0; time < max_time; time++) {
         while( current != NULL ) {
             patch* p = current->data;
@@ -68,6 +69,7 @@ void go()
             current = current->next;
         }
         current = head;
+        if (nan_trigger) break;
     }
     LL_destroy(&flow_patches);    
 
@@ -303,6 +305,22 @@ int get_timestep() {
     return gui_timestep_factor*(patch_length/COMPARE_MAX);
 }
 
+int is_nan(int x, int y, double move_factor) {
+  if ( isnan( patches[x][y].DOC + patches[x][y].DOC*move_factor ) ) {
+      return 1;
+  }
+  if ( isnan( patches[x][y].POC + patches[x][y].POC*move_factor ) ) {
+      return 1;
+  }
+  if ( isnan( patches[x][y].phyto + patches[x][y].phyto*move_factor ) ) {
+      return 1;
+  }
+  if ( isnan( patches[x][y].waterdecomp + patches[x][y].waterdecomp*move_factor ) ) {
+      return 1;
+  }
+  return 0;
+}
+
 /**
  * Flows carbon from the current patch at (x,y) to your neighbor patches
  * @param x: the x-coordinate of the patch
@@ -321,37 +339,64 @@ void flow_carbon(int x, int y) {
     // if a neighbor patch is dry, the carbon does not move in that direction
     int max_timestep = get_timestep();
     int tb_moved = 0, corner_moved = 0, rl_moved = 0;
+
     int px = (int)(((double)max_timestep)*patches[x][y].px_vector);
     int py = (int)(((double)max_timestep)*patches[x][y].py_vector);
 
+    if (px >= 1) px = 1;
+    else if (px <= -1) px = -1;
+    else px = 0;
+
+    if (py >= 1) py = 1;
+    else if (py <= -1) py = -1;
+    else py = 0;
+
     // flow carbon to the top/bottom patches
-    if ( is_valid_patch(x, y+py) )
+    if ( is_valid_patch(x, y+py) && (py!=0) )
     {
-        patches[x][y+py].DOC += patches[x][y].DOC*tb_patch;
-        patches[x][y+py].POC += patches[x][y].POC*tb_patch;
-        patches[x][y+py].phyto += patches[x][y].phyto*tb_patch;
-        patches[x][y+py].waterdecomp += patches[x][y].waterdecomp*tb_patch;
-        tb_moved = 1;
+        if (is_nan(x,y+py,tb_patch)) {
+            nan_trigger = 1;  
+        }
+        else
+        {
+            patches[x][y+py].DOC += patches[x][y].DOC*tb_patch;
+            patches[x][y+py].POC += patches[x][y].POC*tb_patch;
+            patches[x][y+py].phyto += patches[x][y].phyto*tb_patch;
+            patches[x][y+py].waterdecomp += patches[x][y].waterdecomp*tb_patch;
+            tb_moved = 1;
+        }
     }
 
     // flow carbon to the corner patch
-    if ( is_valid_patch(x+px, y+py) )
+    if ( is_valid_patch(x+px, y+py) && (px!=0) && (py!=0))
     {
-        patches[x+px][y+py].DOC += patches[x][y].DOC*corner_patch;
-        patches[x+px][y+py].POC += patches[x][y].POC*corner_patch;
-        patches[x+px][y+py].phyto += patches[x][y].phyto*corner_patch;
-        patches[x+px][y+py].waterdecomp += patches[x][y].waterdecomp*corner_patch;
-        corner_moved = 1;
+        if (is_nan(x+px,y+py,corner_patch)) {
+            nan_trigger = 1;
+        }
+        else
+        {
+            patches[x+px][y+py].DOC += patches[x][y].DOC*corner_patch;
+            patches[x+px][y+py].POC += patches[x][y].POC*corner_patch;
+            patches[x+px][y+py].phyto += patches[x][y].phyto*corner_patch;
+            patches[x+px][y+py].waterdecomp += patches[x][y].waterdecomp*corner_patch;
+            corner_moved = 1;
+        }
     }
 
     // flow carbon to the left/right patches
-    if ( is_valid_patch(x+px, y) ) 
+    if ( is_valid_patch(x+px, y) && (px!=0) ) 
     {
-        patches[x+px][y].DOC += patches[x][y].DOC*rl_patch;
-        patches[x+px][y].POC += patches[x][y].POC*rl_patch;
-        patches[x+px][y].phyto += patches[x][y].phyto*rl_patch;
-        patches[x+px][y].waterdecomp += patches[x][y].waterdecomp*rl_patch;
-        rl_moved = 1;
+        if ( is_nan(x+px,y,rl_patch) ) {
+            nan_trigger = 1;
+        }
+        else
+        {
+            patches[x+px][y].DOC += patches[x][y].DOC*rl_patch;
+            patches[x+px][y].POC += patches[x][y].POC*rl_patch;
+            patches[x+px][y].phyto += patches[x][y].phyto*rl_patch;
+            patches[x+px][y].waterdecomp += patches[x][y].waterdecomp*rl_patch;
+            rl_moved = 1;
+        }
     }
 
     // how much components did we loose

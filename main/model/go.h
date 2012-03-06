@@ -56,6 +56,10 @@ void avg_output();
 int get_timestep();
 
 /**
+ * @return 1 if DOC, POC, phyto, waterdecomp are NaN 0 otherwise
+ */
+int is_nan(int x, int y, double move_factor);
+/**
  * Flows carbon from the current patch at (x,y) to your neighbor patches
  * @param x: the x-coordinate of the patch
  * @param y: the y-coordinate of the patch

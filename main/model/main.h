@@ -15,6 +15,11 @@
 /* Python calls this to let us initialize our module */
 void initMainModule();
 
+/* Extracte the array size for days and maps and initialize them */
+static PyObject* py_extract_filenames_size(PyObject* self, PyObject* args);
+
+/* Extract the hydro map filenames that the user has selected */
+static PyObject* py_extract_filenames(PyObject* self, PyObject* args);
 /* */
 static PyObject* py_goCommand(PyObject* self, PyObject* args);
 
@@ -53,6 +58,9 @@ static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args);
 
 /* Extracts the photo radiation from the GUI and assigns it in globals.h */
 static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args);
+
+/* Extracts the hydro map from the GUI */
+static PyObject* py_extract_hydro_map(PyObject* self, PyObject* args);
 
 PyObject* build_data();
 
