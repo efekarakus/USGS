@@ -35,7 +35,8 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                scale_color(green, patches[x][y].macro, 60000, 0, x, y); //TODO: replace it with MAX_MACRO
+                else
+                  scale_color(green, patches[x][y].macro, 60000, 0, x, y); //TODO: replace it with MAX_MACRO
             }
         }
     }
@@ -49,7 +50,8 @@ void update_color(){
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                     printf("x:%d, y:%d, my depth is zero and color: %d\n", x, y, colorValues[x][y]);
                 }
-                scale_color(green, patches[x][y].phyto, 75000, 0, x, y); //TODO: replace it with MAX_PHYTO
+                else
+                  scale_color(green, patches[x][y].phyto, 75000, 0, x, y); //TODO: replace it with MAX_PHYTO
             }
         }
     }
@@ -62,7 +64,8 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                scale_color(green, patches[x][y].waterdecomp, MAX_WATERDECOMP, 0, x, y);
+                else
+                    scale_color(green, patches[x][y].waterdecomp, MAX_WATERDECOMP, 0, x, y);
             }
         }
     }
@@ -75,7 +78,8 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                scale_color(blue, patches[x][y].POC, MAX_POC, 0, x, y);
+                else
+                    scale_color(blue, patches[x][y].POC, MAX_POC, 0, x, y);
             }
         }
     }
@@ -89,7 +93,8 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                scale_color(green, patches[x][y].detritus, MAX_DETRITUS, 0, x, y);
+                else
+                    scale_color(green, patches[x][y].detritus, MAX_DETRITUS, 0, x, y);
             }
         }
     }
@@ -102,7 +107,8 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                scale_color(green, patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0, x, y);
+                else
+                    scale_color(green, patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0, x, y);
             }
         }
     }
