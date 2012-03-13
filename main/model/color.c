@@ -1,8 +1,8 @@
 #include "color.h"
 
 void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int x, int y){
-    int returnValue = 0xffffff;
-    int offset = 0xffffff;
+    int returnValue = 0x00ffffff;
+    int offset = 0x00ffffff;
     if(maxVal == minVal){
         printf("Error in use of scale_color. Max and min value are equal.\n");
         exit(1);
@@ -10,17 +10,17 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
 
     if(value <= minVal){
         //returnValue = 0; //Darkest shade of color
-        offset = 0xffffff;
+        offset = 0x00ffffff;
     }
     else if(value >= maxVal){
         //returnValue = 255; //Lightest shade of color
-        offset = 0x000000 | (255 << (int)colorVal*8);
+        offset = 0x00000000 | (255 << (int)colorVal*8);
     }
     else{
         int rangeValues = abs(maxVal - minVal);
         //returnValue = (int)(value * 255 / rangeValues);
         rangeValues = (int)(value * 255 / rangeValues);
-        offset = 0x00000 | (rangeValues << (int)colorVal*8);
+        offset = 0x00000000 | (rangeValues << (int)colorVal*8);
     }
     //Check if color scaling should be inverted
     /*
