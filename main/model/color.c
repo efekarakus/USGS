@@ -8,11 +8,11 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
         exit(1);
     }
 
-    if(value < minVal){
+    if(value <= minVal){
         //returnValue = 0; //Darkest shade of color
         offset = 0xffffff;
     }
-    else if(value > maxVal){
+    else if(value >= maxVal){
         //returnValue = 255; //Lightest shade of color
         offset = 0x000000 | (255 << (int)colorVal*8);
     }
@@ -40,7 +40,7 @@ void update_color(){
     if( strcmp(which_stock, "macro") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0) {
+                if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
@@ -55,7 +55,7 @@ void update_color(){
     else if( strcmp(which_stock, "phyto") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0) {
+                if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
@@ -70,7 +70,7 @@ void update_color(){
     else if( strcmp(which_stock, "waterdecomp") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0) {
+                if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
@@ -85,7 +85,7 @@ void update_color(){
     else if( strcmp(which_stock, "POC") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0) {
+                if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
@@ -101,7 +101,7 @@ void update_color(){
     else if( strcmp(which_stock, "detritus") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0) {
+                if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
@@ -116,7 +116,7 @@ void update_color(){
     else if( strcmp(which_stock, "sedconsumer") == 0){
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0) {
+                if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
