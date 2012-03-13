@@ -1,4 +1,5 @@
 #include "color.h"
+#include <math.h>
 
 void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int x, int y){
     int returnValue = 0x00ffffff;
@@ -8,28 +9,17 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
         exit(1);
     }
 
-    if(value <= minVal){
-        //returnValue = 0; //Darkest shade of color
+    if(value <= minVal || isnan(value) ){
         offset = 0x00ffffff;
     }
     else if(value >= maxVal){
-        //returnValue = 255; //Lightest shade of color
         offset = 0x00000000 | (255 << (int)colorVal*8);
     }
     else{
         int rangeValues = abs(maxVal - minVal);
-        //returnValue = (int)(value * 255 / rangeValues);
         rangeValues = (int)(value * 255 / rangeValues);
         offset = 0x00000000 | (rangeValues << (int)colorVal*8);
     }
-    //Check if color scaling should be inverted
-    /*
-    if( maxVal < minVal){
-        returnValue = 255 - returnValue;
-    }
-    */
-
-    //colorValues[x][y] = returnValue << (int)colorVal*8;
     colorValues[x][y] = returnValue & offset;
     printf("x:%d, y:%d, my color is: %d\n", x, y, colorValues[x][y]);
 }
@@ -45,9 +35,7 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                else if(patches[x][y].macro != 0.0) {
-                    scale_color(green, patches[x][y].macro, 60000, 0, x, y); //TODO: replace it with MAX_MACRO
-                }
+                scale_color(green, patches[x][y].macro, 60000, 0, x, y); //TODO: replace it with MAX_MACRO
             }
         }
     }
@@ -61,9 +49,7 @@ void update_color(){
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                     printf("x:%d, y:%d, my depth is zero and color: %d\n", x, y, colorValues[x][y]);
                 }
-                else if( patches[x][y].phyto != 0.0) {
-                    scale_color(green, patches[x][y].phyto, 75000, 0, x, y); //TODO: replace it with MAX_PHYTO
-                }
+                scale_color(green, patches[x][y].phyto, 75000, 0, x, y); //TODO: replace it with MAX_PHYTO
             }
         }
     }
@@ -76,9 +62,7 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                else if( patches[x][y].waterdecomp != 0.0 ) {
-                    scale_color(green, patches[x][y].waterdecomp, MAX_WATERDECOMP, 0, x, y);
-                }
+                scale_color(green, patches[x][y].waterdecomp, MAX_WATERDECOMP, 0, x, y);
             }
         }
     }
@@ -91,9 +75,7 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                else if( patches[x][y].POC != 0.0 )  {
-                    scale_color(blue, patches[x][y].POC, MAX_POC, 0, x, y);
-                }
+                scale_color(blue, patches[x][y].POC, MAX_POC, 0, x, y);
             }
         }
     }
@@ -107,9 +89,7 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                else if( patches[x][y].detritus != 0.0 ) {
-                    scale_color(green, patches[x][y].detritus, MAX_DETRITUS, 0, x, y);
-                }
+                scale_color(green, patches[x][y].detritus, MAX_DETRITUS, 0, x, y);
             }
         }
     }
@@ -122,9 +102,7 @@ void update_color(){
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
-                else if ( patches[x][y].sedconsumer != 0.0 ) {
-                    scale_color(green, patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0, x, y);
-                }
+                scale_color(green, patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0, x, y);
             }
         }
     }
