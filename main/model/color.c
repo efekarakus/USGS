@@ -21,7 +21,9 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
         offset = 0x00000000 | (rangeValues << (int)colorVal*8);
     }
     colorValues[x][y] = returnValue & offset;
-    printf("x:%d, y:%d, my color is: %d\n", x, y, colorValues[x][y]);
+    if (colorValues[x][y] == 0) {
+      printf("x:%d, y:%d, returnValue: %d, offset: %d",x,y,returnValue,offset);
+    }
 }
 
 void update_color(){
