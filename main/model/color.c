@@ -13,12 +13,12 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
         offset = 0x00ffffff;
     }
     else if(value >= maxVal){
-        offset = 0x00000000 | (255 << (int)colorVal*8);
+        offset = 0xff << ((int)colorVal*8);
     }
     else{
         int rangeValues = abs(maxVal - minVal);
         rangeValues = (int)(value * 255 / rangeValues);
-        offset = 0x00000000 | (rangeValues << (int)colorVal*8);
+        offset = rangeValues << ((int)colorVal*8);
     }
     colorValues[x][y] = returnValue & offset;
     if (colorValues[x][y] == 0) {
