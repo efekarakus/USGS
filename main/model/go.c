@@ -328,7 +328,7 @@ int is_nan(int x, int y, double move_factor) {
  */
 void flow_carbon(int x, int y) {
 
-    double corner_patch = fabs( patches[x][y].py_vector - patches[x][y].px_vector )/max_area;
+    double corner_patch = fabs( patches[x][y].py_vector * patches[x][y].px_vector )/max_area;
     double tb_patch = fabs( patches[x][y].py_vector*( patch_length - fabs(patches[x][y].px_vector) ) )/max_area;
     double rl_patch = fabs( patches[x][y].px_vector*( patch_length - fabs(patches[x][y].py_vector) ) )/max_area;
 
