@@ -30,6 +30,7 @@ void go()
                 update_patches(x,y);
                 go_macro(x,y);
                 go_phyto(x,y);
+				go_herbivore(x,y);
                 go_waterdecomp(x,y);
                 go_seddecomp(x,y);
                 go_sedconsumer(x,y);
@@ -41,6 +42,8 @@ void go()
                 pred_phyto(x,y);
                 pred_herbivore(x,y);
                 pred_seddecomp(x,y);
+				pred_waterdecomp(x,y);
+				pred_sedconsumer(x,y);
                 pred_detritus(x,y);
                 pred_DOC(x,y);
                 pred_POC(x,y);
