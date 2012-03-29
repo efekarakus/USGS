@@ -74,7 +74,7 @@ double MAX_DETRITUS = 0.0;
 
 double max_waterdecomp = 6.26/24;
 double max_seddecomp = 6.26/24;
-double max_herbivore = 1/24;
+double max_herbivore = 1.0/24.0;
 double herbivore_egestion = 0.2;
 double max_sedconsumer = 0.55/24;
 double sedconsumer_egestion_seddecomp = 0.35;
@@ -99,19 +99,19 @@ double consum_egestion = 0.2;
 
 // below variables are ripe for sensitivity analysis
 // prey parameters - Ai and Gi, coded 1 -> 0
-int Ai_waterdecomp_DOC = 30;
-int Ai_waterdecomp_POC = 30;
-int Ai_Peri_DOC = 30;
-int Ai_Peri_POC = 30;
+double Ai_waterdecomp_DOC = 30.0;
+double Ai_waterdecomp_POC = 30.0;
+double Ai_Peri_DOC = 30.0;
+double Ai_Peri_POC = 30.0;
 double Ai_seddecomp_detritus = 0.6;
 double Ai_herbivore_phyto = 20;
-int Ai_herbivore_waterdecomp = 3;
-int Ai_herbivore_peri = 3;
-int Ai_sedconsumer_seddecomp = 3;
-int Ai_sedconsumer_peri = 2;
+double Ai_herbivore_waterdecomp = 3.0;
+double Ai_herbivore_peri = 3.0;
+double Ai_sedconsumer_seddecomp = 3.0;
+double Ai_sedconsumer_peri = 2.0;
 double Ai_sedconsumer_detritus = 3.5;
 double Ai_consum_herbivore = 3.5;
-int Ai_consum_sedconsumer = 4;
+double Ai_consum_sedconsumer = 4.0;
 double Gi_waterdecomp_DOC = 0.05;
 double Gi_waterdecomp_POC = 0.05;
 double Gi_Peri_DOC = 0.05;
@@ -129,7 +129,7 @@ double pref_waterdecomp_DOC = 0.5;
 double pref_waterdecomp_POC = 0.5;
 double pref_Peri_DOC = 0.5;
 double pref_Peri_POC = 0.5;
-int pref_seddecomp_detritus = 1;
+double pref_seddecomp_detritus = 1.0;
 double pref_herbivore_phyto = 0.7;
 double pref_herbivore_waterdecomp = 0.15;
 double pref_herbivore_peri = 0.15;
@@ -141,18 +141,18 @@ double pref_consum_sedconsumer = 0.3;
 
 // peri updated every timestep based on macro density  
 // density dependent crowding effects on linear scale - capped at Aj and Gj - coded 1->0  
-int Aj_phyto = 10;
+double Aj_phyto = 10.0;
 double Aj_waterdecomp = 1.2;
 double Aj_seddecomp = 0.2;
 double Aj_herbivore = 2.4;
-int Aj_sedconsumer = 2;
+double Aj_sedconsumer = 2.0;
 double Aj_consum = 0.65;
 double Aj_peri;
-int Gj_phyto = 100;
-int Gj_waterdecomp = 20;
-int Gj_seddecomp = 120;
-int Gj_herbivore = 108;
-int Gj_sedconsumer = 20;
+double Gj_phyto = 100.0;
+double Gj_waterdecomp = 20.0;
+double Gj_seddecomp = 120.0;
+double Gj_herbivore = 108.0;
+double Gj_sedconsumer = 20.0;
 double Gj_consum = 6.5;
 double Gj_peri;
 
