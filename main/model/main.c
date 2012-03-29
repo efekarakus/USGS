@@ -45,7 +45,7 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
     
 //    if((pArray = (PyArrayObject*)PyArray_ContiguousFromObject(pObject,PyArray_OBJECT, 1, 1))== NULL)
 //      printf("ANOTHER FAIL\n");
-      
+/*      
     int i;
     for(i = 0; i < gui_map_days_index; i++)
     {
@@ -57,6 +57,7 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
       gui_map_array[i][strlen(temp)] = '\0';
       printf("Map: %s\n", gui_map_array[i]);
     }
+*/
     return Py_None;
 }
 
