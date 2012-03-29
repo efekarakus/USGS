@@ -2,23 +2,23 @@
 
 void update_patches(int x, int y){
 
-	patches[x][y].turbidity = ( .29587 + TSS) +
-		(gui_k_phyto * (patches[x][y].phyto/ 900) ) +
-		(gui_k_macro * (patches[x][y].macro / 900) );
+	patches[x][y].turbidity = ( .29587 + TSS) + (gui_k_phyto * (patches[x][y].phyto/ 900.0) ) + (gui_k_macro * (patches[x][y].macro / 900.0) );
 
-	if(patches[x][y].turbidity > 30){
-		patches[x][y].turbidity = 30;
+	if(patches[x][y].turbidity > 30.0){
+		patches[x][y].turbidity = 30.0;
 	}
-	if(patches[x][y].turbidity < 0){
+	if(patches[x][y].turbidity < 0.0){
 		patches[x][y].turbidity = 0.01;
 	}
+
+    //TODO: missing if isNaN turbidity [show "NaN"]
+
 	//the amount of light that reaches the bottom of a water column
-	patches[x][y].bottom_light = (photo_radiation * 
-			exp( (-1*patches[x][y].depth)*patches[x][y].turbidity )); 
-	Aj_peri = patches[x][y].macro / 10 ;
-	Gj_peri = patches[x][y].macro / 2;
-	Aj_seddecomp = patches[x][y].detritus / 20;
-	Gj_seddecomp = patches[x][y].detritus / 5;
+	patches[x][y].bottom_light = (photo_radiation * exp( (-1*patches[x][y].depth)*patches[x][y].turbidity )); 
+	Aj_peri = patches[x][y].macro / 10.0 ;
+	Gj_peri = patches[x][y].macro / 2.0;
+	Aj_seddecomp = patches[x][y].detritus / 20.0;
+	Gj_seddecomp = patches[x][y].detritus / 5.0;
 }
 
 double assertRange(double value, double low, double high){
