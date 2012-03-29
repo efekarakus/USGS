@@ -177,9 +177,9 @@ void update_hydro_map() {
                 patches[x][y].velocity = patches[x][y].v_list[hydro_group-1];
 
                 if( fabs(patches[x][y].px_vector) > fabs(patches[x][y].py_vector) ) {
-                    patches[x][y].max_vector = patches[x][y].px_vector;
+                    patches[x][y].max_vector = fabs(patches[x][y].px_vector);
                 } else {
-                    patches[x][y].max_vector = patches[x][y].py_vector;
+                    patches[x][y].max_vector = fabs(patches[x][y].py_vector);
                 }
             } else {
                 patches[x][y].px_vector = 0.0;
@@ -190,22 +190,22 @@ void update_hydro_map() {
             }
 
             // update miscellanous variables inside the patch
-            if(patches[x][y].current_depth > 0 && patches[x][y].depth == 0) {
+            if( (patches[x][y].current_depth > 0.0) && (patches[x][y].depth == 0.0) ) {
                 patches[x][y].detritus += patches[x][y].DOC + patches[x][y].POC + patches[x][y].phyto + 
-                                          patches[x][y].macro + patches[x][y].macro + patches[x][y].waterdecomp +
+                                          patches[x][y].macro + patches[x][y].waterdecomp +
                                           patches[x][y].seddecomp + patches[x][y].herbivore + patches[x][y].sedconsumer + patches[x][y].consum;
 
-                patches[x][y].DOC = 0;
-                patches[x][y].POC = 0;
-                patches[x][y].phyto = 0;
-                patches[x][y].macro = 0;
-                patches[x][y].waterdecomp = 0;
-                patches[x][y].seddecomp = 0;
-                patches[x][y].herbivore = 0;
-                patches[x][y].sedconsumer = 0;
-                patches[x][y].consum = 0;
+                patches[x][y].DOC = 0.0;
+                patches[x][y].POC = 0.0;
+                patches[x][y].phyto = 0.0;
+                patches[x][y].macro = 0.0;
+                patches[x][y].waterdecomp = 0.0;
+                patches[x][y].seddecomp = 0.0;
+                patches[x][y].herbivore = 0.0;
+                patches[x][y].sedconsumer = 0.0;
+                patches[x][y].consum = 0.0;
             }
-            if(patches[x][y].current_depth == 0 && patches[x][y].depth > 0 ){
+            if( (patches[x][y].current_depth == 0.0) && (patches[x][y].depth > 0.0) ){
                 patches[x][y].detritus *= 0.5;
             }
             patches[x][y].current_depth = patches[x][y].depth;
