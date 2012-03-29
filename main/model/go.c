@@ -473,7 +473,7 @@ void get_flow_patches(List* flow_patches) {
  */
 void update_max(int x, int y) {
 
-    if ( patches[x][y].phyto > MAX_MACRO ) {
+    if ( patches[x][y].macro > MAX_MACRO ) {
         MAX_MACRO = patches[x][y].macro;
     }
     if ( patches[x][y].phyto > MAX_PHYTO ) {
