@@ -259,21 +259,21 @@ void avg_output() {
     
     int x,y;
     int count = 0;
-    double sum_macro = 0;
-    double sum_phyto = 0;
-    double sum_herbivore = 0;
-    double sum_waterdecomp = 0;
-    double sum_seddecomp = 0;
-    double sum_sedconsumer = 0;
-    double sum_consum = 0;
-    double sum_DOC = 0;
-    double sum_POC = 0;
-    double sum_detritus = 0;
+    double sum_macro = 0.0;
+    double sum_phyto = 0.0;
+    double sum_herbivore = 0.0;
+    double sum_waterdecomp = 0.0;
+    double sum_seddecomp = 0.0;
+    double sum_sedconsumer = 0.0;
+    double sum_consum = 0.0;
+    double sum_DOC = 0.0;
+    double sum_POC = 0.0;
+    double sum_detritus = 0.0;
 
     for (x = 0; x < MAP_WIDTH; x++) {
         for (y = 0; y < MAP_HEIGHT; y++) {
             // output cells
-            if(!patches[x][y].cell_type)
+            if( patches[x][y].cell_type == 0 )
             {
                 sum_macro += patches[x][y].macro;
                 sum_phyto += patches[x][y].phyto;
@@ -457,7 +457,7 @@ void get_flow_patches(List* flow_patches) {
     int x, y;
     for(y = 0; y < MAP_HEIGHT; y++) {
         for(x = 0; x < MAP_WIDTH; x++) {
-            if (patches[x][y].depth > 0 && patches[x][y].velocity > 0)
+            if (patches[x][y].depth > 0.0 && patches[x][y].velocity > 0.0)
             {
                 LL_insert(flow_patches, &patches[x][y]);
             }
