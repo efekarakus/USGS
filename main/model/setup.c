@@ -445,18 +445,18 @@ void setup_stocks()
     {
         for(y = 0; y < MAP_HEIGHT; y++)
         {
-            if(patches[x][y].depth > 0)
+            if(patches[x][y].depth > 0.0)
             {
-                patches[x][y].macro = 1;
-                patches[x][y].phyto = 10;
-                patches[x][y].waterdecomp = 10;
-                patches[x][y].seddecomp = 1;
-                patches[x][y].herbivore = 1;
-                patches[x][y].sedconsumer = 1;
-                patches[x][y].DOC = 10;
-                patches[x][y].POC = 10;
-                patches[x][y].detritus = 1;
-                patches[x][y].consum = .1;
+                patches[x][y].macro = 1.0;
+                patches[x][y].phyto = 10.0;
+                patches[x][y].waterdecomp = 10.0;
+                patches[x][y].seddecomp = 1.0;
+                patches[x][y].herbivore = 1.0;
+                patches[x][y].sedconsumer = 1.0;
+                patches[x][y].DOC = 10.0;
+                patches[x][y].POC = 10.0;
+                patches[x][y].detritus = 1.0;
+                patches[x][y].consum = 0.1;
             }
         }
     }
