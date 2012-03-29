@@ -14,11 +14,11 @@ void go()
 	if (fixed_environmentals == 0) {
 		update_environmentals();	// This is flagged to run every 24 hours in the function
 	} else {
-		if (sin((hours - 6) * (360 / 24)) <= 0)	// This is a sinusoidal wave to fluctuate PAS rom )
+		if (sin((hours - 6) * (360.0 / 24.0)) <= 0.0)	// This is a sinusoidal wave to fluctuate PAS rom )
         {
 			photo_radiation = 0;
 		} else {
-			photo_radiation = gui_photo_radiation * sin((hours - 6) * (360 / 24));
+			photo_radiation = gui_photo_radiation * sin((hours - 6) * (360.0 / 24.0));
 		}
 	}
 
@@ -228,7 +228,7 @@ void update_temp()
 {
 	temperature_index++;
 	temperature = temperature_data[temperature_index];
-	temperature = temperature - ((temperature - 17) * temp_dif);
+	temperature = temperature - ((temperature - 17.0) * temp_dif);
 }
 
 /**
