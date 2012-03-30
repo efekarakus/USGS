@@ -5,6 +5,9 @@
 #include "list.c"
 #include "color.c"
 
+#include <sys/types.h>
+#include <time.h>
+
 /**
  * This function runs the model
  */
@@ -24,6 +27,9 @@ void go()
 
 	// Ask patches
     int x, y;
+    time_t t1,t2;
+
+    time(&t1);
     for(y = 0; y < MAP_HEIGHT; y++) {
         for(x = 0; x < MAP_WIDTH; x++) {
             if(patches[x][y].depth > 0){
@@ -53,7 +59,8 @@ void go()
             }
         }
     }
-  
+    time(&t2);
+    printf("time for go and pred: %d\n", (int) t2-t1);
     avg_output();
 
     // flow carbon
@@ -65,6 +72,7 @@ void go()
     List* current = head;
 
     nan_trigger = 0;      // set nan to false
+    printf("max_time is: %d\n", max_time);
     for (time = 0; time < max_time; time++) {
         while( current != NULL ) {
             patch* p = current->data;
