@@ -24,8 +24,8 @@ void go()
 
 	// Ask patches
     int x, y;
-    for(x = 0; x < MAP_WIDTH; x++) {
-        for(y = 0; y < MAP_HEIGHT; y++) {
+    for(y = 0; y < MAP_HEIGHT; y++) {
+        for(x = 0; x < MAP_WIDTH; x++) {
             if(patches[x][y].depth > 0){
                 update_patches(x,y);
                 go_macro(x,y);
@@ -165,8 +165,8 @@ void update_hydro_changed(int old_hydro, int new_hydro) {
 void update_hydro_map() {
     double max_vector = 0;
     int x, y;
-    for(x = 0; x < MAP_WIDTH; x++) {
-        for(y = 0; y < MAP_HEIGHT; y++) {
+    for(y = 0; y < MAP_HEIGHT; y++) {
+        for(x = 0; x < MAP_WIDTH; x++) {
             
             // the hydro maps contained information about this patch
             // set the values of px_vector, py_vector, depth and velocity
@@ -270,8 +270,8 @@ void avg_output() {
     double sum_POC = 0.0;
     double sum_detritus = 0.0;
 
-    for (x = 0; x < MAP_WIDTH; x++) {
-        for (y = 0; y < MAP_HEIGHT; y++) {
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
             // output cells
             if( patches[x][y].cell_type == 0 )
             {
