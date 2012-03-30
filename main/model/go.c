@@ -29,7 +29,6 @@ void go()
     int x, y;
     time_t t1,t2;
 
-    time(&t1);
     for(y = 0; y < MAP_HEIGHT; y++) {
         for(x = 0; x < MAP_WIDTH; x++) {
             if(patches[x][y].depth > 0){
@@ -59,13 +58,13 @@ void go()
             }
         }
     }
-    time(&t2);
-    printf("time for go and pred: %d\n", (int) t2-t1);
     avg_output();
 
     // flow carbon
+    time(&t1);
+
     int max_timestep = get_timestep();
-    int time, max_time = 3600/max_timestep;
+    int t, max_time = 3600/max_timestep;
     List flow_patches;
     get_flow_patches(&flow_patches);
     List* head = flow_patches.next;
@@ -73,7 +72,7 @@ void go()
 
     nan_trigger = 0;      // set nan to false
     printf("max_time is: %d\n", max_time);
-    for (time = 0; time < max_time; time++) {
+    for (t = 0; t < max_time; t++) {
         while( current != NULL ) {
             patch* p = current->data;
             flow_carbon((*p).pxcor, (*p).pycor);
@@ -83,6 +82,8 @@ void go()
         if (nan_trigger) break;
     }
     LL_destroy(&flow_patches);    
+    time(&t2);
+    printf("time flow_carbon: %d\n", (int) t2-t1);
 
     // increment tick
     hours++;
