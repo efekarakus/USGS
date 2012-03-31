@@ -7,6 +7,7 @@
 #include "cleanup.c"
 #include "globals.h"
 
+
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
