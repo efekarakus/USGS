@@ -27,11 +27,10 @@ void go()
 
 	// Ask patches
     int x, y;
-    time_t t1,t2;
 
     for(y = 0; y < MAP_HEIGHT; y++) {
         for(x = 0; x < MAP_WIDTH; x++) {
-            if(patches[x][y].depth > 0){
+            if(patches[x][y].depth > 0.0){
                 update_patches(x,y);
                 go_macro(x,y);
                 go_phyto(x,y);
@@ -58,11 +57,9 @@ void go()
             }
         }
     }
-    avg_output();
+    // avg_output();
 
     // flow carbon
-    time(&t1);
-
     int max_timestep = get_timestep();
     int t, max_time = 3600/max_timestep;
     List flow_patches;
@@ -71,7 +68,6 @@ void go()
     List* current = head;
 
     nan_trigger = 0;      // set nan to false
-    printf("max_time is: %d\n", max_time);
     for (t = 0; t < max_time; t++) {
         while( current != NULL ) {
             patch* p = current->data;
@@ -82,8 +78,6 @@ void go()
         if (nan_trigger) break;
     }
     LL_destroy(&flow_patches);    
-    time(&t2);
-    printf("time flow_carbon: %d\n", (int) t2-t1);
 
     // increment tick
     hours++;
@@ -344,9 +338,11 @@ void flow_carbon(int x, int y) {
     double tb_patch = fabs( patches[x][y].py_vector*( patch_length - fabs(patches[x][y].px_vector) ) )/max_area;
     double rl_patch = fabs( patches[x][y].px_vector*( patch_length - fabs(patches[x][y].py_vector) ) )/max_area;
 
+    /**
     if ( gui_loop_output ) {
         if ( patches[x][y].cell_type ) loop_output(x,y);
     }
+    */
 
     // if a neighbor patch is dry, the carbon does not move in that direction
     int max_timestep = get_timestep();
