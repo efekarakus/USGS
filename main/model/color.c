@@ -13,17 +13,14 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
         offset = 0x00ffffff;
     }
     else if(value >= maxVal){
-        offset = 0xff << ((int)colorVal*8);
+        offset = (0xffffffff)^(0xff << ((int)colorVal*8));
     }
     else{
         int rangeValues = abs(maxVal - minVal);
         rangeValues = (int)(value * 255 / rangeValues);
-        offset = rangeValues << ((int)colorVal*8);
+        offset = (0xffffffff)^(rangeValues << ((int)colorVal*8));
     }
     colorValues[x][y] = returnValue & offset;
-    if (colorValues[x][y] == 0) {
-      printf("x:%d, y:%d, returnValue: %d, offset: %d",x,y,returnValue,offset);
-    }
 }
 
 void update_color(){
@@ -50,7 +47,6 @@ void update_color(){
                 if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = 0;
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
-                    printf("x:%d, y:%d, my depth is zero and color: %d\n", x, y, colorValues[x][y]);
                 }
                 else
                   scale_color(green, patches[x][y].phyto, 75000, 0, x, y); //TODO: replace it with MAX_PHYTO
