@@ -62,22 +62,31 @@ void go()
     // flow carbon
     int max_timestep = get_timestep();
     int t, max_time = 3600/max_timestep;
-    List flow_patches;
+/*  List flow_patches;
     get_flow_patches(&flow_patches);
     List* head = flow_patches.next;
     List* current = head;
-
+*/
     nan_trigger = 0;      // set nan to false
     for (t = 0; t < max_time; t++) {
+        /*
         while( current != NULL ) {
             patch* p = current->data;
             flow_carbon((*p).pxcor, (*p).pycor);
             current = current->next;
         }
         current = head;
+        */
+        for(y = 0; y < MAP_HEIGHT; y++) {
+            for(x = 0; x < MAP_WIDTH; x++) {
+                if( (patches[x][y].depth > 0.0) && (patches[x][y].velocity > 0.0) ) {
+                    flow_carbon(x,y);
+                }
+            }
+        }
         if (nan_trigger) break;
     }
-    LL_destroy(&flow_patches);    
+ // LL_destroy(&flow_patches);    
 
     // increment tick
     hours++;
