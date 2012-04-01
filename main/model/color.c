@@ -20,7 +20,7 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
         int rangeValues = abs(maxVal - minVal);
         rangeValues = (int)(value * 255 / rangeValues);
         offset = (0x00ffffff)^(rangeValues << ((int)colorVal*8));
-        printf("%f in between, range: %d and offset is: %d\n",value,range,offset);
+        printf("%f in between, range: %d and offset is: %d\n",value,rangeValues,offset);
     }
     colorValues[x][y] = offset;
 }
