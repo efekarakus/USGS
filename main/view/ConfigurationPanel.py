@@ -114,7 +114,7 @@ class ConfigurationPanel:
     def _init_resp_macro_coef(self):
         """Creates a slider for resp_macro_coef."""
         row,column = (3,1)
-        label = Label(self.container,text="Resp Macro Coef: ").grid(row=row)
+        label = Label(self.container,text="Respiration Macro Coef: ").grid(row=row)
         self.resp_macro_coef = Scale(self.container,from_=0.00,to=1.00,orient=HORIZONTAL,resolution=0.01,tickinterval=0.5,length=200)
         self.resp_macro_coef.set(0.04)
         self.resp_macro_coef.grid(row=row,column=column)
@@ -122,7 +122,7 @@ class ConfigurationPanel:
     def _init_sen_macro_coef(self):
         """Creates a slider for sen_macro_coef."""
         row,column = (4,1)
-        label = Label(self.container,text="Sen Macro Coef: ").grid(row=row)
+        label = Label(self.container,text="Senescence Macro Coef: ").grid(row=row)
         self.sen_macro_coef = Scale(self.container,from_=0.00,to=1.00,orient=HORIZONTAL,resolution=0.01,tickinterval=0.5,length=200)
         self.sen_macro_coef.set(0.08)
         self.sen_macro_coef.grid(row=row,column=column)
