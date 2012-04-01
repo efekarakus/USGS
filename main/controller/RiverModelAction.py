@@ -50,7 +50,6 @@ class RiverModelAction:
         fixed_photo_radiation_value = UI.get_fixed_par()
         filenames = UI.get_filenames()
         daystorunarray = UI.get_daystorunarray()
-        extract_days_to_run_Command(days_to_run_value)
         extract_TSS_Command(tss_value)
         extract_macro_base_temp_Command(macro_base_temp_value)
         extract_gross_macro_coef_Command(gross_macro_coef_value)
@@ -62,7 +61,10 @@ class RiverModelAction:
         extract_k_macro_Command(k_macro_value)
         extract_fixed_temperature_Command(fixed_temperature_value)
         extract_fixed_photo_radiation_Command(fixed_photo_radiation_value)
-        extract_filenames_size_Command(len(filenames))
-        extract_filenames_Command(filenames);
-        colors_list = goCommand(2)
+        setup_Command()
+        for index in range(0,len(filenames)):
+          extract_days_to_run_Command(daystorunarray[index])
+          extract_filenames_Command(filenames[index])
+          colors_list = goCommand()
         output_image(colors_list)
+        cleanup_Command();

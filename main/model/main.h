@@ -15,8 +15,11 @@
 /* Python calls this to let us initialize our module */
 void initMainModule();
 
-/* Extracte the array size for days and maps and initialize them */
-static PyObject* py_extract_filenames_size(PyObject* self, PyObject* args);
+/* Run the cleanup command for the model */
+static PyObject* py_cleanup_command();
+
+/* Run the setup command for the model */
+static PyObject* py_setup_command();
 
 /* Extract the hydro map filenames that the user has selected */
 static PyObject* py_extract_filenames(PyObject* self, PyObject* args);

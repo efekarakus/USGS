@@ -104,11 +104,12 @@ void update_environmentals()
 	if ((hours % 24) == 0)	// Updates daily
 	{
 		update_discharge();	// Pulls next discharge from a data array
-		choose_hydro_map();	// Chooses a new hydro map based on the discharge
+		//choose_hydro_map();	// Chooses a new hydro map based on the discharge
 		if (hydro_changed == 1)
 		{
 			update_hydro_map();	// Updates a new hydro map based on the discharge
-		}
+		    hydro_changed == 0;
+        }
 	}
 
 	if ((hours % 168) == 0)	// Updates weekly
