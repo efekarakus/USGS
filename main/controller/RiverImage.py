@@ -28,6 +28,6 @@ def output_image(colors_list):
     g = (colors_list[index] >> 8) & 0xff
     b = colors_list[index] & 0xff
     # the order is inverted in the y-axis
-    image.putpixel( (x, height-y), (r, g, b))
+    image.putpixel( (x, height-y-1), (r, g, b))
   #endfor
   image.save(image_title, image_type)
