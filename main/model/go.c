@@ -52,8 +52,6 @@ void go()
                 pred_DOC(x,y);
                 pred_POC(x,y);
                 pred_consum(x,y);
-
-                update_max(x,y);
             }
         }
     }
@@ -81,6 +79,7 @@ void go()
             for(x = 0; x < MAP_WIDTH; x++) {
                 if( (patches[x][y].depth > 0.0) && (patches[x][y].velocity > 0.0) ) {
                     flow_carbon(x,y);
+                    update_max(x,y);
                 }
             }
         }
