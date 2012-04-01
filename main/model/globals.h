@@ -17,7 +17,7 @@ int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
 int gui_photo_radiation = 2000;    ///< fixedPAR
 int gui_hydro_group = 5;	///< fixedHydro
-int gui_days_to_run = 1;  ///< number of days to run the code
+int gui_days_to_run = 0;  ///< number of days to run the code
 int gui_loop_output = 0;  ///< represents the Loop-Output? variable in the gui, if set to 1 the 'input' cells gets the stock values changed
 int gui_tss = 0;  ///< TSS
 double gui_k_phyto = 0.4;  ///< k-phyto
@@ -28,12 +28,7 @@ double gui_macro_base_temp = 19.7; ///< macro-base-temp
 int gui_macro_mass_max = 1000; ///< macro-mass-max
 double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
-char* which_stock = "macro"; ///< which-stock?
-
-// Arrays used to hold map groups and days to run each map
-char** gui_map_array;
-int* gui_days_array;
-int gui_map_days_index;
+char* which_stock = "phyto"; ///< which-stock?
 
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
