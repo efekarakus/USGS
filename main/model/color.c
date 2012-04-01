@@ -51,7 +51,7 @@ void update_color(){
                     colorValues[x][y] = (222 << 16) | (184 << 8) | 135;
                 }
                 else
-                  scale_color(green, patches[x][y].phyto, 1.0, 0, x, y); //TODO: replace it with MAX_PHYTO
+                  scale_color(green, patches[x][y].phyto, 1, 0, x, y); //TODO: replace it with MAX_PHYTO
             }
         }
     }
