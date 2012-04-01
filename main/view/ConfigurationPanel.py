@@ -67,7 +67,7 @@ class ConfigurationPanel:
 
     def addmap(self):
         """Add hydro map and days to the arrays"""
-        if(self.get_days_to_run() != "" and self.filename != ""):
+        if(self.get_days_to_run() != "" and self.filename != "" and self.get_days_to_run().isdigit() and int(self.get_days_to_run()) > 0):
           self.filenames.append(self.filename)
           self.daystorunarray.append(self.get_days_to_run())
           self.selected_maps.insert(END, self.filename + " : " + str(self.get_days_to_run()) + " Days")
