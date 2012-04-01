@@ -40,20 +40,6 @@ void clean_discharge_data() {
     free( discharge_data );
 }
 
-void clean_map_days_array(int length)
-{
-    free(gui_days_array);
-
-    int i;
-    
-    for(i = 0; i < length; i++)
-    {
-      free(gui_map_array[i]);
-    }
-
-    free(gui_map_array);
-}
-
 /**
  * Frees the photo_radiation_data array
  */

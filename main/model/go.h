@@ -1,7 +1,6 @@
 #ifndef GO_H
 #define GO_H
 
-#include "main.h"
 #include "globals.h"
 #include "list.h"
 
