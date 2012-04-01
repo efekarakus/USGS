@@ -13,14 +13,14 @@ void scale_color(enum Color colorVal, double value, int maxVal, int minVal, int 
         offset = 0x00ffffff;
     }
     else if(value >= maxVal){
-        offset = (0xffffffff)^(0xff << ((int)colorVal*8));
+        offset = (0x00ffffff)^(0xff << ((int)colorVal*8));
         printf("%f >= max and offset is: %d\n",value,offset);
     }
     else{
         int rangeValues = abs(maxVal - minVal);
         rangeValues = (int)(value * 255 / rangeValues);
-        offset = (0xffffffff)^(rangeValues << ((int)colorVal*8));
-        printf("%f in between and offset is: %d\n",value,offset);
+        offset = (0x00ffffff)^(rangeValues << ((int)colorVal*8));
+        printf("%f in between, range: %d and offset is: %d\n",value,range,offset);
     }
     colorValues[x][y] = offset;
 }

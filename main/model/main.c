@@ -87,6 +87,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     //gui_days_array = (int*)malloc(size * sizeof(int));
     //gui_map_array = (char**)malloc(size * sizeof(char*));
     printf("Size: %d\n", size);
+    printf("MAX_PHYTO: %f\n", MAX_PHYTO);
     int i;
     /*for(i = 0; i < size; i++)
     {
