@@ -40,6 +40,7 @@ class ConfigurationPanel:
         self._init_fixed_par()
         self._init_hydro_map()
         self._init_add_map()
+        self._init_remove_map()
         self._init_selected_maps()
         self._init_hydro_map_label()
 
@@ -59,11 +60,28 @@ class ConfigurationPanel:
         row,column = (1,3)
         hydrolabel = Label(self.container, text="Selected Map: " + self.filename).grid(row=row,column=column+1)
 
+    def removemap(self):
+        try:
+            self.index = self.selected_maps.curselection()[0]
+            self.selected_maps.delete(self.index)
+            self.filenames.pop(int(self.index))
+            self.daystorunarray.pop(int(self.index))
+        except IndexError:
+            pass
+
+    def _init_remove_map(self):
+        row,column=(5,3)
+        self.remove_map = Button(self.container, text="Remove Selected Map", command=self.removemap)
+        self.remove_map.focus_force()
+        self.remove_map.grid(row=row, column=column+1)
+
     def _init_selected_maps(self):
         """Creates a text box that shows user selected maps"""
         row,column = (4,3)
-        self.selected_maps = Listbox(self.container,width=20,height=10)
+        self.scrollbar = Scrollbar(self.container)
+        self.selected_maps = Listbox(self.container,width=20,height=10,yscrollcommand=self.scrollbar.set)
         self.selected_maps.grid(row=row,column=column+1)
+        self.scrollbar.config(command=self.selected_maps.yview)
 
     def addmap(self):
         """Add hydro map and days to the arrays"""
