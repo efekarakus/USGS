@@ -272,7 +272,7 @@ static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args
 
 
 PyObject* build_data(){
-    int size = MAP_WIDTH*MAP_HEIGHT + 1;
+    int size = MAP_WIDTH*MAP_HEIGHT + 2;
     int index;
     PyObject* list = PyList_New(size);
     if(!list)
@@ -280,9 +280,11 @@ PyObject* build_data(){
 
     PyObject* num =  Py_BuildValue("i", MAP_WIDTH);
     PyList_SET_ITEM(list, 0, num);
-    for(index = 1; index < size; index++)
+	num = Py_BuildValue("f", hue);
+	PyList_SET_ITEM(list, 1, num);
+    for(index = 2; index < size; index++)
     {
-        num = Py_BuildValue("i", colorValues[(index-1)%MAP_WIDTH][(index-1)/MAP_WIDTH]);
+        num = Py_BuildValue("f", colorValues[(index-1)%MAP_WIDTH][(index-1)/MAP_WIDTH]);
         PyList_SET_ITEM(list, index, num);
     }
     return list;
