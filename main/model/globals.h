@@ -30,6 +30,11 @@ double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
 char* which_stock = "sedconsumer"; ///< which-stock?
 
+// GUI input hydro maps and days for each map
+int** gui_filenames_array;
+int** gui_days_array;
+int gui_filenames_filesize;
+
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
 int* photo_radiation_data;	///< par array which holds data that photo_radiation indexes

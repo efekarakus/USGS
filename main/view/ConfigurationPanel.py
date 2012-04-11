@@ -1,6 +1,21 @@
 from Tkinter import *
 from tkFileDialog import *
 
+# Default Values for Sliders
+DEFAULT_TSS = 10
+DEFAULT_MACRO = 19.7
+DEFAULT_GROSS_MACRO = 0.08
+DEFAULT_RESP_MACRO_COEF = 0.04
+DEFAULT_SEN_MACRO_COEF = 0.08
+DEFAULT_MACRO_MASS_MAX = 1000
+DEFAULT_MACRO_VEL_MAX = 1.0
+DEFAULT_K_PHYTO = 0.01
+DEFAULT_K_MACRO = 0.01
+DEFAULT_TEMP = 20
+DEFAULT_PAR = 2000
+
+
+
 """
 ConfigurationPanel.py:
 All the widgets necessary for globals.h, assigns the values for patches.
@@ -16,6 +31,7 @@ class ConfigurationPanel:
         self.filenames = []
         self.daystorunarray = []
         self.filename = ""
+
         # widgets
 
         self.file_opt = options = {}
@@ -43,6 +59,7 @@ class ConfigurationPanel:
         self._init_remove_map()
         self._init_selected_maps()
         self._init_hydro_map_label()
+        self._init_reset_values()
 
     def forget(self):
         """Hides the frame in parent."""
@@ -59,6 +76,20 @@ class ConfigurationPanel:
         """Shows what hydro map is currently selected"""
         row,column = (1,3)
         hydrolabel = Label(self.container, text="Selected Map: " + self.filename).grid(row=row,column=column+1)
+
+    def reset(self):
+        """Resets the values of sliders to default values""" 
+        self.tss_slider.set(DEFAULT_TSS)
+        self.macro_base_temp.set(DEFAULT_MACRO)
+        self.gross_macro_coef.set(DEFAULT_GROSS_MACRO)
+        self.resp_macro_coef.set(DEFAULT_RESP_MACRO_COEF)
+        self.sen_macro_coef.set(DEFAULT_SEN_MACRO_COEF)
+        self.macro_mass_max.set(DEFAULT_MACRO_MASS_MAX)
+        self.macro_vel_max.set(DEFAULT_MACRO_VEL_MAX)
+        self.k_phyto.set(DEFAULT_K_PHYTO)
+        self.k_macro.set(DEFAULT_K_MACRO)
+        self.fixed_temp.set(DEFAULT_TEMP)
+        self.fixed_par.set(DEFAULT_PAR)
 
     def removemap(self):
         try:
@@ -93,11 +124,10 @@ class ConfigurationPanel:
     def _init_add_map(self):
         """Creates a button to add a hydro map and selected days to the model"""
         row,column = (3,3)
-        self.add_map = Button(self.container, text="Add Map to Model", command = self.addmap)
+        self.add_map = Button(self.container, text="Add Hydraulic Map to Model", command = self.addmap)
         self.add_map.focus_force()
         self.add_map.grid(row=row,column=column+1)
         
-
     def _init_days_to_run(self):
         """Creates a text box to simulate the number of days that we want our model to run."""
         row,column = (2,3)
@@ -110,7 +140,7 @@ class ConfigurationPanel:
         row,column = (0,1)
         label = Label(self.container,text="TSS: ").grid(row=row)
         self.tss_slider = Scale(self.container,from_=0,to=20,orient=HORIZONTAL,resolution=1,tickinterval=10,length=200)
-        self.tss_slider.set(10)
+        self.tss_slider.set(DEFAULT_TSS)
         self.tss_slider.grid(row=row,column=column)
 
     def _init_macro_base_temp(self):
@@ -118,7 +148,7 @@ class ConfigurationPanel:
         row,column = (1,1) 
         label = Label(self.container,text="Macro Temperature: ").grid(row=row)
         self.macro_base_temp = Scale(self.container,from_=11.70,to=27.70,orient=HORIZONTAL,resolution=0.01,tickinterval=8.00,length=200)
-        self.macro_base_temp.set(19.7)
+        self.macro_base_temp.set(DEFAULT_MACRO)
         self.macro_base_temp.grid(row=row,column=column)
 
     def _init_gross_macro_coef(self):
@@ -126,7 +156,7 @@ class ConfigurationPanel:
         row,column = (2,1)
         label = Label(self.container,text="Gross Macro Coef: ").grid(row=row)
         self.gross_macro_coef = Scale(self.container,from_=0.00,to=1.00,orient=HORIZONTAL,resolution=0.01,tickinterval=0.5,length=200)
-        self.gross_macro_coef.set(0.08)
+        self.gross_macro_coef.set(DEFAULT_GROSS_MACRO)
         self.gross_macro_coef.grid(row=row,column=column)
 
     def _init_resp_macro_coef(self):
@@ -134,7 +164,7 @@ class ConfigurationPanel:
         row,column = (3,1)
         label = Label(self.container,text="Respiration Macro Coef: ").grid(row=row)
         self.resp_macro_coef = Scale(self.container,from_=0.00,to=1.00,orient=HORIZONTAL,resolution=0.01,tickinterval=0.5,length=200)
-        self.resp_macro_coef.set(0.04)
+        self.resp_macro_coef.set(DEFAULT_RESP_MACRO_COEF)
         self.resp_macro_coef.grid(row=row,column=column)
 
     def _init_sen_macro_coef(self):
@@ -142,7 +172,7 @@ class ConfigurationPanel:
         row,column = (4,1)
         label = Label(self.container,text="Senescence Macro Coef: ").grid(row=row)
         self.sen_macro_coef = Scale(self.container,from_=0.00,to=1.00,orient=HORIZONTAL,resolution=0.01,tickinterval=0.5,length=200)
-        self.sen_macro_coef.set(0.08)
+        self.sen_macro_coef.set(DEFAULT_SEN_MACRO_COEF)
         self.sen_macro_coef.grid(row=row,column=column)
 
     def _init_macro_mass_max(self):
@@ -150,7 +180,7 @@ class ConfigurationPanel:
         row,column = (5,1)
         label = Label(self.container,text="Macro Mass Max: ").grid(row=row)
         self.macro_mass_max = Scale(self.container,from_=500,to=1500,orient=HORIZONTAL,resolution=25,tickinterval=500,length=200)
-        self.macro_mass_max.set(1000)
+        self.macro_mass_max.set(DEFAULT_MACRO_MASS_MAX)
         self.macro_mass_max.grid(row=row,column=column)
 
     def _init_macro_vel_max(self):
@@ -158,7 +188,7 @@ class ConfigurationPanel:
         row,column = (6,1)
         label = Label(self.container,text="Macro Velocity Max: ").grid(row=row)
         self.macro_vel_max = Scale(self.container,from_=0.2,to=1.6,orient=HORIZONTAL,resolution=0.1,tickinterval=0.7,length=200)
-        self.macro_vel_max.set(1.0)
+        self.macro_vel_max.set(DEFAULT_MACRO_VEL_MAX)
         self.macro_vel_max.grid(row=row,column=column)
 
     def _init_k_phyto(self):
@@ -166,7 +196,7 @@ class ConfigurationPanel:
         row,column = (7,1)
         label = Label(self.container,text="K-Phyto: ").grid(row=row)
         self.k_phyto = Scale(self.container,from_=0.00,to=1.00,orient=HORIZONTAL,resolution=0.01,tickinterval=0.50,length=200)
-        self.k_phyto.set(0.01)
+        self.k_phyto.set(DEFAULT_K_PHYTO)
         self.k_phyto.grid(row=row,column=column)
 
     def _init_k_macro(self):
@@ -174,7 +204,7 @@ class ConfigurationPanel:
         row,column = (8,1)
         label = Label(self.container,text="K-Macro: ").grid(row=row)
         self.k_macro = Scale(self.container,from_=0.00,to=1.00,orient=HORIZONTAL,resolution=0.01,tickinterval=0.50,length=200)
-        self.k_macro.set(0.01)
+        self.k_macro.set(DEFAULT_K_MACRO)
         self.k_macro.grid(row=row,column=column)
 
     def _init_fixed_temp(self):
@@ -182,7 +212,7 @@ class ConfigurationPanel:
         row,column = (9,1)
         label = Label(self.container,text="Temperature: ").grid(row=row)
         self.fixed_temp = Scale(self.container,from_=0,to=30,orient=HORIZONTAL,resolution=1,tickinterval=15,length=200)
-        self.fixed_temp.set(20)
+        self.fixed_temp.set(DEFAULT_TEMP)
         self.fixed_temp.grid(row=row,column=column)
 
     def _init_fixed_par(self):
@@ -190,9 +220,15 @@ class ConfigurationPanel:
         row,column=(10,1)
         label = Label(self.container,text="Photosynthetic Radiation: ").grid(row=row)
         self.fixed_par = Scale(self.container,from_=0,to=2000,orient=HORIZONTAL,resolution=100,tickinterval=1000,length=200)
-        self.fixed_par.set(2000)
+        self.fixed_par.set(DEFAULT_PAR)
         self.fixed_par.grid(row=row,column=column)
         
+    def _init_reset_values(self):
+        """Creates a button to reset the values of the sliders to their default values"""
+        row,column = (11,1)
+        self.reset_values = Button(self.container, text="Reset To Default Values", command=self.reset)
+        self.reset_values.grid(row=row, column=column)
+
     def askname(self):
         fn = askopenfilename(**self.file_opt)
         ar = fn.split('/')

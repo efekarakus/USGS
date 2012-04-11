@@ -29,12 +29,28 @@ class RiverModelAction:
         self.UI.interface_panel.forget()
         self.UI.configuration_panel.display()
 
+    def setupFilenames(self):
+        """
+        Function that will create the string of selected models and days to run
+        """
+
+        filenames = self.UI.get_filenames()
+        daystorunarray = self.UI.get_daystorunarray() 
+        hydromapFile = ""
+        hydromapFile += str(len(filenames)) + "/"
+        for index in range(0, len(filenames)):
+          hydromapFile += filenames[index] + "/" + daystorunarray[index] + "/"
+        return hydromapFile
+
     def OnGo(self, event):
         """
         Function that is triggered if the user clicks on the 'GO' button.
         """
         UI = self.UI
-
+        
+        hydromapFile = self.setupFilenames();
+        
+        print hydromapFile
         #TODO: days_to_run needs to be implemented in the GUI
         days_to_run_value = UI.get_days_to_run()
         tss_value = UI.get_tss_value()
@@ -48,8 +64,6 @@ class RiverModelAction:
         k_macro_value = UI.get_k_macro()
         fixed_temperature_value = UI.get_fixed_temp()
         fixed_photo_radiation_value = UI.get_fixed_par()
-        filenames = UI.get_filenames()
-        daystorunarray = UI.get_daystorunarray()
         extract_TSS_Command(tss_value)
         extract_macro_base_temp_Command(macro_base_temp_value)
         extract_gross_macro_coef_Command(gross_macro_coef_value)
@@ -61,10 +75,7 @@ class RiverModelAction:
         extract_k_macro_Command(k_macro_value)
         extract_fixed_temperature_Command(fixed_temperature_value)
         extract_fixed_photo_radiation_Command(fixed_photo_radiation_value)
-        setup_Command()
-        for index in range(0,len(filenames)):
-          extract_days_to_run_Command(daystorunarray[index])
-          extract_filenames_Command(filenames[index])
-          colors_list = goCommand()
+        extract_filenames_Command(hydromapFile)
+        colors_list = goCommand()
         output_image(colors_list)
-        cleanup_Command();
+

@@ -31,12 +31,33 @@ static PyMethodDef MainModule_methods[] = {
 
 
 static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
-  char* filename;
-  PyArg_ParseTuple(args, "s", &filename);
-  printf("Selected File: %s\n", filename);
-  hydro_group = atoi(filename)/10;
-  hydro_changed = 1;
-  return Py_None;
+    char* filenames;
+    PyArg_ParseTuple(args, "s", &filenames);
+    char* filename;
+    int index = 0;
+    
+    printf("Passed in filenames: %s\n", filenames);
+    // First value howmany files the use selected in the GUI
+    filename = strtok(filenames, "/");
+    int fileSize = atoi(filename);
+    gui_filenames_filesize = fileSize;
+    gui_filenames_array = (int**)malloc(fileSize*sizeof(int));
+    gui_days_array = (int**)malloc(fileSize*sizeof(int));
+    
+    // Parse the file name if one exists
+    while((filename = strtok(NULL, "/")) != NULL)
+    {
+        printf("Filename: %s", filename); 
+        gui_filenames_array[index] = (int*)malloc(sizeof(int));
+        *(gui_filenames_array[index]) = atoi(filename)/10; //Assume structured file naming, i.e. 10k - 100k
+        filename = strtok(NULL, "/");
+        printf(" Days to run: %s\n", filename);
+        gui_days_array[index] = (int*)malloc(sizeof(int));
+        *(gui_days_array[index]) = atoi(filename); //Parse howmany days to run current file
+        index++;
+    }
+    
+    return Py_None;
 }
 
 static PyObject* py_setup_command(){
@@ -64,21 +85,31 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     //PyArg_ParseTuple(args, "i", &tss);
     //tss = 2*tss;
     printf("MAX_PHYTO: %f\n", MAX_PHYTO);
-	printf("Covered area:%d uncovered area:%d", covered_area[9], uncovered_area[9]);
-
+    
     int day;
-    //setup();
-    while( (day = (hours / 24)) < gui_days_to_run)
-    {   
+    int index;
+    setup();
+    printf("FILESIZE: %d\n", gui_filenames_filesize);
+    
+    for(index = 0; index < gui_filenames_filesize; index++)
+    {
+        printf("RUNNING FILE: %d FOR %d DAYS\n", *(gui_filenames_array[index]), *(gui_days_array[index]));
+        gui_days_to_run += *(gui_days_array[index]);  //Set howmany days to run the new hydromap
+        hydro_group = *(gui_filenames_array[index]); //Set the new hydromap that will run
+        hydro_changed = 1;  //Confirm that a new hydro map has been loaded
+        
+        while( (day = (hours / 24)) < gui_days_to_run)
+        {   
+            printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
+            go();
+        }   
         printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
-        go();
-    }   
-    printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
+    }
     PyObject* data = (PyObject*)build_data();    
     if (!dump_data()) {
         printf("Could not create folder './results' and write the data from the patches\n");
-    }   
-    //cleanup();
+    }
+    cleanup();
     return data;
 }
 

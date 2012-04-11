@@ -23,6 +23,11 @@ void clean_patches();
 
 
 /**
+ * Frees the gui_filenames_arrau and days_array
+ */
+ void clean_gui_filenames_and_days();
+
+/**
  * Frees the discharge_data array
  */
 void clean_discharge_data();

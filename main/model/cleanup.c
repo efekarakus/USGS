@@ -12,6 +12,7 @@ void cleanup() {
     clean_discharge_data();
     clean_photo_radiation_data();
     clean_temperature_data();
+    clean_gui_filenames_and_days();
 }
 
 /**
@@ -40,6 +41,16 @@ void clean_patches() {
  */
 void clean_discharge_data() {
     free( discharge_data );
+}
+
+void clean_gui_filenames_and_days() {
+    int index;
+    for(index = 0; index < gui_filenames_filesize; index++){
+        free(gui_filenames_array[index]);
+        free(gui_days_array[index]);
+    }
+    free(gui_filenames_array);
+    free(gui_days_array);
 }
 
 /**
