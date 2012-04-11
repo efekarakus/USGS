@@ -110,6 +110,8 @@ void init_patches()
     int row = 0;
     int col = 0;
 
+	covered_area = (int*)malloc(num_hydro_files*sizeof(int));
+	uncovered_area = (int*)malloc(num_hydro_files*sizeof(int));
     patches = malloc(MAP_WIDTH*sizeof(patch*));
     for(col = 0; col < MAP_WIDTH; col++) 
 	{
@@ -194,6 +196,8 @@ void import_hydro()
         {
             fscanf(pFile, "%s", str);
         }
+		int covered_cells = 0;
+		int uncovered_cells = 0;
 
         // Scan through the files and assign the values
         while(fscanf(pFile, "%s", str) != EOF)
@@ -213,12 +217,16 @@ void import_hydro()
             patches[temp_x][temp_y].available = 1;
             patches[temp_x][temp_y].pxcor = temp_x;
             patches[temp_x][temp_y].pycor = temp_y;
-            patches[temp_x][temp_y].depth_list[i] = temp_depth;
             patches[temp_x][temp_y].pxv_list[i] = temp_px_vector;
             patches[temp_x][temp_y].pyv_list[i] = temp_py_vector;
             patches[temp_x][temp_y].v_list[i] = temp_velocity;
             patches[temp_x][temp_y].aqa_point = -999;
+			patches[temp_x][temp_y].depth_list[i] = temp_depth;
+			covered_cells++;
         }
+		uncovered_cells = MAP_WIDTH*MAP_HEIGHT - covered_cells;
+		covered_area[i] = max_area*covered_cells;
+		uncovered_area[i] = max_area*uncovered_cells;
 
         fclose(pFile);
     }

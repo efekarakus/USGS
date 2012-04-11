@@ -29,6 +29,8 @@ void clean_patches() {
         free( patches[x] );
         free( colorValues[x] );
     }
+	free( covered_area );
+	free( uncovered_area );
     free( patches );
     free( colorValues );
 }

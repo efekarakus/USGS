@@ -28,12 +28,14 @@ double gui_macro_base_temp = 19.7; ///< macro-base-temp
 int gui_macro_mass_max = 1000; ///< macro-mass-max
 double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
-char* which_stock = "phyto"; ///< which-stock?
+char* which_stock = "sedconsumer"; ///< which-stock?
 
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
 int* photo_radiation_data;	///< par array which holds data that photo_radiation indexes
 int* discharge_data;	///< discharge array which holds data that discharge indexes
+int* covered_area;      ///< Area of land covered by water
+int* uncovered_area;    ///< Area of land not covered by water
 
 int temperature_index;	///< The index of the current temperature value
 int photo_radiation_index;	///< The index of the current photo_radiation value
