@@ -34,7 +34,7 @@ void update_color(){
                     colorValues[x][y] = -1;//(222 << 16) | (184 << 8) | 135;
                 }
                 else
-                  scale_color(patches[x][y].macro, 60000, 0, x, y); //TODO: replace it with MAX_MACRO
+                  scale_color(patches[x][y].macro, MAX_MACRO, 0, x, y); //TODO: replace it with MAX_MACRO
             }
         }
     }

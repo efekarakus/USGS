@@ -64,6 +64,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     //PyArg_ParseTuple(args, "i", &tss);
     //tss = 2*tss;
     printf("MAX_PHYTO: %f\n", MAX_PHYTO);
+	printf("Covered area:%d uncovered area:%d", covered_area[9], uncovered_area[9]);
 
     int day;
     //setup();
