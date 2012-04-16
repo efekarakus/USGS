@@ -147,7 +147,6 @@ class ConfigurationPanel:
         label = Label(self.container,text="Days to run:                                ").grid(row=row,column=column+1)
         self.days_to_run = Entry(self.container,width=5)
         self.days_to_run.grid(row=row,column=column+1)
-<<<<<<< HEAD
         
 	def _init_which_stock(self):
 		"""Creates an option box for which stock to choose"""
@@ -157,7 +156,6 @@ class ConfigurationPanel:
 		stockVal.set("consum")
 		self.which_stock = OptionMenu(self.container, stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
 		self.which_stock.grid(row=row, column=column)
-=======
 
     def _init_which_stock(self):
         """Creates an option box for which stock to choose"""
@@ -167,7 +165,6 @@ class ConfigurationPanel:
         stockVal.set("Consum")
         self.which_stock = OptionMenu(self.container, stockVal, "Consum", "Two")
         self.which_stock.grid(row=row, column=column)
->>>>>>> da65ce84d3805c56ae6c4aedfdd4f87f54e7faeb
 
     def _init_tss(self):
         """Creates a slider for the TSS value."""
