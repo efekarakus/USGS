@@ -38,19 +38,19 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
     
     printf("Passed in filenames: %s\n", filenames);
     // First value howmany files the use selected in the GUI
-    filename = strtok(filenames, "/");
+    filename = strtok(filenames, "?");
     int fileSize = atoi(filename);
     gui_filenames_filesize = fileSize;
     gui_filenames_array = (int**)malloc(fileSize*sizeof(int));
     gui_days_array = (int**)malloc(fileSize*sizeof(int));
     
     // Parse the file name if one exists
-    while((filename = strtok(NULL, "/")) != NULL)
+    while((filename = strtok(NULL, "?")) != NULL)
     {
         printf("Filename: %s", filename); 
         gui_filenames_array[index] = (int*)malloc(sizeof(int));
         *(gui_filenames_array[index]) = atoi(filename)/10; //Assume structured file naming, i.e. 10k - 100k
-        filename = strtok(NULL, "/");
+        filename = strtok(NULL, "?");
         printf(" Days to run: %s\n", filename);
         gui_days_array[index] = (int*)malloc(sizeof(int));
         *(gui_days_array[index]) = atoi(filename); //Parse howmany days to run current file
@@ -91,7 +91,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     setup();
     printf("FILESIZE: %d\n", gui_filenames_filesize);
     
-    for(index = 0; index < gui_filenames_filesize; index++)
+/*    for(index = 0; index < gui_filenames_filesize; index++)
     {
         printf("RUNNING FILE: %d FOR %d DAYS\n", *(gui_filenames_array[index]), *(gui_days_array[index]));
         gui_days_to_run += *(gui_days_array[index]);  //Set howmany days to run the new hydromap
@@ -109,7 +109,8 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     if (!dump_data()) {
         printf("Could not create folder './results' and write the data from the patches\n");
     }
-    cleanup();
+*/    cleanup();
+    PyObject* data = (PyObject*)build_data();    
     return data;
 }
 

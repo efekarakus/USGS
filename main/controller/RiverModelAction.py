@@ -37,9 +37,9 @@ class RiverModelAction:
         filenames = self.UI.get_filenames()
         daystorunarray = self.UI.get_daystorunarray() 
         hydromapFile = ""
-        hydromapFile += str(len(filenames)) + "/"
+        hydromapFile += str(len(filenames)) + "?"
         for index in range(0, len(filenames)):
-          hydromapFile += filenames[index] + "/" + daystorunarray[index] + "/"
+          hydromapFile += filenames[index] + "?" + daystorunarray[index] + "?"
         return hydromapFile
 
     def OnGo(self, event):
