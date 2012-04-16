@@ -153,7 +153,7 @@ class ConfigurationPanel:
 		row,column = (0,1)
 		label = Label(self.container, text="Which Stock: ").grid(row=row)
 		stockVal = StringVar(self.container)
-		stockVal.set("Consum")
+		stockVal.set("consum")
 		self.which_stock = OptionMenu(self.container, stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
 		self.which_stock.grid(row=row, column=column)
 
