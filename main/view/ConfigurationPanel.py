@@ -57,7 +57,7 @@ class ConfigurationPanel:
         options['title'] = 'This is a title'
 
         self._init_days_to_run()
-		self._init_which_stock()
+        self._init_which_stock()
         self._init_tss()
         self._init_macro_base_temp()
         self._init_gross_macro_coef()
