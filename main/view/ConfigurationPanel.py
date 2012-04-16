@@ -32,7 +32,9 @@ class ConfigurationPanel:
         self.filenames = []
         self.daystorunarray = []
         self.filename = ""
-
+        
+        self.stockVal = StringVar(self.container)
+        self.stockVal.set("consum")
         # widgets
 
         self.file_opt = options = {}
@@ -148,23 +150,12 @@ class ConfigurationPanel:
         self.days_to_run = Entry(self.container,width=5)
         self.days_to_run.grid(row=row,column=column+1)
         
-	def _init_which_stock(self):
+    def _init_which_stock(self):
 		"""Creates an option box for which stock to choose"""
 		row,column = (0,1)
 		label = Label(self.container, text="Which Stock: ").grid(row=row)
-		stockVal = StringVar(self.container)
-		stockVal.set("consum")
-		self.which_stock = OptionMenu(self.container, stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
+		self.which_stock = OptionMenu(self.container, self.stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
 		self.which_stock.grid(row=row, column=column)
-
-    def _init_which_stock(self):
-        """Creates an option box for which stock to choose"""
-        row,column = (0,1)
-        label = Label(self.container, text="Which Stock: ").grid(row=row)
-        stockVal = StringVar(self.container)
-        stockVal.set("Consum")
-        self.which_stock = OptionMenu(self.container, stockVal, "Consum", "Two")
-        self.which_stock.grid(row=row, column=column)
 
     def _init_tss(self):
         """Creates a slider for the TSS value."""
@@ -279,7 +270,7 @@ class ConfigurationPanel:
     def get_days_to_run(self):
         return self.days_to_run.get()
 
-	def get_which_stock(self):
+    def get_which_stock(self):
 		return self.stockVal.get()
 
     def get_tss_value(self):

@@ -30,7 +30,7 @@ double gui_gross_macro_coef = 0.08; // gross-macro-coef
 char which_stock[100]; ///< which-stock?
 
 // GUI input hydro maps and days for each map
-int** gui_filenames_array;
+char** gui_filenames_array;
 int** gui_days_array;
 int gui_filenames_filesize;
 
