@@ -28,7 +28,7 @@ double gui_macro_base_temp = 19.7; ///< macro-base-temp
 int gui_macro_mass_max = 1000; ///< macro-mass-max
 double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
-char* which_stock = "sedconsumer"; ///< which-stock?
+char which_stock[100]; ///< which-stock?
 
 // GUI input hydro maps and days for each map
 int** gui_filenames_array;
