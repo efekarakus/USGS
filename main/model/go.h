@@ -11,11 +11,6 @@ void go();
 void update_environmentals();
 
 /**
- * Updates the values of hydro_changed and hydro_group based on the current value of discharge
- */
-void choose_hydro_map();
-
-/**
  * Gives the value 1 if the two hydros are different to hydro_changed else 0
  * @param old_hydro: the previous value of the hydro_group
  * @param new_hydro: the new value of the hydro_group
@@ -37,11 +32,6 @@ void update_temp();
  * Updates the photosynthetic radiation variable
  */
 void update_par();
-
-/**
- * Updates the discharge variable
- */
-void update_discharge();
 
 /**
  * Go through all the patches with cell-type = 'output' and take the 

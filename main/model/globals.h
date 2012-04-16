@@ -16,7 +16,6 @@ int gui_timestep_factor = 60;    ///< By how much are we speeding up the code? I
 int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_temperature = 20;    ///< fixedTemp
 int gui_photo_radiation = 2000;    ///< fixedPAR
-int gui_hydro_group = 5;	///< fixedHydro
 int gui_days_to_run = 0;  ///< number of days to run the code
 int gui_loop_output = 0;  ///< represents the Loop-Output? variable in the gui, if set to 1 the 'input' cells gets the stock values changed
 int gui_tss = 0;  ///< TSS

@@ -60,21 +60,8 @@ void go()
     // flow carbon
     int max_timestep = get_timestep();
     int t, max_time = 3600/max_timestep;
-/*  List flow_patches;
-    get_flow_patches(&flow_patches);
-    List* head = flow_patches.next;
-    List* current = head;
-*/
     nan_trigger = 0;      // set nan to false
     for (t = 0; t < max_time; t++) {
-        /*
-        while( current != NULL ) {
-            patch* p = current->data;
-            flow_carbon((*p).pxcor, (*p).pycor);
-            current = current->next;
-        }
-        current = head;
-        */
         for(y = 0; y < MAP_HEIGHT; y++) {
             for(x = 0; x < MAP_WIDTH; x++) {
                 if( (patches[x][y].depth > 0.0) && (patches[x][y].velocity > 0.0) ) {
@@ -85,8 +72,6 @@ void go()
         }
         if (nan_trigger) break;
     }
- // LL_destroy(&flow_patches);    
-
     // increment tick
     hours++;
 
@@ -103,12 +88,10 @@ void update_environmentals()
 {
 	if ((hours % 24) == 0)	// Updates daily
 	{
-		update_discharge();	// Pulls next discharge from a data array
-		//choose_hydro_map();	// Chooses a new hydro map based on the discharge
 		if (hydro_changed == 1)
 		{
 			update_hydro_map();	// Updates a new hydro map based on the discharge
-		    hydro_changed == 0;
+		    hydro_changed = 0;
         }
 	}
 
@@ -120,55 +103,6 @@ void update_environmentals()
 	update_par();	// Updates hourly to a new photosynthetic radiation value
 }
 
-/**
- * Updates the values of hydro_changed and hydro_group based on the current value of discharge
- */
-void choose_hydro_map() {
-    hydro_changed = 0;
-    int old_hydro = hydro_group;
-    
-    if(discharge <= 20000) {
-        hydro_group = 10;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 30000) {
-        hydro_group = 9;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 40000) {
-        hydro_group = 8;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 50000) {
-        hydro_group = 7;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 60000) {
-        hydro_group = 6;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 70000) {
-        hydro_group = 5;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 80000) {
-        hydro_group = 4;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 90000) {
-        hydro_group = 3;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else if (discharge <= 100000) {
-        hydro_group = 2;
-        update_hydro_changed(old_hydro, hydro_group);
-    } else {
-        hydro_group = 1;
-        update_hydro_changed(old_hydro, hydro_group);
-    }
-}
-
-/**
- * Gives the value 1 if the two hydros are different to hydro_changed else 0
- * @param old_hydro: the previous value of the hydro_group
- * @param new_hydro: the new value of the hydro_group
- */
-void update_hydro_changed(int old_hydro, int new_hydro) {
-    if(old_hydro != new_hydro) hydro_changed = 1;
-    else hydro_changed = 0;
-}
 
 /**
  * Iterates through all the patches and sets the different components
@@ -251,15 +185,6 @@ void update_par()
 	photo_radiation_index++;
 	photo_radiation = photo_radiation_data[photo_radiation_index];
 	photo_radiation = photo_radiation - (photo_radiation * par_dif);
-}
-
-/**
- * Updates the discharge variable
- */
-void update_discharge()
-{
-	discharge_index++;
-	discharge = discharge_data[discharge_index];
 }
 
 

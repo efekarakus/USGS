@@ -59,11 +59,6 @@ void import_hydro();
 void setup_environmentals();
 
 /**
- * Reads the "discharge.txt" file and initializes the discharge variables
- */
-void set_discharge();
-
-/**
  * Reads the "par.txt" file and initializes the photo_radiation array variables
  */
 void set_photo_radiation();

@@ -280,72 +280,9 @@ void setup_environmentals()
 {
 	temp_dif = 0;
 	par_dif = 0;
-
-    if (fixed_environmentals == 1)	// Read environmental data from the GUI
-    {
-		hydro_group = gui_hydro_group;
-		update_hydro_map();
-		photo_radiation = gui_photo_radiation;
-		temperature = gui_temperature;
-    }
-	else	// Read environmental data from the txt files
-	{
-		set_discharge();
-		set_photo_radiation();
-		set_temperature();
-
-		hydro_group = 0;
-		choose_hydro_map();
-		update_hydro_map();
-	}
+	set_photo_radiation();
+	set_temperature();
 }
-
-
-/**
- * Reads the discharge.txt file and initializes the discharge variables
- */
-void set_discharge()
-{
-	char* pathname = environmentals_path;
-
-	char* currFile = discharge_file;
-	int length = strlen(pathname) + strlen(currFile) + 1;
-	char filename[length];
-	filename[0] = '\0';
-	strcat(filename, pathname);
-	strcat(filename, currFile);
-
-	FILE* file = fopen(filename, "r");
-	if (file == NULL)
-	{
-		perror ("Error opening discharge file");
-	}
-
-	char line[256];
-	int count = 0;
-
-	while (fgets(line, 256, file) != NULL)	// Get number of elements in file
-	{
-		count++;
-	}
-	
-	discharge_data = (int*)malloc(count * sizeof(int));
-
-	rewind(file);
-	count = 0;
-	while (fgets(line, 256, file) != NULL)	// Populate discharge_data array
-	{
-		int value = atoi(line);
-		discharge_data[count] = value;
-		count++;
-	}
-
-	discharge_index = 0;	// Initialize discharge index to represent current index
-	discharge = discharge_data[discharge_index];	// Assign first value of discharge
-
-	fclose(file);
-}
-
 
 /*
  * Reads the "par.txt" file and initializes the photo_radiation array variables
