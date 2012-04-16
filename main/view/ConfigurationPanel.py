@@ -160,15 +160,15 @@ class ConfigurationPanel:
         label = Label(self.container,text="Days to run:                                ").grid(row=row,column=column+1)
         self.days_to_run = Entry(self.container,width=5)
         self.days_to_run.grid(row=row,column=column+1)
-        
-	def _init_which_stock(self):
-		"""Creates an option box for which stock to choose"""
-		row,column = (0,1)
-		label = Label(self.container, text="Which Stock: ").grid(row=row)
-		stockVal = StringVar(self.container)
-		stockVal.set("Consum")
-		self.which_stock = OptionMenu(self.container, stockVal, "Consum", "Two")
-		self.which_stock.grid(row=row, column=column)
+
+    def _init_which_stock(self):
+        """Creates an option box for which stock to choose"""
+        row,column = (0,1)
+        label = Label(self.container, text="Which Stock: ").grid(row=row)
+        stockVal = StringVar(self.container)
+        stockVal.set("Consum")
+        self.which_stock = OptionMenu(self.container, stockVal, "Consum", "Two")
+        self.which_stock.grid(row=row, column=column)
 
     def _init_tss(self):
         """Creates a slider for the TSS value."""
