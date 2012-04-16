@@ -53,6 +53,7 @@ class RiverModelAction:
         print hydromapFile
         #TODO: days_to_run needs to be implemented in the GUI
         days_to_run_value = UI.get_days_to_run()
+        which_stock = UI.get_which_stock()
         tss_value = UI.get_tss_value()
         macro_base_temp_value = UI.get_macro_base_temp()
         gross_macro_coef_value = UI.get_gross_macro_coef()
@@ -64,6 +65,7 @@ class RiverModelAction:
         k_macro_value = UI.get_k_macro()
         fixed_temperature_value = UI.get_fixed_temp()
         fixed_photo_radiation_value = UI.get_fixed_par()
+        extract_whichstock_Command(which_stock)
         extract_TSS_Command(tss_value)
         extract_macro_base_temp_Command(macro_base_temp_value)
         extract_gross_macro_coef_Command(gross_macro_coef_value)

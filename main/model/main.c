@@ -12,6 +12,7 @@
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
 	{"extract_days_to_run_Command", py_extract_days_to_run, METH_VARARGS},
+    {"extract_whichstock_Command", py_extract_whichstock, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
 	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
 	{"extract_gross_macro_coef_Command", py_extract_gross_macro_coef, METH_VARARGS},
@@ -112,6 +113,21 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 */    cleanup();
     PyObject* data = (PyObject*)build_data();    
     return data;
+}
+
+/**
+ * Extracts the whichstocks value from the GUI and assigns it in globals.h
+ * @param self The python object calling this C function
+ * @param args The whichstock value
+ */
+static PyObject* py_extract_whichstock(PyObject* self, PyObject* args)
+{
+    char* str;
+    PyArg_ParseTuple(args, "s", &str);
+    strcpy(whichstock,str);
+
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 
 /**
