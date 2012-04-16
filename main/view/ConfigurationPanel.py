@@ -2,19 +2,6 @@ from Tkinter import *
 from tkFileDialog import *
 
 # Default Values for Sliders
-
-STOCK_OPTIONS = [
-		"Consum",
-		"Detritus",
-		"DOC",
-		"Herbivore",
-		"Macro",
-		"Phyto",
-		"POC",
-		"Sed Consumer",
-		"Sed Decomp",
-		"Water Decomp"
-		]
 		
 DEFAULT_TSS = 10
 DEFAULT_MACRO = 19.7
@@ -167,7 +154,7 @@ class ConfigurationPanel:
 		label = Label(self.container, text="Which Stock: ").grid(row=row)
 		stockVal = StringVar(self.container)
 		stockVal.set("Consum")
-		self.which_stock = OptionMenu(self.container, stockVal, "Consum", "Two")
+		self.which_stock = OptionMenu(self.container, stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
 		self.which_stock.grid(row=row, column=column)
 
     def _init_tss(self):
@@ -284,7 +271,7 @@ class ConfigurationPanel:
         return self.days_to_run.get()
 
 	def get_which_stock(self):
-		return self.which_stock.get()
+		return self.stockVal.get()
 
     def get_tss_value(self):
         return self.tss_slider.get()
