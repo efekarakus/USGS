@@ -230,10 +230,10 @@ class ConfigurationPanel:
         self.reset_values.grid(row=row, column=column)
 
     def askname(self):
-        fn = askopenfilename(**self.file_opt)
-        ar = fn.split('/')
-        self.filename = ar[len(ar)-1]
-        self.hydrolabel = Label(self.container,text="Selected Map: " + self.filename).grid(row=1,column=4)
+        self.filename = askopenfilename(**self.file_opt)
+        ar = self.filename.split('/')
+        fn = ar[len(ar)-1]
+        self.hydrolabel = Label(self.container,text="Selected Map: " + fn).grid(row=1,column=4)
 
     def _init_hydro_map(self):
         """Creates a button for the hydro maps."""
