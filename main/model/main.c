@@ -124,7 +124,7 @@ static PyObject* py_extract_whichstock(PyObject* self, PyObject* args)
 {
     char* str;
     PyArg_ParseTuple(args, "s", &str);
-    strcpy(whichstock,str);
+    strcpy(which_stock,str);
 
     Py_INCREF(Py_None);
     return Py_None;
