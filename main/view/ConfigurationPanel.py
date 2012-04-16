@@ -2,6 +2,20 @@ from Tkinter import *
 from tkFileDialog import *
 
 # Default Values for Sliders
+
+STOCK_OPTIONS = [
+		"Consum",
+		"Detritus",
+		"DOC",
+		"Herbivore",
+		"Macro",
+		"Phyto",
+		"POC",
+		"Sed Consumer",
+		"Sed Decomp",
+		"Water Decomp"
+		]
+		
 DEFAULT_TSS = 10
 DEFAULT_MACRO = 19.7
 DEFAULT_GROSS_MACRO = 0.08
@@ -43,6 +57,7 @@ class ConfigurationPanel:
         options['title'] = 'This is a title'
 
         self._init_days_to_run()
+		self._init_which_stock()
         self._init_tss()
         self._init_macro_base_temp()
         self._init_gross_macro_coef()
@@ -146,9 +161,18 @@ class ConfigurationPanel:
         self.days_to_run = Entry(self.container,width=5)
         self.days_to_run.grid(row=row,column=column+1)
         
+	def _init_which_stock(self):
+		"""Creates an option box for which stock to choose"""
+		row,column = (0,1)
+		label = Label(self.container, text="Which Stock: ").grid(row=row)
+		stockVal = StringVar(self.container)
+		stockVal.set("Consum")
+		self.which_stock = OptionMenu(self.container, stockVal, "Consum", "Two")
+		self.which_stock.grid(row=row, column=column)
+
     def _init_tss(self):
         """Creates a slider for the TSS value."""
-        row,column = (0,1)
+        row,column = (1,1)
         label = Label(self.container,text="TSS: ").grid(row=row)
         self.tss_slider = Entry(self.container,width=5)
         self.tss_slider.insert(0, DEFAULT_TSS)
@@ -156,7 +180,7 @@ class ConfigurationPanel:
 
     def _init_macro_base_temp(self):
         """Creates a slider for the macro_base_temp."""
-        row,column = (1,1) 
+        row,column = (2,1) 
         label = Label(self.container,text="Macro Temperature: ").grid(row=row)
         self.macro_base_temp = Entry(self.container,width=5)
         self.macro_base_temp.insert(0,DEFAULT_MACRO)
@@ -164,7 +188,7 @@ class ConfigurationPanel:
 
     def _init_gross_macro_coef(self):
         """Creates a slider for gross_macro_coef."""
-        row,column = (2,1)
+        row,column = (3,1)
         label = Label(self.container,text="Gross Macro Coef: ").grid(row=row)
         self.gross_macro_coef = Entry(self.container,width=5)
         self.gross_macro_coef.insert(0,DEFAULT_GROSS_MACRO)
@@ -172,7 +196,7 @@ class ConfigurationPanel:
 
     def _init_resp_macro_coef(self):
         """Creates a slider for resp_macro_coef."""
-        row,column = (3,1)
+        row,column = (4,1)
         label = Label(self.container,text="Respiration Macro Coef: ").grid(row=row)
         self.resp_macro_coef = Entry(self.container,width=5)
         self.resp_macro_coef.insert(0,DEFAULT_RESP_MACRO_COEF)
@@ -180,7 +204,7 @@ class ConfigurationPanel:
 
     def _init_sen_macro_coef(self):
         """Creates a slider for sen_macro_coef."""
-        row,column = (4,1)
+        row,column = (5,1)
         label = Label(self.container,text="Senescence Macro Coef: ").grid(row=row)
         self.sen_macro_coef = Entry(self.container,width=5)
         self.sen_macro_coef.insert(0,DEFAULT_SEN_MACRO_COEF)
@@ -188,7 +212,7 @@ class ConfigurationPanel:
 
     def _init_macro_mass_max(self):
         """Creates a slider for macro_mass_max."""
-        row,column = (5,1)
+        row,column = (6,1)
         label = Label(self.container,text="Macro Mass Max: ").grid(row=row)
         self.macro_mass_max = Entry(self.container,width=5)
         self.macro_mass_max.insert(0,DEFAULT_MACRO_MASS_MAX)
@@ -196,7 +220,7 @@ class ConfigurationPanel:
 
     def _init_macro_vel_max(self):
         """Creates a slider for macro_vel_max."""
-        row,column = (6,1)
+        row,column = (7,1)
         label = Label(self.container,text="Macro Velocity Max: ").grid(row=row)
         self.macro_vel_max = Entry(self.container,width=5)
         self.macro_vel_max.insert(0,DEFAULT_MACRO_VEL_MAX)
@@ -204,7 +228,7 @@ class ConfigurationPanel:
 
     def _init_k_phyto(self):
         """Creates a slider for k_phyto."""
-        row,column = (7,1)
+        row,column = (8,1)
         label = Label(self.container,text="K-Phyto: ").grid(row=row)
         self.k_phyto = Entry(self.container,width=5)
         self.k_phyto.insert(0,DEFAULT_K_PHYTO)
@@ -212,7 +236,7 @@ class ConfigurationPanel:
 
     def _init_k_macro(self):
         """Creates a slider for k_macro."""
-        row,column = (8,1)
+        row,column = (9,1)
         label = Label(self.container,text="K-Macro: ").grid(row=row)
         self.k_macro = Entry(self.container,width=5)
         self.k_macro.insert(0,DEFAULT_K_MACRO)
@@ -220,7 +244,7 @@ class ConfigurationPanel:
 
     def _init_fixed_temp(self):
         """Creates a slider for the temperature."""
-        row,column = (9,1)
+        row,column = (10,1)
         label = Label(self.container,text="Temperature: ").grid(row=row)
         self.fixed_temp = Entry(self.container,width=5)
         self.fixed_temp.insert(0,DEFAULT_TEMP)
@@ -228,7 +252,7 @@ class ConfigurationPanel:
 
     def _init_fixed_par(self):
         """Creates a slider for the PAR."""
-        row,column=(10,1)
+        row,column=(11,1)
         label = Label(self.container,text="Photosynthetic Radiation: ").grid(row=row)
         self.fixed_par = Entry(self.container,width=5)
         self.fixed_par.insert(0,DEFAULT_PAR)
@@ -236,7 +260,7 @@ class ConfigurationPanel:
         
     def _init_reset_values(self):
         """Creates a button to reset the values of the sliders to their default values"""
-        row,column = (11,1)
+        row,column = (12,1)
         self.reset_values = Button(self.container, text="Reset To Default Values", command=self.reset)
         self.reset_values.grid(row=row, column=column)
 
@@ -258,6 +282,9 @@ class ConfigurationPanel:
     #######################################
     def get_days_to_run(self):
         return self.days_to_run.get()
+
+	def get_which_stock(self):
+		return self.which_stock.get()
 
     def get_tss_value(self):
         return self.tss_slider.get()
