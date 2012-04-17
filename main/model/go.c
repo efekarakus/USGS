@@ -55,7 +55,6 @@ void go()
             }
         }
     }
-    // avg_output();
 
     // flow carbon
     int max_timestep = get_timestep();

@@ -120,13 +120,12 @@ class ConfigurationPanel:
 
     def _init_flow_corners(self):
         """Creates a check button to see if we only want to flow carbon to the corners."""
-        row,column = (6,4)
+        row,column = (7,4)
         v = IntVar()
         self.flow_corners = Checkbutton(self.container,text="Adjacent cells only?",variable=v)
         self.flow_corners.var = v
         self.flow_corners.grid(row=row,column=column)
-        createToolTip(self.flow_corners, "If checked flows carbon only to adjacent cells, \
-         if unchecked flows carbon to according cell based on x-vector and y-vector")
+        createToolTip(self.flow_corners, "If checked flows carbon only to adjacent cells, else flows carbon to according cell based on x-vector and y-vector")
 
     def _init_remove_map(self):
         row,column=(5,3)
