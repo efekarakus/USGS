@@ -111,7 +111,6 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
         printf("Could not create folder './results' and write the data from the patches\n");
     }
     cleanup();
-    PyObject* data = (PyObject*)build_data();    
     return data;
 }
 
@@ -125,7 +124,7 @@ static PyObject* py_extract_whichstock(PyObject* self, PyObject* args)
     char* str;
     PyArg_ParseTuple(args, "s", &str);
     strcpy(which_stock,str);
-
+    printf("Which Stock: %s\n", which_stock);
     Py_INCREF(Py_None);
     return Py_None;
 }
@@ -305,20 +304,6 @@ static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args
 	Py_INCREF(Py_None);
 	return Py_None;
 }
-
-/**
- * Extracts the selected hydro map and days to run pair from the GUI
- * @param self The python object calling this C function
- * @args The hydro_map slider value
- */
- static PyObject* py_extract_hydro_map(PyObject* self, PyObject* args)
- {
-    PyArg_ParseTuple(args, "i", &gui_hydro_group);
-    printf("\n\nHYDRO MAP: %d\n", gui_hydro_group);
-    Py_INCREF(Py_None);
-    return Py_None;
- }
-
 
 PyObject* build_data(){
     int size = MAP_WIDTH*MAP_HEIGHT + 2;

@@ -65,9 +65,6 @@ static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args);
 /* Extracts the photo radiation from the GUI and assigns it in globals.h */
 static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args);
 
-/* Extracts the hydro map from the GUI */
-static PyObject* py_extract_hydro_map(PyObject* self, PyObject* args);
-
 PyObject* build_data();
 
 #endif
