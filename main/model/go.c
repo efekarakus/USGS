@@ -285,14 +285,17 @@ void flow_carbon(int x, int y) {
     int px = (int)(((double)max_timestep)*patches[x][y].px_vector);
     int py = (int)(((double)max_timestep)*patches[x][y].py_vector);
 
-    if (px >= 1) px = 1;
-    else if (px <= -1) px = -1;
-    else px = 0;
+    if (gui_flow_corners_only)
+    {
+        if (px >= 1) px = 1;
+        else if (px <= -1) px = -1;
+        else px = 0;
 
-    if (py >= 1) py = 1;
-    else if (py <= -1) py = -1;
-    else py = 0;
-
+        if (py >= 1) py = 1;
+        else if (py <= -1) py = -1;
+        else py = 0;
+    }
+    
     // flow carbon to the top/bottom patches
     if ( is_valid_patch(x, y+py) && (py!=0) )
     {
