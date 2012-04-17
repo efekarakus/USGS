@@ -157,7 +157,7 @@ class ConfigurationPanel:
         label = Label(self.container, text="Which Stock: ").grid(row=row)
         self.which_stock = OptionMenu(self.container, self.stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
         self.which_stock.grid(row=row, column=column)
-        createToolTip(which_stock, "stock value to display")
+        createToolTip(self.which_stock, "stock value to display")
 
     def _init_tss(self):
         """Creates a slider for the TSS value."""
