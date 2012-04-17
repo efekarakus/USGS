@@ -27,6 +27,7 @@ static PyMethodDef MainModule_methods[] = {
     {"setup_Command", py_setup_command, METH_VARARGS},
     {"cleanup_Command", py_cleanup_command, METH_VARARGS},
     {"extract_filenames_Command", py_extract_filenames, METH_VARARGS},
+    {"extract_flowcorners_Command", py_extract_flow_corners, METH_VARARGS},
     {NULL, NULL}
 };
 
@@ -322,6 +323,14 @@ static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args
 	printf("\n\nPHOTO RADIATION: %d\n", gui_photo_radiation);
 	Py_INCREF(Py_None);
 	return Py_None;
+}
+
+static PyObject* py_extract_flow_corners(PyObject* self, PyObject* args)
+{
+    PyArg_ParseTuple(args, "i", &gui_flow_corners_only);
+    printf("\n\nFLOW CORNERS: %d\n", gui_flow_corners_only);
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 
 PyObject* build_data(){

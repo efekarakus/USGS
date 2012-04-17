@@ -65,6 +65,9 @@ static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args);
 /* Extracts the photo radiation from the GUI and assigns it in globals.h */
 static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args);
 
+/* Extracts the flow corners check box button value and assigns it in globals.h */
+static PyObject* py_extract_flow_corners(PyObject* self, PyObject* args);
+
 PyObject* build_data();
 
 #endif

@@ -120,7 +120,7 @@ class ConfigurationPanel:
 
     def _init_flow_corners(self):
         """Creates a check button to see if we only want to flow carbon to the corners."""
-        row,column = (6,3)
+        row,column = (6,4)
         v = IntVar()
         self.flow_corners = Checkbutton(self.container,text="Adjacent cells only?",variable=v)
         self.flow_corners.var = v

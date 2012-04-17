@@ -66,7 +66,6 @@ class RiverModelAction:
         fixed_temperature_value = UI.get_fixed_temp()
         fixed_photo_radiation_value = UI.get_fixed_par()
         flow_corners = UI.get_flow_corners()
-        print flow_corners
         extract_whichstock_Command(which_stock)
         extract_TSS_Command(tss_value)
         extract_macro_base_temp_Command(macro_base_temp_value)
@@ -80,6 +79,7 @@ class RiverModelAction:
         extract_fixed_temperature_Command(fixed_temperature_value)
         extract_fixed_photo_radiation_Command(fixed_photo_radiation_value)
         extract_filenames_Command(hydromapFile)
+        extract_flowcorners_Command(flow_corners)
         colors_list = goCommand()
         output_image(colors_list)
 
