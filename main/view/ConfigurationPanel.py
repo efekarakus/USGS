@@ -65,6 +65,7 @@ class ConfigurationPanel:
         self._init_selected_maps()
         self._init_hydro_map_label()
         self._init_reset_values()
+        self._init_flow_corners()
 
     def forget(self):
         """Hides the frame in parent."""
@@ -106,6 +107,7 @@ class ConfigurationPanel:
         self.fixed_temp.insert(0,DEFAULT_TEMP)
         self.fixed_par.delete(0,END)
         self.fixed_par.insert(0,DEFAULT_PAR)
+        self.flow_corners.deselect()
 
     def removemap(self):
         try:
