@@ -52,6 +52,9 @@ class RiverModel:
     def get_days_to_run(self):
         return self.configuration_panel.get_days_to_run()
 
+    def get_which_stock(self):
+        return self.configuration_panel.get_which_stock()
+
     def get_tss_value(self):
         return self.configuration_panel.get_tss_value()
 

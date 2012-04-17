@@ -30,6 +30,16 @@ static PyMethodDef MainModule_methods[] = {
     {NULL, NULL}
 };
 
+void check_for_duplicate_files(int index)
+{
+  int i;
+  for(i = 0; i < index; i++)
+  {
+    if(strcmp(gui_filenames_array[i], gui_filenames_array[index]) == 0)
+      return;
+  }
+  unique_file_size++;
+}
 
 static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
     char* filenames;
@@ -42,8 +52,10 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
     filename = strtok(filenames, "?");
     int fileSize = atoi(filename);
     gui_filenames_filesize = fileSize;
+    num_hydro_files = fileSize;
     gui_filenames_array = (char**)malloc(fileSize*sizeof(char*));
     gui_days_array = (int**)malloc(fileSize*sizeof(int));
+    gui_filenames_index_array = (int*)malloc(fileSize*sizeof(int));
     
     // Parse the file name if one exists
     while((filename = strtok(NULL, "?")) != NULL)
@@ -51,12 +63,15 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
         printf("Filename: %s", filename); 
         gui_filenames_array[index] = (char*)malloc((strlen(filename)+1)*sizeof(char));
         strcpy(gui_filenames_array[index],filename);
+        check_for_duplicate_files(index);
         filename = strtok(NULL, "?");
         printf(" Days to run: %s\n", filename);
         gui_days_array[index] = (int*)malloc(sizeof(int));
         *(gui_days_array[index]) = atoi(filename); //Parse howmany days to run current file
         index++;
     }
+
+    check_filenames_array = (char**)malloc(unique_file_size*sizeof(char*));
     
     return Py_None;
 }
@@ -85,8 +100,11 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     //int tss;
     //PyArg_ParseTuple(args, "i", &tss);
     //tss = 2*tss;
+
+
+
     printf("MAX_PHYTO: %f\n", MAX_PHYTO);
-    
+
     int day;
     int index;
     setup();
@@ -94,9 +112,10 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     
     for(index = 0; index < gui_filenames_filesize; index++)
     {
-        printf("RUNNING FILE: %d FOR %d DAYS\n", *(gui_filenames_array[index]), *(gui_days_array[index]));
+        printf("RUNNING FILE: %s FOR %d DAYS\n", gui_filenames_array[index], *(gui_days_array[index]));
+        printf("FILE INDEX: %d\n", gui_filenames_index_array[index]);
         gui_days_to_run += *(gui_days_array[index]);  //Set howmany days to run the new hydromap
-        hydro_group = *(gui_filenames_array[index]); //Set the new hydromap that will run
+        hydro_group = (gui_filenames_index_array[index] + 1); //Set the new hydromap that will run
         hydro_changed = 1;  //Confirm that a new hydro map has been loaded
         
         while( (day = (hours / 24)) < gui_days_to_run)
