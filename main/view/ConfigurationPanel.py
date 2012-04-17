@@ -157,7 +157,7 @@ class ConfigurationPanel:
         label = Label(self.container, text="Which Stock: ").grid(row=row)
         self.which_stock = OptionMenu(self.container, self.stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
         self.which_stock.grid(row=row, column=column)
-        createToolTip(self.which_stock, "stock value to display")
+        createToolTip(self.which_stock, "stock value used for the image")
 
     def _init_tss(self):
         """Creates a slider for the TSS value."""
@@ -166,6 +166,7 @@ class ConfigurationPanel:
         self.tss_slider = Entry(self.container,width=5)
         self.tss_slider.insert(0, DEFAULT_TSS)
         self.tss_slider.grid(row=row,column=column)
+        createToolTip(self.tss_slider, "range between 0.0 and 20.0")
 
     def _init_macro_base_temp(self):
         """Creates a slider for the macro_base_temp."""
@@ -174,6 +175,7 @@ class ConfigurationPanel:
         self.macro_base_temp = Entry(self.container,width=5)
         self.macro_base_temp.insert(0,DEFAULT_MACRO)
         self.macro_base_temp.grid(row=row,column=column)
+        createToolTip(self.macro_base_temp,"range between 11.7 and 27.7")
 
     def _init_gross_macro_coef(self):
         """Creates a slider for gross_macro_coef."""
@@ -182,6 +184,7 @@ class ConfigurationPanel:
         self.gross_macro_coef = Entry(self.container,width=5)
         self.gross_macro_coef.insert(0,DEFAULT_GROSS_MACRO)
         self.gross_macro_coef.grid(row=row,column=column)
+        createToolTip(self.gross_macro_coef,"range between 0.0 and 1.0")
 
     def _init_resp_macro_coef(self):
         """Creates a slider for resp_macro_coef."""
@@ -190,6 +193,7 @@ class ConfigurationPanel:
         self.resp_macro_coef = Entry(self.container,width=5)
         self.resp_macro_coef.insert(0,DEFAULT_RESP_MACRO_COEF)
         self.resp_macro_coef.grid(row=row,column=column)
+        createToolTip(self.resp_macro_coef,"range between 0.0 and 1.0")
 
     def _init_sen_macro_coef(self):
         """Creates a slider for sen_macro_coef."""
@@ -198,6 +202,7 @@ class ConfigurationPanel:
         self.sen_macro_coef = Entry(self.container,width=5)
         self.sen_macro_coef.insert(0,DEFAULT_SEN_MACRO_COEF)
         self.sen_macro_coef.grid(row=row,column=column)
+        createToolTip(self.sen_macro_coef, "range between 0.0 and 1.0")
 
     def _init_macro_mass_max(self):
         """Creates a slider for macro_mass_max."""
@@ -206,6 +211,7 @@ class ConfigurationPanel:
         self.macro_mass_max = Entry(self.container,width=5)
         self.macro_mass_max.insert(0,DEFAULT_MACRO_MASS_MAX)
         self.macro_mass_max.grid(row=row,column=column)
+        createToolTip(self.macro_mass_max, "range between 500.0 and 1500.0")
 
     def _init_macro_vel_max(self):
         """Creates a slider for macro_vel_max."""
@@ -214,6 +220,7 @@ class ConfigurationPanel:
         self.macro_vel_max = Entry(self.container,width=5)
         self.macro_vel_max.insert(0,DEFAULT_MACRO_VEL_MAX)
         self.macro_vel_max.grid(row=row,column=column)
+        createToolTip(self.macro_vel_max, "range between 0.2 and 1.6")
 
     def _init_k_phyto(self):
         """Creates a slider for k_phyto."""
@@ -222,6 +229,7 @@ class ConfigurationPanel:
         self.k_phyto = Entry(self.container,width=5)
         self.k_phyto.insert(0,DEFAULT_K_PHYTO)
         self.k_phyto.grid(row=row,column=column)
+        createToolTip(self.k_phyto, "range between 0.0 and 1.0")
 
     def _init_k_macro(self):
         """Creates a slider for k_macro."""
@@ -230,6 +238,7 @@ class ConfigurationPanel:
         self.k_macro = Entry(self.container,width=5)
         self.k_macro.insert(0,DEFAULT_K_MACRO)
         self.k_macro.grid(row=row,column=column)
+        createToolTip(self.k_macro, "range between 0.0 and 1.0")
 
     def _init_fixed_temp(self):
         """Creates a slider for the temperature."""
@@ -238,6 +247,7 @@ class ConfigurationPanel:
         self.fixed_temp = Entry(self.container,width=5)
         self.fixed_temp.insert(0,DEFAULT_TEMP)
         self.fixed_temp.grid(row=row,column=column)
+        createToolTip(self.fixed_temp, "range between 0.0 and 30.0")
 
     def _init_fixed_par(self):
         """Creates a slider for the PAR."""
@@ -246,6 +256,7 @@ class ConfigurationPanel:
         self.fixed_par = Entry(self.container,width=5)
         self.fixed_par.insert(0,DEFAULT_PAR)
         self.fixed_par.grid(row=row,column=column)
+        createToolTip(self.fixed_par, "range between 0.0 and 2000.0")
         
     def _init_reset_values(self):
         """Creates a button to reset the values of the sliders to their default values"""
