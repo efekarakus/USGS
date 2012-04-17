@@ -118,6 +118,16 @@ class ConfigurationPanel:
         except IndexError:
             pass
 
+    def _init_flow_corners(self):
+        """Creates a check button to see if we only want to flow carbon to the corners."""
+        row,column = (6,3)
+        v = IntVar()
+        self.flow_corners = Checkbutton(self.container,text="Adjacent cells only?",variable=v)
+        self.flow_corners.var = v
+        self.flow_corners.grid(row=row,column=column)
+        createToolTip(self.flow_corners, "If checked flows carbon only to adjacent cells, \
+         if unchecked flows carbon to according cell based on x-vector and y-vector")
+
     def _init_remove_map(self):
         row,column=(5,3)
         self.remove_map = Button(self.container, text="Remove Selected Map", command=self.removemap)
@@ -260,18 +270,10 @@ class ConfigurationPanel:
         self.fixed_par.grid(row=row,column=column)
         createToolTip(self.fixed_par, "range between 0.0 and 2000.0")
 
-    def _init_flow_corners(self):
-        """Creates a check button to see if we only want to flow carbon to the corners."""
-        row,column = (12,1)
-        Label(self.container,text="Flow carbon only to corners? ").grid(row=row)
-        v = IntVar()
-        self.flow_corners = Checkbutton(self.container,text="Adjacent cells only?",variable=v)
-        self.flow_corners.var = v
-        self.flow_corners.grid(row=row,column=column)
         
     def _init_reset_values(self):
         """Creates a button to reset the values of the sliders to their default values"""
-        row,column = (13,1)
+        row,column = (12,1)
         self.reset_values = Button(self.container, text="Reset To Default Values", command=self.reset)
         self.reset_values.grid(row=row, column=column)
 
