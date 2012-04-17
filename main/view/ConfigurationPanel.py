@@ -152,11 +152,11 @@ class ConfigurationPanel:
         self.days_to_run.grid(row=row,column=column+1)
         
     def _init_which_stock(self):
-		"""Creates an option box for which stock to choose"""
-		row,column = (0,1)
-		label = Label(self.container, text="Which Stock: ").grid(row=row)
-		self.which_stock = OptionMenu(self.container, self.stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
-		self.which_stock.grid(row=row, column=column)
+        """Creates an option box for which stock to choose"""
+        row,column = (0,1)
+        label = Label(self.container, text="Which Stock: ").grid(row=row)
+        self.which_stock = OptionMenu(self.container, self.stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
+        self.which_stock.grid(row=row, column=column)
         createToolTip(which_stock, "stock value to display")
 
     def _init_tss(self):
