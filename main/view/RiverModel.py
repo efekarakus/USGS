@@ -88,6 +88,9 @@ class RiverModel:
     def get_fixed_par(self):
         return self.configuration_panel.get_fixed_par()
 
+    def get_flow_corners(self):
+        return self.configuration_panel.get_fixed_corners()
+
     def get_filenames(self):
         return self.configuration_panel.filenames
 

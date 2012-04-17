@@ -257,10 +257,18 @@ class ConfigurationPanel:
         self.fixed_par.insert(0,DEFAULT_PAR)
         self.fixed_par.grid(row=row,column=column)
         createToolTip(self.fixed_par, "range between 0.0 and 2000.0")
+
+    def _init_flow_corners(self):
+        """Creates a check button to see if we only want to flow carbon to the corners."""
+        row,column = (12,1)
+        Label(self.container,text="Flow carbon only to corners? ").grid(row=row)
+        v = IntVar()
+        self.flow_corners = CheckButton(self.container,text="Adjacent cells only?",variable=v)
+        self.flow_corners.var = v
         
     def _init_reset_values(self):
         """Creates a button to reset the values of the sliders to their default values"""
-        row,column = (12,1)
+        row,column = (13,1)
         self.reset_values = Button(self.container, text="Reset To Default Values", command=self.reset)
         self.reset_values.grid(row=row, column=column)
 
@@ -321,4 +329,7 @@ class ConfigurationPanel:
 
     def get_hydro_map(self):
         return self.hydro_map.get()
+
+    def get_fixed_corners(self):
+        return self.flow_corners.var.get()
 
