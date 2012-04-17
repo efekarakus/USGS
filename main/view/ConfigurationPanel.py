@@ -1,5 +1,6 @@
 from Tkinter import *
 from tkFileDialog import *
+from ToolTip import *
 
 # Default Values for Sliders
 		
@@ -154,6 +155,7 @@ class ConfigurationPanel:
 		"""Creates an option box for which stock to choose"""
 		row,column = (0,1)
 		label = Label(self.container, text="Which Stock: ").grid(row=row)
+        createToolTip(label, "stock value to display")
 		self.which_stock = OptionMenu(self.container, self.stockVal, "consum", "detritus", "DOC", "herbivore", "macro", "POC", "phyto", "sedconsumer", "seddecomp", "waterdecomp")
 		self.which_stock.grid(row=row, column=column)
 
