@@ -267,6 +267,7 @@ class ConfigurationPanel:
         v = IntVar()
         self.flow_corners = Checkbutton(self.container,text="Adjacent cells only?",variable=v)
         self.flow_corners.var = v
+        self.flow_corners.grid(row=row,column=column)
         
     def _init_reset_values(self):
         """Creates a button to reset the values of the sliders to their default values"""
