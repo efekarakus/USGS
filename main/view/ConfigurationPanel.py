@@ -265,7 +265,7 @@ class ConfigurationPanel:
         row,column = (12,1)
         Label(self.container,text="Flow carbon only to corners? ").grid(row=row)
         v = IntVar()
-        self.flow_corners = CheckButton(self.container,text="Adjacent cells only?",variable=v)
+        self.flow_corners = Checkbutton(self.container,text="Adjacent cells only?",variable=v)
         self.flow_corners.var = v
         
     def _init_reset_values(self):
