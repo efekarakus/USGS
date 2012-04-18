@@ -29,7 +29,9 @@ void update_color(){
     int x = 0;
     int y = 0;
 
+
     if( strcmp(which_stock, "macro") == 0){
+        printf("I enter macro\n");
 		hue = 120.0 / 360.0;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
@@ -44,6 +46,7 @@ void update_color(){
 
 
     else if( strcmp(which_stock, "phyto") == 0){
+        printf("I enter phyto\n");
 		hue = 120.0 / 360.0;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
@@ -58,6 +61,7 @@ void update_color(){
 
 
     else if( strcmp(which_stock, "waterdecomp") == 0){
+        printf("I enter waterdecomp\n");
 		hue = 120.0 / 360.0;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
@@ -72,6 +76,7 @@ void update_color(){
 
 
     else if( strcmp(which_stock, "POC") == 0){
+        printf("I enter POC\n");
 		hue = 240.0 / 360.0;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
@@ -87,6 +92,7 @@ void update_color(){
      * we use only green.
      */
     else if( strcmp(which_stock, "detritus") == 0){
+        printf("I enter detritus\n");
 		hue = 19.6 / 360.0;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
@@ -101,6 +107,7 @@ void update_color(){
 
 
     else if( strcmp(which_stock, "sedconsumer") == 0){
+        printf("I enter sedconsumer\n");
 		hue = 60.0 / 360.0;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
@@ -114,6 +121,7 @@ void update_color(){
     }
 
 	else if( strcmp(which_stock, "seddecomp") == 0){
+        printf("I enter seddecomp\n");
 		hue = 240.0 / 360.0;
 		for(y = 0; y < MAP_HEIGHT; y++){
 			for(x = 0; x < MAP_WIDTH; x++){
@@ -127,6 +135,7 @@ void update_color(){
 	}
 	
 	else if( strcmp(which_stock, "herbivore") == 0){
+        printf("I enter herbivore\n");
 		hue = 300.0 / 360.0;
 		for(y = 0; y < MAP_HEIGHT; y++){
 			for(x = 0; x < MAP_WIDTH; x++){
@@ -140,6 +149,7 @@ void update_color(){
 	}
 	
 	else if( strcmp(which_stock, "consum") == 0){
+        printf("I enter consum\n");
 		hue = 300.0 / 360.0;
 		for(y = 0; y < MAP_HEIGHT; y++){
 			for(x = 0; x < MAP_WIDTH; x++){
@@ -153,6 +163,7 @@ void update_color(){
 	}
 	
 	else if( strcmp(which_stock, "DOC") == 0){
+        printf("I enter DOC\n");
 		hue = 60.0 / 360.0;
 		for(y = 0; y < MAP_HEIGHT; y++){
 			for(x = 0; x < MAP_WIDTH; x++){
