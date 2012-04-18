@@ -1,11 +1,12 @@
 #include "color.h"
 #include <math.h>
 
-void scale_color(double value, int maxVal, int minVal, int x, int y){
+void scale_color(double value, double maxVal, double minVal, int x, int y){
     float returnValue;
     if(maxVal == minVal){
-        printf("Error in use of scale_color. Max and min value are equal.\n");
-        exit(1);
+        printf("Max and min value are equal in scale_color.\n");
+        return 0.0;
+        //exit(1);
     }
 
     if(value <= minVal || isnan(value) ){
@@ -34,7 +35,7 @@ void update_color(){
                     colorValues[x][y] = -1;//(222 << 16) | (184 << 8) | 135;
                 }
                 else
-                  scale_color(patches[x][y].macro, MAX_MACRO, 0, x, y); //TODO: replace it with MAX_MACRO
+                  scale_color(patches[x][y].macro, MAX_MACRO, 0.0, x, y); //TODO: replace it with MAX_MACRO
             }
         }
     }
@@ -48,7 +49,7 @@ void update_color(){
                     colorValues[x][y] = -1;
                 }
                 else
-                  scale_color(patches[x][y].phyto, MAX_PHYTO, 0, x, y); //TODO: replace it with MAX_PHYTO
+                  scale_color(patches[x][y].phyto, MAX_PHYTO, 0.0, x, y); //TODO: replace it with MAX_PHYTO
             }
         }
     }
@@ -62,7 +63,7 @@ void update_color(){
                     colorValues[x][y] = -1;
                 }
                 else
-                    scale_color(patches[x][y].waterdecomp, MAX_WATERDECOMP, 0, x, y);
+                    scale_color(patches[x][y].waterdecomp, MAX_WATERDECOMP, 0.0, x, y);
             }
         }
     }
@@ -76,7 +77,7 @@ void update_color(){
                     colorValues[x][y] = -1;
                 }
                 else
-                    scale_color(patches[x][y].POC, MAX_POC, 0, x, y);
+                    scale_color(patches[x][y].POC, MAX_POC, 0.0, x, y);
             }
         }
     }
@@ -91,7 +92,7 @@ void update_color(){
                     colorValues[x][y] = -1;
                 }
                 else
-                    scale_color(patches[x][y].detritus, MAX_DETRITUS, 0, x, y);
+                    scale_color(patches[x][y].detritus, MAX_DETRITUS, 0.0, x, y);
             }
         }
     }
@@ -105,7 +106,7 @@ void update_color(){
                     colorValues[x][y] = -1;
                 }
                 else
-                    scale_color(patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0, x, y);
+                    scale_color(patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0.0, x, y);
             }
         }
     }
@@ -118,7 +119,7 @@ void update_color(){
 					colorValues[x][y] = -1;
 				}
 				else //Magic numbers taken from original Netlogo code
-					scale_color(patches[x][y].seddecomp, MAX_SEDDECOMP, 0, x, y);
+					scale_color(patches[x][y].seddecomp, MAX_SEDDECOMP, 0.0, x, y);
 			}
 		}
 	}
@@ -131,7 +132,7 @@ void update_color(){
 					colorValues[x][y] = -1;
 				}
 				else //Magic numbers taken from original Netlogo code
-					scale_color(patches[x][y].herbivore, MAX_HERBIVORE, 0, x, y);
+					scale_color(patches[x][y].herbivore, MAX_HERBIVORE, 0.0, x, y);
 			}
 		}
 	}
@@ -144,7 +145,7 @@ void update_color(){
 					colorValues[x][y] = -1;
 				}
 				else //Magic numbers taken from original Netlogo code
-					scale_color(patches[x][y].consum, MAX_CONSUM, 0, x, y);
+					scale_color(patches[x][y].consum, MAX_CONSUM, 0.0, x, y);
 			}
 		}
 	}
@@ -157,7 +158,7 @@ void update_color(){
 					colorValues[x][y] = -1;
 				}
 				else //Magic numbers taken from original Netlogo code
-					scale_color(patches[x][y].herbivore, MAX_DOC, 0, x, y);
+					scale_color(patches[x][y].herbivore, MAX_DOC, 0.0, x, y);
 			}
 		}
 	}
