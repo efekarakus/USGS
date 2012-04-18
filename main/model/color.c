@@ -5,7 +5,9 @@ void scale_color(double value, double maxVal, double minVal, int x, int y){
     float returnValue;
     if(maxVal == minVal){
         printf("Max and min value are equal in scale_color.\n");
-        return 0.0;
+        returnValue = 0.0;
+        colorValues[x][y] = returnValue;
+        return;
         //exit(1);
     }
 
