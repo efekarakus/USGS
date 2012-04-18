@@ -146,7 +146,9 @@ class ConfigurationPanel:
         if(self.get_days_to_run() != "" and self.filename != "" and self.get_days_to_run().isdigit() and int(self.get_days_to_run()) > 0):
           self.filenames.append(self.filename)
           self.daystorunarray.append(self.get_days_to_run())
-          self.selected_maps.insert(END, self.filename + " : " + str(self.get_days_to_run()) + " Days")
+
+          truncated_name = self.filename.split('/')[-1]
+          self.selected_maps.insert(END, truncated_name + " : " + str(self.get_days_to_run()) + " Days")
 
     def _init_add_map(self):
         """Creates a button to add a hydro map and selected days to the model"""
