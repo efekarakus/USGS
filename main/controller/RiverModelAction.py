@@ -48,7 +48,7 @@ class RiverModelAction:
 		"""
 
 		returnValue = True
-		
+
 		tss_v = UI.get_tss_value()
 		macro_base_temp_v = UI.get_macro_base_temp()
 		gross_macro_coef_v = UI.get_gross_macro_coef()
@@ -110,7 +110,7 @@ class RiverModelAction:
         fixed_photo_radiation_value = UI.get_fixed_par()
         flow_corners = UI.get_flow_corners()
 
-		if (errorCheck() == True):
+		if errorCheck():
 			extract_whichstock_Command(which_stock)
 			extract_TSS_Command(tss_value)
 			extract_macro_base_temp_Command(macro_base_temp_value)
@@ -127,6 +127,5 @@ class RiverModelAction:
 			extract_flowcorners_Command(flow_corners)
 			colors_list = goCommand()
 			output_image(colors_list)
-
 		else:
 			print("error checking gives false")
