@@ -47,16 +47,16 @@ void update_color(){
 
     else if( strcmp(which_stock, "phyto") == 0){
 		hue = 120.0 / 360.0;
-        double testAvg = 0;
-        int testIndex = 0;
+        double total_phyto = 0;
+        int num_patches = 0;
         
         for(y=0; y < MAP_HEIGHT; y++){
           for(x = 0; x < MAP_WIDTH; x++){
-            testAvg +=patches[x][y].phyto;
-            testIndex++;
+            total_phyto +=patches[x][y].phyto;
+            num_patches++;
           }
         }
-        double test = testAvg/testIndex;
+        double AVG_phyto = total_phyto/num_patches;
 
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
@@ -65,8 +65,7 @@ void update_color(){
                 }
                 else
                 {
-                  //printf("Phyto value: %f\n", patches[x][y].phyto);
-                  scale_color(patches[x][y].phyto, test, 0.0, x, y);
+                  scale_color(patches[x][y].phyto, AVG_phyto, 0.0, x, y);
                 }
             }
         }
@@ -89,13 +88,25 @@ void update_color(){
 
     else if( strcmp(which_stock, "POC") == 0){
 		hue = 240.0 / 360.0;
+        double total_POC = 0;
+        int num_patches = 0;
+        
+        for(y=0; y < MAP_HEIGHT; y++){
+          for(x = 0; x < MAP_WIDTH; x++){
+            total_POC +=patches[x][y].POC;
+            num_patches++;
+          }
+        }
+        double AVG_POC = total_POC/num_patches;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
                 if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = -1;
                 }
-                else
-                    scale_color(patches[x][y].POC, MAX_POC, 0.0, x, y);
+                else{
+                    printf("POC Value: %f\n", patches[x][y].POC);
+                    scale_color(patches[x][y].POC, AVG_POC, 0.0, x, y);
+                }
             }
         }
     }
@@ -163,7 +174,6 @@ void update_color(){
 					colorValues[x][y] = -1;
 				}
 				else{ //Magic numbers taken from original Netlogo code
-                    printf("Consum values: %f\n", patches[x][y].consum);
 					scale_color(patches[x][y].consum, MAX_CONSUM, 0.0, x, y);
                 }
 			}
@@ -172,13 +182,24 @@ void update_color(){
 	
 	else if( strcmp(which_stock, "DOC") == 0){
 		hue = 60.0 / 360.0;
+        double total_DOC = 0;
+        int num_patches = 0;
+        
+        for(y=0; y < MAP_HEIGHT; y++){
+          for(x = 0; x < MAP_WIDTH; x++){
+            total_DOC +=patches[x][y].DOC;
+            num_patches++;
+          }
+        }
+        double AVG_DOC = total_DOC/num_patches;
 		for(y = 0; y < MAP_HEIGHT; y++){
 			for(x = 0; x < MAP_WIDTH; x++){
 				if(patches[x][y].depth == 0.0){
 					colorValues[x][y] = -1;
 				}
-				else //Magic numbers taken from original Netlogo code
-					scale_color(patches[x][y].herbivore, MAX_DOC, 0.0, x, y);
+				else{ //Magic numbers taken from original Netlogo code
+                    scale_color(patches[x][y].DOC, AVG_DOC, 0.0, x, y);
+                }
 			}
 		}
 	}
