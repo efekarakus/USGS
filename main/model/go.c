@@ -192,57 +192,6 @@ void update_par()
 	photo_radiation = photo_radiation - (photo_radiation * par_dif);
 }
 
-
-/**
- * Go through all the patches with cell-type = 'output' and take the 
- * mean of the Stock variables
- */
-void avg_output() {
-    
-    int x,y;
-    int count = 0;
-    double sum_macro = 0.0;
-    double sum_phyto = 0.0;
-    double sum_herbivore = 0.0;
-    double sum_waterdecomp = 0.0;
-    double sum_seddecomp = 0.0;
-    double sum_sedconsumer = 0.0;
-    double sum_consum = 0.0;
-    double sum_DOC = 0.0;
-    double sum_POC = 0.0;
-    double sum_detritus = 0.0;
-
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
-            // output cells
-            if( patches[x][y].cell_type == 0 )
-            {
-                sum_macro += patches[x][y].macro;
-                sum_phyto += patches[x][y].phyto;
-                sum_herbivore += patches[x][y].herbivore;
-                sum_waterdecomp += patches[x][y].waterdecomp;
-                sum_seddecomp += patches[x][y].seddecomp;
-                sum_sedconsumer += patches[x][y].consum;
-                sum_DOC += patches[x][y].DOC;
-                sum_POC += patches[x][y].POC;
-                sum_detritus += patches[x][y].detritus;
-                count++;
-            }
-        }
-    }
-
-    out_macro = sum_macro/count;
-    out_phyto = sum_phyto/count;
-    out_herbivore = sum_herbivore/count;
-    out_waterdecomp = sum_waterdecomp/count;
-    out_seddecomp = sum_seddecomp/count;
-    out_sedconsumer = sum_sedconsumer/count;
-    out_consum = sum_consum/count;
-    out_DOC = sum_DOC/count;
-    out_POC = sum_POC/count;
-    out_detritus = sum_detritus/count;
-}
-
 /**
  * @return the max_timestep based on the greatest x-y vector
  */
@@ -277,12 +226,6 @@ void flow_carbon(int x, int y) {
     double corner_patch = fabs( patches[x][y].py_vector * patches[x][y].px_vector )/max_area;
     double tb_patch = fabs( patches[x][y].py_vector*( patch_length - fabs(patches[x][y].px_vector) ) )/max_area;
     double rl_patch = fabs( patches[x][y].px_vector*( patch_length - fabs(patches[x][y].py_vector) ) )/max_area;
-
-    /**
-    if ( gui_loop_output ) {
-        if ( patches[x][y].cell_type ) loop_output(x,y);
-    }
-    */
 
     // if a neighbor patch is dry, the carbon does not move in that direction
     int max_timestep = get_timestep();

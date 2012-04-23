@@ -34,12 +34,6 @@ void update_temp();
 void update_par();
 
 /**
- * Go through all the patches with cell-type = 'output' and take the 
- * mean of the Stock variables
- */
-void avg_output();
-
-/**
  * @return the max_timestep based on the greatest x-y vector
  */
 int get_timestep();

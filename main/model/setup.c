@@ -110,7 +110,6 @@ void init_patch_values(int col, int row){
 	patches[col][row].current_depth = 0.0;
 	patches[col][row].velocity = 0.0;
 	patches[col][row].aqa_point = 0;
-	patches[col][row].cell_type = 0;
 	patches[col][row].waterdecomp_doc_prey_limitation = 0.0;
 	patches[col][row].waterdecomp_poc_prey_limitation = 0.0;
 	patches[col][row].peri_doc_prey_limitation = 0.0;
@@ -246,6 +245,22 @@ void init_patch_values(int col, int row){
 	patches[col][row].waterdecomp_respiration = 0.0;
 	patches[col][row].waterdecomp_senescence = 0.0;
 	patches[col][row].turbidity = 0.0;
+
+
+	patches[col][row].available = malloc(num_unique_files*sizeof(int));        
+	patches[col][row].pxv_list = malloc(num_unique_files*sizeof(double));
+	patches[col][row].pyv_list = malloc(num_unique_files*sizeof(double));
+	patches[col][row].depth_list = malloc(num_unique_files*sizeof(double));
+	patches[col][row].v_list = malloc(num_unique_files*sizeof(double));
+	int index;
+	for(index = 0; index < num_unique_files; index++)
+	{
+		patches[col][row].pxv_list[index] = 0.0;
+		patches[col][row].available[index] = 0;
+		patches[col][row].pyv_list[index] = 0.0;
+		patches[col][row].depth_list[index] = 0.0;
+		patches[col][row].v_list[index] = 0.0;
+	}
 }
 
 /**
@@ -271,23 +286,6 @@ void init_patches()
         for(row = 0; row < MAP_HEIGHT; row++) 
 		{
 			init_patch_values(col, row);
-            
-
-            patches[col][row].available = malloc(num_unique_files*sizeof(int));
-            
-            patches[col][row].pxv_list = malloc(num_unique_files*sizeof(double));
-            patches[col][row].pyv_list = malloc(num_unique_files*sizeof(double));
-            patches[col][row].depth_list = malloc(num_unique_files*sizeof(double));
-            patches[col][row].v_list = malloc(num_unique_files*sizeof(double));
-            int index;
-            for(index = 0; index < num_unique_files; index++)
-            {
-              patches[col][row].pxv_list[index] = 0.0;
-              patches[col][row].available[index] = 0;
-              patches[col][row].pyv_list[index] = 0.0;
-              patches[col][row].depth_list[index] = 0.0;
-              patches[col][row].v_list[index] = 0.0;
-            }
         }
     }
 }
@@ -414,46 +412,6 @@ void import_hydro()
     for(k = 0; k < current_file_index; k++)
       printf("%d ", hydromap_index_array[k]);
     printf("\n");
-
-    //Read in the cell-type file and set the patches
-    strcpy(file, cell_type_path);
-    pFile = fopen(file, "r");
-
-    if(pFile == NULL)
-    {
-        printf("Failed to open cell-type.txt");
-        exit(1);
-    }
-
-    // Go through the cell-type.txt file and set the appropriate patches
-    char temp_cell_type[256];
-
-    // skip the file layout
-    for(j = 0; j < 3; j++) 
-	{
-        fscanf(pFile, "%s", str);
-    }
-
-    while(fscanf(pFile, "%s", str) != EOF)
-    {
-        temp_x = atoi(str);
-        fscanf(pFile, "%s", str);
-        temp_y = atoi(str);
-        fscanf(pFile, "%s", str);
-        strcpy(temp_cell_type,  str);
-
-        // assign the cell_type to the patches
-        if(strcmp(temp_cell_type,"\"output\"") == 0)
-        {
-            patches[temp_x][temp_y].cell_type = 0;
-        }
-        else
-        {
-            patches[temp_x][temp_y].cell_type = 1;
-        }
-    }
-
-    fclose(pFile);
 }
 
 

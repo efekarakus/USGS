@@ -51,7 +51,6 @@ typedef struct _patch {
 	double velocity;      ///< the rate of flow for hydraulics
 	double* v_list;       ///< list of velocities
 	int aqa_point;        ///< biomass estimates of macro from USGS
-	short cell_type;      ///< 0 for "output", 1 for "input"
 
 	double waterdecomp_doc_prey_limitation;       ///< NOT AVAILABLE
 	double waterdecomp_poc_prey_limitation;       ///< NOT AVAILABLE
