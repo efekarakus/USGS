@@ -106,7 +106,7 @@ class RiverModelAction:
         fixed_temperature_value = UI.get_fixed_temp()
         fixed_photo_radiation_value = UI.get_fixed_par()
         flow_corners = UI.get_flow_corners()
-        
+
 		if errorCheck():
 			extract_whichstock_Command(which_stock)
 			extract_TSS_Command(tss_value)
