@@ -32,9 +32,9 @@ char which_stock[100]; ///< which-stock?
 
 // GUI input hydro maps and days for each map
 char** gui_filenames_array;
-int** gui_days_array;
-int* gui_filenames_index_array;
-int unique_file_size = 0;
+int* gui_days_array;
+int* hydromap_index_array;
+int num_unique_files = 0;
 int current_file_index = 0;
 char** check_filenames_array;
 int gui_filenames_filesize;

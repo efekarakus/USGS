@@ -39,7 +39,7 @@ typedef struct _patch {
 	int pcolor; ///< the rgb_value for the patch
 	
 	/* Extra patch variables that were added by Scientists */
-    short available;      ///< 0 if this patch did not contain information in the hydro_maps, 1 otherwise
+    int* available;      ///< 0 if this patch did not contain information in the hydro_maps, 1 otherwise
 	double px_vector;     ///< flow vector in the x_direction for hydraulics
 	double* pxv_list;     ///< list of x_flow vectors
 	double py_vector;     ///< flow vector in the y_direction for hydraulics

@@ -23,6 +23,15 @@ void clean_patches();
 
 
 /**
+ * Frees the hydromap_index_array
+ */
+void clean_hydromap_index_array();
+
+/**
+ * Frees the chek_filenames_array;
+ */
+void clean_check_filenames_array();
+/**
  * Frees the gui_filenames_arrau and days_array
  */
  void clean_gui_filenames_and_days();

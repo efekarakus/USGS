@@ -58,6 +58,8 @@ void go()
 
     // flow carbon
     int max_timestep = get_timestep();
+    if(max_timestep == 0)
+      max_timestep = 3600;
     int t, max_time = 3600/max_timestep;
     nan_trigger = 0;      // set nan to false
     for (t = 0; t < max_time; t++) {
@@ -90,6 +92,7 @@ void update_environmentals()
 		if (hydro_changed == 1)
 		{
 			update_hydro_map();	// Updates a new hydro map based on the discharge
+            printf("Done with update hydro map\n");
 		    hydro_changed = 0;
         }
 	}
@@ -110,12 +113,15 @@ void update_environmentals()
 void update_hydro_map() {
     double max_vector = 0;
     int x, y;
+
+    printf("Updating hydro map for: %d\n",hydro_group-1);
+
     for(y = 0; y < MAP_HEIGHT; y++) {
         for(x = 0; x < MAP_WIDTH; x++) {
             
             // the hydro maps contained information about this patch
             // set the values of px_vector, py_vector, depth and velocity
-            if(patches[x][y].available) {
+            if(patches[x][y].available[hydro_group-1]) {
                 patches[x][y].px_vector = patches[x][y].pxv_list[hydro_group-1];
                 patches[x][y].py_vector = patches[x][y].pyv_list[hydro_group-1];
                 patches[x][y].depth = patches[x][y].depth_list[hydro_group-1];
@@ -133,7 +139,6 @@ void update_hydro_map() {
                 patches[x][y].velocity = 0.0;
                 patches[x][y].max_vector = 0.0;
             }
-
             // update miscellanous variables inside the patch
             if( (patches[x][y].current_depth > 0.0) && (patches[x][y].depth == 0.0) ) {
                 patches[x][y].detritus += patches[x][y].DOC + patches[x][y].POC + patches[x][y].phyto + 
@@ -156,8 +161,9 @@ void update_hydro_map() {
             patches[x][y].current_depth = patches[x][y].depth;
 
             // update the max_vector value
-            if(patches[x][y].max_vector > max_vector) 
+            if(patches[x][y].max_vector > max_vector){
                 max_vector = patches[x][y].max_vector;
+            }
         }// endfor y
     }// endfor x
 
@@ -241,7 +247,8 @@ void avg_output() {
  * @return the max_timestep based on the greatest x-y vector
  */
 int get_timestep() {
-    return gui_timestep_factor*(patch_length/COMPARE_MAX);
+  
+    return gui_timestep_factor*(((double)patch_length)/((double)COMPARE_MAX));
 }
 
 int is_nan(int x, int y, double move_factor) {

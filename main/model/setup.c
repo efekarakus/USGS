@@ -33,15 +33,6 @@ void find_map_sizes()
     int index;
     for(index = 0; index < num_hydro_files; index++) 
 	{
-		/*char* hydro_map = file_names[index];
-		char* path = hydrosets_path;
-		int length = strlen(path) + strlen(hydro_map) + strlen(file_extension) + strlen(".txt") + 1;
-		char hydro_path[length];
-		strcpy(hydro_path, path);
-		strcat(hydro_path, hydro_map);
-		strcat(hydro_path, file_extension);
-		strcat(hydro_path, ".txt");
-     */
 		FILE* file = fopen(gui_filenames_array[index], "r");
 		if (file == NULL) 
 		{
@@ -114,8 +105,8 @@ void init_patches()
     int row = 0;
     int col = 0;
 
-	covered_area = (int*)malloc(unique_file_size*sizeof(int));
-	uncovered_area = (int*)malloc(unique_file_size*sizeof(int));
+	covered_area = (int*)malloc(num_unique_files*sizeof(int));
+	uncovered_area = (int*)malloc(num_unique_files*sizeof(int));
     patches = malloc(MAP_WIDTH*sizeof(patch*));
     for(col = 0; col < MAP_WIDTH; col++) 
 	{
@@ -127,16 +118,27 @@ void init_patches()
 	{
         for(row = 0; row < MAP_HEIGHT; row++) 
 		{
+            patches[col][row].max_vector = 0.0;
             patches[col][row].pxcor = col; 
             patches[col][row].pycor = row;
             patches[col][row].pcolor = 0;
             patches[col][row].current_depth = 0;
-            patches[col][row].available = 0;  // we have not seen this patch yet
 
-            patches[col][row].pxv_list = malloc(unique_file_size*sizeof(double));
-            patches[col][row].pyv_list = malloc(unique_file_size*sizeof(double));
-            patches[col][row].depth_list = malloc(unique_file_size*sizeof(double));
-            patches[col][row].v_list = malloc(unique_file_size*sizeof(double));
+            patches[col][row].available = malloc(num_unique_files*sizeof(int));
+            
+            patches[col][row].pxv_list = malloc(num_unique_files*sizeof(double));
+            patches[col][row].pyv_list = malloc(num_unique_files*sizeof(double));
+            patches[col][row].depth_list = malloc(num_unique_files*sizeof(double));
+            patches[col][row].v_list = malloc(num_unique_files*sizeof(double));
+            int index;
+            for(index = 0; index < num_unique_files; index++)
+            {
+              patches[col][row].pxv_list[index] = 0.0;
+              patches[col][row].available[index] = 0;
+              patches[col][row].pyv_list[index] = 0.0;
+              patches[col][row].depth_list[index] = 0.0;
+              patches[col][row].v_list[index] = 0.0;
+            }
         }
     }
 }
@@ -171,8 +173,7 @@ int check_duplicate_files(int index)
   {
     check_filenames_array[index] = (char*)malloc((strlen(gui_filenames_array[index]) + 1)*sizeof(char));
     strcpy(check_filenames_array[index], gui_filenames_array[index]);
-    gui_filenames_index_array[index] = index;
-    printf("We get here!\n");
+    hydromap_index_array[index] = index;
     return 0;
   }
   int i;
@@ -181,14 +182,14 @@ int check_duplicate_files(int index)
     // We found a duplicate file
     if(strcmp(check_filenames_array[i], gui_filenames_array[index]) == 0)
     {
-      gui_filenames_index_array[index] = i;
+      hydromap_index_array[index] = i;
       return 1;
     }
   }
-  // No duplicate file so add to the unique file array
+  // Not a duplicate fil,e so add to the unique file array
   check_filenames_array[current_file_index] = (char*)malloc((strlen(gui_filenames_array[index]) + 1)*sizeof(char));
   strcpy(check_filenames_array[current_file_index], gui_filenames_array[index]);
-  gui_filenames_index_array[index] = index;
+  hydromap_index_array[index] = current_file_index;
   return 0;
 }
 
@@ -209,12 +210,7 @@ void import_hydro()
 
     for(i = 0;i < num_hydro_files; i++)
     {
-       /* strcpy(file, path);
-        strcat(file, file_names[i]);
-        strcat(file, file_extension);
-        strcat(file, ".txt");
-        */
-
+        // Do not import a file we have already processed
         if(check_duplicate_files(i) == 1)
           continue;
         
@@ -247,8 +243,8 @@ void import_hydro()
             temp_py_vector = value;
             fscanf(pFile, "%f", &value);
             temp_velocity = value;
-
-            patches[temp_x][temp_y].available = 1;
+            
+            patches[temp_x][temp_y].available[current_file_index] = 1;
             patches[temp_x][temp_y].pxcor = temp_x;
             patches[temp_x][temp_y].pycor = temp_y;
             patches[temp_x][temp_y].pxv_list[current_file_index] = temp_px_vector;
@@ -264,6 +260,11 @@ void import_hydro()
         current_file_index++;
         fclose(pFile);
     }
+
+    int k;
+    for(k = 0; k < current_file_index; k++)
+      printf("%d ", hydromap_index_array[k]);
+    printf("\n");
 
     //Read in the cell-type file and set the patches
     strcpy(file, cell_type_path);
