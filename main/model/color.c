@@ -17,10 +17,10 @@ void scale_color(double value, double maxVal, double minVal, int x, int y){
         returnValue = 1.0;
     }
     else{
-        float rangeValues = abs(maxVal - minVal);
+        float rangeValues = fabs(maxVal - minVal);
         returnValue = (value / rangeValues);
     }
-	
+   // printf("ReturnValue: %f\n", returnValue);	
     colorValues[x][y] = returnValue;
 }
 
@@ -37,7 +37,9 @@ void update_color(){
                     colorValues[x][y] = -1;
                 }
                 else
+                {
                   scale_color(patches[x][y].macro, MAX_MACRO, 0.0, x, y); 
+                }
             }
         }
     }
@@ -45,13 +47,27 @@ void update_color(){
 
     else if( strcmp(which_stock, "phyto") == 0){
 		hue = 120.0 / 360.0;
+        double testAvg = 0;
+        int testIndex = 0;
+        
+        for(y=0; y < MAP_HEIGHT; y++){
+          for(x = 0; x < MAP_WIDTH; x++){
+            testAvg +=patches[x][y].phyto;
+            testIndex++;
+          }
+        }
+        double test = testAvg/testIndex;
+
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
                 if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = -1;
                 }
                 else
-                  scale_color(patches[x][y].phyto, MAX_PHYTO, 0.0, x, y);
+                {
+                  //printf("Phyto value: %f\n", patches[x][y].phyto);
+                  scale_color(patches[x][y].phyto, test, 0.0, x, y);
+                }
             }
         }
     }
@@ -146,8 +162,10 @@ void update_color(){
 				if(patches[x][y].depth == 0.0){
 					colorValues[x][y] = -1;
 				}
-				else //Magic numbers taken from original Netlogo code
+				else{ //Magic numbers taken from original Netlogo code
+                    printf("Consum values: %f\n", patches[x][y].consum);
 					scale_color(patches[x][y].consum, MAX_CONSUM, 0.0, x, y);
+                }
 			}
 		}
 	}
