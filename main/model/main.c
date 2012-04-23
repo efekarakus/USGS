@@ -105,7 +105,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 
 
 
-    printf("MAX_PHYTO: %f\n", MAX_POC);
+    printf("MAX_PHYTO: %f\n", MAX_PHYTO);
 
     int day;
     int index;
@@ -122,10 +122,10 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
         
         while( (day = (hours / 24)) < gui_days_to_run)
         {   
-            printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_POC);
+            printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
             go();
         }   
-        printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_POC);
+        printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
     }
     PyObject* data = (PyObject*)build_data();    
     if (!dump_data()) {

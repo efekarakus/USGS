@@ -20,7 +20,6 @@ void scale_color(double value, double maxVal, double minVal, int x, int y){
         float rangeValues = fabs(maxVal - minVal);
         returnValue = (value / rangeValues);
     }
-   // printf("ReturnValue: %f\n", returnValue);	
     colorValues[x][y] = returnValue;
 }
 
@@ -52,8 +51,10 @@ void update_color(){
         
         for(y=0; y < MAP_HEIGHT; y++){
           for(x = 0; x < MAP_WIDTH; x++){
-            total_phyto +=patches[x][y].phyto;
-            num_patches++;
+            if(patches[x][y].depth > 0.0){
+              total_phyto +=patches[x][y].phyto;
+              num_patches++;
+            }
           }
         }
         double AVG_phyto = total_phyto/num_patches;
@@ -74,13 +75,26 @@ void update_color(){
 
     else if( strcmp(which_stock, "waterdecomp") == 0){
 		hue = 120.0 / 360.0;
+        double total_waterdecomp = 0;
+        int num_patches = 0;
+        
+        for(y=0; y < MAP_HEIGHT; y++){
+          for(x = 0; x < MAP_WIDTH; x++){
+            if(patches[x][y].depth > 0.0){
+              total_waterdecomp +=patches[x][y].waterdecomp;
+              num_patches++;
+            }
+          }
+        }
+        double AVG_waterdecomp = total_waterdecomp/num_patches;
         for(y = 0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
                 if (patches[x][y].depth == 0.0) {
                     colorValues[x][y] = -1;
                 }
-                else
-                    scale_color(patches[x][y].waterdecomp, MAX_WATERDECOMP, 0.0, x, y);
+                else{
+                    scale_color(patches[x][y].waterdecomp, AVG_waterdecomp, 0.0, x, y);
+                }
             }
         }
     }
@@ -93,8 +107,10 @@ void update_color(){
         
         for(y=0; y < MAP_HEIGHT; y++){
           for(x = 0; x < MAP_WIDTH; x++){
-            total_POC +=patches[x][y].POC;
-            num_patches++;
+            if(patches[x][y].depth > 0.0){
+              total_POC +=patches[x][y].POC;
+              num_patches++;
+            }
           }
         }
         double AVG_POC = total_POC/num_patches;
@@ -104,7 +120,6 @@ void update_color(){
                     colorValues[x][y] = -1;
                 }
                 else{
-                    printf("POC Value: %f\n", patches[x][y].POC);
                     scale_color(patches[x][y].POC, AVG_POC, 0.0, x, y);
                 }
             }
@@ -115,41 +130,68 @@ void update_color(){
      */
     else if( strcmp(which_stock, "detritus") == 0){
 		hue = 19.6 / 360.0;
-        for(y = 0; y < MAP_HEIGHT; y++){
-            for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0.0) {
-                    colorValues[x][y] = -1;
-                }
-                else
-                    scale_color(patches[x][y].detritus, MAX_DETRITUS, 0.0, x, y);
+        double total_detritus = 0;
+        int num_patches = 0;
+        
+        for(y=0; y < MAP_HEIGHT; y++){
+          for(x = 0; x < MAP_WIDTH; x++){
+            if(patches[x][y].depth > 0.0){
+              total_detritus +=patches[x][y].detritus;
+              num_patches++;
             }
+          }
         }
-    }
+          double AVG_detritus = total_detritus/num_patches;
+          for(y = 0; y < MAP_HEIGHT; y++){
+              for(x = 0; x < MAP_WIDTH; x++){
+                  if (patches[x][y].depth == 0.0) {
+                      colorValues[x][y] = -1;
+                  }
+                  else{
+                      scale_color(patches[x][y].detritus, AVG_detritus, 0.0, x, y);
+                  }
+              }
+          }
+      }
 
 
-    else if( strcmp(which_stock, "sedconsumer") == 0){
-		hue = 60.0 / 360.0;
-        for(y = 0; y < MAP_HEIGHT; y++){
+      else if( strcmp(which_stock, "sedconsumer") == 0){
+          hue = 60.0 / 360.0;
+          for(y = 0; y < MAP_HEIGHT; y++){
+              for(x = 0; x < MAP_WIDTH; x++){
+                  if (patches[x][y].depth == 0.0) {
+                      colorValues[x][y] = -1;
+                  }
+                  else{
+                      scale_color(patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0.0, x, y);
+                  }
+              }
+          }
+      }
+
+      else if( strcmp(which_stock, "seddecomp") == 0){
+          hue = 240.0 / 360.0;
+          double total_seddecomp = 0;
+          int num_patches = 0;
+          
+          for(y=0; y < MAP_HEIGHT; y++){
             for(x = 0; x < MAP_WIDTH; x++){
-                if (patches[x][y].depth == 0.0) {
-                    colorValues[x][y] = -1;
-                }
-                else
-                    scale_color(patches[x][y].sedconsumer, MAX_SEDCONSUMER, 0.0, x, y);
+              if(patches[x][y].depth > 0.0){
+                total_seddecomp +=patches[x][y].seddecomp;
+                num_patches++;
+              }
             }
-        }
-    }
-
-	else if( strcmp(which_stock, "seddecomp") == 0){
-		hue = 240.0 / 360.0;
+          }
+        double AVG_seddecomp = total_seddecomp/num_patches;
 		for(y = 0; y < MAP_HEIGHT; y++){
 			for(x = 0; x < MAP_WIDTH; x++){
 				if(patches[x][y].depth == 0.0){
 					colorValues[x][y] = -1;
 				}
-				else //Magic numbers taken from original Netlogo code
-					scale_color(patches[x][y].seddecomp, MAX_SEDDECOMP, 0.0, x, y);
-			}
+				else{ //Magic numbers taken from original Netlogo code
+                    scale_color(patches[x][y].seddecomp, AVG_seddecomp, 0.0, x, y);
+			    }
+            }
 		}
 	}
 	
@@ -160,8 +202,10 @@ void update_color(){
 				if(patches[x][y].depth == 0.0){
 					colorValues[x][y] = -1;
 				}
-				else //Magic numbers taken from original Netlogo code
-					scale_color(patches[x][y].herbivore, MAX_HERBIVORE, 0.0, x, y);
+				else{ //Magic numbers taken from original Netlogo code
+					printf("herbivore value: %f\n", patches[x][y].herbivore);
+                    scale_color(patches[x][y].herbivore, MAX_HERBIVORE, 0.0, x, y);
+                }
 			}
 		}
 	}
@@ -187,8 +231,10 @@ void update_color(){
         
         for(y=0; y < MAP_HEIGHT; y++){
           for(x = 0; x < MAP_WIDTH; x++){
-            total_DOC +=patches[x][y].DOC;
-            num_patches++;
+            if(patches[x][y].depth > 0.0){
+              total_DOC +=patches[x][y].DOC;
+              num_patches++;
+            }
           }
         }
         double AVG_DOC = total_DOC/num_patches;
