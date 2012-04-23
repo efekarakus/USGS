@@ -96,6 +96,158 @@ void find_map_width_height(FILE* hydro_file)
     MAP_HEIGHT = max_y+1;
 }
 
+void init_patch_values(int col, int row){
+
+	patches[col][row].max_vector = 0.0;
+    patches[col][row].pxcor = col; 
+    patches[col][row].pycor = row;
+    patches[col][row].pcolor = 0;
+    patches[col][row].current_depth = 0;
+	patches[col][row].px_vector = 0.0;
+	patches[col][row].py_vector = 0.0;
+	patches[col][row].max_vector = 0.0;
+	patches[col][row].depth = 0.0;
+	patches[col][row].current_depth = 0.0;
+	patches[col][row].velocity = 0.0;
+	patches[col][row].aqa_point = 0;
+	patches[col][row].cell_type = 0;
+	patches[col][row].waterdecomp_doc_prey_limitation = 0.0;
+	patches[col][row].waterdecomp_poc_prey_limitation = 0.0;
+	patches[col][row].peri_doc_prey_limitation = 0.0;
+	patches[col][row].peri_poc_prey_limitation = 0.0;
+	patches[col][row].seddecomp_detritus_prey_limitation = 0.0;
+	patches[col][row].herbivore_phyto_prey_limitation = 0.0;
+	patches[col][row].herbivore_waterdecomp_prey_limitation = 0.0;
+	patches[col][row].herbivore_peri_prey_limitation = 0.0;
+	patches[col][row].sedconsumer_seddecomp_prey_limitation = 0.0;
+	patches[col][row].sedconsumer_peri_prey_limitation = 0.0;
+	patches[col][row].sedconsumer_detritus_prey_limitation = 0.0;
+	patches[col][row].consum_herbivore_prey_limitation = 0.0;
+	patches[col][row].consum_sedconsumer_prey_limitation = 0.0;
+	
+	patches[col][row].peri_space_limitation = 0.0;
+	patches[col][row].waterdecomp_space_limitation = 0.0;
+	patches[col][row].seddecomp_space_limitation = 0.0;
+	patches[col][row].herbivore_space_limitation = 0.0;
+	patches[col][row].sedconsumer_space_limitation = 0.0;
+	patches[col][row].consum_space_limitation = 0.0;
+	patches[col][row].assimilation = 0.0;
+	patches[col][row].detritus = 0.0;
+	patches[col][row].DOC = 0.0;
+	patches[col][row].POC = 0.0;
+	patches[col][row].waterdecomp = 0.0;
+	patches[col][row].seddecomp = 0.0;
+	patches[col][row].macro = 0.0;
+	patches[col][row].phyto = 0.0;
+	patches[col][row].herbivore = 0.0;
+	patches[col][row].sedconsumer = 0.0;
+	patches[col][row].peri = 0.0;
+	patches[col][row].consum = 0.0;
+	patches[col][row].bottom_light = 0.0;
+	patches[col][row].consumer = 0.0;
+	patches[col][row].consum_consumption = 0.0;
+	patches[col][row].consum_ingest_herbivore = 0.0;
+	patches[col][row].consum_pred_herbivore = 0.0;
+	patches[col][row].consum_ingest_sedconsumer = 0.0;
+	patches[col][row].consum_pred_sedconsumer = 0.0;
+	patches[col][row].consum_excretion = 0.0;
+	patches[col][row].consum_sda = 0.0;
+	patches[col][row].consum_senescence = 0.0;
+	patches[col][row].consum_respiration = 0.0;
+	patches[col][row].consum_growth = 0.0;
+	patches[col][row].detritus_growth = 0.0;
+	patches[col][row].detritus_POC_transfer = 0.0;
+	patches[col][row].seddecomp_pred_detritus = 0.0;
+	patches[col][row].sedconsumer_pred_detritus = 0.0;
+	patches[col][row].direction = 0.0;
+	patches[col][row].DOC_growth = 0.0;
+	patches[col][row].DOC_pred = 0.0;
+	patches[col][row].egestion = 0.0;
+	patches[col][row].excretion = 0.0;
+	patches[col][row].excretion_phyto = 0.0;
+	patches[col][row].flocculation = 0.0;
+	patches[col][row].gross_photo = 0.0;
+	patches[col][row].gross_photo_macro = 0.0;
+	patches[col][row].gross_photo_phyto = 0.0;
+	patches[col][row].growth_herbivore = 0.0;
+	patches[col][row].growth_detritus = 0.0;
+	patches[col][row].growth_macro = 0.0;
+	patches[col][row].growth_sedconsumer = 0.0;
+	patches[col][row].growth_phyto = 0.0;
+	patches[col][row].growth_waterdecomp = 0.0;
+	patches[col][row].herbivore_consumption = 0.0;
+	patches[col][row].herbivore_ingest_peri = 0.0;
+	patches[col][row].herbivore_pred_peri = 0.0;
+	patches[col][row].herbivore_ingest_phyto = 0.0;
+	patches[col][row].herbivore_pred_phyto = 0.0;
+	patches[col][row].herbivore_ingest_waterdecomp = 0.0;
+	patches[col][row].herbivore_pred_waterdecomp = 0.0;
+	patches[col][row].herbivore_excretion = 0.0;
+	patches[col][row].herbivore_sda = 0.0;
+	patches[col][row].herbivore_senescence = 0.0;
+	patches[col][row].herbivore_respiration = 0.0;
+	patches[col][row].herbivore_growth = 0.0;
+	patches[col][row].K = 0.0;
+	patches[col][row].large_death = 0.0;
+	patches[col][row].light = 0.0;
+	patches[col][row].light_k = 0.0;
+	patches[col][row].macro_death = 0.0;
+	patches[col][row].macro_exudation = 0.0;
+	patches[col][row].micro_death = 0.0;
+	patches[col][row].phyto_maximum_growth_rate = 0.0;
+	patches[col][row].phyto_pred = 0.0;
+	patches[col][row].POC_detritus_transfer = 0.0;
+	patches[col][row].POC_growth = 0.0;
+	patches[col][row].POC_pred = 0.0;
+	patches[col][row].phyto_density = 0.0;
+	patches[col][row].peri_ingest_doc = 0.0;
+	patches[col][row].peri_pred_doc = 0.0;
+	patches[col][row].peri_ingest_poc = 0.0;
+	patches[col][row].peri_pred_poc = 0.0;
+	patches[col][row].peri_respiration = 0.0;
+	patches[col][row].peri_excretion = 0.0;
+	patches[col][row].peri_senescence = 0.0;
+	patches[col][row].senescence = 0.0;
+	patches[col][row].scouring = 0.0;
+	patches[col][row].small_death = 0.0;
+	patches[col][row].respiration = 0.0;
+	patches[col][row].respiration_macro = 0.0;
+	patches[col][row].respiration_phyto = 0.0;
+	patches[col][row].scouring_macro = 0.0;
+	patches[col][row].sedconsumer_ingest_peri = 0.0;
+	patches[col][row].sedconsumer_pred_peri = 0.0;
+	patches[col][row].senescence_macro = 0.0;
+	patches[col][row].senescence_phyto = 0.0;
+	patches[col][row].sedconsumer_consumption = 0.0;
+	patches[col][row].sedconsumer_ingest_detritus = 0.0;
+	patches[col][row].sedconsumer_ingest_seddecomp = 0.0;
+	patches[col][row].sedconsumer_pred_seddecomp = 0.0;
+	patches[col][row].sedconsumer_excretion = 0.0;
+	patches[col][row].sedconsumer_egestion = 0.0;
+	patches[col][row].sedconsumer_senescence = 0.0;
+	patches[col][row].sedconsumer_respiration = 0.0;
+	patches[col][row].sedconsumer_growth = 0.0;
+	patches[col][row].seddecomp_consumption = 0.0;
+	patches[col][row].seddecomp_ingest_detritus = 0.0;
+	patches[col][row].seddecomp_excretion = 0.0;
+	patches[col][row].seddecomp_growth = 0.0;
+	patches[col][row].seddcomp_ingest_peri = 0.0;
+	patches[col][row].seddecomp_pred_peri = 0.0;
+	patches[col][row].seddecomp_respiration = 0.0;
+	patches[col][row].seddecomp_senescence = 0.0;
+	patches[col][row].velpoc = 0.0;
+	patches[col][row].waterdecomp_consumption = 0.0;
+	patches[col][row].waterdecomp_ingest_doc = 0.0;
+	patches[col][row].waterdecomp_sda = 0.0;
+	patches[col][row].waterdecomp_excretion = 0.0;
+	patches[col][row].waterdecomp_ingest_poc = 0.0;
+	patches[col][row].waterdecomp_pred_doc = 0.0;
+	patches[col][row].waterdecomp_pred_poc = 0.0;
+	patches[col][row].waterdecomp_respiration = 0.0;
+	patches[col][row].waterdecomp_senescence = 0.0;
+	patches[col][row].turbidity = 0.0;
+}
+
 /**
  * Creates the 2D array of patches
  */
@@ -118,11 +270,8 @@ void init_patches()
 	{
         for(row = 0; row < MAP_HEIGHT; row++) 
 		{
-            patches[col][row].max_vector = 0.0;
-            patches[col][row].pxcor = col; 
-            patches[col][row].pycor = row;
-            patches[col][row].pcolor = 0;
-            patches[col][row].current_depth = 0;
+			init_patch_values(col, row);
+            
 
             patches[col][row].available = malloc(num_unique_files*sizeof(int));
             

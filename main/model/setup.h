@@ -37,6 +37,13 @@ void find_map_sizes();
 void find_map_width_height(FILE* hydro_file);
 
 /**
+ * Initializes every value in the specified patch
+ * @param col
+ * @param row
+ */
+void init_patch_values(int col, int row);
+
+/**
  * Creates the 2D array of patches
  */
 void init_patches();
