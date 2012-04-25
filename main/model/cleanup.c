@@ -23,7 +23,7 @@ void clean_patches() {
     for (x = 0; x < MAP_WIDTH; x++) {
         for (y = 0; y < MAP_HEIGHT; y++) {
             free( patches[x][y].available );
-            printf("cleaned available\n")
+            printf("cleaned available\n");
             free( patches[x][y].pxv_list );
             printf("cleaned pxv_list\n");
             free( patches[x][y].pyv_list );
@@ -36,7 +36,7 @@ void clean_patches() {
         free( patches[x] );
         printf("cleaned pacthes X\n");
         free( colorValues[x] );
-        printf("cleaned colorvalues X\n")
+        printf("cleaned colorvalues X\n");
     }
 	free( covered_area );
     printf("cleaned covered_area\n");
@@ -62,14 +62,14 @@ void clean_gui_filenames_and_days() {
 
 void clean_hydromap_index_array() {
   free(hydromap_index_array);
-  printf("cleaned hydromap_index_array\n")
+  printf("cleaned hydromap_index_array\n");
 }
 
 void clean_check_filenames_array() {
   int index;
   for(index = 0; index < num_unique_files; index++){
     free(check_filenames_array[index]);
-    printf("cleaned check_filenames_array index\n", );
+    printf("cleaned check_filenames_array index\n");
   }
   free(check_filenames_array);
   printf("cleaned check_filenames_array\n");
