@@ -32,7 +32,6 @@ void reset_globals()
 	hours = 0;
 	COMPARE_MAX = 0.0;
 
-	num_unique_files = 0;
 	current_file_index = 0;
 
 	temp_dif = 0.0;
