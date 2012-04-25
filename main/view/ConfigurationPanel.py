@@ -33,6 +33,8 @@ class ConfigurationPanel:
         self.filenames = []
         self.daystorunarray = []
         self.filename = ""
+        self.parfile = ""
+        self.tempfile = ""
         
         self.stockVal = StringVar(self.container)
         self.stockVal.set("consum")
@@ -66,6 +68,10 @@ class ConfigurationPanel:
         self._init_hydro_map_label()
         self._init_reset_values()
         self._init_flow_corners()
+        self._init_temperature_file()
+        self._init_temperature_file_label()
+        self._init_par_file()
+        self._init_par_file_label()
 
     def forget(self):
         """Hides the frame in parent."""
@@ -81,7 +87,17 @@ class ConfigurationPanel:
     def _init_hydro_map_label(self):
         """Shows what hydro map is currently selected"""
         row,column = (1,3)
-        hydrolabel = Label(self.container, text="Selected Map: " + self.filename).grid(row=row,column=column+1)
+        hydrolabel = Label(self.container, text="Selected Map: ").grid(row=row,column=column+1)
+
+    def _init_temperature_file_label(self):
+        """Shows the current temp file that is selected."""
+        row,column = (1,4)
+        temperaturelabel = Label(self.container, text="Selected Temperature: ").grid(row=row,column=column+1)
+
+    def _init_par_file_label(self):
+        """Shows the current par file tha is selected."""
+        row,column = (3,4)
+        parlabel = Label(self.container, text="Selected PAR: ").grid(row=row,column=column+1)
 
     def reset(self):
         """Resets the values of sliders to default values""" 
@@ -283,6 +299,30 @@ class ConfigurationPanel:
         ar = self.filename.split('/')
         fn = ar[len(ar)-1]
         self.hydrolabel = Label(self.container,text="Selected Map: " + fn).grid(row=1,column=4)
+
+    def asktemp(self):
+        self.tempfile = askopenfilename(**self.file_opt)
+        ar = self.tempfile.split('/')
+        tf = ar[len(ar) - 1]
+        self.temperaturelabel = Label(self.container, text="Selected Temperature: " + tf).grid(row=1,column=5)
+
+    def askpar(self):
+        self.parfile = askopenfilename(**self.file_opt)
+        ar = self.parfile.split('/')
+        pf = ar[len(ar) - 1]
+        self.parlabel = Label(self.container, text="Selected PAR: " + pf).grid(row=3,column=5)
+
+    def _init_par_file(self):
+        """Creates a button for the PAR file selection."""
+        row,column = (2,4)
+        self.par_file = Button(self.container, text='Open PAR File',command = self.askpar)
+        self.par_file.grid(row=row,column=column+1)
+
+    def _init_temperature_file(self):
+        """Creates a button for the temperature files."""
+        row,column = (0,4)
+        self.temp_file = Button(self.container, text='Open Temperature File',command = self.asktemp)
+        self.temp_file.grid(row=row,column=column+1)
 
     def _init_hydro_map(self):
         """Creates a button for the hydro maps."""
