@@ -32,6 +32,14 @@ void reset_globals()
 	hours = 0;
 	COMPARE_MAX = 0.0;
 
+	num_unique_files = 0;
+	current_file_index = 0;
+
+	temp_dif = 0.0;
+	par_dif = 0.0;
+
+	nan_trigger = 0;
+
 	MAX_MACRO = 0.0;
 	MAX_PHYTO = 0.0;
 	MAX_HERBIVORE = 0.0;
@@ -524,7 +532,7 @@ void import_hydro()
 
     int k;
     for(k = 0; k < current_file_index; k++)
-      printf("%d ", hydromap_index_array[k]);
+      printf("%d ", hydromap_index_array[k]); //TODO problem here on second run
     printf("\n");
 }
 

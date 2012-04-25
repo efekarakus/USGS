@@ -98,18 +98,11 @@ static PyObject* py_cleanup_command(){
 */
 static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 
-    //TODO: remove this section
-    //int tss;
-    //PyArg_ParseTuple(args, "i", &tss);
-    //tss = 2*tss;
-
-
-
-    printf("MAX_PHYTO: %f\n", MAX_PHYTO);
 
     int day;
     int index;
     setup();
+    printf("MAX_PHYTO: %f\n", MAX_PHYTO);
     printf("FILESIZE: %d\n", gui_filenames_filesize);
     
     for(index = 0; index < gui_filenames_filesize; index++)

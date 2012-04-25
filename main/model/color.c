@@ -203,9 +203,8 @@ void update_color(){
 					colorValues[x][y] = -1;
 				}
 				else{ //Magic numbers taken from original Netlogo code
-					printf("herbivore value: %f\n", patches[x][y].herbivore);
-                    scale_color(patches[x][y].herbivore, MAX_HERBIVORE, 0.0, x, y);
-                }
+               scale_color(patches[x][y].herbivore, MAX_HERBIVORE, 0.0, x, y);
+            }
 			}
 		}
 	}
