@@ -8,7 +8,7 @@
 int MAP_WIDTH;  ///< the map's width
 int MAP_HEIGHT; ///< the map's height
 long hours = 0;	///< Represents 1 tick (should always be [0, sizeof(long)]
-double COMPARE_MAX; ///< represents the maximum of the x or y vector among all patches, this is used to calculate max step
+double COMPARE_MAX = 0.0; ///< represents the maximum of the x or y vector among all patches, this is used to calculate max step
 
 // GUI variables
 char* file_extension = "new";
@@ -48,11 +48,9 @@ int* uncovered_area;    ///< Area of land not covered by water
 
 int temperature_index;	///< The index of the current temperature value
 int photo_radiation_index;	///< The index of the current photo_radiation value
-int discharge_index;	///< The index of the current discharge value
 
 double temperature;	///< temp
 int photo_radiation;	///< photo_radiation
-int discharge;	///< discharge
 
 int hydro_group;	///< hydro-group
 int hydro_changed = 0;  //boolean stating if the hydro map was changed
@@ -78,11 +76,11 @@ double MAX_POC = 0.0;
 double MAX_DETRITUS = 0.0;
 
 
-double max_waterdecomp = 6.26/24;
-double max_seddecomp = 6.26/24;
+double max_waterdecomp = 6.26/24.0;
+double max_seddecomp = 6.26/24.0;
 double max_herbivore = 1.0/24.0;
 double herbivore_egestion = 0.2;
-double max_sedconsumer = 0.55/24;
+double max_sedconsumer = 0.55/24.0;
 double sedconsumer_egestion_seddecomp = 0.35;
 double max_consum = 0.125/24;
 double e_waterdecomp = 0.173/24;
@@ -177,19 +175,8 @@ double TSS = 10;
 double gross_macro_coef = 0.08;
 double resp_macro_coef = 0.04;
 double sen_macro_coef = 0.08;
-int macro_mas_max = 1000;
+double macro_mas_max = 1000.0;
 double macro_vel_max = 1.0;
-
-double out_macro;
-double out_phyto;
-double out_herbivore;
-double out_waterdecomp;
-double out_seddecomp;
-double out_sedconsumer;
-double out_consum;
-double out_DOC;
-double out_POC;
-double out_detritus;
 
 
 #endif

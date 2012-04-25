@@ -8,6 +8,7 @@
  */
 void setup() 
 {
+	reset_globals();
     printf("calling find_map_sizes()\n");
 	find_map_sizes();
     printf("finished find_map_sizes\n");
@@ -19,6 +20,119 @@ void setup()
     setup_environmentals();
     setup_stocks();
     printf("SUCCESS -- setup\n");
+}
+
+/**
+ * Resets all the values in globals.h
+ */
+void reset_globals() 
+{
+	MAP_WIDTH = 0;
+	MAP_HEIGHT = 0;
+	hours = 0;
+	COMPARE_MAX = 0.0;
+
+	MAX_MACRO = 0.0;
+	MAX_PHYTO = 0.0;
+	MAX_HERBIVORE = 0.0;
+	MAX_WATERDECOMP = 0.0;
+	MAX_SEDDECOMP = 0.0;
+	MAX_SEDCONSUMER = 0.0;
+	MAX_CONSUM = 0.0;
+	MAX_DOC = 0.0;
+	MAX_POC = 0.0;
+	MAX_DETRITUS = 0.0;
+
+	max_waterdecomp = 6.26/24.0;
+	max_seddecomp = 6.26/24.0;
+	max_herbivore = 1.0/24.0;
+	herbivore_egestion = 0.2;
+	max_sedconsumer = 0.55/24.0;
+	sedconsumer_egestion_seddecomp = 0.35;
+	max_consum = 0.125/24.0;
+	e_waterdecomp = 0.173/24.0;
+	e_seddecomp = 0.173/24.0;
+	e_herbivore = 0.4/24.0;
+	e_sedconsumer = 0.01/24.0;
+	sedconsumer_egestion_detritus = 0.9;
+	e_consum = 0.0032/24.0;
+	r_waterdecomp = 0.6/24.0;
+	r_seddecomp = 0.6/24.0;
+	r_herbivore = 0.08/24.0;
+	r_sedconsumer = 0.04/24.0;
+	r_consum = 0.0125/24.0;
+	s_waterdecomp = 0.05/24.0;
+	s_seddecomp = 0.05/24.0;
+	s_herbivore = 0.01/24.0;
+	s_sedconsumer = 0.01/24.0;
+	s_consum = 0.002/24.0;
+	consum_egestion = 0.2;
+
+	Ai_waterdecomp_DOC = 30.0;
+	Ai_waterdecomp_POC = 30.0;
+	Ai_Peri_DOC = 30.0;
+	Ai_Peri_POC = 30.0;
+	Ai_seddecomp_detritus = 0.6;
+	Ai_herbivore_phyto = 20;
+	Ai_herbivore_waterdecomp = 3.0;
+	Ai_herbivore_peri = 3.0;
+	Ai_sedconsumer_seddecomp = 3.0;
+	Ai_sedconsumer_peri = 2.0;
+	Ai_sedconsumer_detritus = 3.5;
+	Ai_consum_herbivore = 3.5;
+	Ai_consum_sedconsumer = 4.0;
+	Gi_waterdecomp_DOC = 0.05;
+	Gi_waterdecomp_POC = 0.05;
+	Gi_Peri_DOC = 0.05;
+	Gi_Peri_POC = 0.05;
+	Gi_seddecomp_detritus = 0.005;
+	Gi_herbivore_phyto = 0.01;
+	Gi_herbivore_waterdecomp = 0.01;
+	Gi_herbivore_peri = 0.01;
+	Gi_sedconsumer_seddecomp = 0.02;
+	Gi_sedconsumer_peri = 0.02;
+	Gi_sedconsumer_detritus = 0.02;
+	Gi_consum_herbivore = 0.025;
+	Gi_consum_sedconsumer = 0.04;
+	pref_waterdecomp_DOC = 0.5;
+	pref_waterdecomp_POC = 0.5;
+	pref_Peri_DOC = 0.5;
+	pref_Peri_POC = 0.5;
+	pref_seddecomp_detritus = 1.0;
+	pref_herbivore_phyto = 0.7;
+	pref_herbivore_waterdecomp = 0.15;
+	pref_herbivore_peri = 0.15;
+	pref_sedconsumer_seddecomp = 0.5;
+	pref_sedconsumer_peri = 0.4;
+	pref_sedconsumer_detritus = 0.1;
+	pref_consum_herbivore = 0.7;
+	pref_consum_sedconsumer = 0.3;
+
+	Aj_phyto = 10.0;
+	Aj_waterdecomp = 1.2;
+	Aj_seddecomp = 0.2;
+	Aj_herbivore = 2.4;
+	Aj_sedconsumer = 2.0;
+	Aj_consum = 0.65;
+	Gj_phyto = 100.0;
+	Gj_waterdecomp = 20.0;
+	Gj_seddecomp = 120.0;
+	Gj_herbivore = 108.0;
+	Gj_sedconsumer = 20.0;
+	Gj_consum = 6.5;
+
+	k_herbivore = 0.2;
+	k_POC = 0.2;
+
+	theta = 1.072;
+
+	macro_base_temp = 19.7;
+	TSS = 10.0;
+	gross_macro_coef = 0.08;
+	resp_macro_coef = 0.04;
+	sen_macro_coef = 0.08;
+	macro_mas_max = 1000.0;
+	macro_vel_max = 1.0;
 }
 
 /**

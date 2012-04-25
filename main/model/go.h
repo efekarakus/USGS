@@ -50,14 +50,6 @@ int is_nan(int x, int y, double move_factor);
 void flow_carbon(int x, int y);
 
 /**
- * If the gui_loop_output is set to 1, for every cell of type 'input', we
- * change its stock values to the global variable values
- * @param x: the x-coordinate of the patch
- * @param y: the y-coordinate of the patch
- */
-void loop_output(int x, int y);
-
-/**
  * Checks if the x, y values for the patch is within boundaries of the map
  * @param x: the x-coordinate of the patch
  * @param y: the y-coordinate of the patch

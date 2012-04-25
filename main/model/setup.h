@@ -24,6 +24,11 @@ char* hydrosets_path = "./model/data/HydroSets/";
 void setup();
 
 /**
+ * Resets all the values in globals.h
+ */
+void reset_globals();
+
+/**
  * Opens the first hydro-map i.e 10k-map and finds the maximum pxcor and
  * the maximum pycor, we assign these values to MAP_WIDTH and MAP_HEIGHT
  */

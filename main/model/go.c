@@ -301,24 +301,6 @@ void flow_carbon(int x, int y) {
     patches[x][y].waterdecomp = patches[x][y].waterdecomp - patches[x][y].waterdecomp*patch_loss;
 }
 
-/**
- * If the gui_loop_output is set to 1, for every cell of type 'input', we
- * change its stock values to the global variable values
- * @param x: the x-coordinate of the patch
- * @param y: the y-coordinate of the patch
- */
-void loop_output(int x, int y) {
-    patches[x][y].macro = out_macro;
-    patches[x][y].phyto = out_phyto;
-    patches[x][y].herbivore = out_herbivore;
-    patches[x][y].waterdecomp = out_waterdecomp;
-    patches[x][y].seddecomp = out_seddecomp;
-    patches[x][y].sedconsumer = out_sedconsumer;
-    patches[x][y].consum = out_consum;
-    patches[x][y].DOC = out_DOC;
-    patches[x][y].POC = out_POC;
-    patches[x][y].detritus = out_detritus;
-}
 
 /**
  * Checks if the x, y values for the patch is within boundaries of the map
