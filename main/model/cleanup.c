@@ -54,10 +54,8 @@ void clean_check_filenames_array() {
   int index;
   for(index = 0; index < num_unique_files; index++){
     free(check_filenames_array[index]);
-    printf("cleaned check_filenames_array index\n");
   }
   free(check_filenames_array);
-  printf("cleaned check_filenames_array\n");
 }
 
 /**
