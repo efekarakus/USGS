@@ -11,7 +11,6 @@
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
-	{"extract_days_to_run_Command", py_extract_days_to_run, METH_VARARGS},
     {"extract_whichstock_Command", py_extract_whichstock, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
 	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
@@ -105,6 +104,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     printf("MAX_PHYTO: %f\n", MAX_PHYTO);
     printf("FILESIZE: %d\n", gui_filenames_filesize);
     
+    gui_days_to_run = 0;
     for(index = 0; index < gui_filenames_filesize; index++)
     {
         printf("RUNNING FILE: %s FOR %d DAYS\n", gui_filenames_array[index], gui_days_array[index]);
@@ -142,27 +142,6 @@ static PyObject* py_extract_whichstock(PyObject* self, PyObject* args)
     Py_INCREF(Py_None);
     return Py_None;
 }
-
-/**
- * Extracts the days to run value from the GUI and assigns it in globals.h
- * @param self The python object calling this C function
- * @param args The days to run input value
-*/
-static PyObject* py_extract_days_to_run(PyObject* self, PyObject* args)
-{
-	char* read_String;
-
-	PyArg_ParseTuple(args, "s", &read_String);
-	
-	int read_Int = atoi(read_String);
-	gui_days_to_run += read_Int;
-
-	printf("\n\nDAYS TO RUN: %d\n", gui_days_to_run);
-	
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
 
 /**
  * Extracts the TSS value from the GUI and assigns it in globals.h
