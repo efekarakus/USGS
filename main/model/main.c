@@ -46,6 +46,7 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
     PyArg_ParseTuple(args, "s", &filenames);
     char* filename;
     int index = 0;
+    num_unique_files = 0;
     
     printf("Passed in filenames: %s\n", filenames);
     // First value howmany files the use selected in the GUI
