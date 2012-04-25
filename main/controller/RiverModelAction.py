@@ -56,8 +56,6 @@ class RiverModelAction:
         macro_vel_max_v = UI.get_macro_vel_max()
         k_phyto_v = UI.get_k_phyto()
         k_macro_v = UI.get_k_macro()
-        fixed_temperature_v = UI.get_fixed_temp()
-        fixed_photo_radiation_v = UI.get_fixed_par()
         hydromapFile = self.setupFilenames()
 
         if (tss_v == "" or not float(tss_v)):
@@ -84,14 +82,8 @@ class RiverModelAction:
         if (k_phyto_v == "" or not float(k_phyto_v) ):
           print 'kphyto'
           return False
-        if (fixed_temperature_v == "" or not float(fixed_temperature_v) ):
-          print 'fixed_temp'
-          return False
-        if (fixed_photo_radiation_v == "" or not float(fixed_photo_radiation_v) ):
-          print 'fixed_par'
-          return False
         if hydromapFile=="":
-          print 'ydro map'
+          print 'Hydro map'
           return False
         return True
 
@@ -101,6 +93,8 @@ class RiverModelAction:
         """
         UI = self.UI
         hydromapFile = self.setupFilenames()
+        parfilename = UI.get_parfile()
+        temperaturefilename = UI.get_tempfile()
         days_to_run_value = UI.get_days_to_run()
         which_stock = UI.get_which_stock()
         tss_value = UI.get_tss_value()
@@ -112,8 +106,6 @@ class RiverModelAction:
         macro_vel_max_value = UI.get_macro_vel_max()
         k_phyto_value = UI.get_k_phyto()
         k_macro_value = UI.get_k_macro()
-        fixed_temperature_value = UI.get_fixed_temp()
-        fixed_photo_radiation_value = UI.get_fixed_par()
         flow_corners = UI.get_flow_corners()
         if self.errorCheck():
           extract_whichstock_Command(which_stock)
@@ -126,9 +118,9 @@ class RiverModelAction:
           extract_macro_vel_max_Command(macro_vel_max_value)
           extract_k_phyto_Command(k_phyto_value)
           extract_k_macro_Command(k_macro_value)
-          extract_fixed_temperature_Command(fixed_temperature_value)
-          extract_fixed_photo_radiation_Command(fixed_photo_radiation_value)
           extract_filenames_Command(hydromapFile)
+          extract_par_file_Command(parfilename)
+          extract_temperature_file_Command(temperaturefilename)
           extract_flowcorners_Command(flow_corners)
           colors_list = goCommand()
           output_image(colors_list)

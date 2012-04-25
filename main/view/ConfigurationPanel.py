@@ -59,8 +59,6 @@ class ConfigurationPanel:
         self._init_macro_vel_max()
         self._init_k_phyto()
         self._init_k_macro()
-        self._init_fixed_temp()
-        self._init_fixed_par()
         self._init_hydro_map()
         self._init_add_map()
         self._init_remove_map()
@@ -119,10 +117,6 @@ class ConfigurationPanel:
         self.k_phyto.insert(0,DEFAULT_K_PHYTO)
         self.k_macro.delete(0,END)
         self.k_macro.insert(0,DEFAULT_K_MACRO)
-        self.fixed_temp.delete(0,END)
-        self.fixed_temp.insert(0,DEFAULT_TEMP)
-        self.fixed_par.delete(0,END)
-        self.fixed_par.insert(0,DEFAULT_PAR)
         self.flow_corners.deselect()
 
     def removemap(self):
@@ -269,25 +263,6 @@ class ConfigurationPanel:
         self.k_macro.grid(row=row,column=column)
         createToolTip(self.k_macro, "range between 0.0 and 1.0")
 
-    def _init_fixed_temp(self):
-        """Creates a slider for the temperature."""
-        row,column = (10,1)
-        label = Label(self.container,text="Temperature: ").grid(row=row)
-        self.fixed_temp = Entry(self.container,width=5)
-        self.fixed_temp.insert(0,DEFAULT_TEMP)
-        self.fixed_temp.grid(row=row,column=column)
-        createToolTip(self.fixed_temp, "range between 0.0 and 30.0")
-
-    def _init_fixed_par(self):
-        """Creates a slider for the PAR."""
-        row,column=(11,1)
-        label = Label(self.container,text="Photosynthetic Radiation: ").grid(row=row)
-        self.fixed_par = Entry(self.container,width=5)
-        self.fixed_par.insert(0,DEFAULT_PAR)
-        self.fixed_par.grid(row=row,column=column)
-        createToolTip(self.fixed_par, "range between 0.0 and 2000.0")
-
-        
     def _init_reset_values(self):
         """Creates a button to reset the values of the sliders to their default values"""
         row,column = (12,1)
@@ -366,12 +341,6 @@ class ConfigurationPanel:
 
     def get_k_macro(self):
         return self.k_macro.get()
-
-    def get_fixed_temp(self):
-        return self.fixed_temp.get()
-
-    def get_fixed_par(self):
-        return self.fixed_par.get()
 
     def get_hydro_map(self):
         return self.hydro_map.get()

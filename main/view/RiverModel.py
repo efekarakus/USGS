@@ -82,17 +82,17 @@ class RiverModel:
     def get_k_macro(self):
         return self.configuration_panel.get_k_macro()
 
-    def get_fixed_temp(self):
-        return self.configuration_panel.get_fixed_temp()
-
-    def get_fixed_par(self):
-        return self.configuration_panel.get_fixed_par()
-
     def get_flow_corners(self):
         return self.configuration_panel.get_fixed_corners()
 
     def get_filenames(self):
         return self.configuration_panel.filenames
+
+    def get_parfile(self):
+        return self.configuration_panel.parfile
+
+    def get_tempfile(self):
+        return self.configuration_panel.tempfile
 
     def get_daystorunarray(self):
         return self.configuration_panel.daystorunarray
