@@ -37,11 +37,6 @@ void clean_check_filenames_array();
  void clean_gui_filenames_and_days();
 
 /**
- * Frees the discharge_data array
- */
-void clean_discharge_data();
-
-/**
  * Frees the photo_radiation_data array
  */
 void clean_photo_radiation_data();

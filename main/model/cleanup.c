@@ -3,13 +3,11 @@
 /**
  * Frees the allocated structures:
  *   -- 2D patches array
- *   -- discharge_data array
  *   -- photo_radiation_data array
  *   -- temperature_data array
  */
 void cleanup() {
     clean_patches();
-    clean_discharge_data();
     clean_photo_radiation_data();
     clean_temperature_data();
     clean_gui_filenames_and_days();
@@ -37,13 +35,6 @@ void clean_patches() {
 	free( uncovered_area );
     free( patches );
     free( colorValues );
-}
-
-/**
- * Frees the discharge_data array
- */
-void clean_discharge_data() {
-    free( discharge_data );
 }
 
 void clean_gui_filenames_and_days() {

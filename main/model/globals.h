@@ -42,7 +42,6 @@ int gui_filenames_filesize;
 // Environmental globals
 double* temperature_data;	///< temp array which holds data that temp indexes
 int* photo_radiation_data;	///< par array which holds data that photo_radiation indexes
-int* discharge_data;	///< discharge array which holds data that discharge indexes
 int* covered_area;      ///< Area of land covered by water
 int* uncovered_area;    ///< Area of land not covered by water
 
