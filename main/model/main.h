@@ -23,6 +23,11 @@ static PyObject* py_setup_command();
 
 /* Extract the hydro map filenames that the user has selected */
 static PyObject* py_extract_filenames(PyObject* self, PyObject* args);
+
+static PyObject* py_extract_par_file(PyObject* self, PyObject* args);
+
+static PyObject* py_extract_temperature_file(PyObject* self, PyObject* args);
+
 /* */
 static PyObject* py_goCommand(PyObject* self, PyObject* args);
 

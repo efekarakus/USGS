@@ -26,6 +26,8 @@ static PyMethodDef MainModule_methods[] = {
     {"setup_Command", py_setup_command, METH_VARARGS},
     {"cleanup_Command", py_cleanup_command, METH_VARARGS},
     {"extract_filenames_Command", py_extract_filenames, METH_VARARGS},
+    {"extract_par_file_Command", py_extract_par_file, METH_VARARGS},
+    {"extract_temperature_file_Command", py_extract_temperature_file, METH_VARARGS},
     {"extract_flowcorners_Command", py_extract_flow_corners, METH_VARARGS},
     {NULL, NULL}
 };
@@ -75,6 +77,20 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
 
     check_filenames_array = (char**)malloc(num_unique_files*sizeof(char*));
     
+    return Py_None;
+}
+
+static PyObject* py_extract_par_file(PyObject* self, PyObject* args) {
+    char* filename;
+    PyArg_ParseTuple(args, "s", &filename);
+    strcpy(gui_photo_radiation_file, filename);
+    return Py_None;
+}
+
+static PyObject* py_extract_temperature_file(PyObject* self, PyObject* args) {
+    char* filename;
+    PyArg_ParseTuple(args, "s", &filename);
+    strcpy(gui_temperature_file, filename);   
     return Py_None;
 }
 

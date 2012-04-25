@@ -474,7 +474,6 @@ void import_hydro()
     char str[256];
     float value;
     double temp_depth, temp_px_vector, temp_py_vector, temp_velocity;
-    char* path = hydrosets_path;
 
     for(i = 0;i < num_hydro_files; i++)
     {
@@ -552,14 +551,7 @@ void setup_environmentals()
  */
 void set_photo_radiation()
 {
-	char* pathname = environmentals_path;
-
-	char* currFile = photo_radiation_file;
-	int length = strlen(pathname) + strlen(currFile) + 1;
-	char filename[length];
-	filename[0] = '\0';
-	strcat(filename, pathname);
-	strcat(filename, currFile);
+	char* filename = gui_photo_radiation_file;
 
 	FILE* file = fopen(filename, "r");
 	if (file == NULL)
@@ -599,14 +591,7 @@ void set_photo_radiation()
  */
 void set_temperature()
 {
-	char* pathname = environmentals_path;
-
-	char* currFile = temperature_file;
-	int length = strlen(pathname) + strlen(currFile) + 1;
-	char filename[length];
-	filename[0] = '\0';
-	strcat(filename, pathname);
-	strcat(filename, currFile);
+	char* filename = gui_temperature_file;
 
 	FILE* file = fopen(filename, "r");
 	if (file == NULL)

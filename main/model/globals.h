@@ -12,6 +12,9 @@ double COMPARE_MAX = 0.0; ///< represents the maximum of the x or y vector among
 
 // GUI variables
 char* file_extension = "new";
+int num_hydro_files = 0;
+char gui_photo_radiation_file[1024];
+char gui_temperature_file[1024];
 int gui_flow_corners_only = 0;
 int gui_timestep_factor = 60;    ///< By how much are we speeding up the code? Increasing the factor will reduce the number of iterations required
 int fixed_environmentals = 0;	///< fixedEnvironmentals
