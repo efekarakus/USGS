@@ -61,12 +61,6 @@ static PyObject* py_extract_k_phyto(PyObject* self, PyObject* args);
 /* Extracts the k_macro from the GUI and assigns it in globals.h */
 static PyObject* py_extract_k_macro(PyObject* self, PyObject* args);
 
-/* Extracts the temperature from the GUI and assigns it in globals.h */
-static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args);
-
-/* Extracts the photo radiation from the GUI and assigns it in globals.h */
-static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args);
-
 /* Extracts the flow corners check box button value and assigns it in globals.h */
 static PyObject* py_extract_flow_corners(PyObject* self, PyObject* args);
 

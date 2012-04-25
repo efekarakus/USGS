@@ -21,8 +21,6 @@ static PyMethodDef MainModule_methods[] = {
 	{"extract_macro_vel_max_Command", py_extract_macro_vel_max, METH_VARARGS},
 	{"extract_k_phyto_Command", py_extract_k_phyto, METH_VARARGS},
 	{"extract_k_macro_Command", py_extract_k_macro, METH_VARARGS},
-	{"extract_fixed_temperature_Command", py_extract_fixed_temperature, METH_VARARGS},
-    {"extract_fixed_photo_radiation_Command", py_extract_fixed_photo_radiation, METH_VARARGS},
     {"setup_Command", py_setup_command, METH_VARARGS},
     {"cleanup_Command", py_cleanup_command, METH_VARARGS},
     {"extract_filenames_Command", py_extract_filenames, METH_VARARGS},
@@ -287,33 +285,6 @@ static PyObject* py_extract_k_macro(PyObject* self, PyObject* args)
 	return Py_None;
 }
 
-
-/**
- * Extracts the fixed_temp from the Gui and assigns it in globals.h
- * @param self The python object calling this C function
- * @param args The fixed_temp slider value
-*/
-static PyObject* py_extract_fixed_temperature(PyObject* self, PyObject* args)
-{
-	PyArg_ParseTuple(args, "i", &gui_temperature);
-	printf("\n\nTEMPERATURE: %d\n", gui_temperature);
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-
-/**
- * Extracts the fixed_photo_radiation from the GUI and assigns it in globals.h
- * @param self The python object calling this C function
- * @args The fixed_photo_radiation slider value
-*/
-static PyObject* py_extract_fixed_photo_radiation(PyObject* self, PyObject* args)
-{
-	PyArg_ParseTuple(args, "i", &gui_photo_radiation);
-	printf("\n\nPHOTO RADIATION: %d\n", gui_photo_radiation);
-	Py_INCREF(Py_None);
-	return Py_None;
-}
 
 static PyObject* py_extract_flow_corners(PyObject* self, PyObject* args)
 {
