@@ -49,6 +49,8 @@ class RiverModel:
     #######################################
     #       Getters                       #
     #######################################
+    def get_output_frequency(self):
+        return self.configuration_panel.get_output_frequency()
     def get_days_to_run(self):
         return self.configuration_panel.get_days_to_run()
 
