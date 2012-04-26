@@ -316,6 +316,9 @@ class ConfigurationPanel:
     #######################################
     #       Getters                       #
     #######################################
+    def get_output_frequency(self):
+        return self.output_frequency.get();
+
     def get_days_to_run(self):
         return self.days_to_run.get()
 
