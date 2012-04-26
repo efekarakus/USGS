@@ -70,6 +70,7 @@ class ConfigurationPanel:
         self._init_temperature_file_label()
         self._init_par_file()
         self._init_par_file_label()
+        self._init_output_frequency()
 
     def forget(self):
         """Hides the frame in parent."""
@@ -136,6 +137,12 @@ class ConfigurationPanel:
         self.flow_corners.var = v
         self.flow_corners.grid(row=row,column=column)
         createToolTip(self.flow_corners, "If checked flows carbon only to adjacent cells, else flows carbon to according cell based on x-vector and y-vector")
+
+    def _init_output_frequency(self):
+        row, column = (8, 3)
+        label = Label(self.container, text="Output frequency(days):                                                       ").grid(row=row,column=column+1)
+        self.output_frequency = Entry(self.container, width=5)
+        self.output_frequency.grid(row=row, column=column+1)
 
     def _init_remove_map(self):
         row,column=(5,3)
