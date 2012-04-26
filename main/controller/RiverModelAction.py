@@ -84,7 +84,7 @@ class RiverModelAction:
           errorList.append("k_phyto")
         if (hydromapFile=="0?"):
           errorList.append("Hydromap File(s)")
-        if (output_frequency == "" or not output_frequency.isdigit() or int(output_frequency) < 0):
+        if (output_frequency == "" or not output_frequency.isdigit() or int(output_frequency) < 1):
           errorList.append("Output Frequency")
         if (temperaturefilename == ""):
           errorList.append("Temperature File")
