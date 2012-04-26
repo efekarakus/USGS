@@ -2,6 +2,8 @@
 import os, sys
 from MainModule import *
 from RiverImage import *
+import Tkinter
+import tkMessageBox
 
 class RiverModelAction:
     """
@@ -46,6 +48,9 @@ class RiverModelAction:
         """
         Checks whether every value in the GUI is reasonable
         """
+
+        errorList = []
+
         UI = self.UI
         tss_v = UI.get_tss_value()
         macro_base_temp_v = UI.get_macro_base_temp()
@@ -59,40 +64,40 @@ class RiverModelAction:
         hydromapFile = self.setupFilenames()
 
         if (tss_v == "" or not float(tss_v)):
-          print "tss"
-          return False
+          errorList.append("tss")
         if (macro_base_temp_v == "" or not float(macro_base_temp_v) ):
-          print 'macro'
-          return False
+          errorList.append("macro_base_temp")
         if (gross_macro_coef_v == "" or not float(gross_macro_coef_v)):
-          print 'gross'
-          return False
+          errorList.append("gross_macro_coef")
         if (resp_macro_coef_v == "" or not float(resp_macro_coef_v) ):
-          print 'resp'
-          return False
+          errorList.append("resp_macro_coef")
         if (sen_macro_coef_v == "" or not float(sen_macro_coef_v) ):
-          print 'macro'
-          return False
+          errorList.append("sen_macro_coef")
         if (macro_mass_max_v == "" or not float(macro_mass_max_v) ):
-          print 'macromass'
-          return False
+          errorList.append("macro_mass_max")
         if (macro_vel_max_v == "" or not float(macro_vel_max_v) ):
-          print 'macro vel'
-          return False
+          errorList.append("macro_vel_max")
         if (k_phyto_v == "" or not float(k_phyto_v) ):
-          print 'kphyto'
-          return False
-        if hydromapFile=="":
-          print 'Hydro map'
-          return False
-        return True
+          errorList.append("k_phyto")
+        if hydromapFile=="0?":
+          errorList.append("Hydromap File(s)")
+
+        return errorList
+
+    def errorMessage(self, errorList):
+        messageString = ""
+        for x in range(0, len(errorList)):
+          messageString = errorList.pop() + "\n" + messageString
+        if( messageString != ""):
+          tkMessageBox.showerror("Error - Invalid Input Parameters", "The following input parameters are invalid:\n\n"+meesageString)
+
 
     def OnGo(self, event):
         """
         Function that is triggered if the user clicks on the 'GO' button.
         """
         UI = self.UI
-		output_frequency = UI.get_output_frequency()
+        output_frequency = UI.get_output_frequency()
         hydromapFile = self.setupFilenames()
         parfilename = UI.get_parfile()
         temperaturefilename = UI.get_tempfile()
@@ -108,7 +113,11 @@ class RiverModelAction:
         k_phyto_value = UI.get_k_phyto()
         k_macro_value = UI.get_k_macro()
         flow_corners = UI.get_flow_corners()
-        if self.errorCheck():
+
+        errorList = self.errorCheck()
+        self.errorMessage(errorList)
+
+        if (len(errorList) == 0):
           extract_whichstock_Command(which_stock)
           extract_TSS_Command(tss_value)
           extract_macro_base_temp_Command(macro_base_temp_value)
