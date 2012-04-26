@@ -100,6 +100,7 @@ class RiverModelAction:
         Function that is triggered if the user clicks on the 'GO' button.
         """
         UI = self.UI
+		output_frequency = UI.get_output_frequency()
         hydromapFile = self.setupFilenames()
         days_to_run_value = UI.get_days_to_run()
         which_stock = UI.get_which_stock()
