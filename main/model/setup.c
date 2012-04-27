@@ -134,7 +134,6 @@ void reset_globals()
 	theta = 1.072;
 
 	macro_base_temp = 19.7;
-	TSS = 10.0;
 	gross_macro_coef = 0.08;
 	resp_macro_coef = 0.04;
 	sen_macro_coef = 0.08;
