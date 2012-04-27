@@ -62,6 +62,9 @@ class RiverModelAction:
         k_phyto_v = UI.get_k_phyto()
         k_macro_v = UI.get_k_macro()
         hydromapFile = self.setupFilenames()
+        output_frequency = UI.get_output_frequency()
+        temperaturefilename = UI.get_tempfile()
+        parfilename = UI.get_parfile()
 
         if (tss_v == "" or not float(tss_v)):
           errorList.append("tss")
@@ -79,18 +82,23 @@ class RiverModelAction:
           errorList.append("macro_vel_max")
         if (k_phyto_v == "" or not float(k_phyto_v) ):
           errorList.append("k_phyto")
-        if hydromapFile=="0?":
+        if (hydromapFile=="0?"):
           errorList.append("Hydromap File(s)")
+        if (output_frequency == "" or not output_frequency.isdigit() or int(output_frequency) < 1):
+          errorList.append("Output Frequency")
+        if (temperaturefilename == ""):
+          errorList.append("Temperature File")
+        if (parfilename == ""):
+          errorList.append("PAR Filename")
 
         return errorList
 
     def errorMessage(self, errorList):
         messageString = ""
         for x in range(0, len(errorList)):
-          messageString = errorList.pop() + "\n" + messageString
+          messageString = messageString + "\n" + errorList[x]
         if( messageString != ""):
-          tkMessageBox.showerror("Error - Invalid Input Parameters", "The following input parameters are invalid:\n\n"+meesageString)
-
+          tkMessageBox.showerror("Error - Invalid Input Parameters", "The following input parameters are invalid:\n\n"+messageString)
 
     def OnGo(self, event):
         """
@@ -135,5 +143,3 @@ class RiverModelAction:
           extract_flowcorners_Command(flow_corners)
           colors_list = goCommand()
           output_image(colors_list)
-        else:
-          print("error checking gives false")
