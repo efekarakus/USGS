@@ -313,23 +313,6 @@ int get_day() {
     return hours/24;
 }
 
-/**
- * Populates the flow_patches linked list with patches that have a velocity > 0 and depth > 0
- */
-void get_flow_patches(List* flow_patches) {
-    LL_init(flow_patches);
-  
-    int x, y;
-    for(y = 0; y < MAP_HEIGHT; y++) {
-        for(x = 0; x < MAP_WIDTH; x++) {
-            if (patches[x][y].depth > 0.0 && patches[x][y].velocity > 0.0)
-            {
-                LL_insert(flow_patches, &patches[x][y]);
-            }
-        }
-    }
-
-}
 
 /**
  * Updates the global variables for the stocks

@@ -62,11 +62,6 @@ int is_valid_patch(int x, int y);
 int get_day();
 
 /**
- * Populates the flow_patches linked list with patches that have a velocity > 0 and depth > 0
- */
-void get_flow_patches(List* flow_patches);
-
-/**
  * Updates the global variables for the stocks
  * @param x: the x-coordinate of the patch
  * @param y: the y-coordinate of the patch
