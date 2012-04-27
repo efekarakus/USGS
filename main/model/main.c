@@ -22,8 +22,6 @@ static PyMethodDef MainModule_methods[] = {
 	{"extract_macro_vel_max_Command", py_extract_macro_vel_max, METH_VARARGS},
 	{"extract_k_phyto_Command", py_extract_k_phyto, METH_VARARGS},
 	{"extract_k_macro_Command", py_extract_k_macro, METH_VARARGS},
-    {"setup_Command", py_setup_command, METH_VARARGS},
-    {"cleanup_Command", py_cleanup_command, METH_VARARGS},
     {"extract_filenames_Command", py_extract_filenames, METH_VARARGS},
     {"extract_par_file_Command", py_extract_par_file, METH_VARARGS},
     {"extract_temperature_file_Command", py_extract_temperature_file, METH_VARARGS},
@@ -94,16 +92,6 @@ static PyObject* py_extract_temperature_file(PyObject* self, PyObject* args) {
     return Py_None;
 }
 
-static PyObject* py_setup_command(){
-  setup();
-  return Py_None;
-}
-
-static PyObject* py_cleanup_command(){
-  cleanup();
-  return Py_None;
-}
-
 void output_image(){
 	PyObject *pName, *pModule, *pDict, *pFunc, *pValue;
 
@@ -131,13 +119,6 @@ void output_image(){
     Py_DECREF(pName);
 }
 
-/** 
-* TODO: update the comments of this function
-* Computes the tss value and returns twice as much 
-* @param self: the python object calling this C function
-* @param args: the TSS slider value
-* @return 2*TSS
-*/
 static PyObject* py_goCommand(PyObject* self, PyObject* args) {
 	PyErr_Print();
     int day;
