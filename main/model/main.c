@@ -189,7 +189,7 @@ static PyObject* py_extract_whichstock(PyObject* self, PyObject* args)
 */
 static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 {
-	PyArg_ParseTuple(args, "i", &gui_tss);
+	PyArg_ParseTuple(args, "d", &gui_tss);
 	Py_INCREF(Py_None);
 	return Py_None;
 }

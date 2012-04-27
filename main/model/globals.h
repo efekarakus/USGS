@@ -20,7 +20,7 @@ char gui_temperature_file[1024];
 int gui_flow_corners_only = 0;
 int gui_timestep_factor = 60;    ///< By how much are we speeding up the code? Increasing the factor will reduce the number of iterations required
 int gui_days_to_run = 0;  ///< number of days to run the code
-int gui_tss = 0;  ///< TSS
+double gui_tss = 0.0;  ///< TSS
 double gui_k_phyto = 0.4;  ///< k-phyto
 double gui_k_macro = 0.4; ///< k-macro
 double gui_sen_macro_coef = 0.08; ///< sen-macro-coef
@@ -171,7 +171,6 @@ double theta = 1.072;
 double Q10;
 //Slider variables
 double macro_base_temp = 19.7;
-double TSS = 10;
 double gross_macro_coef = 0.08;
 double resp_macro_coef = 0.04;
 double sen_macro_coef = 0.08;

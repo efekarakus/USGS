@@ -2,7 +2,7 @@
 
 void update_patches(int x, int y){
 
-	patches[x][y].turbidity = ( .29587 + TSS) + (gui_k_phyto * (patches[x][y].phyto/ 900.0) ) + (gui_k_macro * (patches[x][y].macro / 900.0) );
+	patches[x][y].turbidity = ( .29587 + gui_tss) + (gui_k_phyto * (patches[x][y].phyto/ 900.0) ) + (gui_k_macro * (patches[x][y].macro / 900.0) );
 
 	if(patches[x][y].turbidity > 30.0){
 		patches[x][y].turbidity = 30.0;
