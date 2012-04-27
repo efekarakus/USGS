@@ -19,9 +19,7 @@ char gui_photo_radiation_file[1024];
 char gui_temperature_file[1024];
 int gui_flow_corners_only = 0;
 int gui_timestep_factor = 60;    ///< By how much are we speeding up the code? Increasing the factor will reduce the number of iterations required
-int fixed_environmentals = 0;	///< fixedEnvironmentals
 int gui_days_to_run = 0;  ///< number of days to run the code
-int gui_loop_output = 0;  ///< represents the Loop-Output? variable in the gui, if set to 1 the 'input' cells gets the stock values changed
 int gui_tss = 0;  ///< TSS
 double gui_k_phyto = 0.4;  ///< k-phyto
 double gui_k_macro = 0.4; ///< k-macro

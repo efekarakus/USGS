@@ -29,8 +29,7 @@ int write_data() {
         return 0;
     }
 
-    // GUI variables used
-    
+    // GUI variables used    
     fprintf(f,"%s\n","# timestep_factor,hydro_group,days_to_run,tss, \
                       k_phyto,k_macro,sen_macro_coef,resp_macro_coef,macro_base_temp,macro_mass_max,macro_vel_max \
                         ,gross_macro_coef,which_stock");
