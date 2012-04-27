@@ -29,6 +29,8 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args);
 
 static PyObject* py_extract_par_file(PyObject* self, PyObject* args);
 
+static PyObject* py_extract_timestep(PyObject* self, PyObject* args);
+
 static PyObject* py_extract_temperature_file(PyObject* self, PyObject* args);
 
 static PyObject* py_extract_output_frequency(PyObject* self, PyObject* args);

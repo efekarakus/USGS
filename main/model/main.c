@@ -81,6 +81,11 @@ static PyObject* py_extract_par_file(PyObject* self, PyObject* args) {
     return Py_None;
 }
 
+static PyObject* py_extract_timestep(PyObject* self, PyObject* args) {
+    PyArg_ParseTuple(args, "i", &gui_timestep_factor);
+    return Py_None;
+}
+
 static PyObject* py_extract_temperature_file(PyObject* self, PyObject* args) {
     char* filename;
     PyArg_ParseTuple(args, "s", &filename);

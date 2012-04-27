@@ -49,10 +49,7 @@ void go()
     }
 
     // flow carbon
-    int max_timestep = get_timestep();
-    if(max_timestep == 0)
-      max_timestep = 3600;
-    int t, max_time = 3600/max_timestep;
+    int t, max_time = 60/gui_timestep_factor;
     nan_trigger = 0;      // set nan to false
     for (t = 0; t < max_time; t++) {
         for(y = 0; y < MAP_HEIGHT; y++) {
@@ -191,8 +188,9 @@ void update_par()
  * @return the max_timestep based on the greatest x-y vector
  */
 int get_timestep() {
-  
-    return gui_timestep_factor*(((double)patch_length)/((double)COMPARE_MAX));
+    if (COMPARE_MAX == 0.0)
+        return 1.0;
+    return (((double)patch_length)/((double)COMPARE_MAX));
 }
 
 int is_nan(int x, int y, double move_factor) {
