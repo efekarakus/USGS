@@ -71,6 +71,7 @@ class ConfigurationPanel:
         self._init_par_file()
         self._init_par_file_label()
         self._init_output_frequency()
+        self._init_timestep()
 
     def forget(self):
         """Hides the frame in parent."""
@@ -83,6 +84,13 @@ class ConfigurationPanel:
     #######################################
     #       Components Declaration        #
     #######################################
+    def _init_timestep(self):
+        """Create a slider for timestep selection"""
+        row,column = (9,3)
+        timelabel = Label(self.container,text="Timestep                                                        ").grid(row=row, column=column+1)
+        self.timestep = Scale(self.container, tickinterval=29, length=150, from_=1, to=60, orient=HORIZONTAL)
+        self.timestep.grid(row=row,column=column+1)
+
     def _init_hydro_map_label(self):
         """Shows what hydro map is currently selected"""
         row,column = (1,3)
@@ -133,14 +141,14 @@ class ConfigurationPanel:
         """Creates a check button to see if we only want to flow carbon to the corners."""
         row,column = (7,4)
         v = IntVar()
-        self.flow_corners = Checkbutton(self.container,text="Adjacent cells only?",variable=v)
+        self.flow_corners = Checkbutton(self.container,text="Adjacent Cells Only?",variable=v)
         self.flow_corners.var = v
         self.flow_corners.grid(row=row,column=column)
         createToolTip(self.flow_corners, "If checked flows carbon only to adjacent cells, else flows carbon to according cell based on x-vector and y-vector")
 
     def _init_output_frequency(self):
         row, column = (8, 3)
-        label = Label(self.container, text="Output frequency(days):                                                       ").grid(row=row,column=column+1)
+        label = Label(self.container, text="Output Frequency (# Days):                                                                   ").grid(row=row,column=column+1)
         self.output_frequency = Entry(self.container, width=5)
         self.output_frequency.grid(row=row, column=column+1)
 
@@ -358,3 +366,5 @@ class ConfigurationPanel:
     def get_fixed_corners(self):
         return self.flow_corners.var.get()
 
+    def get_timestep(self):
+        return self.timestep.get();

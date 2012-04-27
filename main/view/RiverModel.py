@@ -51,6 +51,7 @@ class RiverModel:
     #######################################
     def get_output_frequency(self):
         return self.configuration_panel.get_output_frequency()
+    
     def get_days_to_run(self):
         return self.configuration_panel.get_days_to_run()
 
@@ -98,3 +99,6 @@ class RiverModel:
 
     def get_daystorunarray(self):
         return self.configuration_panel.daystorunarray
+
+    def get_timestep(self):
+        return self.configuration_panel.get_timestep()
