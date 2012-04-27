@@ -7,9 +7,9 @@
 #include <sys/stat.h>
 #include <time.h>
 
-const char* data_path = "./results/"; /* Folder under which we place the data files */
+const char* data_path = "./results/data/"; /* Folder under which we place the data files */
 char* data_template = "map_data_"; /* Each simulation data file has the name 'map_data_timestamp' */
-char* format = ".dat"; /* file format is .dat */
+char* format = ".csv"; /* file format is .csv */
 
 /**
  * The file format is as follows:
