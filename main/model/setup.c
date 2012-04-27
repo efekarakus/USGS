@@ -9,17 +9,12 @@
 void setup() 
 {
 	reset_globals();
-    printf("calling find_map_sizes()\n");
 	find_map_sizes();
-    printf("finished find_map_sizes\n");
     init_patches();
     init_color_values();
-    printf("calling import_hydro\n");
     import_hydro();
-    printf("finished import_hydro\n");
     setup_environmentals();
     setup_stocks();
-    printf("SUCCESS -- setup\n");
 }
 
 /**
@@ -366,7 +361,6 @@ void init_patch_values(int col, int row){
 	patches[col][row].waterdecomp_senescence = 0.0;
 	patches[col][row].turbidity = 0.0;
 
-
 	patches[col][row].available = malloc(num_unique_files*sizeof(int));        
 	patches[col][row].pxv_list = malloc(num_unique_files*sizeof(double));
 	patches[col][row].pyv_list = malloc(num_unique_files*sizeof(double));
@@ -434,6 +428,11 @@ void init_color_values()
     }
 }
 
+
+/**
+ * Check for duplicate files
+ * @param index the index in the filenames array
+*/
 int check_duplicate_files(int index)
 {
   if(index == 0)
@@ -526,11 +525,6 @@ void import_hydro()
         current_file_index++;
         fclose(pFile);
     }
-
-    int k;
-    for(k = 0; k < current_file_index; k++)
-      printf("%d ", hydromap_index_array[k]); //TODO problem here on second run
-    printf("\n");
 }
 
 
