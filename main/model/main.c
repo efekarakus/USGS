@@ -11,6 +11,7 @@
 /* Bind Python function names to our C functions */
 static PyMethodDef MainModule_methods[] = {
     {"goCommand", py_goCommand, METH_VARARGS},
+    {"extract_timestep_Command", py_extract_timestep, METH_VARARGS},
     {"extract_whichstock_Command", py_extract_whichstock, METH_VARARGS},
 	{"extract_TSS_Command", py_extract_TSS, METH_VARARGS},
 	{"extract_macro_base_temp_Command", py_extract_macro_base_temp, METH_VARARGS},
