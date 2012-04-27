@@ -19,9 +19,12 @@
      */
     void scale_color( double value, double maxVal, double minVal, int x, int y);
 
+	/**
+	 * Updates the color of the patch
+	 */
     void update_color();
 
-    float** colorValues;
-	
+    float** colorValues;	
 	float hue;
+
 #endif

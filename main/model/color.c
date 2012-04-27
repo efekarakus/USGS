@@ -1,10 +1,18 @@
 #include "color.h"
 #include <math.h>
 
+
+/**
+ * Scales the color of the patch
+ * @param value The value of the patch
+ * @param maxVal the max value for the image
+ * @param minVal the min value for the image
+ * @param x The x coord of the patch
+ * @param y The y coord of the patch
+*/
 void scale_color(double value, double maxVal, double minVal, int x, int y){
     float returnValue;
     if(maxVal == minVal){
-        printf("Max and min value are equal in scale_color.\n");
         returnValue = 0.0;
         colorValues[x][y] = returnValue;
         return;
@@ -23,10 +31,13 @@ void scale_color(double value, double maxVal, double minVal, int x, int y){
     colorValues[x][y] = returnValue;
 }
 
+
+/**
+ * Updates the color of the patch
+*/
 void update_color(){
     int x = 0;
     int y = 0;
-
 
     if( strcmp(which_stock, "macro") == 0){
 		hue = 120.0 / 360.0;
@@ -42,7 +53,6 @@ void update_color(){
             }
         }
     }
-
 
     else if( strcmp(which_stock, "phyto") == 0){
 		hue = 120.0 / 360.0;
@@ -72,7 +82,6 @@ void update_color(){
         }
     }
 
-
     else if( strcmp(which_stock, "waterdecomp") == 0){
 		hue = 120.0 / 360.0;
         double total_waterdecomp = 0;
@@ -99,7 +108,6 @@ void update_color(){
         }
     }
 
-
     else if( strcmp(which_stock, "POC") == 0){
 		hue = 240.0 / 360.0;
         double total_POC = 0;
@@ -125,10 +133,8 @@ void update_color(){
             }
         }
     }
-    /*TODO: Brown and Yellow are used as colors for the Netlogo code, but here
-     * we use only green.
-     */
-    else if( strcmp(which_stock, "detritus") == 0){
+    
+	else if( strcmp(which_stock, "detritus") == 0){
 		hue = 19.6 / 360.0;
         double total_detritus = 0;
         int num_patches = 0;
@@ -153,7 +159,6 @@ void update_color(){
               }
           }
       }
-
 
       else if( strcmp(which_stock, "sedconsumer") == 0){
           hue = 60.0 / 360.0;
