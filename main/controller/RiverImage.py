@@ -3,20 +3,21 @@ sys.path.append("/Library/Python/2.7/site-packages/")
 from PIL import Image
 import numpy as np
 import colorsys
+from time import strftime as date
 
 hsv_to_rgb = np.vectorize(colorsys.hsv_to_rgb)
 
-image_title = "river.png"
+timestamp = ""
+image_title = "results\pic"
+extension = ".png"
 image_type = "PNG"
 image = None
-
 
 def output_image(colors_list):
   """
   Creates an image in the current directory of the result of the modeling
   @param colors_list: array of colors representing the Mississippi river
   """
-
   # find the image size
   size = len(colors_list) - 1
   width = colors_list[0]
@@ -59,4 +60,6 @@ def output_image(colors_list):
 	# the order is inverted in the y-axis
     image.putpixel( (x, height-y-1), pixel)
   #endfor
-  image.save(image_title, image_type)
+  timestamp = date('%d-%m-%Y %H_%M_%S')
+  image.save(image_title + timestamp + extension, image_type)
+  return

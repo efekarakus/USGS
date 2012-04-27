@@ -1,6 +1,7 @@
 #include "go.h"
 #include "globals.h"
 #include "math.h"
+#include "main.h"
 #include "pred.c"
 #include "list.c"
 #include "color.c"
@@ -68,8 +69,14 @@ void go()
     hours++;
 
     int day = hours%24;
-    if (day == 0)
+    if (day == 0){
         update_color();
+		current_day++;
+		if(current_day == output_frequency){
+			output_image();
+			current_day = 0;
+		}
+	}
 }
 
 

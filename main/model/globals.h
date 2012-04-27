@@ -11,6 +11,8 @@ long hours = 0;	///< Represents 1 tick (should always be [0, sizeof(long)]
 double COMPARE_MAX = 0.0; ///< represents the maximum of the x or y vector among all patches, this is used to calculate max step
 
 // GUI variables
+int output_frequency = 0;
+int current_day = 0; ///< Keeps track of how often output should be generated
 char* file_extension = "new";
 int num_hydro_files = 0;
 char gui_photo_radiation_file[1024];

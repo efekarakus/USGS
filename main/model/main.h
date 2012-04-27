@@ -15,6 +15,9 @@
 /* Python calls this to let us initialize our module */
 void initMainModule();
 
+/* Calls the Python function to output an image */
+void output_image();
+
 /* Run the cleanup command for the model */
 static PyObject* py_cleanup_command();
 
@@ -27,6 +30,8 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args);
 static PyObject* py_extract_par_file(PyObject* self, PyObject* args);
 
 static PyObject* py_extract_temperature_file(PyObject* self, PyObject* args);
+
+static PyObject* py_extract_output_frequency(PyObject* self, PyObject* args);
 
 /* */
 static PyObject* py_goCommand(PyObject* self, PyObject* args);

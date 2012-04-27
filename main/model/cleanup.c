@@ -7,12 +7,19 @@
  *   -- temperature_data array
  */
 void cleanup() {
+	printf("Start: \n");
     clean_patches();
+	printf("End: Clean patches\n");
     clean_photo_radiation_data();
+	printf("End: photo radiation\n");
     clean_temperature_data();
+	printf("End:temperature data\n");
     clean_gui_filenames_and_days();
+	printf("End:filenames and days\n");
     clean_hydromap_index_array();
+	printf("End:hydromap index array\n");
     clean_check_filenames_array();
+	printf("End:filenames array\n");
 }
 
 /**

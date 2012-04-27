@@ -27,6 +27,7 @@ static PyMethodDef MainModule_methods[] = {
     {"extract_par_file_Command", py_extract_par_file, METH_VARARGS},
     {"extract_temperature_file_Command", py_extract_temperature_file, METH_VARARGS},
     {"extract_flowcorners_Command", py_extract_flow_corners, METH_VARARGS},
+	{"extract_output_frequency", py_extract_output_frequency, METH_VARARGS},
     {NULL, NULL}
 };
 
@@ -103,6 +104,33 @@ static PyObject* py_cleanup_command(){
   return Py_None;
 }
 
+void output_image(){
+	PyObject *pName, *pModule, *pDict, *pFunc, *pValue;
+
+    // Build the name object
+    pName = PyString_FromString("RiverImage");
+    // Load the module object
+    pModule = PyImport_Import(pName);
+    // pDict is a borrowed reference 
+    pDict = PyModule_GetDict(pModule);
+    // pFunc is also a borrowed reference 
+    pFunc = PyDict_GetItemString(pDict, "output_image");
+    if (PyCallable_Check(pFunc)) 
+    {
+		PyObject* list = (PyObject*)build_data();
+		// parse the list into a tuple
+		PyObject* pArgs = Py_BuildValue("(N)", list);
+        pValue = PyObject_CallObject(pFunc, pArgs);
+    } else 
+    {
+        PyErr_Print();
+    }
+
+    // Clean up - Python uses reference counting
+    Py_DECREF(pModule);
+    Py_DECREF(pName);
+}
+
 /** 
 * TODO: update the comments of this function
 * Computes the tss value and returns twice as much 
@@ -111,8 +139,7 @@ static PyObject* py_cleanup_command(){
 * @return 2*TSS
 */
 static PyObject* py_goCommand(PyObject* self, PyObject* args) {
-
-
+	PyErr_Print();
     int day;
     int index;
     setup();
@@ -285,6 +312,13 @@ static PyObject* py_extract_k_macro(PyObject* self, PyObject* args)
 	return Py_None;
 }
 
+static PyObject* py_extract_output_frequency(PyObject* self, PyObject* args)
+{
+	PyArg_ParseTuple(args, "i", &output_frequency);
+	printf("Output frequency:%d\n", output_frequency);
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject* py_extract_flow_corners(PyObject* self, PyObject* args)
 {
@@ -300,7 +334,6 @@ PyObject* build_data(){
     PyObject* list = PyList_New(size);
     if(!list)
         return NULL;
-
     PyObject* num =  Py_BuildValue("i", MAP_WIDTH);
     PyList_SET_ITEM(list, 0, num);
 	num = Py_BuildValue("f", hue);
