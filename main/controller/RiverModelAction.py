@@ -109,6 +109,8 @@ class RiverModelAction:
         hydromapFile = self.setupFilenames()
         parfilename = UI.get_parfile()
         temperaturefilename = UI.get_tempfile()
+        timestep = int(UI.get_timestep())
+        print "Timestep = :" + str(timestep)
         days_to_run_value = UI.get_days_to_run()
         which_stock = UI.get_which_stock()
         tss_value = float(UI.get_tss_value())
@@ -126,6 +128,7 @@ class RiverModelAction:
         self.errorMessage(errorList)
 
         if (len(errorList) == 0):
+          extract_timestep_Command(timestep)
           extract_output_frequency(output_frequency)
           extract_whichstock_Command(which_stock)
           extract_TSS_Command(tss_value)
