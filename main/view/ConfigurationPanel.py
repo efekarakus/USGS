@@ -87,9 +87,10 @@ class ConfigurationPanel:
     def _init_timestep(self):
         """Create a slider for timestep selection"""
         row,column = (9,3)
-        timelabel = Label(self.container,text="Timestep                                                        ").grid(row=row, column=column+1)
+        timelabel = Label(self.container,text="Timestep (mins)                                                              ").grid(row=row, column=column+1)
         self.timestep = Scale(self.container, tickinterval=29, length=150, from_=1, to=60, orient=HORIZONTAL)
         self.timestep.grid(row=row,column=column+1)
+        createToolTip(self.timestep,"frequency at which we are flowing carbon per hour, i.e 30 minutes means calling flow carbon twice/hour")
 
     def _init_hydro_map_label(self):
         """Shows what hydro map is currently selected"""
