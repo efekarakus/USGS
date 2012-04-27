@@ -3,7 +3,6 @@
 #include "math.h"
 #include "main.h"
 #include "pred.c"
-#include "list.c"
 #include "color.c"
 
 #include <sys/types.h>

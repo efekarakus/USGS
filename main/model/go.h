@@ -2,7 +2,6 @@
 #define GO_H
 
 #include "globals.h"
-#include "list.h"
 
 /* Runs the model */
 void go();
