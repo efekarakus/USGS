@@ -129,17 +129,16 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     for(index = 0; index < gui_filenames_filesize; index++)
     {
         printf("RUNNING FILE: %s FOR %d DAYS\n", gui_filenames_array[index], gui_days_array[index]);
-        printf("FILE INDEX: %d\n", hydromap_index_array[index]);
         gui_days_to_run += gui_days_array[index];  //Set howmany days to run the new hydromap
         hydro_group = (hydromap_index_array[index] + 1); //Set the new hydromap that will run
         hydro_changed = 1;  //Confirm that a new hydro map has been loaded
         
         while( (day = (hours / 24)) < gui_days_to_run)
         {   
-            printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
+            //printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
             go();
         }   
-        printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
+        //printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
     }
     PyObject* data = (PyObject*)build_data();    
     if (!dump_data()) {
