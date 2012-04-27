@@ -4,6 +4,9 @@
 #include "math.h"
 #include "globals.h"
 
+// comments can be found in patch.c
+
+
 /*
  * Asserts that the value is between low and high
  */

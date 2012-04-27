@@ -1,5 +1,11 @@
 #include "patch.h"
 
+
+/**
+ * Updates the patches
+ * @param x the X coord of the patch
+ * @param y the Y coord of the patch
+*/
 void update_patches(int x, int y){
 
 	patches[x][y].turbidity = ( .29587 + gui_tss) + (gui_k_phyto * (patches[x][y].phyto/ 900.0) ) + (gui_k_macro * (patches[x][y].macro / 900.0) );
@@ -11,8 +17,6 @@ void update_patches(int x, int y){
 		patches[x][y].turbidity = 0.01;
 	}
 
-    //TODO: missing if isNaN turbidity [show "NaN"]
-
 	//the amount of light that reaches the bottom of a water column
 	patches[x][y].bottom_light = (photo_radiation * exp( (-1*patches[x][y].depth)*patches[x][y].turbidity )); 
 	Aj_peri = patches[x][y].macro / 10.0 ;
@@ -21,6 +25,14 @@ void update_patches(int x, int y){
 	Gj_seddecomp = patches[x][y].detritus / 5.0;
 }
 
+
+/**
+ * Ensures a bound
+ * @param value The value to test
+ * @param low value must be higher than this value
+ * @param high value must be lower than this value
+ * @return The bounded value
+*/
 double assertRange(double value, double low, double high){
     if(value < low)
         return low;
@@ -72,7 +84,7 @@ void go_phyto(int x,int y){
 	//this is the attenuation coefficient of phytoplank m^2/g of phyto plankton
 	double light_k = 0.4;
 	patches[x][y].respiration_phyto = 0.1 / 24.0 * patches[x][y].phyto * Q10;
-	double pre_ln = (0.01 + photo_radiation  * exp(-1*patches[x][y].phyto * gui_k_phyto * patches[x][y].depth)); // TODO: is this exp() or e 
+	double pre_ln = (0.01 + photo_radiation  * exp(-1*patches[x][y].phyto * gui_k_phyto * patches[x][y].depth));
 	double be = (km + (photo_radiation * exp(-1 * patches[x][y].phyto * gui_k_phyto * patches[x][y].depth)));
 	//photosynthesis from phytoplankton derived from Huisman Weissing 1994
 
@@ -351,19 +363,16 @@ void go_detritus(int x, int y)
 {
     if(patches[x][y].velocity > 0.0)
     {
-        // *need reference
         patches[x][y].POC_detritus_transfer = patches[x][y].POC * (1.0 - (0.25 * log10((( patches[x][y].velocity / 40.0) + 0.0001) + 1.0)));
     }
 
     if(patches[x][y].POC_detritus_transfer < 0.0)
     {
-        // *need reference
         patches[x][y].POC_detritus_transfer = 0.0;
     }
 
     if(patches[x][y].velocity == 0.0)
     {
-        // *need reference. almost all material falls to the bottom in stagnant water
         patches[x][y].POC_detritus_transfer = patches[x][y].POC * 0.9; 
     }
 
@@ -381,7 +390,6 @@ void go_detritus(int x, int y)
 
     patches[x][y].egestion = herbivore_egestion + patches[x][y].sedconsumer_egestion + consum_egestion;
 
-    // *need reference
     patches[x][y].detritus_growth = patches[x][y].large_death + patches[x][y].POC_detritus_transfer + 
                                     patches[x][y].egestion + patches[x][y].macro_death;
 }
