@@ -49,7 +49,6 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
     int index = 0;
     num_unique_files = 0;
     
-    printf("Passed in filenames: %s\n", filenames);
     // First value howmany files the use selected in the GUI
     filename = strtok(filenames, "?");
     int fileSize = atoi(filename);
@@ -62,18 +61,14 @@ static PyObject* py_extract_filenames(PyObject* self, PyObject* args) {
     // Parse the file name if one exists
     while((filename = strtok(NULL, "?")) != NULL)
     {
-        printf("Filename: %s", filename); 
         gui_filenames_array[index] = (char*)malloc((strlen(filename)+1)*sizeof(char));
         strcpy(gui_filenames_array[index],filename);
         count_unique_files(index);
         filename = strtok(NULL, "?");
-        printf(" Days to run: %s\n", filename);
         gui_days_array[index] = atoi(filename); //Parse howmany days to run current file
         index++;
     }
     
-    printf("Number of Unique Files: %d\n", num_unique_files);
-
     check_filenames_array = (char**)malloc(num_unique_files*sizeof(char*));
     
     return Py_None;
@@ -100,7 +95,6 @@ static PyObject* py_setup_command(){
 
 static PyObject* py_cleanup_command(){
   cleanup();
-  printf("Finished Cleaning!\n");
   return Py_None;
 }
 
@@ -143,8 +137,6 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     int day;
     int index;
     setup();
-    printf("MAX_PHYTO: %f\n", MAX_PHYTO);
-    printf("FILESIZE: %d\n", gui_filenames_filesize);
     
     gui_days_to_run = 0;
     for(index = 0; index < gui_filenames_filesize; index++)
@@ -180,7 +172,6 @@ static PyObject* py_extract_whichstock(PyObject* self, PyObject* args)
     char* str;
     PyArg_ParseTuple(args, "s", &str);
     strcpy(which_stock,str);
-    printf("Which Stock: %s\n", which_stock);
     Py_INCREF(Py_None);
     return Py_None;
 }
@@ -193,7 +184,6 @@ static PyObject* py_extract_whichstock(PyObject* self, PyObject* args)
 static PyObject* py_extract_TSS(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &gui_tss);
-	printf("\n\nTSS: %d\n", gui_tss);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -208,7 +198,6 @@ static PyObject* py_extract_macro_base_temp(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_macro_base_temp);
 
-	printf("\n\nMACRO_BASE_TEMP: %f\n", gui_macro_base_temp);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -223,7 +212,6 @@ static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_gross_macro_coef);
 
-	printf("\n\nGROSS_MACRO_COEF: %f\n", gui_gross_macro_coef);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -237,7 +225,6 @@ static PyObject* py_extract_gross_macro_coef(PyObject* self, PyObject* args)
 static PyObject* py_extract_resp_macro_coef(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_resp_macro_coef);
-	printf("\n\nRESP_MACRO_COEF: %f\n", gui_resp_macro_coef);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -251,7 +238,6 @@ static PyObject* py_extract_resp_macro_coef(PyObject* self, PyObject* args)
 static PyObject* py_extract_sen_macro_coef(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_sen_macro_coef);
-	printf("\n\nSEN_MACRO_COEF: %f\n", gui_sen_macro_coef);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -265,7 +251,6 @@ static PyObject* py_extract_sen_macro_coef(PyObject* self, PyObject* args)
 static PyObject* py_extract_macro_mass_max(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &gui_macro_mass_max);
-	printf("\n\nMACRO_MASS_MAX: %d\n", gui_macro_mass_max);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -279,7 +264,6 @@ static PyObject* py_extract_macro_mass_max(PyObject* self, PyObject* args)
 static PyObject* py_extract_macro_vel_max(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_macro_vel_max);
-	printf("\n\nMACRO_VEL_MAX: %f\n", gui_macro_vel_max);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -293,7 +277,6 @@ static PyObject* py_extract_macro_vel_max(PyObject* self, PyObject* args)
 static PyObject* py_extract_k_phyto(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_k_phyto);
-	printf("\n\nK_PHYTO: %f\n", gui_k_phyto);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -307,7 +290,6 @@ static PyObject* py_extract_k_phyto(PyObject* self, PyObject* args)
 static PyObject* py_extract_k_macro(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "d", &gui_k_macro);
-	printf("\n\nK_MACRO: %f\n", gui_k_macro);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -315,7 +297,6 @@ static PyObject* py_extract_k_macro(PyObject* self, PyObject* args)
 static PyObject* py_extract_output_frequency(PyObject* self, PyObject* args)
 {
 	PyArg_ParseTuple(args, "i", &output_frequency);
-	printf("Output frequency:%d\n", output_frequency);
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -323,7 +304,6 @@ static PyObject* py_extract_output_frequency(PyObject* self, PyObject* args)
 static PyObject* py_extract_flow_corners(PyObject* self, PyObject* args)
 {
     PyArg_ParseTuple(args, "i", &gui_flow_corners_only);
-    printf("\n\nFLOW CORNERS: %d\n", gui_flow_corners_only);
     Py_INCREF(Py_None);
     return Py_None;
 }
