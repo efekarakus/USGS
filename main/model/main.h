@@ -18,12 +18,6 @@ void initMainModule();
 /* Calls the Python function to output an image */
 void output_image();
 
-/* Run the cleanup command for the model */
-static PyObject* py_cleanup_command();
-
-/* Run the setup command for the model */
-static PyObject* py_setup_command();
-
 /* Extract the hydro map filenames that the user has selected */
 static PyObject* py_extract_filenames(PyObject* self, PyObject* args);
 

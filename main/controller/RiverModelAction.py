@@ -110,7 +110,6 @@ class RiverModelAction:
         parfilename = UI.get_parfile()
         temperaturefilename = UI.get_tempfile()
         timestep = int(UI.get_timestep())
-        print "Timestep = :" + str(timestep)
         days_to_run_value = UI.get_days_to_run()
         which_stock = UI.get_which_stock()
         tss_value = float(UI.get_tss_value())
