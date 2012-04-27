@@ -90,7 +90,6 @@ void update_environmentals()
 		if (hydro_changed == 1)
 		{
 			update_hydro_map();	// Updates a new hydro map based on the discharge
-            printf("Done with update hydro map\n");
 		    hydro_changed = 0;
         }
 	}
@@ -111,8 +110,6 @@ void update_environmentals()
 void update_hydro_map() {
     double max_vector = 0;
     int x, y;
-
-    printf("Updating hydro map for: %d\n",hydro_group-1);
 
     for(y = 0; y < MAP_HEIGHT; y++) {
         for(x = 0; x < MAP_WIDTH; x++) {
