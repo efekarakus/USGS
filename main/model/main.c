@@ -135,16 +135,19 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
         
         while( (day = (hours / 24)) < gui_days_to_run)
         {   
-            //printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
+            printf("Day: %d - Hour: %d\n", day, hours);
             go();
         }   
-        //printf("Day number: %d, MAX_PHYTO: %f\n", day, MAX_PHYTO);
     }
-    PyObject* data = (PyObject*)build_data();    
+    
+	PyObject* data = (PyObject*)build_data();    
     if (!dump_data()) {
         printf("Could not create folder './results' and write the data from the patches\n");
     }
     cleanup();
+
+	printf("\n\nPROCESSING COMPLETE");
+
     return data;
 }
 
