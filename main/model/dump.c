@@ -32,7 +32,7 @@ int write_data() {
     // GUI variables used    
     fprintf(f,"%s\n","# timestep_factor,hydro_group,days_to_run,tss,k_phyto,k_macro,sen_macro_coef,resp_macro_coef,macro_base_temp,macro_mass_max,macro_vel_max,gross_macro_coef,which_stock");
     
-    fprintf(f,"%d,%d,%f,%f,%f,%f,%f,%f,%d,%f,%f,%s\n",gui_timestep_factor,gui_days_to_run,gui_tss,gui_k_phyto,gui_k_macro,gui_sen_macro_coef
+    fprintf(f,"%d,%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%s\n",gui_timestep_factor,gui_days_to_run,gui_tss,gui_k_phyto,gui_k_macro,gui_sen_macro_coef
                                                               ,gui_resp_macro_coef,gui_macro_base_temp,gui_macro_mass_max
                                                               ,gui_macro_vel_max,gui_gross_macro_coef,which_stock);
     

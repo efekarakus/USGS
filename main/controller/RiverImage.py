@@ -8,7 +8,7 @@ from time import strftime as date
 hsv_to_rgb = np.vectorize(colorsys.hsv_to_rgb)
 
 timestamp = ""
-image_title = "results\images\pic"
+image_title = "results/images/pic"
 extension = ".png"
 image_type = "PNG"
 image = None

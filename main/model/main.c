@@ -135,7 +135,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
         
         while( (day = (hours / 24)) < gui_days_to_run)
         {   
-            printf("Day: %d - Hour: %d\n", day, hours);
+            printf("Day: %d - Hour: %ld\n", day, hours);
             go();
         }   
     }
@@ -146,7 +146,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
     }
     cleanup();
 
-	printf("\n\nPROCESSING COMPLETE");
+	printf("\nPROCESSING COMPLETE\n");
 
     return data;
 }
@@ -239,7 +239,7 @@ static PyObject* py_extract_sen_macro_coef(PyObject* self, PyObject* args)
 */
 static PyObject* py_extract_macro_mass_max(PyObject* self, PyObject* args)
 {
-	PyArg_ParseTuple(args, "i", &gui_macro_mass_max);
+	PyArg_ParseTuple(args, "d", &gui_macro_mass_max);
 	Py_INCREF(Py_None);
 	return Py_None;
 }

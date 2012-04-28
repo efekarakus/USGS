@@ -26,7 +26,7 @@ double gui_k_macro = 0.4; ///< k-macro
 double gui_sen_macro_coef = 0.08; ///< sen-macro-coef
 double gui_resp_macro_coef = 0.04; ///< resp-macro-coef
 double gui_macro_base_temp = 19.7; ///< macro-base-temp
-int gui_macro_mass_max = 1000; ///< macro-mass-max
+double gui_macro_mass_max = 1000; ///< macro-mass-max
 double gui_macro_vel_max = 1.0; ///< macro-vel-max
 double gui_gross_macro_coef = 0.08; // gross-macro-coef
 char which_stock[100]; ///< which-stock?
