@@ -135,7 +135,7 @@ static PyObject* py_goCommand(PyObject* self, PyObject* args) {
         
         while( (day = (hours / 24)) < gui_days_to_run)
         {   
-            printf("Day: %d - Hour: %ld\n", day, hours);
+            printf("Day: %d - Hour: %ld\n", (day+1), (hours)%24);
             go();
         }   
     }
