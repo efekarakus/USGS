@@ -2,6 +2,7 @@
 #define GO_H
 
 #include "globals.h"
+#include "dump.h"
 
 /* Runs the model */
 void go();
