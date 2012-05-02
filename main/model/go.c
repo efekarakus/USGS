@@ -70,6 +70,7 @@ void go()
 		current_day++;
 		if(current_day == output_frequency){
 			output_image();
+            dump_data();
 			current_day = 0;
 		}
 	}
