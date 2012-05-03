@@ -15,8 +15,8 @@ def ensure_dir(f):
       raise
 
 ensure_dir("results")
-ensure_dir("results\images")
-ensure_dir("results\data")
+ensure_dir("results/images")
+ensure_dir("results/data")
 
 if __name__=="__main__":
   root = Tk()
