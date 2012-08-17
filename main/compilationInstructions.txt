@@ -11,3 +11,6 @@ Copy paste view and controller into the dist directory
 Done once:
 Copy paste tkFileDialog.pyc, tkMessageBox.pyc, and tkCommonDialog into the dist/view directory. 
 This file can be found in C:\Python27\Lib\lib-tk after downloading tkinter
+
+How to run it once you're all done:
+Double click on main.exe in the dist directory, or type main.exe into a command line within that directory.
