@@ -1,4 +1,13 @@
 How to compile the python code
 python buildPython.py py2exe -p encodings –pPIL
+
 How to compile the c code:
 python setup.py build -cmingw32
+Once your c code is compiled, you must move the executable from the build/lib.win32-2.7 to the dist/view directory.
+
+Every time you update the python code:
+Copy paste view and controller into the dist directory
+
+Done once:
+Copy paste tkFileDialog.pyc, tkMessageBox.pyc, and tkCommonDialog into the dist/view directory. 
+This file can be found in C:\Python27\Lib\lib-tk after downloading tkinter
